@@ -11,7 +11,7 @@ class UserSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
         $user = new User();
 
@@ -20,5 +20,16 @@ class UserSeeder extends Seeder
         $user->password = bcrypt('pippo');
 
         $user->save();
+
+        for($i = 0; $i < 5; $i++){
+            $user = new User();
+            
+            $user->name = $faker->firstName();
+            $user->email = $faker->email();
+            $user->password = bcrypt($faker->password());
+
+            $user->save();
+
+        }
     }
 }
