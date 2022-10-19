@@ -15,8 +15,9 @@ class UserSeeder extends Seeder
     public function run(Faker $faker)
     {
         //recupero id specializzazioni
-
         $spec_ids = Specialization::pluck('id')->toArray();
+
+        // creo un nuovo user 
         $user = new User();
 
         $user->name = 'Pippo';
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
 
         $user->save();
 
+        // popolo gli user attraverso un ciclo 
         for($i = 0; $i < 5; $i++){
             $user = new User();
             
@@ -33,12 +35,13 @@ class UserSeeder extends Seeder
             $user->password = bcrypt($faker->password());
 
             $user->save();
+            // creo un array vuoto per raggruppare un numero random di specializzazioni
             $specs = [];
             
             foreach( $spec_ids as $spec_id)
             {
 
-                if($faker->boolean()) $specs[] = $spec_id;
+                if($faker->boolean()) $specs [] = $spec_id;
             }
             $user->specializations()->attach($specs);
 

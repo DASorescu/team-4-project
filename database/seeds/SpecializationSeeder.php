@@ -23,7 +23,5 @@ class SpecializationSeeder extends Seeder
 
             $new_spec->save();
         }
-
-
     }
 }
