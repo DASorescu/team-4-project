@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use App\User;
+use App\Models\Specialization;
 
 class UserSeeder extends Seeder
 {
@@ -13,6 +14,9 @@ class UserSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+        //recupero id specializzazioni
+
+        $spec_ids = Specialization::pluck('id')->toArray();
         $user = new User();
 
         $user->name = 'Pippo';
@@ -29,7 +33,18 @@ class UserSeeder extends Seeder
             $user->password = bcrypt($faker->password());
 
             $user->save();
+            $specs = [];
+            
+            foreach( $spec_ids as $spec_id)
+            {
+
+                if($faker->boolean()) $specs[] = $spec_id;
+            }
+            $user->specializations()->attach($specs);
+
+
+            }
 
         }
     }
-}
+

@@ -41,4 +41,9 @@ class User extends Authenticatable
 
         return $this->hasOne('App\Models\UserDetail');
     }
+
+    public function specializations(){
+
+        return $this->belongsToMany('App\Models\Specialization');
+    }
 }

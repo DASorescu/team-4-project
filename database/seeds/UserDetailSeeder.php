@@ -6,6 +6,7 @@ use App\Models\UserDetail;
 use Illuminate\Support\Arr;
 use Faker\Generator as Faker;
 
+
 class UserDetailSeeder extends Seeder
 {
     /**
@@ -31,6 +32,8 @@ class UserDetailSeeder extends Seeder
                 $user_detail->address = $faker->city();
             }
             $user_detail->save();
+
+            
         }
     }
 }
