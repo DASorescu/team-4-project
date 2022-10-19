@@ -19,7 +19,7 @@ Auth::routes();
 Route::middleware('auth')->prefix('admin')->name('admin.')->namespace('Admin')->group( function(){
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/users/edit', 'Users\UserDetailController@edit')->name('users.edit');
-    Route::post('/users/update', 'Users\UserDetailController@update')->name('users.update');
+    Route::put('/users/update', 'Users\UserDetailController@update')->name('users.update');
     
     
 });

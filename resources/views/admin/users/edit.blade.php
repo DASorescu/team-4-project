@@ -53,13 +53,20 @@
 
        <div class="col-6">
             <div class="form-group">
-                <select name="" id="">
+                <select name="address" id="address">
                     <option value="">Scegli la città</option>
                     @foreach(config('cities') as $city)
-                      <option value="{{$city}}">
-                        {{$city}}
-                      </option>
+                        
+                        <option value="{{ $city }}" {{ old('address', $user->address) == $city ? 'selected' : '' }}>
+                      
+                            {{$city}}
+                            
+
+                        </option>
+
                     @endforeach
+    
+    
                 </select>
             </div>
         </div>
@@ -69,6 +76,21 @@
                 <label for="phone">Numero di telefono</label>
                 <input type="phone" class="form-control" id="phone" name="phone" value="{{ old('phone', $user->phone) }}" required minlength="3">
             </div>
+       </div>
+
+       
+       <footer class="d-flex align-items-center justify-content-between">
+            <div>
+
+                <button class="btn btn-success" type="submit">
+                <i class="fa-solid fa-floppy-disk mr-2"></i>Salva Modifiche
+                </button>
+
+            </div>
+
+
+       </footer>
+
        </div>
 
    </form>
