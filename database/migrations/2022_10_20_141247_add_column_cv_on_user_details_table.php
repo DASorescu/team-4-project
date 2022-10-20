@@ -27,10 +27,7 @@ class AddColumnCvOnUserDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::table('user_details', function (Blueprint $table) {
-            
-            dropColumn('cv');
+        Schema::dropIfExists('user_details');
 
-        });
     }
 }

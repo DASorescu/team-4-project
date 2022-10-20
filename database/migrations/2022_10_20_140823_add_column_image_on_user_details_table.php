@@ -27,8 +27,7 @@ class AddColumnImageOnUserDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::table('user_details', function (Blueprint $table) {
-            dropColumn('image');
-        });
+        Schema::dropIfExists('image');
+        
     }
 }
