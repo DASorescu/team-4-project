@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User;
+use App\Models\Service;
 
 class ServiceController extends Controller
 {
@@ -14,7 +16,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.users.services.index', compact('user', 'services'));
+
+        
     }
 
     /**
@@ -24,7 +28,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.services.create', compact('user', 'services'));
     }
 
     /**
@@ -46,7 +50,7 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('admin.users.services.show', compact('user','services'));
     }
 
     /**
@@ -57,7 +61,7 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.users.services.edit', compact('user', 'services'));
     }
 
     /**

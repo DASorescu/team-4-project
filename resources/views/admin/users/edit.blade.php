@@ -32,7 +32,7 @@
  </div>
 @endif
 
-<form class="mt-5" action="{{ route('admin.users.update', $user)}}" method="POST">
+<form class="mt-5" action="{{ route('admin.users.update', $user)}}" enctype="multipart/form-data" method="POST">
     @method('PUT')
     @csrf
       <div class="row">
@@ -78,6 +78,29 @@
             </div>
        </div>
 
+       <div class="col-12">
+
+           <div class="form-group">
+           
+                <label for="cv">Curriculum</label>
+                <input type="file" id="cv" name="cv">
+                <iframe src="{{ asset('storage/' . $user->cv) }}" width=”100%” height=”100%”>
+            </div>
+       </div>
+
+       <div class="col-12">
+
+           <div class="form-group">
+           
+                <label for="image">Immagine</label>
+                <input type="file" id="image" name="image">
+                <img class="img-fluid" src="{{ asset('storage/' . $user->image) }}" alt="user image preview" width="100px">
+
+            </div>
+
+       </div>
+       
+
        
        <footer class="d-flex align-items-center justify-content-between">
             <div>
@@ -87,6 +110,7 @@
                 </button>
 
             </div>
+
 
 
        </footer>
