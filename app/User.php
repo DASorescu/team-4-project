@@ -61,4 +61,9 @@ class User extends Authenticatable
 
         return $this->belongsToMany('App\Models\Sponsorship');
     }
+
+    public function services(){
+
+        return $this->hasMany('App\Models\Service');
+    }
 }
