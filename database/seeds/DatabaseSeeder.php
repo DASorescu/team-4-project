@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             SpecializationSeeder::class,
             UserSeeder::class,
             UserDetailSeeder::class,
+            MessageSeeder::class,
+            ReviewSeeder::class,
     ]);
     }
 }
