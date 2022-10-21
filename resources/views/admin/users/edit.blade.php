@@ -7,16 +7,17 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <div>Nome Cognome</div>
+                    <div>Nome</div>
+                    <div>Cognome</div>
                     <div>Specializzazione</div>
                 </div>
 
                 <div class="card-body">
-                   Bla bla
+      
                 </div>
 
                 <div class="card-footer">
-                    bgfhdjk
+        
                 </div>
             </div>
         </div>
