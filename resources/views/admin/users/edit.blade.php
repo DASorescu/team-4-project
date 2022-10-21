@@ -6,18 +6,20 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
+                {{-- card header --}}
                 <div class="card-header">
-                    <div>Nome Cognome</div>
+                    <div>Nome</div>
+                    <div>Cognome</div>
                     <div>Specializzazione</div>
                 </div>
 
                 <div class="card-body">
-                   Bla bla
+                   {{-- card body todo --}}
                 </div>
 
                 <div class="card-footer">
-                    bgfhdjk
-                </div>
+                    {{-- card footer todo --}}               
+                 </div>
             </div>
         </div>
     </div>
