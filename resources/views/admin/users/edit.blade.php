@@ -99,25 +99,23 @@
             </div>
 
        </div>
-       
-
-       
-       <footer class="d-flex align-items-center justify-content-between">
-            <div>
-
-                <button class="btn btn-success" type="submit">
-                <i class="fa-solid fa-floppy-disk mr-2"></i>Salva Modifiche
-                </button>
-
-            </div>
-
-
-
-       </footer>
 
        </div>
-
    </form>
+   
+   <footer class="d-flex align-items-center justify-content-between">
+    <div>
+        <button class="btn btn-success" type="submit">
+        <i class="fa-solid fa-floppy-disk mr-2"></i>Salva Modifiche
+        </button>
+    </div>
+
+    <div>
+        <a class="btn btn-primary" href="{{route('admin.users.sponsorships.show')}}"> 
+            <i class="fa-regular fa-file mr-2"></i>Dettagli
+        </a>
+    </div>
+</footer>
 </div>
     
 @endsection

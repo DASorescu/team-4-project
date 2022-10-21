@@ -19,6 +19,7 @@ Auth::routes();
 Route::middleware('auth')->prefix('admin')->name('admin.')->namespace('Admin')->group( function(){
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/users/edit', 'Users\UserDetailController@edit')->name('users.edit');
+    Route::get('/users/sponsorships/show', 'Users\SponsorshipController@show')->name('users.sponsorships.show');
     Route::resource('/users/services','Users\ServiceController');
     Route::put('/users/update', 'Users\UserDetailController@update')->name('users.update');
     
