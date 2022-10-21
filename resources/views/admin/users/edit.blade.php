@@ -100,17 +100,33 @@
             </div>
 
        </div>
+       
 
-       </div>
-   </form>
-   
-   <footer class="d-flex align-items-center justify-content-between">
+       
+       
+            
+            
+
+       
+       
+       
+       
+       
+    </div>
+</form>
+
+<footer class="d-flex align-items-center justify-content-end">
     <div>
         <button class="btn btn-success" type="submit">
-        <i class="fa-solid fa-floppy-disk mr-2"></i>Salva Modifiche
+            <i class="fa-solid fa-floppy-disk mr-2"></i>Salva Modifiche
         </button>
     </div>
-
+    
+    <div class="ml-2">
+        <a class="btn btn-primary" href="{{ route('admin.users.messages.index') }}">
+        <i class="fa-solid fa-message mr-2"></i>Messaggi
+        </a>
+    </div>
     <div>
         <a class="btn btn-primary" href="{{route('admin.users.sponsorships.show')}}"> 
             <i class="fa-regular fa-file mr-2"></i>Dettagli
