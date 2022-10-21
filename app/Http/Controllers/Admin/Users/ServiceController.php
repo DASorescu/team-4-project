@@ -16,10 +16,12 @@ class ServiceController extends Controller
      */
     public function index()
     {
+        $services = Service::all();
+        $user = User::all();
         return view('admin.users.services.index', compact('user', 'services'));
+    }
 
         
-    }
 
     /**
      * Show the form for creating a new resource.

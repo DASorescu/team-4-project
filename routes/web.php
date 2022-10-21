@@ -22,6 +22,10 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->namespace('Admin')->
     Route::resource('/users/services','Users\ServiceController');
     Route::put('/users/update', 'Users\UserDetailController@update')->name('users.update');
     
+    Route::get('/{any}', function(){
+        abort('404');
+    })->where('any', '.*');
+        
     
 });
 
