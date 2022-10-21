@@ -6,6 +6,7 @@
             <div class="text-align-center mt-5">
                 <form action="{{ route('admin.users.sponsorships.store') }}" method="POST">
                     @csrf
+                    
                     <h3>Dr. {{ $user->userDetail->first_name }} {{ $user->userDetail->last_name}}</h3>
                     {{-- @if($payment_methods) --}}
                     <select name="payment_method" id="payment_method">
@@ -23,6 +24,8 @@
                             @endforeach
                         </div>
                     </div>
+
+                    <button type="submit" class="btn btn-primary">Conferma Pagamento</button>
                 </form>
                     
                     {{-- @else
