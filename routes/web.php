@@ -21,6 +21,9 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->namespace('Admin')->
     Route::get('/users/edit', 'Users\UserDetailController@edit')->name('users.edit');
     Route::resource('/users/services','Users\ServiceController');
     Route::put('/users/update', 'Users\UserDetailController@update')->name('users.update');
+    Route::get('/users/create','Users\UserDetailController@create')->name('users.create');
+    Route::post('/users/store','Users\UserDetailController@store')->name('users.store');
+    
     
     Route::get('/{any}', function(){
         abort('404');
