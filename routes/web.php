@@ -13,6 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Auth::routes();
+
+Route::middleware('auth')->prefix('admin')->name('admin.')->namespace('Admin')->group( function(){
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/users/edit', 'Users\UserDetailController@edit')->name('users.edit');
+    Route::resource('/users/services','Users\ServiceController');
+    Route::put('/users/update', 'Users\UserDetailController@update')->name('users.update');
+    
+    Route::get('/{any}', function(){
+        abort('404');
+    })->where('any', '.*');
+        
+    
+});
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('guest.home');
 });
