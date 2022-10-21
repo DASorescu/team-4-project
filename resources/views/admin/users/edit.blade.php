@@ -103,12 +103,19 @@
 
        
        <footer class="d-flex align-items-center justify-content-between">
+            
             <div>
 
                 <button class="btn btn-success" type="submit">
                 <i class="fa-solid fa-floppy-disk mr-2"></i>Salva Modifiche
                 </button>
 
+            </div>
+
+            <div class="ml-2">
+                <a class="btn btn-primary" href="{{ route('admin.users.messages.index') }}">
+                <i class="fa-solid fa-message mr-2"></i>Messaggi
+                </a>
             </div>
 
 
