@@ -22,6 +22,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->namespace('Admin')->
     Route::get('/users/sponsorships/show', 'Users\SponsorshipController@show')->name('users.sponsorships.show');
     Route::resource('/users/services', 'Users\ServiceController');
     Route::put('/users/update', 'Users\UserDetailController@update')->name('users.update');
+    Route::get('/users/sponsorships/create', 'Users\SponsorshipController@create')->name('users.sponsorships.create');
+    Route::post('/users/sponsorships/store', 'Users\SponsorshipController@store')->name('users.sponsorships.store');
     
     // reviews
     Route::get('/users/reviews', 'Users\ReviewController@index')->name('users.reviews.index');
