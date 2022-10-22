@@ -44,7 +44,7 @@
        <a class="btn btn-secondary mr-2" href="{{route('admin.users.edit')}}">
            <i class="fa-solid fa-rotate-left mr-2"></i>Torna indietro
        </a>
-       <a class="btn btn-success" href="#">
+       <a class="btn btn-success" href="{{route('admin.users.sponsorships.create')}}">
              <i class="fa-solid fa-plus mr-2"></i>Aggiungi sponsorizzazione
         </a>
    </footer>
