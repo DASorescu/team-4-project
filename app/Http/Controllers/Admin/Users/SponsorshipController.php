@@ -15,4 +15,19 @@ class SponsorshipController extends Controller
         $user = Auth::user();
         return view('admin.users.sponsorships.show', compact('user'));
     }
+
+    public function create()
+    {
+        $user = Auth::user();
+        $sponsor_plans = Sponsorship::all();
+        return view('admin.users.sponsorships.create', compact('user','sponsor_plans'));
+    }
+
+    public function store(Request $request)
+    {
+        $user = Auth::user();
+        $sponsor_plans = Sponsorship::all();
+        return redirect()->route('admin.users.sponsorships.show');
+    }
 }
+
