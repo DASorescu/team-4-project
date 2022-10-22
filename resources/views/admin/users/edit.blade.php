@@ -33,7 +33,8 @@
  </div>
 @endif
 
-<form class="mt-5" action="{{ route('admin.users.update', $user)}}" enctype="multipart/form-data" method="POST">
+{{-- rimosso il passaggio di $user perché lo prendiamo tramite autorizzazione --}}
+<form class="mt-5" action="{{ route('admin.users.update')}}" enctype="multipart/form-data" method="POST">
     @method('PUT')
     @csrf
       <div class="row">
@@ -41,14 +42,14 @@
        <div class="col-6">
            <div class="form-group">
                <label for="first_name">Nome</label>
-               <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name', $user->first_name) }}" required minlength="3">
+               <input type="text" class="form-control" id="first_name" name="first_name" @if($user->userDetail->first_name) value="{{ old('first_name', $user->userDetail->first_name) }}" @endif required minlength="3">
            </div>
        </div>
 
        <div class="col-6">
             <div class="form-group">
                 <label for="last_name">Cognome</label>
-                <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name', $user->last_name) }}" required minlength="3">
+                <input type="text" class="form-control" id="last_name" name="last_name" @if($user->userDetail->last_name) value="{{ old('last_name', $user->userDetail->last_name) }}" @endif required minlength="3">
             </div>
        </div>
 
@@ -58,7 +59,7 @@
                     <option value="">Scegli la città</option>
                     @foreach(config('cities') as $city)
                         
-                        <option value="{{ $city }}" {{ old('address', $user->address) == $city ? 'selected' : '' }}>
+                        <option value="{{ $city }}" {{ old('address', $user->userDetail->address) == $city ? 'selected' : '' }}>
                       
                             {{$city}}
                             
@@ -75,7 +76,7 @@
         <div class="col-6">
             <div class="form-group">
                 <label for="phone">Numero di telefono</label>
-                <input type="phone" class="form-control" id="phone" name="phone" value="{{ old('phone', $user->phone) }}" required minlength="3">
+                <input type="phone" class="form-control" id="phone" name="phone" @if($user->userDetail->phone) value="{{ old('phone', $user->userDetail->phone) }}" @endif required minlength="3">
             </div>
        </div>
 
@@ -85,7 +86,7 @@
            
                 <label for="cv">Curriculum</label>
                 <input type="file" id="cv" name="cv">
-                <iframe src="{{ asset('storage/' . $user->cv) }}" width=”100%” height=”100%”>
+                <iframe src="{{ asset('storage/' . $user->userDetail->cv) }}" width=”100%” height=”100%”>
             </div>
        </div>
 
@@ -95,7 +96,7 @@
            
                 <label for="image">Immagine</label>
                 <input type="file" id="image" name="image">
-                <img class="img-fluid" src="{{ asset('storage/' . $user->image) }}" alt="user image preview" width="100px">
+                <img class="img-fluid" src="{{ asset('storage/' . $user->userDetail->image) }}" alt="user image preview" width="100px">
 
             </div>
 
