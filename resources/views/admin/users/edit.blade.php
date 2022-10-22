@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@if($user->userDetail)
 
 <div class="container">
     <div class="row justify-content-center">
@@ -37,7 +38,7 @@
 <form class="mt-5" action="{{ route('admin.users.update')}}" enctype="multipart/form-data" method="POST">
     @method('PUT')
     @csrf
-      <div class="row">
+    <div class="row">
 
        <div class="col-6">
            <div class="form-group">
@@ -99,41 +100,46 @@
                 <img class="img-fluid" src="{{ asset('storage/' . $user->userDetail->image) }}" alt="user image preview" width="100px">
 
             </div>
-
-       </div>
-       
-
-       
-       
-            
-            
-
-       
-       
-       
-       
-       
+        </div>
     </div>
+    <footer class="d-flex align-items-center justify-content-end">
+        <div>
+            <button class="btn btn-success" type="submit">
+                <i class="fa-solid fa-floppy-disk mr-2"></i>Salva Modifiche
+            </button>
+        </div>
+        
+        <div class="ml-2">
+            <a class="btn btn-primary" href="{{ route('admin.users.messages.index') }}">
+            <i class="fa-solid fa-message mr-2"></i>Messaggi
+            </a>
+        </div>
+        <div>
+            <a class="btn btn-primary" href="{{route('admin.users.sponsorships.show')}}"> 
+                <i class="fa-regular fa-file mr-2"></i>Dettagli
+            </a>
+        </div>
+    </footer>
 </form>
 
-<footer class="d-flex align-items-center justify-content-end">
-    <div>
-        <button class="btn btn-success" type="submit">
-            <i class="fa-solid fa-floppy-disk mr-2"></i>Salva Modifiche
-        </button>
-    </div>
-    
-    <div class="ml-2">
-        <a class="btn btn-primary" href="{{ route('admin.users.messages.index') }}">
-        <i class="fa-solid fa-message mr-2"></i>Messaggi
-        </a>
-    </div>
-    <div>
-        <a class="btn btn-primary" href="{{route('admin.users.sponsorships.show')}}"> 
-            <i class="fa-regular fa-file mr-2"></i>Dettagli
-        </a>
-    </div>
-</footer>
+@else()
+<div class="h-100 d-flex justify-content-center">
+    <h2 class="text-danger">Devi completare il profilo Dr. Strunz!</h2>
 </div>
-    
+@endif()
 @endsection
+       
+
+
+       
+       
+            
+            
+
+       
+       
+       
+       
+       
+
+    
