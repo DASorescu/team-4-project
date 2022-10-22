@@ -52,6 +52,11 @@
                             <a class="nav-link" @if (Route::is('admin.services.index'))  @endif
                                 href="{{ route('admin.users.reviews.index') }}">Reviews</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" @if (Route::is('admin.services.index'))  @endif
+                                href="{{ route('admin.users.messages.index') }}">Messages</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
