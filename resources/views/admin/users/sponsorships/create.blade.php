@@ -17,9 +17,9 @@
 
                     <div class="mt-5">
                         <h3>Seleziona Abbonamento:</h3>
-                        <div class="d-flex">
+                        <div>
                             @foreach ($sponsor_plans as $plan)
-                            <input type="radio" id="{{$plan->name}}" name="plan_id" value="{{$plan->name}}">
+                            <input type="radio" id="{{$plan->name}}" name="plan_id" value="{{$plan->name}}" class="align-middle">
                             <label for="{{$plan->name}}">{{$plan->name}}, {{ $plan->cost }}&euro;, {{ $plan->duration }} ore</label><br>     
                             @endforeach
                         </div>
