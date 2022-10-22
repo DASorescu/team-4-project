@@ -33,9 +33,9 @@
  </div>
 @endif
 
-<form class="mt-5" action="{{ route('admin.users.update', $user)}}" enctype="multipart/form-data" method="POST">
+{{-- rimosso il passaggio di $user perché lo prendiamo tramite autorizzazione --}}
+<form class="mt-5" action="{{ route('admin.users.update')}}" enctype="multipart/form-data" method="POST">
     @method('PUT')
-    @dd($user);
     @csrf
       <div class="row">
 

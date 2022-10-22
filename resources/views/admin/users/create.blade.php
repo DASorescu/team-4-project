@@ -40,7 +40,8 @@
                 <div>
     
                     <button class="btn btn-success" type="submit">
-                    <i class="fa-solid fa-floppy-disk mr-2"></i>Salve
+                        {{-- Salve -> Salva --}}
+                    <i class="fa-solid fa-floppy-disk mr-2"></i>Salva
                     </button>
     
                 </div>

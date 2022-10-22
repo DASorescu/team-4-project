@@ -19,7 +19,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $details = $user->UserDetail;
+        $details = $user->userDetail;
 
         
         if(!$details){
