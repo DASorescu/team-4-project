@@ -43,7 +43,13 @@
                                 </div>
                             </div>
 
-                            <div class="card-body">
+                            <div class="card-body shadow">
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username"
+                                        @if ($user->name) value="{{ old('username', $user->name) }}" @endif
+                                        required minlength="3">
+                                </div>
                                 <div class="form-group">
                                     <label for="first_name">Nome</label>
                                     <input type="text" class="form-control" id="first_name" name="first_name"
@@ -56,6 +62,22 @@
                                         @if ($user->userDetail->last_name) value="{{ old('last_name', $user->userDetail->last_name) }}" @endif
                                         required minlength="3">
                                 </div>
+                                {{-- Unica pecca è che per selezionare più di una specializzazione devi schiacciare o ctrl o maiusc e cliccare si quella che vuoi.
+                                    Non sono riuscita a trovare un modo alternativo per farlo, secondo me bisogna gestirla lato VUE MA BOH --}}
+                                <div class="form-group">
+                                    <label for="specialization">Specializzazioni</label>
+                                    {{-- incredibile ma vero mettendo le quaddre al name mi permette di selezionare più specializzazioni. I was shocked  --}}
+                                    <select name="specializations[]" id="specialization" class="form-control" multiple>
+                                        @foreach ($all_specialization as $specialization)
+                                            <option value="{{ $specialization->id }}" {{-- utilizzo il metodo contains per selezionare le specializzazioni che l'utente possiede. --}}
+                                                {{ $user->specializations->contains($specialization->id) ? 'selected' : '' }}>
+                                                {{ $specialization->label }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+
                                 <div class="form-group">
                                     <label for="adress">Città</label>
                                     <select name="address" id="address" class="form-control">
@@ -63,14 +85,9 @@
                                         @foreach (config('cities') as $city)
                                             <option value="{{ $city }}"
                                                 {{ old('address', $user->userDetail->address) == $city ? 'selected' : '' }}>
-
                                                 {{ $city }}
-
-
                                             </option>
                                         @endforeach
-
-
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -90,15 +107,17 @@
 
                             <div class="card-footer d-flex justify-content-center">
                                 <div>
-                                    <button class="btn btn-success" type="submit">
+                                    <button class="btn btn-success shadow-sm" type="submit">
                                         <i class="fa-solid fa-floppy-disk mr-2"></i>Salva Modifiche
                                     </button>
                                 </div>
                                 <div class="ml-2">
-                                    <a class="btn btn-primary" href="{{ route('admin.users.sponsorships.show') }}">
-                                        <i class="fa-regular fa-file mr-2"></i>Dettagli
+                                    <a class="btn btn-primary shadow-sm"
+                                        href="{{ route('admin.users.sponsorships.show') }}">
+                                        Sponsorizzazioni
                                     </a>
                                 </div>
+
                             </div>
                         </div>
                     </form>

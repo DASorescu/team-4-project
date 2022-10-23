@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         $spec_ids = Specialization::pluck('id')->toArray();
         $plan_ids = Sponsorship::pluck('id')->toArray();
 
-        // creo un nuovo user 
+        // creo un nuovo user
         $user = new User();
 
         $user->name = 'Pippo';
@@ -28,36 +28,31 @@ class UserSeeder extends Seeder
 
         $user->save();
 
-        // popolo gli user attraverso un ciclo 
-        for($i = 0; $i < 5; $i++){
+        // popolo gli user attraverso un ciclo
+        for ($i = 0; $i < 5; $i++) {
             $user = new User();
-            
+
             $user->name = $faker->firstName();
             $user->email = $faker->email();
-            $user->password = bcrypt($faker->password());
+            $user->password = bcrypt('password');
 
             $user->save();
             // creo un array vuoto per raggruppare un numero random di specializzazioni
             $specs = [];
-            
-            foreach( $spec_ids as $spec_id)
-            {
 
-                if($faker->boolean()) $specs [] = $spec_id;
+            foreach ($spec_ids as $spec_id) {
+
+                if ($faker->boolean()) $specs[] = $spec_id;
             }
 
             // genero un numero random fra 0 e gli sponsor
-            $ranNum = rand(0,count($plan_ids));
+            $ranNum = rand(0, count($plan_ids));
 
             // se è un id presente nell'array, lo attacco alla relazione
-            foreach($plan_ids as $plan_id)
-            if($plan_id == $ranNum) $user->sponsorships()->attach($ranNum);
+            foreach ($plan_ids as $plan_id)
+                if ($plan_id == $ranNum) $user->sponsorships()->attach($ranNum);
 
             $user->specializations()->attach($specs);
-
-
-            }
-
         }
     }
-
+}

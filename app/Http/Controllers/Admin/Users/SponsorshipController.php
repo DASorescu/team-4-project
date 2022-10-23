@@ -20,7 +20,7 @@ class SponsorshipController extends Controller
     {
         $user = Auth::user();
         $sponsor_plans = Sponsorship::all();
-        return view('admin.users.sponsorships.create', compact('user','sponsor_plans'));
+        return view('admin.users.sponsorships.create', compact('user', 'sponsor_plans'));
     }
 
     public function store(Request $request)
@@ -30,4 +30,3 @@ class SponsorshipController extends Controller
         return redirect()->route('admin.users.sponsorships.show');
     }
 }
-

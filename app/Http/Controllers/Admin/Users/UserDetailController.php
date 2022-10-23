@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Specialization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -25,8 +26,8 @@ class UserDetailController extends Controller
 
         // passo user anziché solo i dettagli in caso di form più complessi in futuro
         $user = Auth::user();
-
-        return view('admin.users.edit', compact('user'));
+        $all_specialization = Specialization::all();
+        return view('admin.users.edit', compact('user', 'all_specialization'));
     }
 
     public function update(Request $request)
@@ -42,6 +43,8 @@ class UserDetailController extends Controller
 
         $request->validate(
             [
+                'username' => 'string|min:3|max:20',
+
                 'first_name' => 'nullable|string|min:3|max:50',
 
                 'last_name' => 'nullable|string|min:3|max:50',
@@ -59,7 +62,9 @@ class UserDetailController extends Controller
 
                 'cv' => "il formato del file dev'essere PDF",
 
-                'image' => "il formato dev'essere jpg,jpeg o png"
+                'image' => "il formato dev'essere jpg,jpeg o png",
+
+                'username' => 'il nome utente deve contenere almeno 3 caratteri',
             ],
         );
 
@@ -82,6 +87,18 @@ class UserDetailController extends Controller
         // aggiungo il phone (che non è più in fillable) in caso mi dovessero passare la chiave del campo phone
         if (array_key_exists('phone', $data)) {
             $detail->phone = $data['phone'];
+        }
+
+        // lo user presso dall'auth non mi dà la possibilità di salvare le modifiche, quindi uso il metodo find del modello user che cerca per id.
+        if (array_key_exists('username', $data)) {
+            $curUser = User::find($user->id);
+            $curUser->name = $data['username'];
+            $curUser->save();
+        }
+
+        // cerco l'utente corrente e nelle sue specializzazioni sincronizzo quelle che possiede passando l'array di quelle selezionate.
+        if (array_key_exists('specializations', $data)) {
+            User::find($user->id)->specializations()->sync($data['specializations']);
         }
 
         $detail->update($data);
@@ -123,7 +140,6 @@ class UserDetailController extends Controller
 
         // ! MAIN FIX - non avevamo salvato il nuovo oggetto UserDetail
         $new_userDetail->save();
-
         return redirect()->route('admin.users.edit')->with('message', 'dati inseriti con successo');
     }
 }
