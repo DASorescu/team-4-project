@@ -5,8 +5,8 @@
         <h1 class="text-center">Reviews</h1>
     </header>
     <div class="container">
-        <table class="table container-fluid">
-            <thead class="text-center">
+        <table class="table shadow border">
+            <thead class="text-center card-header">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Autore</th>
@@ -16,7 +16,7 @@
                     <th scope="col">Azioni</th>
                 </tr>
             </thead>
-            <tbody class="text-center">
+            <tbody class="text-center card-body">
                 @forelse($reviews as $review)
                     <tr>
                         <th scope="row">{{ $review->id }}</th>
@@ -43,5 +43,6 @@
                 @endforelse
             </tbody>
         </table>
+    </div>
     </div>
 @endsection
