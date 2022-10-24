@@ -14,23 +14,7 @@ class SponsorshipSeeder extends Seeder
     {
         // $plans = config('sponsor_plans');
 
-        $plans = [
-            [
-                'name' => 'silver',
-                'cost' => 2,99,
-                'duration' => 24
-            ],
-            [
-                'name' => 'gold',
-                'cost' => 5,99,
-                'duration' => 72
-            ],
-            [
-                'name' => 'platinum',
-                'cost' => 9,99,
-                'duration' => 144
-            ],
-        ];
+        $plans = config('sponsor_plans');
 
         foreach($plans as $plan){
             $new_sponsorship = new Sponsorship();
