@@ -15,7 +15,7 @@ export default {
     },
     methods: {
         fetchParams() {
-            axios.get('http://127.0.0.1:8000/api/')
+            axios.get('http://localhost:8000/api/')
                 .then(res => {
                     this.params = res.data
                 })
