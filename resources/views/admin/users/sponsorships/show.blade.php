@@ -28,12 +28,21 @@
                     </div>
                     <div class="card-body shadow">
                         <ul class="list-group">
-                            @foreach ($user->sponsorships as $sponsorship)
+                            @forelse ($user->sponsorships as $sponsorship)
+                                {{-- @dd($sponsorship) --}}
                                 <li class="list-group-item list-group-item-secondary">
-                                    <strong>{{ $sponsorship->name }}</strong> Costo: {{ $sponsorship->cost }} Durata:
-                                    {{ $sponsorship->duration }}
+                                    Sponsorizzazione: <strong>{{ $sponsorship->name }}
+                                        ({{ $sponsorship->duration }}h)
+                                    </strong>
+                                    <div>Costo: {{ $sponsorship->cost }}€</div>
+                                    <div>Creato il: {{ $sponsorship->pivot->created_at }}</div>
+                                    <div>Finisce il: {{ $sponsorship->pivot->ends_at }}</div>
                                 </li>
-                            @endforeach
+                            @empty
+                                <li class="list-group-item list-group-item-secondary">
+                                    Nessuna Sponsorizzazione attiva!
+                                </li>
+                            @endforelse
                         </ul>
                     </div>
 

@@ -35,9 +35,9 @@ class SponsorshipController extends Controller
 
         $user->sponsorship_id = $sponsorship->id;
 
-        if($user->sponsorships()) $user->sponsorships()->detach();
+        if ($user->sponsorships()) $user->sponsorships()->detach();
         $user->sponsorships()->attach($sponsorship, ['ends_at' => Carbon::now()->addHours($sponsorship->duration)]);
 
-        return redirect()->route('admin.users.edit');
+        return redirect()->route('admin.users.sponsorships.show');
     }
 }
