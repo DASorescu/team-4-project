@@ -1,8 +1,11 @@
-window.Vue=require('vue');
+require('./bootstrap');
+
+window.Vue = require('vue');
 
 import App from './components/App.vue';
+
 const app = new Vue({
     el: '#root',
-    render:h=>h(App),
+    render: h => h(App),
 });
 
