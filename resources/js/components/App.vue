@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <p>pippo</p>
+        <router-view></router-view>
     </div>
 </template>
 
