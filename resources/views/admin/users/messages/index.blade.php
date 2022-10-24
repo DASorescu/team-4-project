@@ -36,9 +36,20 @@
             <td>{{$message->email}}</td>
             <td>{{$message->content}}</td>
             <td>{{$message->date}}</td>
-            <td><a class="btn btn-primary btn-small" href="{{ route('admin.users.messages.show', $message) }}">
-            <i class="fa-solid fa-magnifying-glass"></i> Dettagli
-            </a></td>
+            <td class="d-flex">
+                <a class="btn btn-primary btn-small d-flex align-items-center" href="{{ route('admin.users.messages.show', $message) }}">
+                    <i class="fa-solid fa-magnifying-glass mr-2"></i> Dettagli
+                </a>
+
+                <form action="{{ route('admin.users.messages.destroy', $message->id) }}"
+                method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger btn-small ml-2 d-flex align-items-center" type="submit">
+                    <i class="fa-solid fa-trash mr-2"></i> Elimina
+                </button>
+            </form>
+            </td>
             </tr>
 
             @empty
@@ -55,6 +66,8 @@
 
 
 </div>
+
+
 
 
 
