@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Models\Sponsorship;
+use Carbon\Carbon;
 
 class SponsorshipController extends Controller
 {
@@ -25,8 +26,18 @@ class SponsorshipController extends Controller
 
     public function store(Request $request)
     {
+
         $user = Auth::user();
-        $sponsor_plans = Sponsorship::all();
-        return redirect()->route('admin.users.sponsorships.show');
+
+        $data = $request->all();
+
+        $sponsorship = Sponsorship::findOrFail($data['plan_id']);
+
+        $user->sponsorship_id = $sponsorship->id;
+
+        if($user->sponsorships()) $user->sponsorships()->detach();
+        $user->sponsorships()->attach($sponsorship, ['ends_at' => Carbon::now()->addHours($sponsorship->duration)]);
+
+        return redirect()->route('admin.users.edit');
     }
 }

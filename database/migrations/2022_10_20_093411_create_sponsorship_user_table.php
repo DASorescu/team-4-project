@@ -18,7 +18,7 @@ class CreateSponsorshipUserTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('sponsorship_id');
-            $table->date('ends_at')->default('2050-12-03 12:30:34');
+            $table->dateTime('ends_at')->default('2050-12-03 12:30:34');
             $table->foreign('sponsorship_id')->references('id')->on('sponsorships')->onDelete('cascade');
             $table->timestamps();
         });

@@ -30,7 +30,7 @@
                                         @foreach ($sponsor_plans as $plan)
                                             <li class="list-group-item">
                                                 <input type="radio" id="{{ $plan->name }}" name="plan_id"
-                                                    value="{{ $plan->name }}" class="align-middle">
+                                                    value="{{ $plan->id }}" class="align-middle">
                                                 <label for="{{ $plan->name }}">{{ $plan->name }},
                                                     {{ $plan->cost }}&euro;,
                                                     {{ $plan->duration }} ore</label>
