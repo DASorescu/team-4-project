@@ -22,7 +22,14 @@
                         <th scope="row">{{ $review->id }}</th>
                         <td>{{ $review->guest_name }}</td>
                         <td>{{ $review->guest_email }}</td>
-                        <td>{{ $review->rating }}</td>
+                        <td>
+                            @for ($i = 0; $i < $review->rating; $i++)
+                                <i class="fa-solid fa-star text-warning"></i>
+                            @endfor
+                            @for ($i = 0; $i < 10 - $review->rating; $i++)
+                                <i class="fa-regular fa-star"></i>
+                            @endfor
+                        </td>
                         <td>{{ substr($review->content, 0, 20) }}...</td>
                         <td><a href="{{ route('admin.users.reviews.show', $review->id) }}"
                                 class="btn btn-primary mr-4">Vedi</a>
