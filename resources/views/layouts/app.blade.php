@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -37,7 +37,7 @@
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name','BDoctors') }}
+                        BDoctors
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -83,13 +83,19 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
+                                        <a class="dropdown-item d-flex justify-content-between" href="{{ route('admin.users.edit') }}">
+                                            Profile <i class="fa-solid fa-user"></i>
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.users.edit') }}">
-                                            Profile
+
+                                        <a class="dropdown-item d-flex justify-content-between" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }} 
+                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                        </a>
+
+                                        <a class="dropdown-item d-flex justify-content-between" href="">
+                                            Impostazioni<i class="fa-solid fa-gear"></i>
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"

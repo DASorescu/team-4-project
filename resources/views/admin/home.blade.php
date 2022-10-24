@@ -5,7 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <p>BDoctors</p>
+                    <p>Accesso effettuato alle {{date('H:m')}}</p>
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +17,7 @@
                         </div>
                     @endif
 
-                    {{ __("Bentornato Dr $user->name") }}
+                    {{ __("Bentornato Dr $user->name") }} 
 
                 </div>
             </div>

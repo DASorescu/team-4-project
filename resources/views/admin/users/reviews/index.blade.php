@@ -36,5 +36,10 @@
                 @endforelse
             </tbody>
         </table>
+        <div class="card-footer d-flex justify-content-end">
+            <a class="btn btn-secondary mr-2 shadow-sm" href="{{ route('admin.users.edit') }}">
+                <i class="fa-solid fa-rotate-left mr-2"></i>Torna indietro
+            </a>
+        </div>
     </div>
 @endsection

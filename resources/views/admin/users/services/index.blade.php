@@ -2,18 +2,17 @@
 
 @section('content')
 
-<header>
+<header class="container">
 
 <div class="d-flex justify-content-between">
     <h2>
         Lista Servizi
     </h2>
 
-    <a class="nav-link btn btn-sm btn-success" @if(Route::is('admin.services.create')) 
+    <a class="nav-link btn btn-sm btn-success mt-2" @if(Route::is('admin.services.create')) 
     @endif href="{{ route('admin.services.create') }}">
-    <i class="fa-solid fa-plus"></i>
-    Crea Servizio</a>
-
+    <i class="fa-solid fa-plus"></i>  Crea Servizio
+    </a>
 </div>
 
 

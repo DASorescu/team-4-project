@@ -13,8 +13,6 @@
     
     <h3>Lista Messaggi</h3>
 
-    
-
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -36,9 +34,11 @@
             <td>{{$message->email}}</td>
             <td>{{$message->content}}</td>
             <td>{{$message->date}}</td>
-            <td><a class="btn btn-primary btn-small" href="{{ route('admin.users.messages.show', $message) }}">
-            <i class="fa-solid fa-magnifying-glass"></i> Dettagli
-            </a></td>
+            <td>
+                <a class="btn btn-primary btn-small" href="{{ route('admin.users.messages.show', $message) }}">
+                    <i class="fa-solid fa-magnifying-glass"></i> Dettagli
+                </a>
+            </td>
             </tr>
 
             @empty
@@ -51,6 +51,12 @@
             
         </tbody>
     </table>
+
+    <div class="card-footer d-flex justify-content-end">
+        <a class="btn btn-secondary mr-2 shadow-sm" href="{{ route('admin.users.edit') }}">
+            <i class="fa-solid fa-rotate-left mr-2"></i>Torna indietro
+        </a>
+    </div>
 
 
 
