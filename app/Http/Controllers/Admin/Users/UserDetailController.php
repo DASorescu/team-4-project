@@ -18,7 +18,8 @@ class UserDetailController extends Controller
     {
 
         $user = Auth::user();
-        return view('admin.users.create', compact('user'));
+        $all_specialization = Specialization::all();
+        return view('admin.users.create', compact('user', 'all_specialization'));
     }
 
     public function edit()
@@ -27,12 +28,13 @@ class UserDetailController extends Controller
         // passo user anziché solo i dettagli in caso di form più complessi in futuro
         $user = Auth::user();
         $all_specialization = Specialization::all();
+        
         return view('admin.users.edit', compact('user', 'all_specialization'));
     }
 
     public function update(Request $request)
     {
-
+        // dd($request->all());
 
         // anche qui separo lo user dai dettagli aiutandomi con una seconda variabile, per leggibilità
         $user = Auth::user();
@@ -55,16 +57,20 @@ class UserDetailController extends Controller
 
                 'phone' => ['nullable', 'regex:^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$^'],
 
-                'city' => ['nullable', 'string', "in_array:cities"]
+                'city' => ['nullable', 'string', "in_array:cities"],
+
+                'specs' => 'required|exists:specializations,id',
             ],
             [
                 'city.in_array' => ' Pippo ',
-
+                
                 'cv' => "il formato del file dev'essere PDF",
-
+                
                 'image' => "il formato dev'essere jpg,jpeg o png",
-
+                
                 'username' => 'il nome utente deve contenere almeno 3 caratteri',
+
+                'specs.required' => 'Devi selezionare almeno una specializzazione ',
             ],
         );
 
@@ -97,8 +103,8 @@ class UserDetailController extends Controller
         }
 
         // cerco l'utente corrente e nelle sue specializzazioni sincronizzo quelle che possiede passando l'array di quelle selezionate.
-        if (array_key_exists('specializations', $data)) {
-            User::find($user->id)->specializations()->sync($data['specializations']);
+        if (array_key_exists('specs', $data)) {
+            User::find($user->id)->specializations()->sync($data['specs']);
         }
 
         $detail->update($data);
@@ -110,6 +116,7 @@ class UserDetailController extends Controller
 
     public function store(Request $request)
     {
+       
 
         $user = Auth::user();
         $cities = config('cities');
@@ -121,10 +128,14 @@ class UserDetailController extends Controller
 
                 'last_name' => 'string|min:3|max:50',
 
-                'address' => ['string', Rule::in($cities)]
+                'address' => ['string', Rule::in($cities)],
+
+                'specs' => 'required|exists:specializations,id',
             ],
             [
                 'address.in_array' => 'Localita non valida ',
+
+                'specs.required' => 'Devi selezionare almeno una specializzazione ',
             ],
         );
 
@@ -137,6 +148,8 @@ class UserDetailController extends Controller
         $new_userDetail->first_name = $data['first_name'];
         $new_userDetail->last_name = $data['last_name'];
         $new_userDetail->address = $data['address'];
+
+        User::find($user->id)->specializations()->sync($data['specs']);
 
         // ! MAIN FIX - non avevamo salvato il nuovo oggetto UserDetail
         $new_userDetail->save();

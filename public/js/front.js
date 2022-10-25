@@ -1936,7 +1936,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     fetchParams: function fetchParams() {
       var _this = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/').then(function (res) {
         _this.params = res.data;
       });
     }

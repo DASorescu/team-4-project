@@ -65,19 +65,43 @@
                                 </div>
                                 {{-- Unica pecca è che per selezionare più di una specializzazione devi schiacciare o ctrl o maiusc e cliccare si quella che vuoi.
                                     Non sono riuscita a trovare un modo alternativo per farlo, secondo me bisogna gestirla lato VUE MA BOH --}}
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="specialization">Specializzazioni</label>
-                                    {{-- incredibile ma vero mettendo le quaddre al name mi permette di selezionare più specializzazioni. I was shocked  --}}
+                                    incredibile ma vero mettendo le quaddre al name mi permette di selezionare più specializzazioni. I was shocked 
                                     <select name="specializations[]" id="specialization" class="form-control" multiple>
                                         @foreach ($all_specialization as $specialization)
-                                            <option value="{{ $specialization->id }}" {{-- utilizzo il metodo contains per selezionare le specializzazioni che l'utente possiede. --}}
+                                            <option value="{{ $specialization->id }}" utilizzo il metodo contains per selezionare le specializzazioni che l'utente possiede.
                                                 {{ $user->specializations->contains($specialization->id) ? 'selected' : '' }}>
                                                 {{ $specialization->label }}
                                             </option>
                                         @endforeach
                                     </select>
+                                </div> --}}
+                                {{-- modale specializzazioni --}}
+                                <div class="btn-group w-50 my-2">
+                                    {{-- <button class="btn btn-light dropdown-toggle w-75" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false"> --}}
+                                    <button type="button" class="btn btn-light dropdown-toggle w-75 text-left" data-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+                                         Specializzazioni
+                                    </button>
+                                    <div class="dropdown-menu w-100">
+                                        @foreach ($all_specialization as $specialization)
+                                            <div class="form-check form-check-inline d-flex align-items-center p-2 dropdown-item spec-checkbox w-100">
+                                                <input 
+                                                    class="form-check-input"
+                                                    id="spec-{{$specialization->label}}" 
+                                                    type="checkbox" 
+                                                    name="specs[]"
+                                                    value="{{ $specialization->id }}" 
+                                                    @if(in_array($specialization->id, old('specs',[]))) checked @endif
+                                                    @foreach ($user->specializations as $user_spec)
+                                                        @if($specialization->id == $user_spec->id) checked @endif
+                                                    @endforeach
+                                                    >
+                                                <label class="w-70 my-0 mx-1" for="spec-{{$specialization->label}}">{{ $specialization->label }}</label>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
-
 
                                 <div class="form-group">
                                     <label for="adress">Città</label>

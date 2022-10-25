@@ -10973,3 +10973,7 @@ a.text-dark:focus {
   height: 100%;
 }
 
+.spec-checkbox {
+  width: 10%;
+}
+

@@ -37,7 +37,7 @@
         @if (!Route::is('admin.users.create'))
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ route('admin.users.edit') }}">
                         {{ config('app.name', 'BDoctors') }}
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"

@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
 
+<div class="container">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+`   @endif
     <form class="mt-5" action="{{ route('admin.users.store')}}" method="POST">
         @method('POST')
         @csrf
@@ -35,7 +44,31 @@
                     </select>
                 </div>
             </div>
-                        {{-- TODO Specialization --}}
+
+            {{-- TODO Specialization --}}
+            <div class="btn-group w-50 my-2">
+                {{-- <button class="btn btn-light dropdown-toggle w-75" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false"> --}}
+                <button type="button" class="btn btn-light dropdown-toggle w-75 text-left" data-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+                     Specializzazioni
+                </button>
+                <div class="dropdown-menu w-100">
+                    @foreach ($all_specialization as $specialization)
+                        <div class="form-check form-check-inline d-flex align-items-center p-2 dropdown-item spec-checkbox w-100">
+                            <input 
+                                class="form-check-input"
+                                id="spec-{{$specialization->label}}" 
+                                type="checkbox" 
+                                name="specs[]"
+                                value="{{ $specialization->id }}" 
+                                @if(in_array($specialization->id, old('specs',[]))) checked @endif
+                                >
+                            <label class="w-70 my-0 mx-1" for="spec-{{$specialization->label}}">{{ $specialization->label }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+
            <footer class="d-flex align-items-center justify-content-between">
                 <div>
     
