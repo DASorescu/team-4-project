@@ -4,10 +4,6 @@ import Vue from 'vue';
 // importiamo Vue-router
 import VueRouter from 'vue-router';
 
-// rotte
-import HomePage from './components/pages/HomePage';
-import UserSearchPage from './components/pages/UserSearchPage';
-
 // specifico a vue-router le rotte da prendere e usare
 Vue.use(VueRouter)
 
