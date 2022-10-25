@@ -12,6 +12,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    @if (Route::is('register'))
+    <script src="{{ asset('js/register_validation.js') }}" defer></script>
+    @endif
 
 
     <!-- Fonts -->
