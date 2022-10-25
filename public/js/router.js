@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1921,7 +1921,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     fetchParams: function fetchParams() {
       var _this = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/').then(function (res) {
         _this.params = res.data;
       });
     }
@@ -17665,7 +17665,7 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!**************************************!*\
   !*** multi ./resources/js/router.js ***!
   \**************************************/
