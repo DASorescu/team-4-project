@@ -2057,7 +2057,7 @@ var render = function render() {
       key: index
     }, [_c("div", {
       staticClass: "card my-2"
-    }, [_vm._v(_vm._s(doctor))])]);
+    }, [_c("div", [_vm._v("\n                " + _vm._s(doctor.first_name) + " \n                ")]), _vm._v(" "), _c("div", [_vm._v("\n                   " + _vm._s(doctor.last_name) + " \n                ")]), _vm._v(" "), _c("div", [_vm._v("\n                   " + _vm._s(doctor.address) + " \n                ")]), _vm._v(" "), _c("div", [_vm._v("\n                    " + _vm._s(doctor.address) + " \n                ")]), _vm._v(" "), _c("div", [_vm._v("\n                    " + _vm._s(doctor.specializations) + " \n                ")])])]);
   })], 2)]);
 };
 var staticRenderFns = [];

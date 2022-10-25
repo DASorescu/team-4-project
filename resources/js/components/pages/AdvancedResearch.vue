@@ -21,7 +21,23 @@
             </div>
             
             <div v-else class="" v-for="( doctor, index ) in filteredDoctors()" :key="index">
-                <div class="card my-2">{{ doctor }}</div>
+                <div class="card my-2">
+                    <div>
+                    {{ doctor.first_name }} 
+                    </div> 
+                    <div>
+                       {{ doctor.last_name }} 
+                    </div>
+                    <div>
+                       {{ doctor.address }} 
+                    </div>
+                    <div>
+                        {{ doctor.address }} 
+                    </div>
+                    <div>
+                        {{ doctor.specializations }} 
+                    </div>
+                </div>
             </div>
             
             
