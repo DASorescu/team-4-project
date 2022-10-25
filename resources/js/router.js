@@ -10,6 +10,9 @@ Vue.use(VueRouter)
 // rotte
 import HomePage from './components/pages/HomePage';
 import AdvancedResearch from './components/pages/AdvancedResearch';
+import UserSearchPage from './components/pages/UserSearchPage';
+
+
 
 // istanziamo VueRouter
 const routes = new VueRouter({
