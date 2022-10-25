@@ -1,6 +1,7 @@
 <template>
     <div v-if="hasResult" class="mt-5 container flex-wrap d-flex">
-        <div class="card shadow" v-for="doctor in result" :key="'res-' + doctor.id">
+        <CitySelect :cities="cities" @address-change="(city) => selectedAddress = city" />
+        <div class="card shadow" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
             <div class="card-header">
                 Doctor: {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
             </div>
@@ -16,15 +17,19 @@
 <script>
 import axios from 'axios';
 import AppLoader from '../AppLoader.vue';
+import CitySelect from '../CitySelect.vue'
 export default {
     name: 'UserSearchPage',
     components: {
-        AppLoader
+        AppLoader,
+        CitySelect,
     },
     data() {
         return {
             result: [],
-            fetching: false
+            cities: [],
+            fetching: false,
+            selectedAddress: '',
         }
     },
     computed: {
@@ -32,8 +37,14 @@ export default {
             return this.result.length > 0 && !this.fetching
         },
         hasSpecializationId() {
-            return typeof this.$route.params.specializationId === 'number'
-        }
+            return typeof this.$route.params.specializationId === 'number';
+        },
+        filteredDoctors() {
+            if (!this.selectedAddress) return this.result;
+            return this.result.filter((doctor)=>doctor.detail.address == this.selectedAddress)
+            
+        },
+        
     },
     methods: {
         async searchDoctorBySpecialization(specializationId) {
@@ -49,6 +60,7 @@ export default {
                 for (const doctor of res.data) {
                     // prendo i dettagli del dottore corrente
                     const doctorDetail = (await this.getDoctorDetails(doctor.id)).data
+
                     // compongo un oggetto più semplice da usare con i dettagli.
                     // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
                     this.result.push({
@@ -56,6 +68,8 @@ export default {
                         email: doctor.email,
                         detail: doctorDetail
                     })
+                    this.cities.push(doctorDetail.address)
+
                 }
             }
             this.fetching = false
