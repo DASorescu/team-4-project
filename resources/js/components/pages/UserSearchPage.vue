@@ -1,17 +1,24 @@
 <template>
-    <div v-if="hasResult" class="mt-5 container flex-wrap d-flex">
-        <CitySelect :cities="cities" @address-change="(city) => selectedAddress = city" />
-        <div class="card shadow" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
-            <div class="card-header">
-                Doctor: {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
-            </div>
-            <div class="card-body">
-                Città: {{ doctor.detail.address }}
-                Email: {{ doctor.email }}
+    <div class="mt-5">
+        <CitySelect
+            class="d-flex justify-content-center"
+            :cities="cities"
+            @address-change="(city) => selectedAddress = city"
+            label="Seleziona Una Città"
+        />
+        <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
+            <div class="card shadow" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
+                <div class="card-header">
+                    Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
+                </div>
+                <div class="card-body">
+                    <p>Città: {{ doctor.detail.address }}</p>
+                    <p>Email: {{ doctor.email }}</p>
+                </div>
             </div>
         </div>
+        <AppLoader v-else />
     </div>
-    <AppLoader v-else/>
 </template>
 
 <script>
@@ -37,14 +44,15 @@ export default {
             return this.result.length > 0 && !this.fetching
         },
         hasSpecializationId() {
-            return typeof this.$route.params.specializationId === 'number';
+            return typeof this.$route.params.specializationId === 'number' &&
+                !Number.isNaN(this.$route.params.specializationId)
         },
         filteredDoctors() {
             if (!this.selectedAddress) return this.result;
             return this.result.filter((doctor)=>doctor.detail.address == this.selectedAddress)
-            
+
         },
-        
+
     },
     methods: {
         async searchDoctorBySpecialization(specializationId) {
@@ -68,7 +76,10 @@ export default {
                         email: doctor.email,
                         detail: doctorDetail
                     })
-                    this.cities.push(doctorDetail.address)
+                    //cosi non si ripetono le città :)
+                    if(doctorDetail.address !== null && !this.cities.includes(doctorDetail.address)){
+                        this.cities.push(doctorDetail.address)
+                    }
 
                 }
             }
@@ -79,6 +90,9 @@ export default {
         },
     },
     mounted() {
+        if (typeof this.$route.params.specializationId === 'string') {
+            this.$route.params.specializationId = parseInt(this.$route.params.specializationId)
+        }
         if (this.hasSpecializationId) {
             this.searchDoctorBySpecialization(this.$route.params.specializationId);
         }

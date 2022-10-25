@@ -1,7 +1,7 @@
 <template>
     <div>
         <select class="form-select" aria-label="Default select example" v-model="selectedAddress" @change="emitChange">
-            <option value="">{{ 'Select an option' }}</option>
+            <option value="">{{ label || 'Select an option' }}</option>
             <option v-for="(city, index) in cities" :key="index" :value="city">{{ city }}</option>
         </select>
     </div>
@@ -22,6 +22,7 @@ export default {
     },
     props: {
         cities: Array,
+        label: String
     },
     methods: {
         emitChange() {

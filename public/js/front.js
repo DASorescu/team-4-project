@@ -1946,7 +1946,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    cities: Array
+    cities: Array,
+    label: String
   },
   methods: {
     emitChange: function emitChange() {
@@ -2087,7 +2088,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.result.length > 0 && !this.fetching;
     },
     hasSpecializationId: function hasSpecializationId() {
-      return typeof this.$route.params.specializationId === 'number';
+      return typeof this.$route.params.specializationId === 'number' && !Number.isNaN(this.$route.params.specializationId);
     },
     filteredDoctors: function filteredDoctors() {
       var _this = this;
@@ -2143,7 +2144,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   email: doctor.email,
                   detail: doctorDetail
                 });
-                _this2.cities.push(doctorDetail.address);
+                //cosi non si ripetono le città :)
+                if (doctorDetail.address !== null && !_this2.cities.includes(doctorDetail.address)) {
+                  _this2.cities.push(doctorDetail.address);
+                }
               case 18:
                 _context.next = 11;
                 break;
@@ -2173,6 +2177,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
+    if (typeof this.$route.params.specializationId === 'string') {
+      this.$route.params.specializationId = parseInt(this.$route.params.specializationId);
+    }
     if (this.hasSpecializationId) {
       this.searchDoctorBySpecialization(this.$route.params.specializationId);
     }
@@ -2278,7 +2285,7 @@ var render = function render() {
     attrs: {
       value: ""
     }
-  }, [_vm._v(_vm._s("Select an option"))]), _vm._v(" "), _vm._l(_vm.cities, function (city, index) {
+  }, [_vm._v(_vm._s(_vm.label || "Select an option"))]), _vm._v(" "), _vm._l(_vm.cities, function (city, index) {
     return _c("option", {
       key: index,
       domProps: {
@@ -2415,27 +2422,31 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm.hasResult ? _c("div", {
-    staticClass: "mt-5 container flex-wrap d-flex"
+  return _c("div", {
+    staticClass: "mt-5"
   }, [_c("CitySelect", {
+    staticClass: "d-flex justify-content-center",
     attrs: {
-      cities: _vm.cities
+      cities: _vm.cities,
+      label: "Seleziona Una Città"
     },
     on: {
       "address-change": function addressChange(city) {
         return _vm.selectedAddress = city;
       }
     }
-  }), _vm._v(" "), _vm._l(_vm.filteredDoctors, function (doctor) {
+  }), _vm._v(" "), _vm.hasResult ? _c("div", {
+    staticClass: "mt-3 container flex-wrap d-flex"
+  }, _vm._l(_vm.filteredDoctors, function (doctor) {
     return _c("div", {
       key: "res-" + doctor.id,
       staticClass: "card shadow"
     }, [_c("div", {
       staticClass: "card-header"
-    }, [_vm._v("\n            Doctor: " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name) + "\n        ")]), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name) + "\n            ")]), _vm._v(" "), _c("div", {
       staticClass: "card-body"
-    }, [_vm._v("\n            Città: " + _vm._s(doctor.detail.address) + "\n            Email: " + _vm._s(doctor.email) + "\n        ")])]);
-  })], 2) : _c("AppLoader");
+    }, [_c("p", [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("p", [_vm._v("Email: " + _vm._s(doctor.email))])])]);
+  }), 0) : _c("AppLoader")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
