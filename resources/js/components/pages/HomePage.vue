@@ -1,6 +1,15 @@
 <template>
     <div>
-        <div>{{ params }}</div>
+        <h1>Prenota La tua visita medica</h1>
+        <div>
+            <select v-if="hasSpecializations" v-model="currentSpecialization" @change="search()">
+                <option :value="0">Scegli un medico per specializzazione bichote</option>
+                <option v-for="specialization in specializations" :key="'spec-'+ specialization.id" :value="specialization.id" :selected="currentSpecialization===specialization.id">
+                    {{specialization.label}}
+                </option>
+            </select>
+        </div>
+
     </div>
 </template>
 
@@ -10,19 +19,31 @@ export default {
     name: 'HomePage',
     data() {
         return {
-            params: '',
+            specializations: [],
+            currentSpecialization: 0,
         }
     },
+    computed: {
+        hasSpecializations() {
+            return this.specializations.length > 0
+        },
+    },
     methods: {
-        fetchParams() {
-            axios.get('http://localhost:8000/api/')
+        getSpecializations() {
+            axios.get('http://localhost:8000/api/specializations/')
                 .then(res => {
-                    this.params = res.data
+                    this.specializations = res.data
                 })
+        },
+        search() {
+            this.$router.push({ name: 'search', params: { specializationId: this.currentSpecialization } })
         }
     },
     mounted() {
-        this.fetchParams();
+        this.getSpecializations();
     }
 }
 </script>
+
+<style lang="scss" scoped>
+</style>

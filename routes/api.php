@@ -18,4 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/','Api\HomeController@index');
+Route::get('/', 'Api\HomeController@index');
+Route::get('/search/{specialization_id}', 'Api\SearchDoctorController@show');
+Route::get('/specializations', 'Api\SpecializationController@index');
+Route::get('/detail/{id}', 'Api\DoctorController@show');

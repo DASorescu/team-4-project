@@ -24,7 +24,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->namespace('Admin')->
     Route::put('/users/update', 'Users\UserDetailController@update')->name('users.update');
     Route::get('/users/sponsorships/create', 'Users\SponsorshipController@create')->name('users.sponsorships.create');
     Route::post('/users/sponsorships/store', 'Users\SponsorshipController@store')->name('users.sponsorships.store');
-    
+
     // reviews
     Route::get('/users/reviews', 'Users\ReviewController@index')->name('users.reviews.index');
     Route::get('/users/reviews/{id}', 'Users\ReviewController@show')->name('users.reviews.show');
@@ -33,15 +33,15 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->namespace('Admin')->
     Route::get('/users/messages', 'Users\Messages\MessageController@index')->name('users.messages.index');
     Route::get('/users/messages/{message}', 'Users\Messages\MessageController@show')->name('users.messages.show');
     Route::delete('/users/messages/{message}', 'Users\Messages\MessageController@destroy')->name('users.messages.destroy');
-    Route::get('/users/create','Users\UserDetailController@create')->name('users.create');
-    Route::post('/users/store','Users\UserDetailController@store')->name('users.store');
-    
-    
-    Route::get('/{any}', function(){
+    Route::get('/users/create', 'Users\UserDetailController@create')->name('users.create');
+    Route::post('/users/store', 'Users\UserDetailController@store')->name('users.store');
+
+
+    Route::get('/{any}', function () {
         abort('404');
     })->where('any', '.*');
 });
 
-Route::get('/', function () {
+Route::get('/{any?}', function () {
     return view('guest.home');
-});
+})->where('any', '.*');
