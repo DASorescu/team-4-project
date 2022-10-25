@@ -10932,3 +10932,44 @@ a.text-dark:focus {
   }
 }
 
+.custom-file-label::after {
+  content: "Carica";
+}
+
+#profileImg {
+  cursor: pointer;
+  position: relative;
+}
+
+#profileImg i {
+  display: none;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  color: white;
+}
+
+#profileImg .overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+#profileImg:hover .overlay,
+#profileImg:hover i {
+  display: block;
+}
+
+.img-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+

@@ -59,7 +59,7 @@ class User extends Authenticatable
 
     public function sponsorships(){
 
-        return $this->belongsToMany('App\Models\Sponsorship');
+        return $this->belongsToMany('App\Models\Sponsorship')->withTimestamps()->withPivot('ends_at');
     }
 
     public function services(){

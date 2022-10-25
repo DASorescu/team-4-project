@@ -9,6 +9,8 @@
     <!--Importiamo Bootstrap-->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+    {{-- js --}}
+    <script src="{{ asset('js/front.js') }}" defer></script> 
 
     <title>Document</title>
 </head>
