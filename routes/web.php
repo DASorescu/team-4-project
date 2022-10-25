@@ -42,6 +42,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->namespace('Admin')->
     })->where('any', '.*');
 });
 
-Route::get('/', function () {
+Route::get('/{any?}', function () {
     return view('guest.home');
-});
+})->where('any', '.*');

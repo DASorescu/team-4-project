@@ -19,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/','Api\HomeController@index');
+
+Route::get('/users','Api\UserController@index');
+Route::get('/users/{user}','Api\UserController@show');
+
