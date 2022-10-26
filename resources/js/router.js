@@ -11,6 +11,8 @@ Vue.use(VueRouter)
 import HomePage from './components/pages/HomePage';
 import AdvancedResearch from './components/pages/AdvancedResearch';
 import UserSearchPage from './components/pages/UserSearchPage';
+import DoctorDetails from './components/pages/DoctorDetails';
+
 
 
 
@@ -22,9 +24,9 @@ const routes = new VueRouter({
         {path: '/', component: HomePage, name: 'home'},
         {path: '/search/:specializationId', component: UserSearchPage, name: 'search'},
         {path: '/users', component: AdvancedResearch, name: 'users'},
-        {path: '/users/{user}', component: AdvancedResearch, name: 'users.show'},
+        {path: '/users/:id', component: DoctorDetails, name: 'users.show'},
     ],
 })
 
-// se ti dimentichi sto dio madonna di export non ti funziona un cazzo puttana la madonna, Dr. Strunz
+// se ti dimentichi sto madonna di export non ti funziona un cazzo, Dr. Strunz
 export default routes;
