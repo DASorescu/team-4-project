@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\api;
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::with(['name','surname','userDetails'])->where('id', $id)->first();
         return response()->json($users);
     }
 
@@ -37,7 +37,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user_detail = User::findOrFail($id)->userDetail;
+        
+        // TODO gestire pagina errore api
+        // if(!$user_detail) return response('Not Found', 404);
+        return response()->json($user_detail);
     }
 
     /**
