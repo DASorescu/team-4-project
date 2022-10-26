@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <p>Città: {{ doctor.detail.address }}</p>
                     <p>Email: {{ doctor.email }}</p>
-                    <p>Rating: <RateReview  :rate="averageReviews[doctor.id].avg" />({{averageReviews[doctor.id].count}})</p>
+                    <p>Rating: <RateReview  :value="averageReviews[doctor.id].avg" />({{averageReviews[doctor.id].count}})</p>
                 </div>
             </div>
         </div>

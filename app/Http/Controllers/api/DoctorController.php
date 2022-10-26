@@ -58,6 +58,34 @@ class DoctorController extends Controller
         //
     }
 
+    public function addReview(Request $request, $id)
+    {
+        $user = User::find($id);
+        $request->validate(
+            [
+                'content' => 'string|min:10|max:2048',
+
+                'guest_name' => 'string|min:3|max:50',
+
+                'guest_email' => 'string|min:3|max:50',
+
+                'rating' => 'number|min:1|max:5',
+            ],
+            [
+                'content' => 'err_content',
+
+                'guest_name' => "err_guest_name",
+
+                'guest_email' => "err_guest_email",
+
+                'rating' => 'err_rating',
+            ],
+        );
+        $data = $request->all();
+
+        $new_review = new Review();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
