@@ -24,6 +24,5 @@ Route::get('/specializations', 'Api\SpecializationController@index');
 Route::get('/detail/{id}', 'Api\DoctorController@show');
 Route::get('/users', 'Api\UserController@index');
 Route::get('/users/{user}', 'Api\UserController@show');
-
-// registro la rotta delle review
 Route::get('/user/reviews/{id}', 'Api\DoctorController@reviews');
+Route::post('/user/{id}/reviews', 'Api\DoctorController@addReview');

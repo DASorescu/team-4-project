@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Review;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -63,13 +64,13 @@ class DoctorController extends Controller
         $user = User::find($id);
         $request->validate(
             [
-                'content' => 'string|min:10|max:2048',
+                'content' => 'required|string|min:10|max:2048',
 
-                'guest_name' => 'string|min:3|max:50',
+                'guest_name' => 'required|string|min:3|max:50',
 
-                'guest_email' => 'string|min:3|max:50',
+                'guest_email' => 'required|string|min:3|max:50',
 
-                'rating' => 'number|min:1|max:5',
+                'rating' => 'required|numeric|min:1|max:5',
             ],
             [
                 'content' => 'err_content',
@@ -84,6 +85,19 @@ class DoctorController extends Controller
         $data = $request->all();
 
         $new_review = new Review();
+
+        $new_review->user_id = $user->id;
+        $new_review->content = $data['content'];
+        $new_review->guest_name = $data['guest_name'];
+        $new_review->guest_email = $data['guest_email'];
+        $new_review->rating = $data['rating'];
+
+        $new_review->save();
+
+        return response()->json([
+            'message' => 'created',
+            'errors' => false
+        ]);
     }
 
     /**

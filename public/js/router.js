@@ -1971,7 +1971,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       review: 0,
-      reviewText: ''
+      reviewText: '',
+      guestName: '',
+      guestEmail: ''
     };
   },
   methods: {
@@ -1979,10 +1981,12 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       var data = {
         rating: this.review,
-        content: this.reviewText
+        content: this.reviewText,
+        guest_name: this.guestName,
+        guest_email: this.guestEmail
       };
       // sistemo la richiesta da inviqae nel back le reviews
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('...', data).then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://localhost:8000/api/user/' + this.doctorId + '/reviews', data).then(function () {
         _this.$emit('submitted', data);
       })["catch"](function (e) {
         _this.$emit('error', e);
@@ -2484,7 +2488,61 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "mt-5"
-  }, [_c("h3", [_vm._v("Scrivi una recensione")]), _vm._v(" "), _c("div", [_c("RateReview", {
+  }, [_c("h3", [_vm._v("Scrivi una recensione")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "name"
+    }
+  }, [_vm._v("Inserisci il tuo nome")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.guestName,
+      expression: "guestName"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      id: "name"
+    },
+    domProps: {
+      value: _vm.guestName
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.guestName = $event.target.value;
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "email"
+    }
+  }, [_vm._v("Inserisci la tua mail")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.guestEmail,
+      expression: "guestEmail"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "email",
+      id: "email"
+    },
+    domProps: {
+      value: _vm.guestEmail
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.guestEmail = $event.target.value;
+      }
+    }
+  })]), _vm._v(" "), _c("div", [_c("RateReview", {
     attrs: {
       clickable: ""
     },
@@ -2510,6 +2568,7 @@ var render = function render() {
     }],
     staticClass: "form-control",
     attrs: {
+      id: "review",
       rows: "5"
     },
     domProps: {
