@@ -40,6 +40,12 @@ class DoctorController extends Controller
         return response()->json(User::find($id)->userDetail);
     }
 
+    //prendo le review dell'utente specififcato dall'id
+    public function reviews($id)
+    {
+        return response()->json(User::find($id)->reviews);
+    }
+
     /**
      * Update the specified resource in storage.
      *
