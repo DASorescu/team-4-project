@@ -1,17 +1,13 @@
 <template>
     <div class="mt-5">
-        <CitySelect
-            v-if="hasResult"
-            class="d-flex justify-content-center"
-            :cities="cities"
-            @address-change="(city) => selectedAddress = city"
-            label="Seleziona Una Città"
-        />
+        <CitySelect v-if="hasResult" class="d-flex justify-content-center" :cities="cities"
+            @address-change="(city) => selectedAddress = city" label="Seleziona Una Città" />
         <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
             <div class="card shadow" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
                 <div class="card-header">
                     Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
-                    <router-link class="btn btn-primary d-flex align-items-center" :to="{name:'user-detail',params:{id:doctor.id}}">
+                    <router-link class="btn btn-primary d-flex align-items-center"
+                        :to="{ name: 'user-detail', params: { id: doctor.id } }">
                         <i class="fa-solid fa-eye mx-1"></i>
                     </router-link>
                 </div>
@@ -53,7 +49,7 @@ export default {
         },
         filteredDoctors() {
             if (!this.selectedAddress) return this.result;
-            return this.result.filter((doctor)=>doctor.detail.address == this.selectedAddress)
+            return this.result.filter((doctor) => doctor.detail.address == this.selectedAddress)
 
         },
 
@@ -81,7 +77,7 @@ export default {
                         detail: doctorDetail
                     })
                     //cosi non si ripetono le città :)
-                    if(doctorDetail.address !== null && !this.cities.includes(doctorDetail.address)){
+                    if (doctorDetail.address !== null && !this.cities.includes(doctorDetail.address)) {
                         this.cities.push(doctorDetail.address)
                     }
 
