@@ -15,6 +15,9 @@
     @if (Route::is('register'))
     <script src="{{ asset('js/register_validation.js') }}" defer></script>
     @endif
+    @if (Route::is('admin.users.create'))
+    <script src="{{ asset('js/register_validation.js') }}" defer></script>
+    @endif
 
 
     <!-- Fonts -->

@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/js/create_validation.js": "/js/create_validation.js",
     "/js/front.js": "/js/front.js",
     "/js/register_validation.js": "/js/register_validation.js",
     "/js/router.js": "/js/router.js"

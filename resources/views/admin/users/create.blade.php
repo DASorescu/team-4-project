@@ -12,7 +12,7 @@
             </ul>
         </div>
 `   @endif
-    <form class="mt-5" action="{{ route('admin.users.store')}}" method="POST">
+    <form class="mt-5" action="{{ route('admin.users.store')}}" method="POST" id="creation-form">
         @method('POST')
         @csrf
         <div class="row">

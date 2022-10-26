@@ -1,6 +1,7 @@
 <template>
     <div class="mt-5">
         <CitySelect
+            v-if="hasResult"
             class="d-flex justify-content-center"
             :cities="cities"
             @address-change="(city) => selectedAddress = city"

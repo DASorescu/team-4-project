@@ -81,47 +81,48 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/validations/register_validation.js":
-/*!*********************************************************!*\
-  !*** ./resources/js/validations/register_validation.js ***!
-  \*********************************************************/
+/***/ "./resources/js/validations/create_validation.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/validations/create_validation.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var form = document.getElementById('form');
-var username = document.getElementById('name');
-var email = document.getElementById('email');
-var password = document.getElementById('password');
-var passwordConfirm = document.getElementById('password-confirm');
+var form = document.getElementById('creation-form');
+var user_name = document.getElementById('first_name');
+var user_surname = document.getElementById('last_name');
+var address_choice = document.getElementById('address');
+var address = address_choice.options[address_choice.selectedIndex].value;
+// todo specialization validation!!
+// const specialization = document.getElementById('password-confirm');
+
 form.addEventListener('submit', function (e) {
   var isValid = false;
-  if (!isNaN(username.value) || username.value.length < 3 || username.value.length > 30) {
-    alert('Inserire un username valido.');
-  } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
-    alert('La mail inserita non è valida.');
-  } else if (password.value.length < 8) {
-    alert('La password deve essere di almeno 8 caratteri.');
-  } else if (passwordConfirm.value !== password.value) {
-    alert('Le password non corrispondono.');
+  if (!isNaN(user_name.value) || user_name.value.length < 3 || user_name.value.length > 30) {
+    alert('Inserire un nome valido.');
+  } else if (!isNaN(user_surname.value) || user_surname.value.length < 3 || user_surname.value.length > 30) {
+    alert('Inserire un cognome valido.');
+  } else if (address == 0) {
+    alert('Devi scegliere una citta');
   } else isValid = true;
   if (!isValid) e.preventDefault();
 });
 
 /***/ }),
 
-/***/ 1:
-/*!***************************************************************!*\
-  !*** multi ./resources/js/validations/register_validation.js ***!
-  \***************************************************************/
+/***/ 2:
+/*!*************************************************************!*\
+  !*** multi ./resources/js/validations/create_validation.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laravel\team-4-project\resources\js\validations\register_validation.js */"./resources/js/validations/register_validation.js");
+module.exports = __webpack_require__(/*! C:\laravel\team-4-project\resources\js\validations\create_validation.js */"./resources/js/validations/create_validation.js");
 
 
 /***/ })

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2424,7 +2424,7 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "mt-5"
-  }, [_c("CitySelect", {
+  }, [_vm.hasResult ? _c("CitySelect", {
     staticClass: "d-flex justify-content-center",
     attrs: {
       cities: _vm.cities,
@@ -2435,7 +2435,7 @@ var render = function render() {
         return _vm.selectedAddress = city;
       }
     }
-  }), _vm._v(" "), _vm.hasResult ? _c("div", {
+  }) : _vm._e(), _vm._v(" "), _vm.hasResult ? _c("div", {
     staticClass: "mt-3 container flex-wrap d-flex"
   }, _vm._l(_vm.filteredDoctors, function (doctor) {
     return _c("div", {
@@ -54626,7 +54626,7 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!*************************************!*\
   !*** multi ./resources/js/front.js ***!
   \*************************************/

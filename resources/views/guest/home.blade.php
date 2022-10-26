@@ -13,10 +13,11 @@
     {{-- js --}}
     <script src="{{ asset('js/front.js') }}" defer></script>
 
-    <title>Boolean Doctors</title>
+    <title>BDoctors</title>
 </head>
 
 <body>
+
     <div id="root">
 
     </div>

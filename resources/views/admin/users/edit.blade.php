@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @if ($user->userDetail)
-@php
-    // se non viene selezionata nessun elemento dallo storage ritorno quello alternativo
-    function defaultPathStorage($path, $alternativePath)
-    {
-        $path = asset($path);
-        $alternativePath = !empty($alternativePath) ? asset($alternativePath) : $alternativePath;
-        return Str::endsWith($path, 'storage') ? $alternativePath : $path;
-    }
-    $imagePath = defaultPathStorage('storage/' . $user->userDetail->image, 'img/default-user-image.png');
-    $curriculumPath = defaultPathStorage('storage/' . $user->userDetail->cv, '');
+    @php
+        // se non viene selezionata nessun elemento dallo storage ritorno quello alternativo
+        function defaultPathStorage($path, $alternativePath)
+        {
+            $path = asset($path);
+            $alternativePath = !empty($alternativePath) ? asset($alternativePath) : $alternativePath;
+            return Str::endsWith($path, 'storage') ? $alternativePath : $path;
+        }
+        $imagePath = defaultPathStorage('storage/' . $user->userDetail->image, 'img/default-user-image.png');
+        $curriculumPath = defaultPathStorage('storage/' . $user->userDetail->cv, '');
     @endphp
 @endif
 
