@@ -59,7 +59,9 @@
 
 export default {
     name: 'AdvancedResearch',
-    
+    props: {
+        doctorsArray: Array,
+    },
     data() {
         return {
             

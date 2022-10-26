@@ -1969,6 +1969,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'AdvancedResearch',
+  props: {
+    doctorsArray: Array
+  },
   data: function data() {
     return {
       proprieties: ['nome', 'cognome', 'città', 'specializzazione'],
