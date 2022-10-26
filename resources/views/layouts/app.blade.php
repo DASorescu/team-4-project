@@ -16,7 +16,10 @@
     <script src="{{ asset('js/register_validation.js') }}" defer></script>
     @endif
     @if (Route::is('admin.users.create'))
-    <script src="{{ asset('js/register_validation.js') }}" defer></script>
+    <script src="{{ asset('js/create_validation.js') }}" defer></script>
+    @endif
+    @if (Route::is('admin.users.edit'))
+    <script src="{{ asset('js/edit_validation.js') }}" defer></script>
     @endif
 
 

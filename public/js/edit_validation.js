@@ -81,21 +81,22 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/validations/create_validation.js":
-/*!*******************************************************!*\
-  !*** ./resources/js/validations/create_validation.js ***!
-  \*******************************************************/
+/***/ "./resources/js/validations/edit_validation.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/validations/edit_validation.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var form = document.getElementById('creation-form');
-var user_name = document.getElementById('first_name');
-var user_surname = document.getElementById('last_name');
+var form = document.getElementById('edit-form');
+var username = document.getElementById('username');
+var first_name = document.getElementById('first_name');
+var last_name = document.getElementById('last_name');
 var address_choice = document.getElementById('address');
 var specializations = document.querySelectorAll('.form-check-input');
 function checkTheBox() {
@@ -111,13 +112,13 @@ function checkTheBox() {
   }
   return true;
 }
-// todo specialization validation!!
-
 form.addEventListener('submit', function (e) {
   var isValid = false;
-  if (!isNaN(user_name.value) || user_name.value.length < 3 || user_name.value.length > 30) {
+  if (!isNaN(first_name.value) || first_name.value.length < 3 || first_name.value.length > 30) {
     alert('Inserire un nome valido.');
-  } else if (!isNaN(user_surname.value) || user_surname.value.length < 3 || user_surname.value.length > 30) {
+  } else if (!isNaN(username.value) || username.value.length < 3 || username.value.length > 30) {
+    alert('Inserire un username valido.');
+  } else if (!isNaN(last_name.value) || last_name.value.length < 3 || last_name.value.length > 30) {
     alert('Inserire un cognome valido.');
   } else if (!address_choice.value) {
     alert('Devi scegliere una citta');
@@ -129,14 +130,14 @@ form.addEventListener('submit', function (e) {
 
 /***/ }),
 
-/***/ 2:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/validations/create_validation.js ***!
-  \*************************************************************/
+/***/ 3:
+/*!***********************************************************!*\
+  !*** multi ./resources/js/validations/edit_validation.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laravel\team-4-project\resources\js\validations\create_validation.js */"./resources/js/validations/create_validation.js");
+module.exports = __webpack_require__(/*! C:\laravel\team-4-project\resources\js\validations\edit_validation.js */"./resources/js/validations/edit_validation.js");
 
 
 /***/ })

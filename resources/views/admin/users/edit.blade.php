@@ -28,7 +28,7 @@
             @endif
             <div class="row justify-content-center mt-5">
                 <div class="col-md-6">
-                    <form action="{{ route('admin.users.update') }}" enctype="multipart/form-data" method="POST">
+                    <form action="{{ route('admin.users.update') }}" enctype="multipart/form-data" method="POST" id="edit-form">
                         @method('PUT')
                         @csrf
                         <div class="card shadow">
@@ -63,20 +63,6 @@
                                         @if ($user->userDetail->last_name) value="{{ old('last_name', $user->userDetail->last_name) }}" @endif
                                         required minlength="3">
                                 </div>
-                                {{-- Unica pecca è che per selezionare più di una specializzazione devi schiacciare o ctrl o maiusc e cliccare si quella che vuoi.
-                                    Non sono riuscita a trovare un modo alternativo per farlo, secondo me bisogna gestirla lato VUE MA BOH --}}
-                                {{-- <div class="form-group">
-                                    <label for="specialization">Specializzazioni</label>
-                                    incredibile ma vero mettendo le quaddre al name mi permette di selezionare più specializzazioni. I was shocked 
-                                    <select name="specializations[]" id="specialization" class="form-control" multiple>
-                                        @foreach ($all_specialization as $specialization)
-                                            <option value="{{ $specialization->id }}" utilizzo il metodo contains per selezionare le specializzazioni che l'utente possiede.
-                                                {{ $user->specializations->contains($specialization->id) ? 'selected' : '' }}>
-                                                {{ $specialization->label }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div> --}}
                                 {{-- modale specializzazioni --}}
                                 <div class="btn-group w-50 my-2">
                                     {{-- <button class="btn btn-light dropdown-toggle w-75" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false"> --}}
@@ -88,7 +74,7 @@
                                             <div class="form-check form-check-inline d-flex align-items-center p-2 dropdown-item spec-checkbox w-100">
                                                 <input 
                                                     class="form-check-input"
-                                                    id="spec-{{$specialization->label}}" 
+                                                    id="spec-{{$specialization->id}}" 
                                                     type="checkbox" 
                                                     name="specs[]"
                                                     value="{{ $specialization->id }}" 

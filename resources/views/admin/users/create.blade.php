@@ -56,7 +56,7 @@
                         <div class="form-check form-check-inline d-flex align-items-center p-2 dropdown-item spec-checkbox w-100">
                             <input 
                                 class="form-check-input"
-                                id="spec-{{$specialization->label}}" 
+                                id="spec-{{$specialization->id}}" 
                                 type="checkbox" 
                                 name="specs[]"
                                 value="{{ $specialization->id }}" 
