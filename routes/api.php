@@ -24,3 +24,4 @@ Route::get('/specializations', 'Api\SpecializationController@index');
 Route::get('/users/{id}', 'Api\UserController@show');
 Route::get('/users','Api\UserController@index');
 
+

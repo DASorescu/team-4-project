@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with(['name','surname','userDetails'])->where('id', $id)->first();
+        $users = User::all();
         return response()->json($users);
     }
 

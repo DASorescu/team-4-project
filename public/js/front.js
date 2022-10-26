@@ -2173,7 +2173,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     getDoctorDetails: function getDoctorDetails(doctorId) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/detail/' + doctorId);
+      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/users/' + doctorId);
     }
   },
   mounted: function mounted() {

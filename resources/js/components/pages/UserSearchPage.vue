@@ -87,7 +87,7 @@ export default {
             this.fetching = false
         },
         getDoctorDetails(doctorId) {
-            return axios.get('http://localhost:8000/api/detail/' + doctorId)
+            return axios.get('http://localhost:8000/api/users/' + doctorId)
         },
     },
     mounted() {
