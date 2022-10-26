@@ -11,6 +11,9 @@
             <div class="card shadow" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
                 <div class="card-header">
                     Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
+                    <router-link class="btn btn-primary d-flex align-items-center" :to="{name:'user-detail',params:{id:doctor.id}}">
+                        <i class="fa-solid fa-eye mx-1"></i>
+                    </router-link>
                 </div>
                 <div class="card-body">
                     <p>Città: {{ doctor.detail.address }}</p>

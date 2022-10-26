@@ -9,8 +9,9 @@ Vue.use(VueRouter)
 
 // rotte
 import HomePage from './components/pages/HomePage';
-import AdvancedResearch from './components/pages/AdvancedResearch';
+import UserDetailsPage from './components/pages/UserDetailsPage';
 import UserSearchPage from './components/pages/UserSearchPage';
+import NotFoundPage from './components/pages/NotFoundPage';
 
 
 
@@ -21,8 +22,11 @@ const routes = new VueRouter({
     routes: [
         {path: '/', component: HomePage, name: 'home'},
         {path: '/search/:specializationId', component: UserSearchPage, name: 'search'},
-        {path: '/users', component: AdvancedResearch, name: 'users'},
-        {path: '/users/{user}', component: AdvancedResearch, name: 'users.show'},
+        { path: '/users/:id', component: UserDetailsPage, name: 'user-detail' },
+
+
+        // ! SEMPRE IN FONDO!
+        { path: '*', component: NotFoundPage, name: 'notFound' },
     ],
 })
 
