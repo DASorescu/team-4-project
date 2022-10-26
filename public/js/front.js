@@ -1971,26 +1971,47 @@ __webpack_require__.r(__webpack_exports__);
   name: 'AdvancedResearch',
   data: function data() {
     return {
-      input: "",
+      proprieties: ['nome', 'cognome', 'città', 'specializzazione'],
+      selected: null,
+      input: '',
       doctors: [{
-        first_name: 'gennaro',
-        last_name: 'savastano',
-        address: 'secondigliano',
-        specializations: 'spaccio'
+        first_name: 'Gennaro',
+        last_name: 'Savastano',
+        address: 'Napoli',
+        specialization: 'Cardiologia'
       }, {
-        first_name: 'genny',
-        last_name: 'savastano',
-        address: 'secondigliano',
-        specializations: 'spaccio'
+        first_name: 'Roberto',
+        last_name: 'Salvi',
+        address: 'Milano',
+        specialization: 'Dentista'
+      }, {
+        first_name: 'Angelo',
+        last_name: 'Esposito',
+        address: 'Napoli',
+        specialization: 'Dentista'
+      }, {
+        first_name: 'Anna',
+        last_name: 'Magnani',
+        address: 'Roma',
+        specialization: 'Osteopata'
       }]
     };
   },
   computed: {},
   methods: {
-    filteredDoctors: function filteredDoctors() {
+    filteredDoctorsBy: function filteredDoctorsBy() {
       var _this = this;
-      return this.doctors.filter(function (doctor) {
+      if (this.selected == 'nome') return this.doctors.filter(function (doctor) {
+        return doctor.first_name.toLowerCase().includes(_this.input.toLowerCase());
+      });
+      if (this.selected == 'cognome') return this.doctors.filter(function (doctor) {
+        return doctor.last_name.toLowerCase().includes(_this.input.toLowerCase());
+      });
+      if (this.selected == 'città') return this.doctors.filter(function (doctor) {
         return doctor.address.toLowerCase().includes(_this.input.toLowerCase());
+      });
+      if (this.selected == 'specializzazione') return this.doctors.filter(function (doctor) {
+        return doctor.specialization.toLowerCase().includes(_this.input.toLowerCase());
       });
     }
   }
@@ -2314,7 +2335,38 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("Ricerca Avanzata")]), _vm._v(" "), _c("nav", {
+  return _c("div", {
+    staticClass: "container"
+  }, [_c("h1", {
+    staticClass: "text-center"
+  }, [_vm._v("Ricerca Avanzata")]), _vm._v(" "), _c("h3", {
+    staticClass: "my-3 text-center"
+  }, [_vm._v("Seleziona un campo di ricerca e inizia a scrivere")]), _vm._v(" "), _c("label", [_vm._v("filtra per...\n        "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.selected,
+      expression: "selected"
+    }],
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.selected = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, _vm._l(_vm.proprieties, function (propriety, index) {
+    return _c("option", {
+      key: index,
+      domProps: {
+        value: propriety
+      }
+    }, [_vm._v("\n                " + _vm._s(propriety) + "\n            ")]);
+  }), 0)]), _vm._v(" "), _c("nav", {
     staticClass: "navbar navbar-light bg-light"
   }, [_c("input", {
     directives: [{
@@ -2326,7 +2378,7 @@ var render = function render() {
     staticClass: "form-control mr-sm-2",
     attrs: {
       type: "search",
-      placeholder: "Search",
+      placeholder: "filtra per...",
       "aria-label": "Search"
     },
     domProps: {
@@ -2340,12 +2392,25 @@ var render = function render() {
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "doctors"
-  }, [!_vm.input ? _c("div", {}, [_c("p", [_vm._v("No results found!")])]) : _vm._l(_vm.filteredDoctors(), function (doctor, index) {
+  }, [!_vm.input ? _c("div", {}, [_c("p", [_vm._v("Nessun Risulato!")])]) : _vm._l(_vm.filteredDoctorsBy(), function (doctor, index) {
     return _c("div", {
       key: index
     }, [_c("div", {
       staticClass: "card my-2"
-    }, [_c("div", [_vm._v("\n                " + _vm._s(doctor.first_name) + " \n                ")]), _vm._v(" "), _c("div", [_vm._v("\n                   " + _vm._s(doctor.last_name) + " \n                ")]), _vm._v(" "), _c("div", [_vm._v("\n                   " + _vm._s(doctor.address) + " \n                ")]), _vm._v(" "), _c("div", [_vm._v("\n                    " + _vm._s(doctor.address) + " \n                ")]), _vm._v(" "), _c("div", [_vm._v("\n                    " + _vm._s(doctor.specializations) + " \n                ")])])]);
+    }, [_c("div", {
+      staticClass: "card-header"
+    }, [_c("h4", [_vm._v(" " + _vm._s(doctor.first_name) + " " + _vm._s(doctor.last_name) + " ")])]), _vm._v(" "), _c("div", {
+      staticClass: "card-body"
+    }, [_c("h5", {
+      staticClass: "card-title"
+    }, [_vm._v("Specializzazione: " + _vm._s(doctor.specialization))]), _vm._v(" "), _c("p", {
+      staticClass: "card-text"
+    }, [_vm._v("Città: " + _vm._s(doctor.address))]), _vm._v(" "), _c("router-link", {
+      staticClass: "btn btn-primary",
+      attrs: {
+        to: "/users/{user}"
+      }
+    }, [_vm._v("Contatta")])], 1)])]);
   })], 2)]);
 };
 var staticRenderFns = [];
@@ -6889,7 +6954,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n*[data-v-12da3af3]{\r\n    list-style-type: none;\n}\nli[data-v-12da3af3]{\r\n    margin: 0 10px;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n*[data-v-12da3af3]{\n    list-style-type: none;\n}\nli[data-v-12da3af3]{\n    margin: 0 10px;\n}\n\n", ""]);
 
 // exports
 
@@ -54633,7 +54698,7 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laravel\team-4-project\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/emanueledezotti/team-4-project/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })
