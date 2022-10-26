@@ -9,8 +9,9 @@
         />
         <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
             <div class="card shadow" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
-                <div class="card-header">
-                    Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
+                <div class="card-header d-flex justify-content-between">
+                   <p>Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}</p> 
+                   <router-link :to="{ name: 'users.show', params:{id:doctor.id}}">Dettagli</router-link>
                 </div>
                 <div class="card-body">
                     <p>Città: {{ doctor.detail.address }}</p>
