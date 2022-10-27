@@ -65,12 +65,12 @@
                                         required minlength="3">
                                 </div>
                                 {{-- modale specializzazioni --}}
-                                <div class="btn-group w-50 my-2">
+                                <div class="btn-group w-75 my-2">
                                     {{-- <button class="btn btn-light dropdown-toggle w-75" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false"> --}}
                                     <button type="button" class="btn btn-light dropdown-toggle w-75 text-left" data-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                                          Specializzazioni *
                                     </button>
-                                    <div class="dropdown-menu w-100">
+                                    <div class="dropdown-menu w-100 overflow-auto spec-menu">
                                         @foreach ($all_specialization as $specialization)
                                             <div class="form-check form-check-inline d-flex align-items-center p-2 dropdown-item spec-checkbox w-100">
                                                 <input 
