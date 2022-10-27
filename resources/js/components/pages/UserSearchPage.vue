@@ -4,18 +4,12 @@
             @address-change="(city) => selectedAddress = city" label="Seleziona Una Città" />
         <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
             <div class="card shadow" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
-<<<<<<< HEAD
-                <div class="card-header d-flex justify-content-between">
-                   <p>Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}</p> 
-                   <router-link :to="{ name: 'users-show', params:{id:doctor.id}}">Dettagli</router-link>
-=======
                 <div class="card-header">
                     Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
                     <router-link class="btn btn-primary d-flex align-items-center"
                         :to="{ name: 'user-detail', params: { id: doctor.id } }">
                         Visualizza profilo
                     </router-link>
->>>>>>> d25c59d99f80dd27c9cabb204695d0e37be26428
                 </div>
                 <div class="card-body">
                     <p>Città: {{ doctor.detail.address }}</p>
