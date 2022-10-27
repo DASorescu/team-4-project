@@ -12,34 +12,7 @@ class SpecializationSeeder extends Seeder
      */
     public function run()
     {
-        $specs = [
-            [
-                'label' => 'Cardiologo',
-                'color' => 'danger'
-            ],
-            [
-                'label' => 'Osteopata',
-                'color' => 'info'
-            ],
-            [
-                'label' => 'Chirurgo',
-                'color' => 'danger'
-            ],
-            [
-                'label' => 'Otorino',
-                'color' => 'warning'
-            ],
-            [
-                'label' => 'Dentista',
-                'color' => 'dark'
-            ],
-            [
-                'label' => 'Urologo',
-                'color' => 'success'
-            ],
-            
-        
-        ];
+        $specs = config('specializations');
         
         foreach($specs as $spec){
 
