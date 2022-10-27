@@ -9,7 +9,7 @@ Vue.use(VueRouter)
 
 // rotte
 import HomePage from './components/pages/HomePage';
-import AdvancedResearch from './components/pages/AdvancedResearch';
+import DoctorDetails from './components/pages/DoctorDetails';
 import UserSearchPage from './components/pages/UserSearchPage';
 
 
@@ -21,8 +21,7 @@ const routes = new VueRouter({
     routes: [
         {path: '/', component: HomePage, name: 'home'},
         {path: '/search/:specializationId', component: UserSearchPage, name: 'search'},
-        {path: '/users', component: AdvancedResearch, name: 'users'},
-        {path: '/users/{user}', component: AdvancedResearch, name: 'users.show'},
+        {path: '/users/:id', component: DoctorDetails, name: 'users-show'},
     ],
 })
 
