@@ -9,15 +9,19 @@
 
         <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
             <div class="card shadow w-100" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
-                <div class="card-header">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <div>
                     Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
+                  </div> 
+                  <div>
                     <router-link class="btn btn-primary d-flex align-items-center"
                         :to="{ name: 'user-detail', params: { id: doctor.id } }">
                         Visualizza profilo
                     </router-link>
+                  </div> 
                 </div>
-                <div class="card-body d-flex">
-                    <div class="w-25">
+                <div class="card-body d-flex align-items-center">
+                    <div class="w-25 mr-2">
                         <input class="img-fluid rounded-circle" type="image" :src="doctor.detail.image" alt="">
                     </div>
                     <div>
@@ -94,6 +98,10 @@ export default {
         }
     },
     methods: {
+        findKey(){
+            console.log(Object.keys(this.doctor))
+            
+        },
         async searchDoctorBySpecialization(specializationId) {
             if (specializationId === 0) {
                 this.result = [];
@@ -107,7 +115,7 @@ export default {
                 for (const doctor of res.data) {
                     // prendo i dettagli del dottore corrente
                     const doctorDetail = (await this.getDoctorDetails(doctor.id)).data
-                    console.log(res.data);
+                    
                     // prendo le reviews del dottore corrente
                     const doctorReviews = (await this.getDoctorReviews(doctor.id)).data
 

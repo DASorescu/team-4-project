@@ -2347,6 +2347,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   methods: {
+    findKey: function findKey() {
+      console.log(Object.keys(this.doctor));
+    },
     searchDoctorBySpecialization: function searchDoctorBySpecialization(specializationId) {
       var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -2368,7 +2371,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 res = _context.sent;
                 _this2.fetching = true;
                 if (!Array.isArray(res.data)) {
-                  _context.next = 32;
+                  _context.next = 31;
                   break;
                 }
                 // ciclo sui dottori che ho ottenuto
@@ -2377,7 +2380,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 _iterator2.s();
               case 11:
                 if ((_step2 = _iterator2.n()).done) {
-                  _context.next = 24;
+                  _context.next = 23;
                   break;
                 }
                 doctor = _step2.value;
@@ -2385,11 +2388,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 return _this2.getDoctorDetails(doctor.id);
               case 15:
                 doctorDetail = _context.sent.data;
-                console.log(res.data);
-                // prendo le reviews del dottore corrente
-                _context.next = 19;
+                _context.next = 18;
                 return _this2.getDoctorReviews(doctor.id);
-              case 19:
+              case 18:
                 doctorReviews = _context.sent.data;
                 // compongo un oggetto più semplice da usare con i dettagli.
                 // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
@@ -2403,28 +2404,28 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 if (doctorDetail.address !== null && !_this2.cities.includes(doctorDetail.address)) {
                   _this2.cities.push(doctorDetail.address);
                 }
-              case 22:
+              case 21:
                 _context.next = 11;
                 break;
-              case 24:
-                _context.next = 29;
+              case 23:
+                _context.next = 28;
                 break;
-              case 26:
-                _context.prev = 26;
+              case 25:
+                _context.prev = 25;
                 _context.t0 = _context["catch"](9);
                 _iterator2.e(_context.t0);
-              case 29:
-                _context.prev = 29;
+              case 28:
+                _context.prev = 28;
                 _iterator2.f();
-                return _context.finish(29);
-              case 32:
+                return _context.finish(28);
+              case 31:
                 _this2.fetching = false;
-              case 33:
+              case 32:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[9, 26, 29, 32]]);
+        }, _callee, null, [[9, 25, 28, 31]]);
       }))();
     },
     // faccio una chiamata per avere i dettagli  di un dottore
@@ -2995,8 +2996,8 @@ var render = function render() {
       key: "res-" + doctor.id,
       staticClass: "card shadow w-100"
     }, [_c("div", {
-      staticClass: "card-header"
-    }, [_vm._v("\n                Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name) + "\n                "), _c("router-link", {
+      staticClass: "card-header d-flex justify-content-between align-items-center"
+    }, [_c("div", [_vm._v("\n                Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name) + "\n              ")]), _vm._v(" "), _c("div", [_c("router-link", {
       staticClass: "btn btn-primary d-flex align-items-center",
       attrs: {
         to: {
@@ -3006,10 +3007,10 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("\n                    Visualizza profilo\n                ")])], 1), _vm._v(" "), _c("div", {
-      staticClass: "card-body d-flex"
+    }, [_vm._v("\n                    Visualizza profilo\n                ")])], 1)]), _vm._v(" "), _c("div", {
+      staticClass: "card-body d-flex align-items-center"
     }, [_c("div", {
-      staticClass: "w-25"
+      staticClass: "w-25 mr-2"
     }, [_c("input", {
       staticClass: "img-fluid rounded-circle",
       attrs: {
