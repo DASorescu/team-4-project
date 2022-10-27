@@ -9,8 +9,12 @@ Vue.use(VueRouter)
 
 // rotte
 import HomePage from './components/pages/HomePage';
+<<<<<<< HEAD
+import DoctorDetails from './components/pages/DoctorDetails';
+=======
 import UserDetailsPage from './components/pages/UserDetailsPage';
 import ReviewsPage from './components/pages/ReviewsPage';
+>>>>>>> d25c59d99f80dd27c9cabb204695d0e37be26428
 import UserSearchPage from './components/pages/UserSearchPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 
