@@ -1,45 +1,57 @@
 <template>
     <div class="mt-5">
-        <CitySelect v-if="hasResult" class="d-flex justify-content-center" :cities="cities"
-            @address-change="(city) => selectedAddress = city" label="Seleziona Una Città" />
 
-        <!--Componente x EMA -->
-        <AdvancedResearch v-if="hasResult" class="d-flex justify-content-center my-2"
-        @propriety-change="(propriety) => selectedPropriety = propriety" label="Filtra per..." />
+        <HomePageComponent/>
 
-        <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
-            <div class="card shadow w-100" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                  <div>
-                    Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
-                  </div> 
-                  <div>
-                    <router-link class="btn btn-primary d-flex align-items-center"
-                        :to="{ name: 'user-detail', params: { id: doctor.id } }">
-                        Visualizza profilo
-                    </router-link>
-                  </div> 
-                </div>
-                <div class="card-body d-flex align-items-center">
-                    <div class="w-25 mr-2">
-                        <input class="img-fluid rounded-circle" type="image" :src="doctor.detail.image" alt="">
-                    </div>
+        <div id="main-sx col-3">
+            
+            <!--Componente x EMA -->
+            <AdvancedResearch v-if="hasResult" class="d-flex justify-content-center my-2"
+                @propriety-change="(propriety) => selectedPropriety = propriety" label="Filtra per..." />
+        </div>
+
+        <div id="main-dx col-9">
+            <CitySelect v-if="hasResult" class="d-flex justify-content-center" :cities="cities"
+                @address-change="(city) => selectedAddress = city" label="Seleziona Una Città" />
+
+                <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
+                <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
+                    <div class="card-header d-flex justify-content-between align-items-center">
                     <div>
-                        <p>Specializzazione: </p>
-                        <p>Città: {{ doctor.detail.address }}</p>
-                        <p>Email: {{ doctor.email }}</p>
-                        <p>
-                            Rating: <RateReview  :value="averageReviews[doctor.id].avg" />({{averageReviews[doctor.id].count}})
-                        <router-link class="btn btn-primary" :to="{ name: 'reviews', params: {  userId: doctor.id } }">
-                            mostra
+                        Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
+                    </div> 
+                    <div>
+                        <router-link class="btn btn-primary d-flex align-items-center"
+                            :to="{ name: 'user-detail', params: { id: doctor.id } }">
+                            Visualizza profilo
                         </router-link>
-                        </p>
-                        
+                    </div> 
+                    </div>
+                    <div class="card-body d-flex align-items-center">
+                        <div class="w-25 mr-2">
+                            <input class="img-fluid rounded-circle" type="image" :src="doctor.detail.image" alt="">
+                        </div>
+                        <div>
+                            <p>Specializzazione: </p>
+                            <p>Città: {{ doctor.detail.address }}</p>
+                            <p>Email: {{ doctor.email }}</p>
+                            <p>
+                                Rating: <RateReview  :value="averageReviews[doctor.id].avg" />({{averageReviews[doctor.id].count}})
+                            <router-link class="btn btn-primary" :to="{ name: 'reviews', params: {  userId: doctor.id } }">
+                                mostra
+                            </router-link>
+                            </p>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
+            <AppLoader v-else />
+
         </div>
-        <AppLoader v-else />
+                
+                
+            
     </div>
 </template>
 
@@ -49,13 +61,15 @@ import AppLoader from '../AppLoader.vue'
 import CitySelect from '../CitySelect.vue'
 import RateReview from '../RateReview.vue'
 import AdvancedResearch from '../AdvancedResearch.vue'
+import HomePageComponent from '../HomePageComponent.vue'
 export default {
     name: 'UserSearchPage',
     components: {
         AppLoader,
         CitySelect,
         RateReview,
-        AdvancedResearch
+        AdvancedResearch,
+        HomePageComponent
     },
     data() {
         return {
@@ -98,9 +112,8 @@ export default {
         }
     },
     methods: {
-        findKey(){
-            console.log(Object.keys(this.doctor))
-            
+        toggleVisibility() {
+           return this.advancedResearchBtn == !this.advancedResearchBtn;
         },
         async searchDoctorBySpecialization(specializationId) {
             if (specializationId === 0) {

@@ -1,20 +1,22 @@
 <template>
     <div>
-        <HomePageComponent/>
-
-        
+        <h1>Prenota La tua visita medica</h1>
+        <div>
+            <select v-if="hasSpecializations" v-model="currentSpecialization" @change="search()">
+                <option :value="0">Scegli la specializzazione dei medici</option>
+                <option v-for="specialization in specializations" :key="'spec-'+ specialization.id" :value="specialization.id" :selected="currentSpecialization===specialization.id">
+                    {{specialization.label}}
+                </option>
+            </select>
+        </div>
 
     </div>
 </template>
 
 <script>
 import axios from 'axios';
-import HomePageComponent from '../HomePageComponent.vue'
 export default {
-    components:{
-        HomePageComponent
-    },
-    name: 'HomePage',
+    name: 'HomePageComponent',
     data() {
         return {
             specializations: [],
@@ -43,5 +45,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
