@@ -2,8 +2,13 @@
     <div class="mt-5">
         <CitySelect v-if="hasResult" class="d-flex justify-content-center" :cities="cities"
             @address-change="(city) => selectedAddress = city" label="Seleziona Una Città" />
+
+        <!--Componente x EMA -->
+        <AdvancedResearch v-if="hasResult" class="d-flex justify-content-center my-2"
+        @propriety-change="(propriety) => selectedPropriety = propriety" label="Filtra per..." />
+
         <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
-            <div class="card shadow" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
+            <div class="card shadow w-100" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
                 <div class="card-header">
                     Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
                     <router-link class="btn btn-primary d-flex align-items-center"
@@ -11,15 +16,22 @@
                         Visualizza profilo
                     </router-link>
                 </div>
-                <div class="card-body">
-                    <p>Città: {{ doctor.detail.address }}</p>
-                    <p>Email: {{ doctor.email }}</p>
-                    <p>
-                        Rating: <RateReview  :value="averageReviews[doctor.id].avg" />({{averageReviews[doctor.id].count}})
-                    <router-link class="btn btn-primary" :to="{ name: 'reviews', params: {  userId: doctor.id } }">
-                        mostra
-                    </router-link>
-                    </p>
+                <div class="card-body d-flex">
+                    <div class="w-25">
+                        <input class="img-fluid rounded-circle" type="image" :src="doctor.detail.image" alt="">
+                    </div>
+                    <div>
+                        <p>Specializzazione: </p>
+                        <p>Città: {{ doctor.detail.address }}</p>
+                        <p>Email: {{ doctor.email }}</p>
+                        <p>
+                            Rating: <RateReview  :value="averageReviews[doctor.id].avg" />({{averageReviews[doctor.id].count}})
+                        <router-link class="btn btn-primary" :to="{ name: 'reviews', params: {  userId: doctor.id } }">
+                            mostra
+                        </router-link>
+                        </p>
+                        
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,12 +44,14 @@ import axios from 'axios';
 import AppLoader from '../AppLoader.vue'
 import CitySelect from '../CitySelect.vue'
 import RateReview from '../RateReview.vue'
+import AdvancedResearch from '../AdvancedResearch.vue'
 export default {
     name: 'UserSearchPage',
     components: {
         AppLoader,
         CitySelect,
         RateReview,
+        AdvancedResearch
     },
     data() {
         return {
@@ -45,6 +59,9 @@ export default {
             cities: [],
             fetching: false,
             selectedAddress: '',
+            //data x EMA
+            newFilteredDoctors: [],
+            selectedPropriety: '',
         }
     },
     computed: {
@@ -90,7 +107,7 @@ export default {
                 for (const doctor of res.data) {
                     // prendo i dettagli del dottore corrente
                     const doctorDetail = (await this.getDoctorDetails(doctor.id)).data
-
+                    console.log(res.data);
                     // prendo le reviews del dottore corrente
                     const doctorReviews = (await this.getDoctorReviews(doctor.id)).data
 
@@ -120,10 +137,6 @@ export default {
         getDoctorReviews(doctorId) {
             return axios.get('http://localhost:8000/api/user/reviews/' + doctorId)
         },
-        // faccio una chiamata per avere le reviews  di un dottore
-        getDoctorReviews(doctorId) {
-            return axios.get('http://localhost:8000/api/user/reviews/' + doctorId)
-        },
     },
     mounted() {
         if (typeof this.$route.params.specializationId === 'string') {
@@ -138,14 +151,8 @@ export default {
 
 
 <style lang="scss" scoped>
-.container {
-    padding: 2em 8em;
-}
 
-.card {
-    width: calc((100% / 3) - 1em);
-    margin: 0.5em;
-}
+
 </style>
 
 

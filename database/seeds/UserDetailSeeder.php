@@ -25,6 +25,7 @@ class UserDetailSeeder extends Seeder
             $user_detail->first_name = $faker->firstName();
             $user_detail->last_name = $faker->lastName();
             $user_detail->phone = $faker->phoneNumber();
+            $user_detail->image = $faker->imageUrl(360, 360, 'people', true);
             if(config('cities')){
                 $user_detail->address = Arr::random($cities);   
             }else{

@@ -38,7 +38,8 @@ class SearchDoctorController extends Controller
     public function show($specialization_id)
     {
         // cerco la specializzazione richiesta e restituisco i dottori con la specializzazione richiesta
-        return response()->json(Specialization::find($specialization_id)->users);
+        return response()
+        ->json(Specialization::find($specialization_id)->users);
     }
 
     /**
