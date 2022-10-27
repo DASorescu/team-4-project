@@ -9,8 +9,15 @@ Vue.use(VueRouter)
 
 // rotte
 import HomePage from './components/pages/HomePage';
+<<<<<<< HEAD
 import DoctorDetails from './components/pages/DoctorDetails';
+=======
+import UserDetailsPage from './components/pages/UserDetailsPage';
+import ReviewsPage from './components/pages/ReviewsPage';
+>>>>>>> d25c59d99f80dd27c9cabb204695d0e37be26428
 import UserSearchPage from './components/pages/UserSearchPage';
+import NotFoundPage from './components/pages/NotFoundPage';
+
 
 
 
@@ -21,7 +28,15 @@ const routes = new VueRouter({
     routes: [
         {path: '/', component: HomePage, name: 'home'},
         {path: '/search/:specializationId', component: UserSearchPage, name: 'search'},
+<<<<<<< HEAD
         {path: '/users/:id', component: DoctorDetails, name: 'users-show'},
+=======
+        { path: '/users/:id', component: UserDetailsPage, name: 'user-detail' },
+        { path: '/users/:userId/reviews', component: ReviewsPage, name: 'reviews' },
+
+        // ! SEMPRE IN FONDO!
+        { path: '*', component: NotFoundPage, name: 'notFound' },
+>>>>>>> d25c59d99f80dd27c9cabb204695d0e37be26428
     ],
 })
 

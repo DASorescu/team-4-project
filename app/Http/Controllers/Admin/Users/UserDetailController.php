@@ -47,9 +47,9 @@ class UserDetailController extends Controller
             [
                 'username' => 'string|min:3|max:20',
 
-                'first_name' => 'nullable|string|min:3|max:50',
+                'first_name' => 'string|min:3|max:50',
 
-                'last_name' => 'nullable|string|min:3|max:50',
+                'last_name' => 'string|min:3|max:50',
 
                 'cv' => 'nullable|file|mimes:pdf|max:10000',
 
@@ -57,18 +57,18 @@ class UserDetailController extends Controller
 
                 'phone' => ['nullable', 'regex:^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$^'],
 
-                'city' => ['nullable', 'string', "in_array:cities"],
+                'city' => ['string', "in_array:cities"],
 
                 'specs' => 'required|exists:specializations,id',
             ],
             [
-                'city.in_array' => ' Pippo ',
+                'city.in_array' => 'Città non valida',
                 
-                'cv' => "il formato del file dev'essere PDF",
+                'cv' => "Il formato del file dev'essere PDF",
                 
-                'image' => "il formato dev'essere jpg,jpeg o png",
+                'image' => "Il formato dev'essere jpg,jpeg o png",
                 
-                'username' => 'il nome utente deve contenere almeno 3 caratteri',
+                'username' => 'Il nome utente deve contenere almeno 3 caratteri',
 
                 'specs.required' => 'Devi selezionare almeno una specializzazione ',
             ],
@@ -111,7 +111,7 @@ class UserDetailController extends Controller
 
 
         // alla fine passo comunque lo user intero per eventuali paginazioni complesse del profilo (reviews ecc)
-        return redirect()->route('admin.users.edit')->with('message', 'dati modificati con successo');
+        return redirect()->route('admin.users.edit')->with('message', 'Dati modificati con successo');
     }
 
     public function store(Request $request)
@@ -153,6 +153,6 @@ class UserDetailController extends Controller
 
         // ! MAIN FIX - non avevamo salvato il nuovo oggetto UserDetail
         $new_userDetail->save();
-        return redirect()->route('admin.users.edit')->with('message', 'dati inseriti con successo');
+        return redirect()->route('admin.users.edit')->with('message', 'Dati inseriti con successo');
     }
 }

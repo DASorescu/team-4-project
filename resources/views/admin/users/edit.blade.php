@@ -26,6 +26,7 @@
                     </ul>
                 </div>
             @endif
+            <span class="text-muted">I campi contrassegnati con * sono obbligatori</span>
             <div class="row justify-content-center mt-5">
                 <div class="col-md-6">
                     <form action="{{ route('admin.users.update') }}" enctype="multipart/form-data" method="POST" id="edit-form">
@@ -46,19 +47,19 @@
 
                             <div class="card-body shadow">
                                 <div class="form-group">
-                                    <label for="username">Username</label>
+                                    <label for="username">Username *</label>
                                     <input type="text" class="form-control" id="username" name="username"
                                         @if ($user->name) value="{{ old('username', $user->name) }}" @endif
                                         required minlength="3">
                                 </div>
                                 <div class="form-group">
-                                    <label for="first_name">Nome</label>
+                                    <label for="first_name">Nome *</label>
                                     <input type="text" class="form-control" id="first_name" name="first_name"
                                         @if ($user->userDetail->first_name) value="{{ old('first_name', $user->userDetail->first_name) }}" @endif
                                         required minlength="3">
                                 </div>
                                 <div class="form-group">
-                                    <label for="last_name">Cognome</label>
+                                    <label for="last_name">Cognome *</label>
                                     <input type="text" class="form-control" id="last_name" name="last_name"
                                         @if ($user->userDetail->last_name) value="{{ old('last_name', $user->userDetail->last_name) }}" @endif
                                         required minlength="3">
@@ -67,7 +68,7 @@
                                 <div class="btn-group w-50 my-2">
                                     {{-- <button class="btn btn-light dropdown-toggle w-75" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false"> --}}
                                     <button type="button" class="btn btn-light dropdown-toggle w-75 text-left" data-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
-                                         Specializzazioni
+                                         Specializzazioni *
                                     </button>
                                     <div class="dropdown-menu w-100">
                                         @foreach ($all_specialization as $specialization)
@@ -90,7 +91,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="adress">Città</label>
+                                    <label for="address">Città*</label>
                                     <select name="address" id="address" class="form-control">
                                         <option value="">Scegli la Città</option>
                                         @foreach (config('cities') as $city)
