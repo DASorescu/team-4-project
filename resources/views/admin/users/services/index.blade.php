@@ -4,7 +4,7 @@
 
 <header>
 
-<div class='d-flex justify-content-between'>
+<div class="d-flex justify-content-between">
     <h2>
         Lista Servizi
     </h2>

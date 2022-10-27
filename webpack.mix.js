@@ -12,4 +12,9 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/validations/register_validation.js', 'public/js')
+    .js('resources/js/validations/create_validation.js', 'public/js')
+    .js('resources/js/validations/edit_validation.js', 'public/js')
+    .js('resources/js/front.js', 'public/js')
+    .js('resources/js/router.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');

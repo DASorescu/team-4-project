@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Models\UserDetails;
 
 use Illuminate\Http\Request;
 
@@ -18,7 +19,13 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $details = $user->userDetail;
+
         
-        return view('admin.home', compact('user'));
+        if(!$details){
+            return redirect()->route('admin.users.create');
+        }else{
+            return view('admin.home', compact('user'));  
+        }
     }
 }
