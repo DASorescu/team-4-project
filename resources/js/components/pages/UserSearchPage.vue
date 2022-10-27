@@ -17,9 +17,11 @@
                     <p>
                         Rating: <RateReview  :value="averageReviews[doctor.id].avg" />({{averageReviews[doctor.id].count}})
                     <router-link class="btn btn-primary" :to="{ name: 'reviews', params: {  userId: doctor.id } }">
-                        Mostra
+                        mostra
                     </router-link>
                     </p>
+                    <font-awesome-icon icon="fa-solid fau-secret" />
+
                 </div>
             </div>
         </div>

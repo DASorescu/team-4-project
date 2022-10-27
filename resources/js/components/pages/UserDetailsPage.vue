@@ -21,8 +21,8 @@
                             <p>Specializzazione: {{user.specializations}}</p>
                         <div id="contacts">
                             <h5>Contatti:</h5>
-                            <i class="fa-solid-fa-house">Città:</i><p>{{user.address}}</p>
-                            <i class="fa-solid-fa-phone">Telefono:</i><p>{{user.phone}}</p>
+                            <font-awesome-icon icon="fa-solid fa-house" /> Città:<p>{{user.address}}</p>
+                            <font-awesome-icon icon="fa-solid fa-phone" /> Telefono:<p>{{user.phone}}</p>
                         </div>
                             <h5>Descrizione:</h5>
                         </div>

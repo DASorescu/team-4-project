@@ -18039,11 +18039,15 @@ var render = function render() {
     attrs: {
       id: "contacts"
     }
-  }, [_c("h5", [_vm._v("Contatti:")]), _vm._v(" "), _c("i", {
-    staticClass: "fa-solid-fa-house"
-  }, [_vm._v("Città:")]), _c("p", [_vm._v(_vm._s(_vm.user.address))]), _vm._v(" "), _c("i", {
-    staticClass: "fa-solid-fa-phone"
-  }, [_vm._v("Telefono:")]), _c("p", [_vm._v(_vm._s(_vm.user.phone))])]), _vm._v(" "), _c("h5", [_vm._v("Descrizione:")])])])]), _vm._v(" "), _vm._m(0)])]), _vm._v(" "), _c("footer", {
+  }, [_c("h5", [_vm._v("Contatti:")]), _vm._v(" "), _c("font-awesome-icon", {
+    attrs: {
+      icon: "fa-solid fa-house"
+    }
+  }), _vm._v(" Città:"), _c("p", [_vm._v(_vm._s(_vm.user.address))]), _vm._v(" "), _c("font-awesome-icon", {
+    attrs: {
+      icon: "fa-solid fa-phone"
+    }
+  }), _vm._v(" Telefono:"), _c("p", [_vm._v(_vm._s(_vm.user.phone))])], 1), _vm._v(" "), _c("h5", [_vm._v("Descrizione:")])])])]), _vm._v(" "), _vm._m(0)])]), _vm._v(" "), _c("footer", {
     staticClass: "container d-flex align-items-center justify-content-end"
   }, [_c("button", {
     staticClass: "btn btn-secondary",
@@ -18134,7 +18138,11 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("\n                    Mostra\n                ")])], 1)])]);
+    }, [_vm._v("\n                    mostra\n                ")])], 1), _vm._v(" "), _c("font-awesome-icon", {
+      attrs: {
+        icon: "fa-solid fau-secret"
+      }
+    })], 1)]);
   }), 0) : _c("AppLoader")], 1);
 };
 var staticRenderFns = [];
