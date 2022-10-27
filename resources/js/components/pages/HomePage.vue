@@ -1,45 +1,17 @@
 <template>
     <div>
         <HomePageComponent/>
-
-        
-
     </div>
 </template>
 
 <script>
-import axios from 'axios';
+
 import HomePageComponent from '../HomePageComponent.vue'
 export default {
     components:{
         HomePageComponent
     },
     name: 'HomePage',
-    data() {
-        return {
-            specializations: [],
-            currentSpecialization: 0,
-        }
-    },
-    computed: {
-        hasSpecializations() {
-            return this.specializations.length > 0
-        },
-    },
-    methods: {
-        getSpecializations() {
-            axios.get('http://localhost:8000/api/specializations/')
-                .then(res => {
-                    this.specializations = res.data
-                })
-        },
-        search() {
-            this.$router.push({ name: 'search', params: { specializationId: this.currentSpecialization } })
-        }
-    },
-    mounted() {
-        this.getSpecializations();
-    }
 }
 </script>
 

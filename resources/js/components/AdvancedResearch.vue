@@ -8,12 +8,14 @@
 
         <div v-if="isShow">
 
+            <HomePageComponent/>
+
             <select class="form-select" aria-label="Default select example" v-model="selectedPropriety" @change="AlChangeFai">
                 <option value="">{{ label || 'Select an option' }}</option>
                 <option v-for="(propriety, index) in proprieties" :key="index" :value="propriety">{{ propriety }}</option>
             </select>    
 
-            
+
         </div>
 
     </div>
@@ -22,7 +24,11 @@
 
 <script>
 import axios from 'axios';
+import HomePageComponent from './HomePageComponent.vue'
 export default {
+    components:{
+        HomePageComponent
+    },
     name: 'AdvancedResearch',
     data() {
         return {

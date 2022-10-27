@@ -1,7 +1,6 @@
 <template>
     <div class="mt-5">
 
-        <HomePageComponent/>
 
         <div id="main-sx col-3">
             
@@ -61,7 +60,6 @@ import AppLoader from '../AppLoader.vue'
 import CitySelect from '../CitySelect.vue'
 import RateReview from '../RateReview.vue'
 import AdvancedResearch from '../AdvancedResearch.vue'
-import HomePageComponent from '../HomePageComponent.vue'
 export default {
     name: 'UserSearchPage',
     components: {
@@ -69,7 +67,6 @@ export default {
         CitySelect,
         RateReview,
         AdvancedResearch,
-        HomePageComponent
     },
     data() {
         return {
