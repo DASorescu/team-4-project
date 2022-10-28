@@ -18,44 +18,42 @@
 
 
                 <div v-if="show" class="text-center">
-                    <div class="my-2">
-                        <select v-if="hasSpecializations" v-model="currentSpecialization"
+                    <div class="text-center">
+
+                        <div class="my-2 mx-auto">
+                            <select v-if="hasSpecializations" v-model="currentSpecialization"
                             @change="searchDoctorBySpecialization(currentSpecialization)">
                             <option :value="0">Scegli la specializzazione dei medici</option>
                             <option v-for="specialization in specializations" :key="'spec-' + specialization.id"
-                                :value="specialization.id" :selected="currentSpecialization === specialization.id">
-                                {{ specialization.label }}
-                            </option>
-                        </select>
+                                    :value="specialization.id" :selected="currentSpecialization === specialization.id">
+                                    {{ specialization.label }}
+                                </option>
+                            </select>
 
 
-                        <select class="form-select" aria-label="Default select example" v-model="selectedPropriety">
-                            <option value="">{{ 'Filtra per...' }}</option>
-                            <option v-for="(propriety, index) in proprieties" :key="index" :value="propriety">
-                                {{ propriety }}
-                            </option>
+                            <select class="form-select" aria-label="Default select example" v-model="selectedPropriety">
+                                <option value="">{{ 'Filtra per...' }}</option>
+                                <option v-for="(propriety, index) in proprieties" :key="index" :value="propriety">
+                                    {{ propriety }}
+                                </option>
 
-                        </select>
+                            </select>
 
+                        </div>
+                        <div>
+                            <input type="text" v-model="searched">
+                        </div>
                     </div>
-                    <div>
-                        <input type="text" v-model="searched">
+                        
+                        
                     </div>
-
-
-                </div>
-
+                    
 
 
 
                 <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
                     <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctorsBy" :key="'res-' + doctor.id">
-                        <div class="
-                card-header
-                d-flex
-                justify-content-between
-                align-items-center
-              ">
+                        <div class="card-header d-flex justify-content-between align-items-center">
                             <div>
                                 Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
                             </div>
@@ -72,7 +70,7 @@
                                     alt="" />
                             </div>
                             <div>
-                                <p>Specializzazione:</p>
+                                <p>Specializzazione: {{ doctor.specialization }}</p>
                                 <p>Città: {{ doctor.detail.address }}</p>
                                 <p>Email: {{ doctor.email }}</p>
                                 <p>
@@ -248,7 +246,6 @@ export default {
     },
 
     mounted() {
-
 
         if (typeof this.$route.params.specializationId === "string") {
             this.$route.params.specializationId = parseInt(

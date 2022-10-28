@@ -2924,7 +2924,9 @@ var render = function render() {
   }, [_vm._v("\n                    Ricerca Avanzata\n                ")])]), _vm._v(" "), _vm.show ? _c("div", {
     staticClass: "text-center"
   }, [_c("div", {
-    staticClass: "my-2"
+    staticClass: "text-center"
+  }, [_c("div", {
+    staticClass: "my-2 mx-auto"
   }, [_vm.hasSpecializations ? _c("select", {
     directives: [{
       name: "model",
@@ -2956,7 +2958,7 @@ var render = function render() {
         value: specialization.id,
         selected: _vm.currentSpecialization === specialization.id
       }
-    }, [_vm._v("\n                            " + _vm._s(specialization.label) + "\n                        ")]);
+    }, [_vm._v("\n                                " + _vm._s(specialization.label) + "\n                            ")]);
   })], 2) : _vm._e(), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
@@ -2989,7 +2991,7 @@ var render = function render() {
       domProps: {
         value: propriety
       }
-    }, [_vm._v("\n                            " + _vm._s(propriety) + "\n                        ")]);
+    }, [_vm._v("\n                                " + _vm._s(propriety) + "\n                            ")]);
   })], 2)]), _vm._v(" "), _c("div", [_c("input", {
     directives: [{
       name: "model",
@@ -3009,7 +3011,7 @@ var render = function render() {
         _vm.searched = $event.target.value;
       }
     }
-  })])]) : _vm._e(), _vm._v(" "), _vm.hasResult ? _c("div", {
+  })])])]) : _vm._e(), _vm._v(" "), _vm.hasResult ? _c("div", {
     staticClass: "mt-3 container flex-wrap d-flex"
   }, _vm._l(_vm.filteredDoctorsBy, function (doctor) {
     return _c("div", {
@@ -3038,7 +3040,7 @@ var render = function render() {
         src: doctor.detail.image,
         alt: ""
       }
-    })]), _vm._v(" "), _c("div", [_c("p", [_vm._v("Specializzazione:")]), _vm._v(" "), _c("p", [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("p", [_vm._v("Email: " + _vm._s(doctor.email))]), _vm._v(" "), _c("p", [_vm._v("\n                                Rating:\n                                "), _c("RateReview", {
+    })]), _vm._v(" "), _c("div", [_c("p", [_vm._v("Specializzazione: " + _vm._s(doctor.specialization))]), _vm._v(" "), _c("p", [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("p", [_vm._v("Email: " + _vm._s(doctor.email))]), _vm._v(" "), _c("p", [_vm._v("\n                                Rating:\n                                "), _c("RateReview", {
       attrs: {
         value: _vm.averageReviews[doctor.id].avg
       }
