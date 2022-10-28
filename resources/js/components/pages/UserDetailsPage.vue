@@ -1,17 +1,5 @@
 <template>
     <div id="user-details">
-        <header>
-            <div id="navbar">
-               <div>
-                <figure>
-                    <img @click="$router.back()" src="" alt="LOGO">
-                </figure>
-               </div>
-               <div>
-                Servizi
-               </div>
-            </div>
-        </header>
         <main>
             <section class="row card-details mt-5">
                 <div class="col-6">
@@ -19,7 +7,7 @@
                         <div class="description">
                             <h3>{{user.first_name}} {{user.last_name}}</h3>
                             <p>Specializzazioni: </p>
-                            <ul class="list-group">
+                            <ul class="list-group pb-3">
                                 <li v-for="specialization in specializations" :key="specialization.id" :class="'list-group-item list-group-item-'+specialization.color">{{specialization.label}}</li>
                             </ul>
                         <div id="contacts">
@@ -85,14 +73,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    // NAVBAR
-    #navbar{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 80px;
-        box-shadow: 2px 2px 2px #dedede;
-    }
     // CARD
     .card-details{
     margin-top: 60px;
@@ -125,6 +105,7 @@ export default {
             }
             
         }
+    
     }
 
 }
