@@ -24,8 +24,8 @@ const routes = new VueRouter({
     routes: [
         {path: '/', component: HomePage, name: 'home'},
         {path: '/search/:specializationId', component: UserSearchPage, name: 'search'},
-        { path: '/users/:id', component: UserDetailsPage, name: 'user-detail' },
-        { path: '/users/:userId/reviews', component: ReviewsPage, name: 'reviews' },
+        {path: '/users/:id', component: UserDetailsPage, name: 'user-detail' },
+        {path: '/users/:userId/reviews', component: ReviewsPage, name: 'reviews' },
 
         // ! SEMPRE IN FONDO!
         { path: '*', component: NotFoundPage, name: 'notFound' },

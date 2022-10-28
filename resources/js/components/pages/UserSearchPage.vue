@@ -1,23 +1,18 @@
 <template>
     <div class="mt-5">
-        <div class="row">
 
-            <select v-if="hasSpecializations" v-model="currentSpecialization" @change="search()">
-                <option :value="0" >Scegli la specializzazione dei medici</option>
+        <div class="row">
+           <div id="main-content" class="">
+
+            <select v-if="hasSpecializations" v-model="currentSpecialization" @change="searchDoctorBySpecialization(currentSpecialization)">
+                <option :value="0">Scegli la specializzazione dei medici</option>
                 <option v-for="specialization in specializations" :key="'spec-'+ specialization.id" :value="specialization.id" :selected="currentSpecialization===specialization.id">
                     {{specialization.label}}
                 </option>
             </select>
+                
 
-
-            <div id="main-sx" class="col-2">
-                <!--Componente x EMA -->
                 <AdvancedResearch :result="result"/>
-            </div>
-
-            <div id="main-dx" class="col-10">
-                <CitySelect v-if="hasResult" class="d-flex justify-content-center" :cities="cities"
-                    @address-change="(city) => (selectedAddress = city)" label="Seleziona Una Città" />
 
                 <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
                     <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
@@ -97,6 +92,7 @@ export default {
         hasSpecializations() {
             return this.specializations.length > 0
         },
+        //
 
         hasResult() {
             return this.result.length > 0 && !this.fetching;
@@ -107,12 +103,15 @@ export default {
                 !Number.isNaN(this.$route.params.specializationId)
             );
         },
+      
+        
         filteredDoctors() {
             if (!this.selectedAddress) return this.result;
             return this.result.filter(
                 (doctor) => doctor.detail.address === this.selectedAddress
             );
         },
+
         // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
         // In questo oggetto le proprietà sono la media del rating e il numero di review su cui è basata la media.
         averageReviews() {
@@ -132,10 +131,7 @@ export default {
         },
     },
     methods: {
-        //miei metodi
-        search() {
-            this.$router.push({ name: 'search', params: { specializationId: this.currentSpecialization } })
-        },
+        
         getSpecializations() {
             axios.get('http://localhost:8000/api/specializations/')
                 .then(res => {
@@ -143,13 +139,11 @@ export default {
                 })
         },
 
-        toggleVisibility() {
-            return this.advancedResearchBtn == !this.advancedResearchBtn;
-        },
+
         async searchDoctorBySpecialization(specializationId) {
+            this.result = [];
             if (specializationId === 0) {
-                this.result = [];
-                return;
+            return ;
             }
             // richiedo una ricerca per specializzazione, ottengo tutti i dottori che hanno quella specializzazione.
             const res = await axios.get(
@@ -196,7 +190,7 @@ export default {
     },
     
     mounted(){
-        this.getSpecializations();
+    
 
         if (typeof this.$route.params.specializationId === "string") {
             this.$route.params.specializationId = parseInt(
@@ -206,6 +200,8 @@ export default {
         if (this.hasSpecializationId) {
             this.searchDoctorBySpecialization(this.$route.params.specializationId);
         }
+
+        this.getSpecializations();
     },
 };
 </script>
