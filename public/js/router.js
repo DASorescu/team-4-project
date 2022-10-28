@@ -2871,7 +2871,7 @@ var render = function render() {
   return _c("div", {
     staticClass: "mt-5"
   }, [_c("div", {
-    staticClass: "row"
+    staticClass: "row justify-content-center"
   }, [_c("div", {
     attrs: {
       id: "main-content"

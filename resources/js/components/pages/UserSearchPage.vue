@@ -1,7 +1,7 @@
 <template>
     <div class="mt-5">
 
-        <div class="row">
+        <div class="row justify-content-center">
             
             
             
