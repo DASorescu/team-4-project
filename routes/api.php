@@ -19,7 +19,11 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', 'Api\HomeController@index');
+
+//rotte che servono a me
 Route::get('/search/{specialization_id}', 'Api\SearchDoctorController@show');
+Route::get('/search', 'Api\SearchDoctorController@index');
+
 Route::get('/specializations', 'Api\SpecializationController@index');
 Route::get('/users/{id}', 'Api\UserController@show');
 Route::get('/users', 'Api\UserController@index');

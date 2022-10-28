@@ -1,19 +1,28 @@
 <template>
-    <div>
-        <button class="btn btn-primary" v-on:click="isShow = !isShow">
+    <div class="d-flex flex-column">
+        <div class="btn btn-primary w-100 mt-5" v-on:click="isShow = !isShow">
                 Ricerca avanzata 
-                <i class="fa-solid fa-chevron-down"></i> 
-                <i class="fa-solid fa-chevron-up"></i>
-        </button>
+        </div>
 
         <div v-if="isShow">
 
-            <HomePageComponent/>
+            
 
-            <select class="form-select" aria-label="Default select example" v-model="selectedPropriety" @change="AlChangeFai">
-                <option value="">{{ label || 'Select an option' }}</option>
-                <option v-for="(propriety, index) in proprieties" :key="index" :value="propriety">{{ propriety }}</option>
-            </select>    
+            
+            <select class="form-select" aria-label="Default select example" v-model="selectedPropriety" >
+                <option value="">{{ 'Filtra per...' }}</option>
+                <option v-for="(propriety, index) in proprieties" :key="index" :value="propriety">
+                    {{ propriety }}
+                </option>
+                
+            </select>
+
+            <input type="text" v-model="searched">
+
+            <div v-for="(doctor, index) in filteredDoctorsBy" :key="index">
+                {{doctor}}
+            </div>
+    
 
 
         </div>
@@ -23,52 +32,47 @@
 
 
 <script>
-import axios from 'axios';
-import HomePageComponent from './HomePageComponent.vue'
 export default {
+    props:{
+        result: Array
+    },
     components:{
-        HomePageComponent
     },
     name: 'AdvancedResearch',
     data() {
         return {
-            selectedPropriety: '',
-            proprieties: ['first_name','last_name','address','specialization'],
-            isShow: false
+            selectedPropriety: "",
+            searched: "",
+            proprieties: ['Nome','Cognome','Città'],
+            isShow: false,
+            isLoading: false,
         }
     },
-    methods: {
-        AlChangeFai() {
-            this.$emit('propriety-change', this.selectedPropriety)
-        },
-        fetchUser() {
-            this.isLoading = true;
-            axios.get('http://127.0.0.1:8000/api/users')
-                .then((res) => {
-                    this.user = res.data;
-                })
-                .catch((err) => {
-                    console.error(err);
-                })
-                .then(() => {
-                    this.isLoading = false;
-                })
-        },
-        mounted() {
-        this.fetchUser();
-    }
+    computed:{
+        
+        filteredDoctorsBy() {
+            if (this.selectedPropriety === "Nome")
+            return this.result.filter(
+                (doctor) => doctor.detail.first_name === this.searched
+            );
+            if (this.selectedPropriety === "Cognome")
+            return this.result.filter(
+                (doctor) => doctor.detail.last_name === this.searched
+            );
+            if (this.selectedPropriety === "Città")
+            return this.result.filter(
+                (doctor) => doctor.detail.address === this.searched
+            );
+        }
     },
-    props: {
-        label: String
-    },
+    
+    
 }
+
 
 
 </script>
 
 <style lang="scss" scoped>
-select {
-    width: 300px;
-    height: 30px;
-}
+
 </style>
