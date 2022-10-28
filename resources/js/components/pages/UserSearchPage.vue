@@ -9,7 +9,7 @@
 
                 <div class="d-flex justify-content-center">
 
-                    <button class="btn btn-primary" @click="show = !show">
+                    <button class="btn btn-primary" @click=" showBar = !showBar" v-if="showBtn">
                         Ricerca Avanzata
                     </button>
 
@@ -17,7 +17,7 @@
                 </div>
 
 
-                <div v-if="show" class="text-center">
+                <div v-if="showBar" class="text-center">
                     <div class="text-center">
 
                         <div class="my-2 mx-auto">
@@ -114,7 +114,8 @@ export default {
             currentSpecialization: 0,
             specializations: [],
 
-            show: false,
+            showBtn: false,
+            showBar: false,
             searched: "",
             selectedPropriety: "",
             proprieties: ['Nome', 'Cognome', 'Città'],
@@ -190,6 +191,7 @@ export default {
 
         getSpecializations() {
             axios.get('http://localhost:8000/api/specializations/')
+
                 .then(res => {
                     this.specializations = res.data
                 })
@@ -233,6 +235,7 @@ export default {
                 }
             }
             this.fetching = false;
+            this.showBtn = true
         },
 
         // faccio una chiamata per avere i dettagli  di un dottore

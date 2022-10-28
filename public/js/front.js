@@ -2272,7 +2272,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       proprieties: ['Nome', 'Cognome', 'Città'],
       currentSpecialization: 0,
       specializations: [],
-      show: false,
+      showBtn: false,
+      showBar: false,
       searched: "",
       selectedPropriety: ""
     }, _defineProperty(_ref, "proprieties", ['Nome', 'Cognome', 'Città']), _defineProperty(_ref, "isLoading", false), _defineProperty(_ref, "result", []), _defineProperty(_ref, "cities", []), _defineProperty(_ref, "fetching", false), _defineProperty(_ref, "selectedAddress", ""), _ref;
@@ -2412,7 +2413,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return _context.finish(28);
               case 31:
                 _this4.fetching = false;
-              case 32:
+                _this4.showBtn = true;
+              case 33:
               case "end":
                 return _context.stop();
             }
@@ -2914,14 +2916,14 @@ var render = function render() {
     }
   }, [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("button", {
+  }, [_vm.showBtn ? _c("button", {
     staticClass: "btn btn-primary",
     on: {
       click: function click($event) {
-        _vm.show = !_vm.show;
+        _vm.showBar = !_vm.showBar;
       }
     }
-  }, [_vm._v("\n                    Ricerca Avanzata\n                ")])]), _vm._v(" "), _vm.show ? _c("div", {
+  }, [_vm._v("\n                    Ricerca Avanzata\n                ")]) : _vm._e()]), _vm._v(" "), _vm.showBar ? _c("div", {
     staticClass: "text-center"
   }, [_c("div", {
     staticClass: "text-center"
