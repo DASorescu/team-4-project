@@ -4,14 +4,7 @@
         <div class="row">
             <div id="main-content" class="">
 
-                <select v-if="hasSpecializations" v-model="currentSpecialization"
-                    @change="searchDoctorBySpecialization(currentSpecialization)">
-                    <option :value="0">Scegli la specializzazione dei medici</option>
-                    <option v-for="specialization in specializations" :key="'spec-' + specialization.id"
-                        :value="specialization.id" :selected="currentSpecialization === specialization.id">
-                        {{ specialization.label }}
-                    </option>
-                </select>
+
 
 
                 <div class="d-flex justify-content-center">
@@ -26,8 +19,17 @@
 
                 <div v-if="show" class="text-center">
                     <div class="my-2">
-                        <select class="form-select" aria-label="Default select example"
-                            v-model="selectedPropriety">
+                        <select v-if="hasSpecializations" v-model="currentSpecialization"
+                            @change="searchDoctorBySpecialization(currentSpecialization)">
+                            <option :value="0">Scegli la specializzazione dei medici</option>
+                            <option v-for="specialization in specializations" :key="'spec-' + specialization.id"
+                                :value="specialization.id" :selected="currentSpecialization === specialization.id">
+                                {{ specialization.label }}
+                            </option>
+                        </select>
+
+
+                        <select class="form-select" aria-label="Default select example" v-model="selectedPropriety">
                             <option value="">{{ 'Filtra per...' }}</option>
                             <option v-for="(propriety, index) in proprieties" :key="index" :value="propriety">
                                 {{ propriety }}
@@ -110,7 +112,7 @@ export default {
         return {
             //proprietà su cui ciclare
             proprieties: ['Nome', 'Cognome', 'Città'],
-            
+
             currentSpecialization: 0,
             specializations: [],
 
@@ -153,6 +155,7 @@ export default {
 
         //mio filtro
         filteredDoctorsBy() {
+            if ((this.selectedPropriety === "") && (this.searched === "")) return this.result;
             if (this.selectedPropriety === "Nome")
                 return this.result.filter(
                     (doctor) => doctor.detail.first_name === this.searched

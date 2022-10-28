@@ -2299,6 +2299,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //mio filtro
     filteredDoctorsBy: function filteredDoctorsBy() {
       var _this2 = this;
+      if (this.selectedPropriety === "" && this.searched === "") return this.result;
       if (this.selectedPropriety === "Nome") return this.result.filter(function (doctor) {
         return doctor.detail.first_name === _this2.searched;
       });
@@ -2911,6 +2912,19 @@ var render = function render() {
     attrs: {
       id: "main-content"
     }
+  }, [_c("div", {
+    staticClass: "d-flex justify-content-center"
+  }, [_c("button", {
+    staticClass: "btn btn-primary",
+    on: {
+      click: function click($event) {
+        _vm.show = !_vm.show;
+      }
+    }
+  }, [_vm._v("\n                    Ricerca Avanzata\n                ")])]), _vm._v(" "), _vm.show ? _c("div", {
+    staticClass: "text-center"
+  }, [_c("div", {
+    staticClass: "my-2"
   }, [_vm.hasSpecializations ? _c("select", {
     directives: [{
       name: "model",
@@ -2942,21 +2956,8 @@ var render = function render() {
         value: specialization.id,
         selected: _vm.currentSpecialization === specialization.id
       }
-    }, [_vm._v("\n                    " + _vm._s(specialization.label) + "\n                ")]);
-  })], 2) : _vm._e(), _vm._v(" "), _c("div", {
-    staticClass: "d-flex justify-content-center"
-  }, [_c("button", {
-    staticClass: "btn btn-primary",
-    on: {
-      click: function click($event) {
-        _vm.show = !_vm.show;
-      }
-    }
-  }, [_vm._v("\n                    Ricerca Avanzata\n                ")])]), _vm._v(" "), _vm.show ? _c("div", {
-    staticClass: "text-center"
-  }, [_c("div", {
-    staticClass: "my-2"
-  }, [_c("select", {
+    }, [_vm._v("\n                            " + _vm._s(specialization.label) + "\n                        ")]);
+  })], 2) : _vm._e(), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
