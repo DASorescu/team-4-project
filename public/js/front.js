@@ -2351,39 +2351,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _this4.showBar = _this4.showBtn = false;
                 _this4.result = [];
                 if (!(specializationId === 0)) {
-                  _context.next = 3;
+                  _context.next = 4;
                   break;
                 }
                 return _context.abrupt("return");
-              case 3:
-                _context.next = 5;
+              case 4:
+                _context.next = 6;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://localhost:8000/api/search/" + specializationId);
-              case 5:
+              case 6:
                 res = _context.sent;
                 _this4.fetching = true;
                 if (!Array.isArray(res.data)) {
-                  _context.next = 31;
+                  _context.next = 32;
                   break;
                 }
                 // ciclo sui dottori che ho ottenuto
                 _iterator2 = _createForOfIteratorHelper(res.data);
-                _context.prev = 9;
+                _context.prev = 10;
                 _iterator2.s();
-              case 11:
+              case 12:
                 if ((_step2 = _iterator2.n()).done) {
-                  _context.next = 23;
+                  _context.next = 24;
                   break;
                 }
                 doctor = _step2.value;
-                _context.next = 15;
+                _context.next = 16;
                 return _this4.getDoctorDetails(doctor.id);
-              case 15:
+              case 16:
                 doctorDetail = _context.sent.data;
-                _context.next = 18;
+                _context.next = 19;
                 return _this4.getDoctorReviews(doctor.id);
-              case 18:
+              case 19:
                 doctorReviews = _context.sent.data;
                 // compongo un oggetto più semplice da usare con i dettagli.
                 // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
@@ -2397,29 +2398,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 if (doctorDetail.address !== null && !_this4.cities.includes(doctorDetail.address)) {
                   _this4.cities.push(doctorDetail.address);
                 }
-              case 21:
-                _context.next = 11;
+              case 22:
+                _context.next = 12;
                 break;
-              case 23:
-                _context.next = 28;
+              case 24:
+                _context.next = 29;
                 break;
-              case 25:
-                _context.prev = 25;
-                _context.t0 = _context["catch"](9);
+              case 26:
+                _context.prev = 26;
+                _context.t0 = _context["catch"](10);
                 _iterator2.e(_context.t0);
-              case 28:
-                _context.prev = 28;
+              case 29:
+                _context.prev = 29;
                 _iterator2.f();
-                return _context.finish(28);
-              case 31:
+                return _context.finish(29);
+              case 32:
                 _this4.fetching = false;
                 _this4.showBtn = true;
-              case 33:
+              case 34:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[9, 25, 28, 31]]);
+        }, _callee, null, [[10, 26, 29, 32]]);
       }))();
     },
     // faccio una chiamata per avere i dettagli  di un dottore
@@ -2926,9 +2927,9 @@ var render = function render() {
   }, [_vm._v("\n                    Ricerca Avanzata\n                ")]) : _vm._e()]), _vm._v(" "), _vm.showBar ? _c("div", {
     staticClass: "text-center"
   }, [_c("div", {
-    staticClass: "text-center"
+    staticClass: "text-center mx-auto"
   }, [_c("div", {
-    staticClass: "my-2 mx-auto"
+    staticClass: "my-2"
   }, [_vm.hasSpecializations ? _c("select", {
     directives: [{
       name: "model",

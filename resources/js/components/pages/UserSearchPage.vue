@@ -2,14 +2,14 @@
     <div class="mt-5">
 
         <div class="row">
+            
+            
+            
             <div id="main-content" class="">
-
-
-
 
                 <div class="d-flex justify-content-center">
 
-                    <button class="btn btn-primary" @click=" showBar = !showBar" v-if="showBtn">
+                    <button class="btn btn-primary" @click="showBar = !showBar" v-if="showBtn">
                         Ricerca Avanzata
                     </button>
 
@@ -17,14 +17,14 @@
                 </div>
 
 
-                <div v-if="showBar" class="text-center">
-                    <div class="text-center">
+                <div v-if="showBar" class="text-center ">
+                    <div class="text-center mx-auto">
 
-                        <div class="my-2 mx-auto">
+                        <div class="my-2">
                             <select v-if="hasSpecializations" v-model="currentSpecialization"
-                            @change="searchDoctorBySpecialization(currentSpecialization)">
-                            <option :value="0">Scegli la specializzazione dei medici</option>
-                            <option v-for="specialization in specializations" :key="'spec-' + specialization.id"
+                                @change="searchDoctorBySpecialization(currentSpecialization)">
+                                <option :value="0">Scegli la specializzazione dei medici</option>
+                                <option v-for="specialization in specializations" :key="'spec-' + specialization.id"
                                     :value="specialization.id" :selected="currentSpecialization === specialization.id">
                                     {{ specialization.label }}
                                 </option>
@@ -44,10 +44,10 @@
                             <input type="text" v-model="searched">
                         </div>
                     </div>
-                        
-                        
-                    </div>
-                    
+
+
+                </div>
+
 
 
 
@@ -199,6 +199,7 @@ export default {
 
 
         async searchDoctorBySpecialization(specializationId) {
+            this.showBar = this.showBtn = false
             this.result = [];
             if (specializationId === 0) {
                 return;
