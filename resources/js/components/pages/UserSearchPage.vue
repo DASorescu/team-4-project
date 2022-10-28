@@ -1,6 +1,15 @@
 <template>
     <div class="mt-5">
         <div class="row">
+
+            <select v-if="hasSpecializations" v-model="currentSpecialization" @change="search()">
+                <option :value="0" >Scegli la specializzazione dei medici</option>
+                <option v-for="specialization in specializations" :key="'spec-'+ specialization.id" :value="specialization.id" :selected="currentSpecialization===specialization.id">
+                    {{specialization.label}}
+                </option>
+            </select>
+
+
             <div id="main-sx" class="col-2">
                 <!--Componente x EMA -->
                 <AdvancedResearch :result="result"/>
@@ -73,6 +82,10 @@ export default {
     },
     data() {
         return {
+            //miei data
+            currentSpecialization: 0,
+            specializations: [],
+
             result: [],
             cities: [],
             fetching: false,
@@ -80,6 +93,11 @@ export default {
         };
     },
     computed: {
+        //mie computed
+        hasSpecializations() {
+            return this.specializations.length > 0
+        },
+
         hasResult() {
             return this.result.length > 0 && !this.fetching;
         },
@@ -114,6 +132,17 @@ export default {
         },
     },
     methods: {
+        //miei metodi
+        search() {
+            this.$router.push({ name: 'search', params: { specializationId: this.currentSpecialization } })
+        },
+        getSpecializations() {
+            axios.get('http://localhost:8000/api/specializations/')
+                .then(res => {
+                    this.specializations = res.data
+                })
+        },
+
         toggleVisibility() {
             return this.advancedResearchBtn == !this.advancedResearchBtn;
         },
@@ -165,7 +194,10 @@ export default {
             return axios.get("http://localhost:8000/api/user/reviews/" + doctorId);
         },
     },
-    mounted() {
+    
+    mounted(){
+        this.getSpecializations();
+
         if (typeof this.$route.params.specializationId === "string") {
             this.$route.params.specializationId = parseInt(
                 this.$route.params.specializationId

@@ -2296,6 +2296,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   data: function data() {
     return {
+      //miei data
+      currentSpecialization: 0,
+      specializations: [],
       result: [],
       cities: [],
       fetching: false,
@@ -2303,6 +2306,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     };
   },
   computed: {
+    //mie computed
+    hasSpecializations: function hasSpecializations() {
+      return this.specializations.length > 0;
+    },
     hasResult: function hasResult() {
       return this.result.length > 0 && !this.fetching;
     },
@@ -2342,11 +2349,26 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   methods: {
+    //miei metodi
+    search: function search() {
+      this.$router.push({
+        name: 'search',
+        params: {
+          specializationId: this.currentSpecialization
+        }
+      });
+    },
+    getSpecializations: function getSpecializations() {
+      var _this2 = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/specializations/').then(function (res) {
+        _this2.specializations = res.data;
+      });
+    },
     toggleVisibility: function toggleVisibility() {
       return this.advancedResearchBtn == !this.advancedResearchBtn;
     },
     searchDoctorBySpecialization: function searchDoctorBySpecialization(specializationId) {
-      var _this2 = this;
+      var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var res, _iterator2, _step2, doctor, doctorDetail, doctorReviews;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -2357,14 +2379,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                   _context.next = 3;
                   break;
                 }
-                _this2.result = [];
+                _this3.result = [];
                 return _context.abrupt("return");
               case 3:
                 _context.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://localhost:8000/api/search/" + specializationId);
               case 5:
                 res = _context.sent;
-                _this2.fetching = true;
+                _this3.fetching = true;
                 if (!Array.isArray(res.data)) {
                   _context.next = 31;
                   break;
@@ -2380,24 +2402,24 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 }
                 doctor = _step2.value;
                 _context.next = 15;
-                return _this2.getDoctorDetails(doctor.id);
+                return _this3.getDoctorDetails(doctor.id);
               case 15:
                 doctorDetail = _context.sent.data;
                 _context.next = 18;
-                return _this2.getDoctorReviews(doctor.id);
+                return _this3.getDoctorReviews(doctor.id);
               case 18:
                 doctorReviews = _context.sent.data;
                 // compongo un oggetto più semplice da usare con i dettagli.
                 // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
-                _this2.result.push({
+                _this3.result.push({
                   id: doctor.id,
                   email: doctor.email,
                   detail: doctorDetail,
                   reviews: doctorReviews
                 });
                 //cosi non si ripetono le città :)
-                if (doctorDetail.address !== null && !_this2.cities.includes(doctorDetail.address)) {
-                  _this2.cities.push(doctorDetail.address);
+                if (doctorDetail.address !== null && !_this3.cities.includes(doctorDetail.address)) {
+                  _this3.cities.push(doctorDetail.address);
                 }
               case 21:
                 _context.next = 11;
@@ -2414,7 +2436,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 _iterator2.f();
                 return _context.finish(28);
               case 31:
-                _this2.fetching = false;
+                _this3.fetching = false;
               case 32:
               case "end":
                 return _context.stop();
@@ -2433,6 +2455,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   mounted: function mounted() {
+    this.getSpecializations();
     if (typeof this.$route.params.specializationId === "string") {
       this.$route.params.specializationId = parseInt(this.$route.params.specializationId);
     }
@@ -2973,7 +2996,39 @@ var render = function render() {
     staticClass: "mt-5"
   }, [_c("div", {
     staticClass: "row"
-  }, [_c("div", {
+  }, [_vm.hasSpecializations ? _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.currentSpecialization,
+      expression: "currentSpecialization"
+    }],
+    on: {
+      change: [function ($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.currentSpecialization = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }, function ($event) {
+        return _vm.search();
+      }]
+    }
+  }, [_c("option", {
+    domProps: {
+      value: 0
+    }
+  }, [_vm._v("Scegli la specializzazione dei medici")]), _vm._v(" "), _vm._l(_vm.specializations, function (specialization) {
+    return _c("option", {
+      key: "spec-" + specialization.id,
+      domProps: {
+        value: specialization.id,
+        selected: _vm.currentSpecialization === specialization.id
+      }
+    }, [_vm._v("\n                " + _vm._s(specialization.label) + "\n            ")]);
+  })], 2) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "col-2",
     attrs: {
       id: "main-sx"
