@@ -85,7 +85,7 @@ export default {
                 return
             }
             // richiedo una ricerca per specializzazione, ottengo tutti i dottori che hanno quella specializzazione.
-            const res = await axios.get('http://localhost:8000/api/search/' + specializationId)
+            const res = await axios.get('/api/search/' + specializationId)
             this.fetching = true
             if (Array.isArray(res.data)) {
                 // ciclo sui dottori che ho ottenuto
@@ -116,15 +116,11 @@ export default {
 
         // faccio una chiamata per avere i dettagli  di un dottore
         getDoctorDetails(doctorId) {
-            return axios.get('http://localhost:8000/api/users/' + doctorId)
+            return axios.get('/api/users/' + doctorId)
         },
         // faccio una chiamata per avere le reviews  di un dottore
         getDoctorReviews(doctorId) {
-            return axios.get('http://localhost:8000/api/user/reviews/' + doctorId)
-        },
-        // faccio una chiamata per avere le reviews  di un dottore
-        getDoctorReviews(doctorId) {
-            return axios.get('http://localhost:8000/api/user/reviews/' + doctorId)
+            return axios.get('/api/user/reviews/' + doctorId)
         },
     },
     mounted() {

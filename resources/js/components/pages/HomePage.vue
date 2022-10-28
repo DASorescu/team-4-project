@@ -30,7 +30,7 @@ export default {
     },
     methods: {
         getSpecializations() {
-            axios.get('http://localhost:8000/api/specializations/')
+            axios.get('/api/specializations/')
                 .then(res => {
                     this.specializations = res.data
                 })

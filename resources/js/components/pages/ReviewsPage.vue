@@ -38,7 +38,7 @@ export default {
             this.reviews.push(review)
         },
        async getDoctorReviews(doctorId) {
-            const res = await axios.get('http://localhost:8000/api/user/reviews/' + doctorId)
+            const res = await axios.get('/api/user/reviews/' + doctorId)
             if (Array.isArray(res.data)) {
                 // ciclo sui dottori che ho ottenuto
                 for (const review of res.data) {

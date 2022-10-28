@@ -24,7 +24,7 @@
                         <img src="#" alt="immagine profilo">
                     </figure>
                 </div>
-                
+
             </section>
         </main>
         <footer class="container d-flex align-items-center justify-content-end">
@@ -40,14 +40,14 @@ import axios from 'axios';
 export default {
     name: "UserDetailPage",
     data: () => ({
-        user: [],      
+        user: [],
         specializations: [],
         isLoading: false,
     }),
     methods: {
         fetchUser($id) {
             this.isLoading = true;
-            axios.get('http://127.0.0.1:8000/api/users/' + $id)
+            axios.get('/api/users/' + $id)
                 .then((res) => {
                     this.user = res.data;
                 })
@@ -59,7 +59,7 @@ export default {
                 })
         },
         getDoctorSpecializations($id) {
-            axios.get('http://localhost:8000/api/specializations/' + $id)
+            axios.get('/api/specializations/' + $id)
             .then((res) => {
                 this.specializations = res.data;
             })
@@ -78,7 +78,7 @@ export default {
     margin-top: 60px;
     margin-left: 80px;
     padding-bottom: 100px;
-  
+
     .wrapper{
         display: flex;
         justify-content: space-between;
@@ -103,9 +103,9 @@ export default {
                 font-size: 1.5rem;
                 padding-bottom: 10px;
             }
-            
+
         }
-    
+
     }
 
 }
