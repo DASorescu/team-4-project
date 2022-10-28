@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Specialization;
 use Illuminate\Http\Request;
+use App\User;
 
 class SpecializationController extends Controller
 {
@@ -38,7 +39,10 @@ class SpecializationController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        $specializations = $user->specializations;
+        return response()->json($specializations);
+
     }
 
     /**

@@ -25,3 +25,4 @@ Route::get('/users/{id}', 'Api\UserController@show');
 Route::get('/users', 'Api\UserController@index');
 Route::get('/user/reviews/{id}', 'Api\UserController@reviews');
 Route::post('/user/{id}/reviews', 'Api\UserController@addReview');
+Route::get('/specializations/{id}', 'Api\SpecializationController@show');

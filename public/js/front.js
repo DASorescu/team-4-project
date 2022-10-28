@@ -17369,6 +17369,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       user: [],
+      specializations: [],
       isLoading: false
     };
   },
@@ -17386,9 +17387,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     getDoctorSpecializations: function getDoctorSpecializations($id) {
       var _this2 = this;
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/specializations' + $id).then(function (res) {
-        _this2.user.specializations = res.data;
-        console.log(_this2.specializations);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/specializations/' + $id).then(function (res) {
+        _this2.specializations = res.data;
       });
     }
   },
@@ -18035,7 +18035,14 @@ var render = function render() {
     staticClass: "wrapper"
   }, [_c("div", {
     staticClass: "description"
-  }, [_c("h3", [_vm._v(_vm._s(_vm.user.first_name) + " " + _vm._s(_vm.user.last_name))]), _vm._v(" "), _c("p", [_vm._v("Specializzazione: " + _vm._s(_vm.user.specializations))]), _vm._v(" "), _c("div", {
+  }, [_c("h3", [_vm._v(_vm._s(_vm.user.first_name) + " " + _vm._s(_vm.user.last_name))]), _vm._v(" "), _c("p", [_vm._v("Specializzazioni: ")]), _vm._v(" "), _c("ul", {
+    staticClass: "list-group"
+  }, _vm._l(_vm.specializations, function (specialization) {
+    return _c("li", {
+      key: specialization.id,
+      "class": "list-group-item list-group-item-" + specialization.color
+    }, [_vm._v(_vm._s(specialization.label))]);
+  }), 0), _vm._v(" "), _c("div", {
     attrs: {
       id: "contacts"
     }

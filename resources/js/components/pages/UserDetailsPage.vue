@@ -18,7 +18,10 @@
                     <div class="wrapper">
                         <div class="description">
                             <h3>{{user.first_name}} {{user.last_name}}</h3>
-                            <p>Specializzazione: {{user.specializations}}</p>
+                            <p>Specializzazioni: </p>
+                            <ul class="list-group">
+                                <li v-for="specialization in specializations" :key="specialization.id" :class="'list-group-item list-group-item-'+specialization.color">{{specialization.label}}</li>
+                            </ul>
                         <div id="contacts">
                             <h5>Contatti:</h5>
                             <font-awesome-icon icon="fa-solid fa-house" /> Città:<p>{{user.address}}</p>
@@ -49,7 +52,8 @@ import axios from 'axios';
 export default {
     name: "UserDetailPage",
     data: () => ({
-        user: [],
+        user: [],      
+        specializations: [],
         isLoading: false,
     }),
     methods: {
@@ -67,10 +71,9 @@ export default {
                 })
         },
         getDoctorSpecializations($id) {
-            return axios.get('http://localhost:8000/api/specializations' + $id)
+            axios.get('http://localhost:8000/api/specializations/' + $id)
             .then((res) => {
-                this.user.specializations = res.data;
-                console.log(this.specializations)
+                this.specializations = res.data;
             })
         },
     },
