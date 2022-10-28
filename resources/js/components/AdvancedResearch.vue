@@ -13,7 +13,7 @@
 
         <div v-if="show" class="text-center">
             <div class="my-2">
-                <select class="form-select" aria-label="Default select example" v-model="selectedPropriety">
+                <select class="form-select" aria-label="Default select example" ref="month-picker" v-model="selectedPropriety" @change="emitPropriety">
                     <option value="">{{ 'Filtra per...' }}</option>
                     <option v-for="(propriety, index) in proprieties" :key="index" :value="propriety">
                         {{ propriety }}
@@ -23,7 +23,7 @@
 
             </div>
             <div>
-                <input type="text" v-model="searched">
+                <input type="text" v-model="searched" ref="month-picker">
             </div>
 
 
@@ -83,8 +83,6 @@ export default {
     name: 'AdvancedResearch',
     data() {
         return {
-            doctors: [],
-            specializations: [],
 
             show: false,
             selectedPropriety: "",
@@ -95,20 +93,7 @@ export default {
     },
     computed: {
 
-        filteredDoctorsBy() {
-            if (this.selectedPropriety === "Nome")
-                return this.result.filter(
-                    (doctor) => doctor.detail.first_name === this.searched
-                );
-            if (this.selectedPropriety === "Cognome")
-                return this.result.filter(
-                    (doctor) => doctor.detail.last_name === this.searched
-                );
-            if (this.selectedPropriety === "Città")
-                return this.result.filter(
-                    (doctor) => doctor.detail.address === this.searched
-                );
-        },
+        
         averageReviews() {
             const res = {};
             for (const doctor of this.filteredDoctorsby) {
@@ -126,9 +111,6 @@ export default {
         },
     },
     methods: {
-        emitChange() {
-            this.$emit('selected-research', this.selected)
-        },
 
         getSpecializations() {
             axios.get('http://localhost:8000/api/specializations/')
@@ -137,44 +119,7 @@ export default {
                 })
         },
 
-        async searchDoctorBySpecialization(specializationId) {
-            if (specializationId === 0) {
-                this.result = [];
-                return;
-            }
-            // richiedo una ricerca per specializzazione, ottengo tutti i dottori che hanno quella specializzazione.
-            const res = await axios.get(
-                "http://localhost:8000/api/search/" + specializationId
-            );
-            this.fetching = true;
-            if (Array.isArray(res.data)) {
-                // ciclo sui dottori che ho ottenuto
-                for (const doctor of res.data) {
-                    // prendo i dettagli del dottore corrente
-                    const doctorDetail = (await this.getDoctorDetails(doctor.id)).data;
-
-                    // prendo le reviews del dottore corrente
-                    const doctorReviews = (await this.getDoctorReviews(doctor.id)).data;
-
-                    // compongo un oggetto più semplice da usare con i dettagli.
-                    // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
-                    this.result.push({
-                        id: doctor.id,
-                        email: doctor.email,
-                        detail: doctorDetail,
-                        reviews: doctorReviews,
-                    });
-                    //cosi non si ripetono le città :)
-                    if (
-                        doctorDetail.address !== null &&
-                        !this.cities.includes(doctorDetail.address)
-                    ) {
-                        this.cities.push(doctorDetail.address);
-                    }
-                }
-            }
-            this.fetching = false;
-        },
+     
 
         // faccio una chiamata per avere i dettagli  di un dottore
         getDoctorDetails(doctorId) {

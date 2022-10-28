@@ -2,20 +2,52 @@
     <div class="mt-5">
 
         <div class="row">
-           <div id="main-content" class="">
+            <div id="main-content" class="">
 
-            <select v-if="hasSpecializations" v-model="currentSpecialization" @change="searchDoctorBySpecialization(currentSpecialization)">
-                <option :value="0">Scegli la specializzazione dei medici</option>
-                <option v-for="specialization in specializations" :key="'spec-'+ specialization.id" :value="specialization.id" :selected="currentSpecialization===specialization.id">
-                    {{specialization.label}}
-                </option>
-            </select>
-                
+                <select v-if="hasSpecializations" v-model="currentSpecialization"
+                    @change="searchDoctorBySpecialization(currentSpecialization)">
+                    <option :value="0">Scegli la specializzazione dei medici</option>
+                    <option v-for="specialization in specializations" :key="'spec-' + specialization.id"
+                        :value="specialization.id" :selected="currentSpecialization === specialization.id">
+                        {{ specialization.label }}
+                    </option>
+                </select>
 
-                <AdvancedResearch :result="result"/>
+
+                <div class="d-flex justify-content-center">
+
+                    <button class="btn btn-primary" @click="show = !show">
+                        Ricerca Avanzata
+                    </button>
+
+
+                </div>
+
+
+                <div v-if="show" class="text-center">
+                    <div class="my-2">
+                        <select class="form-select" aria-label="Default select example"
+                            v-model="selectedPropriety">
+                            <option value="">{{ 'Filtra per...' }}</option>
+                            <option v-for="(propriety, index) in proprieties" :key="index" :value="propriety">
+                                {{ propriety }}
+                            </option>
+
+                        </select>
+
+                    </div>
+                    <div>
+                        <input type="text" v-model="searched">
+                    </div>
+
+
+                </div>
+
+
+
 
                 <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
-                    <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
+                    <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctorsBy" :key="'res-' + doctor.id">
                         <div class="
                 card-header
                 d-flex
@@ -66,20 +98,27 @@ import axios from "axios";
 import AppLoader from "../AppLoader.vue";
 import CitySelect from "../CitySelect.vue";
 import RateReview from "../RateReview.vue";
-import AdvancedResearch from "../AdvancedResearch.vue";
+
 export default {
     name: "UserSearchPage",
     components: {
         AppLoader,
         CitySelect,
         RateReview,
-        AdvancedResearch,
     },
     data() {
         return {
-            //miei data
+            //proprietà su cui ciclare
+            proprieties: ['Nome', 'Cognome', 'Città'],
+            
             currentSpecialization: 0,
             specializations: [],
+
+            show: false,
+            searched: "",
+            selectedPropriety: "",
+            proprieties: ['Nome', 'Cognome', 'Città'],
+            isLoading: false,
 
             result: [],
             cities: [],
@@ -103,13 +142,29 @@ export default {
                 !Number.isNaN(this.$route.params.specializationId)
             );
         },
-      
-        
+
+
         filteredDoctors() {
             if (!this.selectedAddress) return this.result;
             return this.result.filter(
                 (doctor) => doctor.detail.address === this.selectedAddress
             );
+        },
+
+        //mio filtro
+        filteredDoctorsBy() {
+            if (this.selectedPropriety === "Nome")
+                return this.result.filter(
+                    (doctor) => doctor.detail.first_name === this.searched
+                );
+            if (this.selectedPropriety === "Cognome")
+                return this.result.filter(
+                    (doctor) => doctor.detail.last_name === this.searched
+                );
+            if (this.selectedPropriety === "Città")
+                return this.result.filter(
+                    (doctor) => doctor.detail.address === this.searched
+                );
         },
 
         // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
@@ -131,7 +186,7 @@ export default {
         },
     },
     methods: {
-        
+
         getSpecializations() {
             axios.get('http://localhost:8000/api/specializations/')
                 .then(res => {
@@ -143,7 +198,7 @@ export default {
         async searchDoctorBySpecialization(specializationId) {
             this.result = [];
             if (specializationId === 0) {
-            return ;
+                return;
             }
             // richiedo una ricerca per specializzazione, ottengo tutti i dottori che hanno quella specializzazione.
             const res = await axios.get(
@@ -188,9 +243,9 @@ export default {
             return axios.get("http://localhost:8000/api/user/reviews/" + doctorId);
         },
     },
-    
-    mounted(){
-    
+
+    mounted() {
+
 
         if (typeof this.$route.params.specializationId === "string") {
             this.$route.params.specializationId = parseInt(
