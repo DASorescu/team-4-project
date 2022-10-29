@@ -10981,3 +10981,27 @@ a.text-dark:focus {
   height: 300px;
 }
 
+.bg-main {
+  background-color: #0451CB;
+}
+
+.nav-image {
+  height: 60px;
+}
+
+.logo {
+  background-color: #004ecb;
+}
+
+.no-underline:hover {
+  text-decoration: none;
+}
+
+.p-relative {
+  position: relative;
+}
+
+body {
+  background-color: #fff;
+}
+

@@ -3284,6 +3284,11 @@
   dependencies:
     "debug" "=3.1.0"
 
+"fontawesome@^5.6.3":
+  "integrity" "sha512-FCc+CawwsJWWprVEg9X14yI7zI+l9YVAyhzgu70qwGeDn0tLLDH/dVfqgij72g4BBGgLGfK2qnvFGAmYUkhaWg=="
+  "resolved" "https://registry.npmjs.org/fontawesome/-/fontawesome-5.6.3.tgz"
+  "version" "5.6.3"
+
 "for-in@^1.0.2":
   "integrity" "sha512-7EwmXrOjyL+ChxMhmG5lnW9MPt1aIeZEwKhQzoBUdTV0N3zuwWDZYVJatDvZ2OyzPUvdIAZDsCetk3coyMfcnQ=="
   "resolved" "https://registry.npmjs.org/for-in/-/for-in-1.0.2.tgz"
