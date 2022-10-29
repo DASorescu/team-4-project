@@ -17279,11 +17279,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getSpecializations: function getSpecializations() {
       var _this = this;
-<<<<<<< HEAD
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/specializations/').then(function (res) {
-=======
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://localhost:8000/api/specializations/").then(function (res) {
->>>>>>> homepage-layout
         _this.specializations = res.data;
       });
     },

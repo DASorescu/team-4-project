@@ -24,29 +24,7 @@ export default {
         WorkWithUs,
         Footer,
     },
-<<<<<<< HEAD
-    computed: {
-        hasSpecializations() {
-            return this.specializations.length > 0
-        },
-    },
-    methods: {
-        getSpecializations() {
-            axios.get('/api/specializations/')
-                .then(res => {
-                    this.specializations = res.data
-                })
-        },
-        search() {
-            this.$router.push({ name: 'search', params: { specializationId: this.currentSpecialization } })
-        }
-    },
-    mounted() {
-        this.getSpecializations();
-    }
-=======
-    
->>>>>>> homepage-layout
+
 }
 </script>
 
