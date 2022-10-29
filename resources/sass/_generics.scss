@@ -5,7 +5,7 @@
     height: 300px;
 }
 .bg-main {
-    background-color: #004ecb;
+    background-color: #0451CB;
 }
 
 .nav-image {
@@ -15,4 +15,15 @@
 
 .logo {
     background-color: #004ecb;
+}
+.no-underline:hover {
+    text-decoration: none;
+}
+
+.p-relative {
+    position: relative;
+}
+
+body {
+    background-color: #fff;
 }

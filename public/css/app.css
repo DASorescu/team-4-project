@@ -10982,7 +10982,7 @@ a.text-dark:focus {
 }
 
 .bg-main {
-  background-color: #004ecb;
+  background-color: #0451CB;
 }
 
 .nav-image {
@@ -10991,5 +10991,17 @@ a.text-dark:focus {
 
 .logo {
   background-color: #004ecb;
+}
+
+.no-underline:hover {
+  text-decoration: none;
+}
+
+.p-relative {
+  position: relative;
+}
+
+body {
+  background-color: #fff;
 }
 
