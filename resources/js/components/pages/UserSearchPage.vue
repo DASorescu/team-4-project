@@ -1,6 +1,7 @@
 <template>
-    <div class="mt-5">
-        <CitySelect v-if="hasResult" class="d-flex justify-content-center" :cities="cities"
+    <div>
+        <NavBar />
+        <CitySelect v-if="hasResult" class="d-flex justify-content-center mt-3" :cities="cities"
             @address-change="(city) => selectedAddress = city" label="Seleziona Una Città" />
         <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
             <div class="card shadow" v-for="doctor in filteredDoctors" :key="'res-' + doctor.id">
@@ -31,15 +32,18 @@
 
 <script>
 import axios from 'axios';
+import NavBar from '../homePageSections/NavBar.vue'
 import AppLoader from '../AppLoader.vue'
 import CitySelect from '../CitySelect.vue'
 import RateReview from '../RateReview.vue'
+
 export default {
     name: 'UserSearchPage',
     components: {
         AppLoader,
         CitySelect,
         RateReview,
+        NavBar,
     },
     data() {
         return {

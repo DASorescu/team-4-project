@@ -1,5 +1,6 @@
 <template>
     <div>
+        <NavBar />
         <MainJumbotron/>
         <HowItWorks/>
         <FeedBack/>
@@ -10,6 +11,7 @@
 
 <script>
 
+import NavBar from '../homePageSections/NavBar.vue';
 import MainJumbotron from '../homePageSections/MainJumbotron.vue';
 import HowItWorks from '../homePageSections/HowItWorks.vue';
 import FeedBack from '../homePageSections/FeedBack.vue';
@@ -17,7 +19,8 @@ import WorkWithUs from '../homePageSections/WorkWithUs.vue';
 import Footer from '../homePageSections/Footer.vue';
 export default {
     name: "HomePage",
-    components:{
+    components: {
+        NavBar,
         MainJumbotron,
         HowItWorks,
         FeedBack,

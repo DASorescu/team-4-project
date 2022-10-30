@@ -17,9 +17,9 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-md navbar-light bg-main ">
+        {{-- <nav class="navbar navbar-expand-md navbar-light bg-main ">
             <div class="px-5 d-flex justify-content-between w-100">
-                {{-- left side of navbar --}}
+                left side of navbar
                 <div>
                     <a href="{{url('/')}}" class="d-flex align-items-center justify-content-between no-underline">
                         <img src="{{asset('img/site-logo.png')}}" alt="logo" class="img-fluid nav-image logo">
@@ -27,9 +27,9 @@
                     </a>
 
                 </div>
-                <!-- Right Side Of Navbar -->
+              Right Side Of Navbar 
                 <ul class="navbar-nav ml-auto align-items-center">
-                    <!-- Authentication Links -->
+                    Authentication Links 
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
@@ -39,7 +39,7 @@
                         </li>
                     </ul>
                 </div>
-            </nav>
+            </nav> --}}
             <div id="root"></div>
     </body>
     
