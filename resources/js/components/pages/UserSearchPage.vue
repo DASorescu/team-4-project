@@ -1,6 +1,6 @@
 <template>
-    <div class="mt-5">
-
+    <div>
+        <NavBar />
         <div class="row justify-content-center">
             
             
@@ -98,6 +98,7 @@ import axios from 'axios';
 import AppLoader from '../AppLoader.vue'
 import CitySelect from '../CitySelect.vue'
 import RateReview from '../RateReview.vue'
+import NavBar from '../homePageSections/NavBar.vue'
 export default {
     name: "UserSearchPage",
     components: {
