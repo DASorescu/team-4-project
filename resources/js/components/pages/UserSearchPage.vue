@@ -2,9 +2,6 @@
     <div>
         <NavBar />
         <div class="row justify-content-center">
-            
-            
-            
             <div id="main-content" class="">
 
                 <div class="d-flex justify-content-center">
@@ -75,9 +72,7 @@
                                 <p>Email: {{ doctor.email }}</p>
                                 <p>
                                     Rating:
-                                    <RateReview :value="averageReviews[doctor.id].avg" />({{
-                                            averageReviews[doctor.id].count
-                                    }})
+                                    <RateReview :value="averageReviews[doctor.id].avg" />({{averageReviews[doctor.id].count}})
                                     <router-link class="btn btn-primary"
                                         :to="{ name: 'reviews', params: { userId: doctor.id } }">
                                         mostra
@@ -271,5 +266,8 @@ export default {
 <style lang="scss" scoped>
 
 </style>
+            
+            
+            
 
 
