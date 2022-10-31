@@ -92,13 +92,14 @@ export default {
         padding: 10px;
         height: 50px;
         width: 700px;
-        border-radius: 10px;
-        border-width: 3px;
-        border-color: #fff;
-        transform: translateY(-28px);
-
-        &:hover {
-
+            border-radius: 10px;
+                border-width: 3px;
+                border-color: #fff;
+                transform: translateY(-28px);
+                // transition: width 1000ms ease;
+            
+                &:hover {
+                    // width: 700px;
             border-color: rgb(48, 158, 227);
         }
     }

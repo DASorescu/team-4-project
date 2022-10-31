@@ -11,11 +11,17 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
 import { faPhone } from '@fortawesome/free-solid-svg-icons'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
 library.add(faHouse)
 library.add(faPhone)
 library.add(faArrowRight)
+library.add(faChevronDown)
+library.add(faChevronUp)
+library.add(faMagnifyingGlass)
 
 /* add font awesome icon component */
 Vue.component('font-awesome-icon', FontAwesomeIcon)
