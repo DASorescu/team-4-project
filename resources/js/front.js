@@ -11,11 +11,12 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
 import { faPhone } from '@fortawesome/free-solid-svg-icons'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faHouse)
-library.add(faPhone)
-library.add(faArrowRight)
+library.add(faHouse,faPhone,faArrowRight,faPenToSquare,faEnvelope)
+
 
 /* add font awesome icon component */
 Vue.component('font-awesome-icon', FontAwesomeIcon)

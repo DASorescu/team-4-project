@@ -22,6 +22,7 @@ class UserDetailSeeder extends Seeder
         foreach($user_ids as $id){
             $user_detail = new UserDetail();
             $user_detail->user_id = $id;
+            $user_detail->image = $faker->imageUrl(350,350);
             $user_detail->first_name = $faker->firstName();
             $user_detail->last_name = $faker->lastName();
             $user_detail->phone = $faker->phoneNumber();

@@ -2299,11 +2299,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _homePageSections_NavBar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../homePageSections/NavBar.vue */ "./resources/js/components/homePageSections/NavBar.vue");
+/* harmony import */ var _homePageSections_Footer_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../homePageSections/Footer.vue */ "./resources/js/components/homePageSections/Footer.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserDetailPage",
+  components: {
+    NavBar: _homePageSections_NavBar_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Footer: _homePageSections_Footer_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
       user: [],
@@ -2315,7 +2323,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchUser: function fetchUser($id) {
       var _this = this;
       this.isLoading = true;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/users/' + $id).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/users/' + $id).then(function (res) {
         _this.user = res.data;
       })["catch"](function (err) {
         console.error(err);
@@ -2325,7 +2333,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     getDoctorSpecializations: function getDoctorSpecializations($id) {
       var _this2 = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/specializations/' + $id).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/specializations/' + $id).then(function (res) {
         _this2.specializations = res.data;
       });
     }
@@ -3265,17 +3273,15 @@ var render = function render() {
     attrs: {
       id: "user-details"
     }
-  }, [_c("main", [_c("section", {
-    staticClass: "row card-details mt-5"
+  }, [_c("header", [_c("NavBar")], 1), _vm._v(" "), _c("main", [_c("section", {
+    staticClass: "doctor-card container"
   }, [_c("div", {
-    staticClass: "col-6"
-  }, [_c("div", {
-    staticClass: "wrapper"
-  }, [_c("div", {
-    staticClass: "description"
-  }, [_c("h3", [_vm._v(_vm._s(_vm.user.first_name) + " " + _vm._s(_vm.user.last_name))]), _vm._v(" "), _c("p", [_vm._v("Specializzazioni: ")]), _vm._v(" "), _c("ul", {
+    attrs: {
+      id: "info"
+    }
+  }, [_c("h3", [_vm._v(_vm._s(_vm.user.first_name) + " " + _vm._s(_vm.user.last_name))]), _vm._v(" "), _c("h5", [_vm._v("Specializzazioni:")]), _vm._v(" "), _c("ul", {
     staticClass: "list-group pb-3"
-  }, _vm._l(_vm.specializations, function (specialization) {
+  }, _vm._l(_vm.specializations.slice(0, 3), function (specialization) {
     return _c("li", {
       key: specialization.id,
       "class": "list-group-item list-group-item-" + specialization.color
@@ -3292,9 +3298,38 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-phone"
     }
-  }), _vm._v(" Telefono:"), _c("p", [_vm._v(_vm._s(_vm.user.phone))])], 1), _vm._v(" "), _c("h5", [_vm._v("Descrizione:")])])])]), _vm._v(" "), _vm._m(0)])]), _vm._v(" "), _c("footer", {
-    staticClass: "container d-flex align-items-center justify-content-end"
-  }, [_c("button", {
+  }), _vm._v(" Telefono:"), _c("p", [_vm._v(_vm._s(_vm.user.phone))])], 1)]), _vm._v(" "), _c("div", {
+    attrs: {
+      id: "img-side"
+    }
+  }, [_c("figure", [_c("img", {
+    attrs: {
+      src: "".concat(_vm.user.image),
+      alt: "".concat(_vm.user.name)
+    }
+  })])])])]), _vm._v(" "), _c("footer", {
+    staticClass: "container d-flex align-items-center justify-content-end mb-3"
+  }, [_c("router-link", {
+    staticClass: "btn btn-success mr-2",
+    attrs: {
+      to: {
+        name: "reviews",
+        params: {
+          id: _vm.user.id
+        }
+      }
+    }
+  }, [_c("font-awesome-icon", {
+    attrs: {
+      icon: "fa-solid fa-pen-to-square"
+    }
+  }), _vm._v("Scrivi una recensione\n        ")], 1), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-primary mr-2"
+  }, [_c("font-awesome-icon", {
+    attrs: {
+      icon: "fa-solid fa-envelope"
+    }
+  }), _vm._v("Contatta il medico\n        ")], 1), _vm._v(" "), _c("button", {
     staticClass: "btn btn-secondary",
     on: {
       click: function click($event) {
@@ -3303,20 +3338,9 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "fa-solid fa-arrow-rotate-left"
-  }), _vm._v(" Torna Indietro\n        ")])])]);
+  }), _vm._v(" Torna Indietro\n        ")])], 1), _vm._v(" "), _c("Footer")], 1);
 };
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "col-6"
-  }, [_c("figure", [_c("img", {
-    attrs: {
-      src: "#",
-      alt: "immagine profilo"
-    }
-  })])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -3558,7 +3582,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".card-details[data-v-5ab8bc00] {\n  margin-top: 60px;\n  margin-left: 80px;\n  padding-bottom: 100px;\n}\n.card-details .wrapper[data-v-5ab8bc00] {\n  display: flex;\n  justify-content: space-between;\n  align-items: stretch;\n}\n.card-details .wrapper .contacts[data-v-5ab8bc00] {\n  height: 50px;\n  display: flex;\n  justify-content: space-between;\n  line-height: 50px;\n  background-color: #55BA59;\n  margin: 5px 0;\n}\n.card-details .wrapper .description[data-v-5ab8bc00] {\n  flex-basis: 50%;\n}\n.card-details .wrapper .description h3[data-v-5ab8bc00], .card-details .wrapper .description h5[data-v-5ab8bc00] {\n  color: #003F5E;\n  font-weight: bold;\n  font-size: 1.5rem;\n  padding-bottom: 10px;\n}", ""]);
+exports.push([module.i, ".doctor-card[data-v-5ab8bc00] {\n  width: 800px;\n  display: flex;\n  margin-top: 50px;\n  margin-bottom: 50px;\n  border: 1px solid black;\n}\n.doctor-card #info[data-v-5ab8bc00] {\n  flex-basis: 50%;\n  border-right: 1px solid black;\n  padding: 20px;\n}\n.doctor-card #info h3[data-v-5ab8bc00] {\n  color: dodgerblue;\n  font-size: 2rem;\n  font-weight: bold;\n}\n.doctor-card #img-side[data-v-5ab8bc00] {\n  flex-basis: 50px;\n}\n.doctor-card #img-side img[data-v-5ab8bc00] {\n  border-radius: 50%;\n  box-shadow: 2px black;\n  margin-top: 30px;\n  margin-left: 25px;\n}", ""]);
 
 // exports
 
