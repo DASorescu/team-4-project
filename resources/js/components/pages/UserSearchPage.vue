@@ -50,7 +50,7 @@
 
 
 
-
+                <!--Render su pagina-->
                 <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
                     <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctorsBy" :key="'res-' + doctor.id">
                         <div class="card-header d-flex justify-content-between align-items-center">
@@ -110,7 +110,7 @@ export default {
         return {
             //proprietà su cui ciclare
             proprieties: ['Nome', 'Cognome', 'Città'],
-
+            //id di partenza nel v-model select su cui ciclare
             currentSpecialization: 0,
             specializations: [],
 
@@ -128,12 +128,10 @@ export default {
         };
     },
     computed: {
-        //mie computed
+        
         hasSpecializations() {
             return this.specializations.length > 0
         },
-        //
-
         hasResult() {
             return this.result.length > 0 && !this.fetching;
         },
@@ -152,9 +150,10 @@ export default {
             );
         },
 
-        //mio filtro
+        //Filtro per Proprietà oggetto dottore, va ottimizzato
         filteredDoctorsBy() {
-            if ((this.selectedPropriety === "") && (this.searched === "")) return this.result;
+
+            if ((this.selectedPropriety === "") && (this.searched === "")) {return this.result};
             if (this.selectedPropriety === "Nome")
                 return this.result.filter(
                     (doctor) => doctor.detail.first_name === this.searched
@@ -188,7 +187,7 @@ export default {
         },
     },
     methods: {
-
+        //fai una chiamata per restituire tutte le specializzazioni disponibili
         getSpecializations() {
             axios.get('http://localhost:8000/api/specializations/')
 

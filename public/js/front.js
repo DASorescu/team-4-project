@@ -2270,6 +2270,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return _ref = {
       //proprietà su cui ciclare
       proprieties: ['Nome', 'Cognome', 'Città'],
+      //id di partenza nel v-model select su cui ciclare
       currentSpecialization: 0,
       specializations: [],
       showBtn: false,
@@ -2279,11 +2280,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }, _defineProperty(_ref, "proprieties", ['Nome', 'Cognome', 'Città']), _defineProperty(_ref, "isLoading", false), _defineProperty(_ref, "result", []), _defineProperty(_ref, "cities", []), _defineProperty(_ref, "fetching", false), _defineProperty(_ref, "selectedAddress", ""), _ref;
   },
   computed: {
-    //mie computed
     hasSpecializations: function hasSpecializations() {
       return this.specializations.length > 0;
     },
-    //
     hasResult: function hasResult() {
       return this.result.length > 0 && !this.fetching;
     },
@@ -2297,10 +2296,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return doctor.detail.address === _this.selectedAddress;
       });
     },
-    //mio filtro
+    //Filtro per Proprietà oggetto dottore, va ottimizzato
     filteredDoctorsBy: function filteredDoctorsBy() {
       var _this2 = this;
-      if (this.selectedPropriety === "" && this.searched === "") return this.result;
+      if (this.selectedPropriety === "" && this.searched === "") {
+        return this.result;
+      }
+      ;
       if (this.selectedPropriety === "Nome") return this.result.filter(function (doctor) {
         return doctor.detail.first_name === _this2.searched;
       });
@@ -2337,6 +2339,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
+    //fai una chiamata per restituire tutte le specializzazioni disponibili
     getSpecializations: function getSpecializations() {
       var _this3 = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/specializations/').then(function (res) {

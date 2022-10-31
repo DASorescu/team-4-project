@@ -18,6 +18,7 @@ class SearchDoctorController extends Controller
     {
         //Ema -> prendo i miei utenti
         $users = User::all();
+        return response()->json(Specialization::find($specialization_id)->users);
         return response()->json($users);
     }
 
