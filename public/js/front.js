@@ -17532,13 +17532,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'UserSearchPage',
+  name: "UserSearchPage",
   components: {
     AppLoader: _AppLoader_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     CitySelect: _CitySelect_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -17546,25 +17547,51 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     NavBar: _homePageSections_NavBar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
-    return {
-      result: [],
-      cities: [],
-      fetching: false,
-      selectedAddress: ''
-    };
+    var _ref;
+    return _ref = {
+      //proprietà su cui ciclare
+      proprieties: ['Nome', 'Cognome', 'Città'],
+      //id di partenza nel v-model select su cui ciclare
+      currentSpecialization: 0,
+      specializations: [],
+      showBtn: false,
+      showBar: false,
+      searched: "",
+      selectedPropriety: ""
+    }, _defineProperty(_ref, "proprieties", ['Nome', 'Cognome', 'Città']), _defineProperty(_ref, "isLoading", false), _defineProperty(_ref, "result", []), _defineProperty(_ref, "cities", []), _defineProperty(_ref, "fetching", false), _defineProperty(_ref, "selectedAddress", ""), _ref;
   },
   computed: {
+    hasSpecializations: function hasSpecializations() {
+      return this.specializations.length > 0;
+    },
     hasResult: function hasResult() {
       return this.result.length > 0 && !this.fetching;
     },
     hasSpecializationId: function hasSpecializationId() {
-      return typeof this.$route.params.specializationId === 'number' && !Number.isNaN(this.$route.params.specializationId);
+      return typeof this.$route.params.specializationId === "number" && !Number.isNaN(this.$route.params.specializationId);
     },
     filteredDoctors: function filteredDoctors() {
       var _this = this;
       if (!this.selectedAddress) return this.result;
       return this.result.filter(function (doctor) {
         return doctor.detail.address === _this.selectedAddress;
+      });
+    },
+    //Filtro per Proprietà oggetto dottore, va ottimizzato
+    filteredDoctorsBy: function filteredDoctorsBy() {
+      var _this2 = this;
+      if (this.selectedPropriety === "" && this.searched === "") {
+        return this.result;
+      }
+      ;
+      if (this.selectedPropriety === "Nome") return this.result.filter(function (doctor) {
+        return doctor.detail.first_name === _this2.searched;
+      });
+      if (this.selectedPropriety === "Cognome") return this.result.filter(function (doctor) {
+        return doctor.detail.last_name === _this2.searched;
+      });
+      if (this.selectedPropriety === "Città") return this.result.filter(function (doctor) {
+        return doctor.detail.address === _this2.searched;
       });
     },
     // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
@@ -17593,100 +17620,128 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   methods: {
+<<<<<<< HEAD
+=======
+    //fai una chiamata per restituire tutte le specializzazioni disponibili
+    getSpecializations: function getSpecializations() {
+      var _this3 = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/specializations/').then(function (res) {
+        _this3.specializations = res.data;
+      });
+    },
+>>>>>>> Ema-task-Advanced-Research-page
     searchDoctorBySpecialization: function searchDoctorBySpecialization(specializationId) {
-      var _this2 = this;
+      var _this4 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var res, _iterator2, _step2, doctor, doctorDetail, doctorReviews;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _this4.showBar = _this4.showBtn = false;
+                _this4.result = [];
                 if (!(specializationId === 0)) {
-                  _context.next = 3;
+                  _context.next = 4;
                   break;
                 }
-                _this2.result = [];
                 return _context.abrupt("return");
+<<<<<<< HEAD
               case 3:
                 _context.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/search/' + specializationId);
               case 5:
+=======
+              case 4:
+                _context.next = 6;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://localhost:8000/api/search/" + specializationId);
+              case 6:
+>>>>>>> Ema-task-Advanced-Research-page
                 res = _context.sent;
-                _this2.fetching = true;
+                _this4.fetching = true;
                 if (!Array.isArray(res.data)) {
-                  _context.next = 31;
+                  _context.next = 32;
                   break;
                 }
                 // ciclo sui dottori che ho ottenuto
                 _iterator2 = _createForOfIteratorHelper(res.data);
-                _context.prev = 9;
+                _context.prev = 10;
                 _iterator2.s();
-              case 11:
+              case 12:
                 if ((_step2 = _iterator2.n()).done) {
-                  _context.next = 23;
+                  _context.next = 24;
                   break;
                 }
                 doctor = _step2.value;
-                _context.next = 15;
-                return _this2.getDoctorDetails(doctor.id);
-              case 15:
+                _context.next = 16;
+                return _this4.getDoctorDetails(doctor.id);
+              case 16:
                 doctorDetail = _context.sent.data;
-                _context.next = 18;
-                return _this2.getDoctorReviews(doctor.id);
-              case 18:
+                _context.next = 19;
+                return _this4.getDoctorReviews(doctor.id);
+              case 19:
                 doctorReviews = _context.sent.data;
                 // compongo un oggetto più semplice da usare con i dettagli.
                 // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
-                _this2.result.push({
+                _this4.result.push({
                   id: doctor.id,
                   email: doctor.email,
                   detail: doctorDetail,
                   reviews: doctorReviews
                 });
                 //cosi non si ripetono le città :)
-                if (doctorDetail.address !== null && !_this2.cities.includes(doctorDetail.address)) {
-                  _this2.cities.push(doctorDetail.address);
+                if (doctorDetail.address !== null && !_this4.cities.includes(doctorDetail.address)) {
+                  _this4.cities.push(doctorDetail.address);
                 }
-              case 21:
-                _context.next = 11;
+              case 22:
+                _context.next = 12;
                 break;
-              case 23:
-                _context.next = 28;
+              case 24:
+                _context.next = 29;
                 break;
-              case 25:
-                _context.prev = 25;
-                _context.t0 = _context["catch"](9);
+              case 26:
+                _context.prev = 26;
+                _context.t0 = _context["catch"](10);
                 _iterator2.e(_context.t0);
-              case 28:
-                _context.prev = 28;
+              case 29:
+                _context.prev = 29;
                 _iterator2.f();
-                return _context.finish(28);
-              case 31:
-                _this2.fetching = false;
+                return _context.finish(29);
               case 32:
+                _this4.fetching = false;
+                _this4.showBtn = true;
+              case 34:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[9, 25, 28, 31]]);
+        }, _callee, null, [[10, 26, 29, 32]]);
       }))();
     },
     // faccio una chiamata per avere i dettagli  di un dottore
     getDoctorDetails: function getDoctorDetails(doctorId) {
+<<<<<<< HEAD
       return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/users/' + doctorId);
     },
     // faccio una chiamata per avere le reviews  di un dottore
     getDoctorReviews: function getDoctorReviews(doctorId) {
       return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/user/reviews/' + doctorId);
+=======
+      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://localhost:8000/api/users/" + doctorId);
+    },
+    // faccio una chiamata per avere le reviews  di un dottore
+    getDoctorReviews: function getDoctorReviews(doctorId) {
+      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://localhost:8000/api/user/reviews/" + doctorId);
+>>>>>>> Ema-task-Advanced-Research-page
     }
   },
   mounted: function mounted() {
-    if (typeof this.$route.params.specializationId === 'string') {
+    if (typeof this.$route.params.specializationId === "string") {
       this.$route.params.specializationId = parseInt(this.$route.params.specializationId);
     }
     if (this.hasSpecializationId) {
       this.searchDoctorBySpecialization(this.$route.params.specializationId);
     }
+    this.getSpecializations();
   }
 });
 
@@ -17961,10 +18016,17 @@ render._withStripped = true;
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/homePageSections/FeedBack.vue?vue&type=template&id=3d52685d&scoped=true&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/homePageSections/FeedBack.vue?vue&type=template&id=3d52685d&scoped=true& ***!
   \**********************************************************************************************************************************************************************************************************************************************************************/
+=======
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/HomePage.vue?vue&type=template&id=317790a4&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/HomePage.vue?vue&type=template&id=317790a4& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+>>>>>>> Ema-task-Advanced-Research-page
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17975,6 +18037,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
+<<<<<<< HEAD
   return _vm._m(0);
 };
 var staticRenderFns = [function () {
@@ -18164,6 +18227,9 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "select-wrapper"
   }, [_vm._m(0), _vm._v(" "), _c("div", [_vm.hasSpecializations ? _c("select", {
+=======
+  return _c("div", [_c("div", [_c("h1", [_vm._v("Scegli per Specializzazione")]), _vm._v(" "), _vm.hasSpecializations ? _c("select", {
+>>>>>>> Ema-task-Advanced-Research-page
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -18530,26 +18596,127 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
+<<<<<<< HEAD
   return _c("div", [_c("NavBar"), _vm._v(" "), _vm.hasResult ? _c("CitySelect", {
     staticClass: "d-flex justify-content-center mt-3",
+=======
+  return _c("div", {
+    staticClass: "mt-5"
+  }, [_c("div", {
+    staticClass: "row justify-content-center"
+  }, [_c("div", {
+>>>>>>> Ema-task-Advanced-Research-page
     attrs: {
-      cities: _vm.cities,
-      label: "Seleziona Una Città"
-    },
+      id: "main-content"
+    }
+  }, [_c("div", {
+    staticClass: "d-flex justify-content-center"
+  }, [_vm.showBtn ? _c("button", {
+    staticClass: "btn btn-primary",
     on: {
-      "address-change": function addressChange(city) {
-        return _vm.selectedAddress = city;
+      click: function click($event) {
+        _vm.showBar = !_vm.showBar;
       }
     }
-  }) : _vm._e(), _vm._v(" "), _vm.hasResult ? _c("div", {
+  }, [_vm._v("\n                    Ricerca Avanzata\n                ")]) : _vm._e()]), _vm._v(" "), _vm.showBar ? _c("div", {
+    staticClass: "text-center"
+  }, [_c("div", {
+    staticClass: "text-center mx-auto"
+  }, [_c("div", {
+    staticClass: "my-2"
+  }, [_vm.hasSpecializations ? _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.currentSpecialization,
+      expression: "currentSpecialization"
+    }],
+    on: {
+      change: [function ($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.currentSpecialization = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }, function ($event) {
+        return _vm.searchDoctorBySpecialization(_vm.currentSpecialization);
+      }]
+    }
+  }, [_c("option", {
+    domProps: {
+      value: 0
+    }
+  }, [_vm._v("Scegli la specializzazione dei medici")]), _vm._v(" "), _vm._l(_vm.specializations, function (specialization) {
+    return _c("option", {
+      key: "spec-" + specialization.id,
+      domProps: {
+        value: specialization.id,
+        selected: _vm.currentSpecialization === specialization.id
+      }
+    }, [_vm._v("\n                                " + _vm._s(specialization.label) + "\n                            ")]);
+  })], 2) : _vm._e(), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.selectedPropriety,
+      expression: "selectedPropriety"
+    }],
+    staticClass: "form-select",
+    attrs: {
+      "aria-label": "Default select example"
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.selectedPropriety = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, [_c("option", {
+    attrs: {
+      value: ""
+    }
+  }, [_vm._v(_vm._s("Filtra per..."))]), _vm._v(" "), _vm._l(_vm.proprieties, function (propriety, index) {
+    return _c("option", {
+      key: index,
+      domProps: {
+        value: propriety
+      }
+    }, [_vm._v("\n                                " + _vm._s(propriety) + "\n                            ")]);
+  })], 2)]), _vm._v(" "), _c("div", [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.searched,
+      expression: "searched"
+    }],
+    attrs: {
+      type: "text"
+    },
+    domProps: {
+      value: _vm.searched
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.searched = $event.target.value;
+      }
+    }
+  })])])]) : _vm._e(), _vm._v(" "), _vm.hasResult ? _c("div", {
     staticClass: "mt-3 container flex-wrap d-flex"
-  }, _vm._l(_vm.filteredDoctors, function (doctor) {
+  }, _vm._l(_vm.filteredDoctorsBy, function (doctor) {
     return _c("div", {
       key: "res-" + doctor.id,
-      staticClass: "card shadow"
+      staticClass: "card shadow w-100 my-2"
     }, [_c("div", {
-      staticClass: "card-header"
-    }, [_vm._v("\n                Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name) + "\n                "), _c("router-link", {
+      staticClass: "card-header d-flex justify-content-between align-items-center"
+    }, [_c("div", [_vm._v("\n                            Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name) + "\n                        ")]), _vm._v(" "), _c("div", [_c("router-link", {
       staticClass: "btn btn-primary d-flex align-items-center",
       attrs: {
         to: {
@@ -18559,13 +18726,22 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("\n                    Visualizza profilo\n                ")])], 1), _vm._v(" "), _c("div", {
-      staticClass: "card-body"
-    }, [_c("p", [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("p", [_vm._v("Email: " + _vm._s(doctor.email))]), _vm._v(" "), _c("p", [_vm._v("\n                    Rating: "), _c("RateReview", {
+    }, [_vm._v("\n                                Visualizza profilo\n                            ")])], 1)]), _vm._v(" "), _c("div", {
+      staticClass: "card-body d-flex align-items-center"
+    }, [_c("div", {
+      staticClass: "w-25 mr-2"
+    }, [_c("input", {
+      staticClass: "img-fluid rounded-circle",
+      attrs: {
+        type: "image",
+        src: doctor.detail.image,
+        alt: ""
+      }
+    })]), _vm._v(" "), _c("div", [_c("p", [_vm._v("Specializzazione: " + _vm._s(doctor.specialization))]), _vm._v(" "), _c("p", [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("p", [_vm._v("Email: " + _vm._s(doctor.email))]), _vm._v(" "), _c("p", [_vm._v("\n                                Rating:\n                                "), _c("RateReview", {
       attrs: {
         value: _vm.averageReviews[doctor.id].avg
       }
-    }), _vm._v("(" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n                "), _c("router-link", {
+    }), _vm._v("(" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n                                "), _c("router-link", {
       staticClass: "btn btn-primary",
       attrs: {
         to: {
@@ -18575,12 +18751,17 @@ var render = function render() {
           }
         }
       }
+<<<<<<< HEAD
     }, [_vm._v("\n                    mostra\n                ")])], 1), _vm._v(" "), _c("font-awesome-icon", {
       attrs: {
         icon: "fa-solid fau-secret"
       }
     })], 1)]);
   }), 0) : _c("AppLoader")], 1);
+=======
+    }, [_vm._v("\n                                    mostra\n                                ")])], 1)])])]);
+  }), 0) : _c("AppLoader")], 1)])]);
+>>>>>>> Ema-task-Advanced-Research-page
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -23011,6 +23192,7 @@ exports.push([module.i, ".e-primary {\n  color: transparent;\n  text-shadow: 0 0
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/homePageSections/FeedBack.vue?vue&type=style&index=0&id=3d52685d&lang=scss&scoped=true&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/homePageSections/FeedBack.vue?vue&type=style&index=0&id=3d52685d&lang=scss&scoped=true& ***!
@@ -23144,6 +23326,8 @@ exports.push([module.i, ".container[data-v-3982aa98] {\n  padding: 2em 8em;\n}\n
 
 /***/ }),
 
+=======
+>>>>>>> Ema-task-Advanced-Research-page
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/NotFoundPage.vue?vue&type=style&index=0&id=302b2534&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/NotFoundPage.vue?vue&type=style&index=0&id=302b2534&lang=css& ***!
@@ -54497,6 +54681,7 @@ if(false) {}
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/homePageSections/FeedBack.vue?vue&type=style&index=0&id=3d52685d&lang=scss&scoped=true&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/homePageSections/FeedBack.vue?vue&type=style&index=0&id=3d52685d&lang=scss&scoped=true& ***!
@@ -54707,6 +54892,8 @@ if(false) {}
 
 /***/ }),
 
+=======
+>>>>>>> Ema-task-Advanced-Research-page
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/NotFoundPage.vue?vue&type=style&index=0&id=302b2534&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/NotFoundPage.vue?vue&type=style&index=0&id=302b2534&lang=css& ***!
@@ -71568,7 +71755,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _HomePage_vue_vue_type_template_id_317790a4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HomePage.vue?vue&type=template&id=317790a4&scoped=true& */ "./resources/js/components/pages/HomePage.vue?vue&type=template&id=317790a4&scoped=true&");
+/* harmony import */ var _HomePage_vue_vue_type_template_id_317790a4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HomePage.vue?vue&type=template&id=317790a4& */ "./resources/js/components/pages/HomePage.vue?vue&type=template&id=317790a4&");
 /* harmony import */ var _HomePage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HomePage.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/HomePage.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -71580,11 +71767,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _HomePage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _HomePage_vue_vue_type_template_id_317790a4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _HomePage_vue_vue_type_template_id_317790a4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _HomePage_vue_vue_type_template_id_317790a4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _HomePage_vue_vue_type_template_id_317790a4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "317790a4",
+  null,
   null
   
 )
@@ -71610,19 +71797,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/pages/HomePage.vue?vue&type=template&id=317790a4&scoped=true&":
-/*!***********************************************************************************************!*\
-  !*** ./resources/js/components/pages/HomePage.vue?vue&type=template&id=317790a4&scoped=true& ***!
-  \***********************************************************************************************/
+/***/ "./resources/js/components/pages/HomePage.vue?vue&type=template&id=317790a4&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/pages/HomePage.vue?vue&type=template&id=317790a4& ***!
+  \***********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_template_id_317790a4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../../node_modules/vue-loader/lib??vue-loader-options!./HomePage.vue?vue&type=template&id=317790a4&scoped=true& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/HomePage.vue?vue&type=template&id=317790a4&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_template_id_317790a4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_template_id_317790a4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../../node_modules/vue-loader/lib??vue-loader-options!./HomePage.vue?vue&type=template&id=317790a4& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/HomePage.vue?vue&type=template&id=317790a4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_template_id_317790a4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_template_id_317790a4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_template_id_317790a4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -71882,9 +72069,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserSearchPage_vue_vue_type_template_id_3982aa98_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserSearchPage.vue?vue&type=template&id=3982aa98&scoped=true& */ "./resources/js/components/pages/UserSearchPage.vue?vue&type=template&id=3982aa98&scoped=true&");
 /* harmony import */ var _UserSearchPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserSearchPage.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/UserSearchPage.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _UserSearchPage_vue_vue_type_style_index_0_id_3982aa98_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserSearchPage.vue?vue&type=style&index=0&id=3982aa98&lang=scss&scoped=true& */ "./resources/js/components/pages/UserSearchPage.vue?vue&type=style&index=0&id=3982aa98&lang=scss&scoped=true&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -71892,7 +72077,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _UserSearchPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _UserSearchPage_vue_vue_type_template_id_3982aa98_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
   _UserSearchPage_vue_vue_type_template_id_3982aa98_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -71921,22 +72106,6 @@ component.options.__file = "resources/js/components/pages/UserSearchPage.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSearchPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./UserSearchPage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/UserSearchPage.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSearchPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/pages/UserSearchPage.vue?vue&type=style&index=0&id=3982aa98&lang=scss&scoped=true&":
-/*!********************************************************************************************************************!*\
-  !*** ./resources/js/components/pages/UserSearchPage.vue?vue&type=style&index=0&id=3982aa98&lang=scss&scoped=true& ***!
-  \********************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSearchPage_vue_vue_type_style_index_0_id_3982aa98_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--7-2!../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./UserSearchPage.vue?vue&type=style&index=0&id=3982aa98&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/UserSearchPage.vue?vue&type=style&index=0&id=3982aa98&lang=scss&scoped=true&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSearchPage_vue_vue_type_style_index_0_id_3982aa98_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSearchPage_vue_vue_type_style_index_0_id_3982aa98_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSearchPage_vue_vue_type_style_index_0_id_3982aa98_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSearchPage_vue_vue_type_style_index_0_id_3982aa98_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
 
 /***/ }),
 

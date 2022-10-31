@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
         $user->save();
 
         // popolo gli user attraverso un ciclo
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $user = new User();
 
             $user->name = $faker->firstName();
