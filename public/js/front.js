@@ -17949,7 +17949,9 @@ var render = function render() {
         _vm.reviewText = $event.target.value;
       }
     }
-  })]), _vm._v(" "), _c("button", {
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "d-flex justify-content-between"
+  }, [_c("button", {
     staticClass: "btn btn-success",
     attrs: {
       type: "button"
@@ -17959,7 +17961,7 @@ var render = function render() {
         return _vm.invia();
       }
     }
-  }, [_vm._v(" Invia ")])]);
+  }, [_vm._v(" Invia ")]), _vm._v(" "), _vm._t("default")], 2)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -18281,7 +18283,7 @@ var staticRenderFns = [function () {
   }, [_c("div", [_c("a", {
     staticClass: "d-flex align-items-center justify-content-between no-underline",
     attrs: {
-      href: "http://127.0.0.1:8000"
+      href: "/"
     }
   }, [_c("img", {
     staticClass: "img-fluid nav-image logo",
@@ -18298,14 +18300,14 @@ var staticRenderFns = [function () {
   }, [_c("a", {
     staticClass: "nav-link text-white",
     attrs: {
-      href: "http://127.0.0.1:8000/login"
+      href: "/login"
     }
   }, [_vm._v("Login")])]), _vm._v(" "), _c("li", {
     staticClass: "nav-item"
   }, [_c("a", {
     staticClass: "nav-link text-white",
     attrs: {
-      href: "http://127.0.0.1:8000/register"
+      href: "/register"
     }
   }, [_vm._v("Register")])])])])])]);
 }];
@@ -18440,7 +18442,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "d-flex flex-column mt-5"
+    staticClass: "d-flex flex-column mt-5 container"
   }, [_vm._l(_vm.reviews, function (review, i) {
     return _c("div", {
       key: "rev-" + i,
@@ -18455,7 +18457,7 @@ var render = function render() {
       staticClass: "card-body"
     }, [_vm._v("\n                " + _vm._s(review.content) + "\n            ")])]);
   }), _vm._v(" "), _c("div", {
-    staticClass: "card shadow mt-5"
+    staticClass: "card shadow mt-5 px-3"
   }, [_c("NewReview", {
     attrs: {
       doctorId: _vm.$route.params.userId
@@ -18463,7 +18465,7 @@ var render = function render() {
     on: {
       submitted: _vm.addNewReview
     }
-  }), _vm._v(" "), _c("button", {
+  }, [_c("button", {
     staticClass: "btn btn-secondary",
     on: {
       click: function click($event) {
@@ -18472,7 +18474,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "fa-solid fa-arrow-rotate-left"
-  }), _vm._v(" Torna\n            Indietro")])], 1)], 2);
+  }), _vm._v("\n                Torna Indietro\n            ")])])], 1)], 2);
 };
 var staticRenderFns = [];
 render._withStripped = true;

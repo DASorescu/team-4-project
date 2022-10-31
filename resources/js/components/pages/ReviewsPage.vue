@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column mt-5">
+    <div class="d-flex flex-column mt-5 container">
             <div v-for="(review,i) in reviews" :key="'rev-'+i" class="card shadow mt-2">
                 <div class="card-header" >
                     <RateReview :value="review.rating"/>
@@ -10,10 +10,13 @@
                     {{review.content}}
                 </div>
             </div>
-        <div class="card shadow mt-5">
-            <NewReview @submitted="addNewReview" :doctorId="$route.params.userId" />
-            <button class="btn btn-secondary" @click="$router.back()"><i class="fa-solid fa-arrow-rotate-left"></i> Torna
-                Indietro</button>
+        <div class="card shadow mt-5 px-3">
+            <NewReview @submitted="addNewReview" :doctorId="$route.params.userId">
+                <button class="btn btn-secondary" @click="$router.back()">
+                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                    Torna Indietro
+                </button>
+            </NewReview>
         </div>
     </div>
 </template>

@@ -16,7 +16,10 @@
             <label for="review">Scrivi la tua recensione</label>
             <textarea class="form-control" id="review" v-model="reviewText" rows="5"></textarea>
         </div>
-        <button class="btn btn-success" type="button" @click="invia()"> Invia </button>
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-success" type="button" @click="invia()"> Invia </button>
+            <slot></slot>
+        </div>
     </div>
 </template>
 
