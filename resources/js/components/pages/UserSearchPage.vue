@@ -17,13 +17,13 @@
                 </div>
 
 
-                <div v-if="showBar" class="text-center ">
+                <div v-if="showBar" class="text-center card p-3 mt-3">
                     <div class="text-center mx-auto">
 
                         <div class="my-2">
                             <select v-if="hasSpecializations" v-model="currentSpecialization"
                                 @change="searchDoctorBySpecialization(currentSpecialization)">
-                                <option :value="0">Scegli la specializzazione dei medici</option>
+                                <option :value="0">Scegli una specializzazione</option>
                                 <option v-for="specialization in specializations" :key="'spec-' + specialization.id"
                                     :value="specialization.id" :selected="currentSpecialization === specialization.id">
                                     {{ specialization.label }}
@@ -41,7 +41,7 @@
 
                         </div>
                         <div>
-                            <input type="text" v-model="searched">
+                            <input type="text" v-model="searched" placeholder="Cerca qui...">
                         </div>
                     </div>
 
@@ -73,25 +73,35 @@
                                         alt="" />
                                 </div>
                                 <div class="col-5">
-                                    <p>Specializzazione: {{ doctor.specialization }} <span class="mr-2"> <font-awesome-icon icon="fa-solid fa-briefcase-medical" /> </span> </p>
-                                    <p>Città: {{ doctor.detail.address }} <span class="mr-2"> <font-awesome-icon icon="fa-solid fa-location-dot" /> </span> </p>
-                                    <p> Telefono:{{ doctor.detail.phone }} <span class="mr-2"> <font-awesome-icon icon="fa-solid fa-phone"/> </span>   </p>   
+                                    <div>Specializzazioni: 
+                                        <ul>
+                                            <li v-for="specialization in doctor.specializations" :key="specialization.id">
+                                            {{doctor.specializations.label}}
+                                            </li>  
+
+                                        </ul>
+                                    </div>
+                                    <p>Città: {{ doctor.detail.address }} <span class="ml-1">  <font-awesome-icon icon="fa-solid fa-location-dot" /> </span> </p>
+                                    <p> Telefono:{{ doctor.detail.phone }} <span class="ml-1">  <font-awesome-icon icon="fa-solid fa-phone"/> </span>   </p>   
                                 </div>
                                 <div col="col-4">
                                     <p>Email: {{ doctor.email }}</p>
-                                    <p>
-                                        Rating:
-                                        <RateReview :value="averageReviews[doctor.id].avg" />{{
-                                                averageReviews[doctor.id].count
-                                        }}
-                                        <div>
-                                            <router-link class="btn btn-sm btn-light shadow"
+                                    <div>
+                                        Rating: 
+                                        <span>
+                                           <RateReview :value="averageReviews[doctor.id].avg" />
+                                           {{"(" + averageReviews[doctor.id].count + " " + "recensioni )"}} 
+                                        </span>    
+                                        
+
+                                        <div class="my-3">
+                                            <router-link class="btn btn-sm btn-success"
                                                 :to="{ name: 'reviews', params: { userId: doctor.id } }">
                                                 Recensioni
                                             </router-link>
 
                                         </div>
-                                    </p>
+                                    </div>
                                     
                                 </div>
                             </div>
@@ -154,7 +164,6 @@ export default {
             );
         },
 
-
         filteredDoctors() {
             if (!this.selectedAddress) return this.result;
             return this.result.filter(
@@ -207,8 +216,6 @@ export default {
                     this.specializations = res.data
                 })
         },
-
-
         async searchDoctorBySpecialization(specializationId) {
             this.showBar = this.showBtn = false
             this.result = [];
@@ -227,6 +234,9 @@ export default {
                     // prendo le reviews del dottore corrente
                     const doctorReviews = (await this.getDoctorReviews(doctor.id)).data;
 
+                    //prendo le specializazzioni del dottore
+                    const doctorSpecializations = (await this.getDoctorSpecializations(doctor.id)).data;
+
                     // compongo un oggetto più semplice da usare con i dettagli.
                     // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
                     this.result.push({
@@ -234,6 +244,8 @@ export default {
                         email: doctor.email,
                         detail: doctorDetail,
                         reviews: doctorReviews,
+                        //aggiungo specializzazioni nell'oggetto che arriva
+                        specializations: doctorSpecializations
                     });
                     //cosi non si ripetono le città :)
                     if (
@@ -259,6 +271,10 @@ export default {
         // faccio una chiamata per avere le reviews  di un dottore
         getDoctorReviews(doctorId) {
             return axios.get('http://localhost:8000/api/user/reviews/' + doctorId)
+        },
+        //faccio una chiamata per avere le specializzazioni  di un dottore
+        getDoctorSpecializations(doctorId) {
+            return axios.get('http://localhost:8000/api/specializations/' + doctorId)
         },
     },
 

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'Api\HomeController@index');
 
-//rotte che servono a me
+//rotte che servono a ema
 Route::get('/search/{specialization_id}', 'Api\SearchDoctorController@show');
 Route::get('/search', 'Api\SearchDoctorController@index');
 
