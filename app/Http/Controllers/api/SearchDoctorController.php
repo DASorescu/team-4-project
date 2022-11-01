@@ -41,8 +41,20 @@ class SearchDoctorController extends Controller
      */
     public function show($specialization_id)
     {
+
+        // ciclo su tutti gli utenti per mapparli. Cosi devo fare solo una chiamata json che sarà più veloce
+        $users = Specialization::find($specialization_id)->users;
+        $users_mapped = [];
+        foreach ($users as $user) {
+            $users_mapped[] = [
+                "id" => $user->id,
+                "email" => $user->email,
+                "detail" => $user->userDetail,
+                "reviews" => $user->reviews,
+            ];
+        }
         // cerco la specializzazione richiesta e restituisco i dottori con la specializzazione richiesta
-        return response()->json(Specialization::find($specialization_id)->users);
+        return response()->json($users_mapped);
     }
 
     /**

@@ -124,7 +124,7 @@ export default {
         };
     },
     computed: {
-        
+
         hasSpecializations() {
             return this.specializations.length > 0
         },
@@ -205,26 +205,29 @@ export default {
             if (Array.isArray(res.data)) {
                 // ciclo sui dottori che ho ottenuto
                 for (const doctor of res.data) {
-                    // prendo i dettagli del dottore corrente
-                    const doctorDetail = (await this.getDoctorDetails(doctor.id)).data;
 
-                    // prendo le reviews del dottore corrente
-                    const doctorReviews = (await this.getDoctorReviews(doctor.id)).data;
+                    // // prendo i dettagli del dottore corrente
+                    // const doctorDetail = (await this.getDoctorDetails(doctor.id)).data;
 
-                    // compongo un oggetto più semplice da usare con i dettagli.
-                    // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
-                    this.result.push({
-                        id: doctor.id,
-                        email: doctor.email,
-                        detail: doctorDetail,
-                        reviews: doctorReviews,
-                    });
+                    // // prendo le reviews del dottore corrente
+                    // const doctorReviews = (await this.getDoctorReviews(doctor.id)).data;
+
+                    // // compongo un oggetto più semplice da usare con i dettagli.
+                    // // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
+                    // this.result.push({
+                    //     id: doctor.id,
+                    //     email: doctor.email,
+                    //     detail: doctorDetail,
+                    //     reviews: doctorReviews,
+                    // });
+
+                    this.result.push(doctor)
                     //cosi non si ripetono le città :)
                     if (
-                        doctorDetail.address !== null &&
-                        !this.cities.includes(doctorDetail.address)
+                        doctor.detail.address !== null &&
+                        !this.cities.includes(doctor.detail.address)
                     ) {
-                        this.cities.push(doctorDetail.address);
+                        this.cities.push(doctor.detail.address);
                     }
                 }
             }
@@ -266,8 +269,8 @@ export default {
 <style lang="scss" scoped>
 
 </style>
-            
-            
-            
+
+
+
 
 

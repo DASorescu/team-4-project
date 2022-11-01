@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
 use App\Models\Review;
+use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 use App\User;
 use Carbon\Carbon;
@@ -26,6 +27,24 @@ class UserController extends Controller
     public function reviews($id)
     {
         return response()->json(User::find($id)->reviews);
+    }
+
+    public function sponsorized()
+    {
+
+        // ciclo su tutti gli utenti per mapparli. Cosi devo fare solo una chiamata json che sarà più veloce
+        $users = User::with('sponsorships')->get();
+        $users_mapped = [];
+        foreach ($users as $user) {
+            $users_mapped[] = [
+                "id" => $user->id,
+                "email" => $user->email,
+                "detail" => $user->userDetail,
+                "reviews" => $user->reviews,
+            ];
+        }
+        // cerco la specializzazione richiesta e restituisco i dottori con la specializzazione richiesta
+        return response()->json($users_mapped);
     }
 
     /**

@@ -25,9 +25,12 @@ Route::get('/search/{specialization_id}', 'Api\SearchDoctorController@show');
 Route::get('/search', 'Api\SearchDoctorController@index');
 
 Route::get('/specializations', 'Api\SpecializationController@index');
+Route::get('/specializations/{id}', 'Api\SpecializationController@show');
+
 Route::get('/users/{id}', 'Api\UserController@show');
 Route::get('/users', 'Api\UserController@index');
 Route::get('/user/reviews/{id}', 'Api\UserController@reviews');
 Route::post('/user/{id}/reviews', 'Api\UserController@addReview');
 Route::post('/user/{id}/messages', 'Api\UserController@addMessage');
-Route::get('/specializations/{id}', 'Api\SpecializationController@show');
+
+Route::get('/sponsorizedDoctors', 'Api\UserController@sponsorized');
