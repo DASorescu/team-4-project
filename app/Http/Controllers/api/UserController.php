@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Message;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use App\User;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -61,19 +63,10 @@ class UserController extends Controller
 
                 'guest_name' => 'required|string|min:3|max:50',
 
-                'guest_email' => 'required|string|min:3|max:50',
+                'guest_email' => 'required|string|email|min:3|max:50',
 
                 'rating' => 'required|numeric|min:1|max:5',
-            ],
-            [
-                'content' => 'err_content',
-
-                'guest_name' => "err_guest_name",
-
-                'guest_email' => "err_guest_email",
-
-                'rating' => 'err_rating',
-            ],
+            ]
         );
         $data = $request->all();
 
@@ -86,6 +79,37 @@ class UserController extends Controller
         $new_review->rating = $data['rating'];
 
         $new_review->save();
+
+        return response()->json([
+            'message' => 'created',
+            'errors' => false
+        ]);
+    }
+
+    public function addMessage(Request $request, $id)
+    {
+        $user = User::find($id);
+        $request->validate(
+            [
+                'content' => 'required|string|min:10|max:2048',
+
+                'name' => 'required|string|min:3|max:50',
+
+                'email' => 'required|string|email|min:3|max:50',
+
+            ]
+        );
+        $data = $request->all();
+
+        $new_message = new Message();
+
+        $new_message->user_id = $user->id;
+        $new_message->content = $data['content'];
+        $new_message->name = $data['name'];
+        $new_message->email = $data['email'];
+        $new_message->date = Carbon::now()->toDateString();
+
+        $new_message->save();
 
         return response()->json([
             'message' => 'created',
