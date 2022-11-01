@@ -1,0 +1,21 @@
+#back-navbar {
+    background: linear-gradient(rgb(101, 170, 255), rgb(0, 115, 255));
+
+    a {
+        color: #fff;
+
+    }
+
+    .dropdown-menu {
+        background: rgb(232, 226, 226);
+
+        a {
+            color: #000;
+
+            &:hover {
+                background-color: #999;
+            }
+        }
+
+    }
+}

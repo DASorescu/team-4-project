@@ -11005,3 +11005,23 @@ body {
   background-color: #fff;
 }
 
+#back-navbar {
+  background: linear-gradient(rgb(101, 170, 255), rgb(0, 115, 255));
+}
+
+#back-navbar a {
+  color: #fff;
+}
+
+#back-navbar .dropdown-menu {
+  background: rgb(232, 226, 226);
+}
+
+#back-navbar .dropdown-menu a {
+  color: #000;
+}
+
+#back-navbar .dropdown-menu a:hover {
+  background-color: #999;
+}
+
