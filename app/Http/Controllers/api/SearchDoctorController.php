@@ -14,8 +14,12 @@ class SearchDoctorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //Ema -> prendo i miei utenti
+        $users = User::all();
+        return response()->json(Specialization::find($specialization_id)->users);
+        return response()->json($users);
     }
 
     /**

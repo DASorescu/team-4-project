@@ -17,4 +17,5 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/validations/edit_validation.js', 'public/js')
     .js('resources/js/front.js', 'public/js')
     .js('resources/js/router.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    .options({processCssUrl: false});

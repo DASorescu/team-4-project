@@ -13,13 +13,13 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     @if (Route::is('register'))
-    <script src="{{ asset('js/register_validation.js') }}" defer></script>
+        <script src="{{ asset('js/register_validation.js') }}" defer></script>
     @endif
     @if (Route::is('admin.users.create'))
-    <script src="{{ asset('js/create_validation.js') }}" defer></script>
+        <script src="{{ asset('js/create_validation.js') }}" defer></script>
     @endif
     @if (Route::is('admin.users.edit'))
-    <script src="{{ asset('js/edit_validation.js') }}" defer></script>
+        <script src="{{ asset('js/edit_validation.js') }}" defer></script>
     @endif
 
 
@@ -46,7 +46,7 @@
         @if (!Route::is('admin.users.create'))
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ route('admin.users.edit') }}">
+                    <a class="navbar-brand" href="/">
                         {{ config('app.name', 'BDoctors') }}
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
