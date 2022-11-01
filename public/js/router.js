@@ -2631,7 +2631,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "mt-5"
+    staticClass: "mt-5 container"
   }, [_c("h3", [_vm._v("Scrivi una recensione")]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {

@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-5">
+    <div class="mt-5 container">
         <h3>Scrivi una recensione</h3>
             <div class="form-group">
                 <label for="name">Inserisci il tuo nome</label>
