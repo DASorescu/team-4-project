@@ -23277,7 +23277,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#not-found {\r\n    height: 90vh;\n}\r\n", ""]);
+exports.push([module.i, "\n#not-found {\n    height: 90vh;\n}\n", ""]);
 
 // exports
 
@@ -70584,7 +70584,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/altroconsumo_reviews.svg?6fd8222c4c8a06d335d76203fe866331";
+module.exports = "/images/altroconsumo_reviews.svg?230774637878d60de6d430a5853310f7";
 
 /***/ }),
 
@@ -70595,7 +70595,7 @@ module.exports = "/images/altroconsumo_reviews.svg?6fd8222c4c8a06d335d76203fe866
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/commenti_diconodinoi.svg?905a5f91a4c807e9f87cfdcbc50ef184";
+module.exports = "/images/commenti_diconodinoi.svg?3b5c331f73d1bccf1bb9deaf4be8c58f";
 
 /***/ }),
 
@@ -70606,7 +70606,7 @@ module.exports = "/images/commenti_diconodinoi.svg?905a5f91a4c807e9f87cfdcbc50ef
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/consultazione-sito.svg?c1b0052bc3a9572ac10b1db3fedb396a";
+module.exports = "/images/consultazione-sito.svg?8adb14069a9f6068c9d6e6492372d650";
 
 /***/ }),
 
@@ -70650,7 +70650,7 @@ module.exports = "/images/facebook-reviews.png?7ed45070ee48f1f27de29fb9c3a5b57f"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/medico-e-paziente.svg?657be2094dfa7eb5596f17045385a2b1";
+module.exports = "/images/medico-e-paziente.svg?57b8381e7dbbc0c31bafcb3875fd9efd";
 
 /***/ }),
 
@@ -70661,7 +70661,7 @@ module.exports = "/images/medico-e-paziente.svg?657be2094dfa7eb5596f17045385a2b1
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/medico-vertical.svg?a078d4a5aaf060a5daa36a6f250a4bb9";
+module.exports = "/images/medico-vertical.svg?b16bc91ab4694e9425231d48d6458d7d";
 
 /***/ }),
 
@@ -70672,7 +70672,7 @@ module.exports = "/images/medico-vertical.svg?a078d4a5aaf060a5daa36a6f250a4bb9";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/prenotazione-online.svg?2f0f8d8a1fe40a8fb92f43e97d52d67e";
+module.exports = "/images/prenotazione-online.svg?47029cc2d35633fde57f12ce802b5019";
 
 /***/ }),
 
@@ -72151,7 +72151,7 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laravel\team-4-project\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/daniel-andrei.sorescu/Desktop/project/team-4-project/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })
