@@ -94,6 +94,14 @@ import AppLoader from '../AppLoader.vue'
 import CitySelect from '../CitySelect.vue'
 import RateReview from '../RateReview.vue'
 import NavBar from '../homePageSections/NavBar.vue'
+
+function valoreODefault(valore, defaultValore) {
+    if (valore !== null && valore) {
+        return valore
+    }
+    return defaultValore
+}
+
 export default {
     name: "UserSearchPage",
     components: {
@@ -124,7 +132,7 @@ export default {
         };
     },
     computed: {
-        
+
         hasSpecializations() {
             return this.specializations.length > 0
         },
@@ -138,29 +146,21 @@ export default {
             );
         },
 
-
-        filteredDoctors() {
-            if (!this.selectedAddress) return this.result;
-            return this.result.filter(
-                (doctor) => doctor.detail.address === this.selectedAddress
-            );
-        },
-
         //Filtro per Proprietà oggetto dottore, va ottimizzato
         filteredDoctorsBy() {
 
-            if ((this.selectedPropriety === "") && (this.searched === "")) {return this.result};
+            if (this.searched === "") {return this.result};
             if (this.selectedPropriety === "Nome")
                 return this.result.filter(
-                    (doctor) => doctor.detail.first_name === this.searched
+                    (doctor) => valoreODefault(doctor.detail.first_name,'').toLowerCase().startsWith(this.searched.toLowerCase())
                 );
             if (this.selectedPropriety === "Cognome")
                 return this.result.filter(
-                    (doctor) => doctor.detail.last_name === this.searched
+                    (doctor) => valoreODefault(doctor.detail.last_name,'').toLowerCase().startsWith(this.searched.toLowerCase())
                 );
             if (this.selectedPropriety === "Città")
                 return this.result.filter(
-                    (doctor) => doctor.detail.address === this.searched
+                    (doctor) => valoreODefault(doctor.detail.address,'').toLowerCase().startsWith(this.searched.toLowerCase())
                 );
         },
 
@@ -168,7 +168,7 @@ export default {
         // In questo oggetto le proprietà sono la media del rating e il numero di review su cui è basata la media.
         averageReviews() {
             const res = {};
-            for (const doctor of this.filteredDoctors) {
+            for (const doctor of this.filteredDoctorsBy) {
                 res[doctor.id] = {
                     count: doctor.reviews.length,
                     // faccio una chiamata per avere i dettagli  di un dottore
@@ -185,7 +185,7 @@ export default {
     methods: {
         //fai una chiamata per restituire tutte le specializzazioni disponibili
         getSpecializations() {
-            axios.get('http://localhost:8000/api/specializations/')
+            axios.get('/api/specializations/')
 
                 .then(res => {
                     this.specializations = res.data
@@ -200,49 +200,39 @@ export default {
                 return;
             }
             // richiedo una ricerca per specializzazione, ottengo tutti i dottori che hanno quella specializzazione.
-            const res = await axios.get('http://localhost:8000/api/search/' + specializationId)
+            const res = await axios.get('/api/search/' + specializationId)
             this.fetching = true
             if (Array.isArray(res.data)) {
                 // ciclo sui dottori che ho ottenuto
                 for (const doctor of res.data) {
-                    // prendo i dettagli del dottore corrente
-                    const doctorDetail = (await this.getDoctorDetails(doctor.id)).data;
 
-                    // prendo le reviews del dottore corrente
-                    const doctorReviews = (await this.getDoctorReviews(doctor.id)).data;
+                    // // prendo i dettagli del dottore corrente
+                    // const doctorDetail = (await this.getDoctorDetails(doctor.id)).data;
 
-                    // compongo un oggetto più semplice da usare con i dettagli.
-                    // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
-                    this.result.push({
-                        id: doctor.id,
-                        email: doctor.email,
-                        detail: doctorDetail,
-                        reviews: doctorReviews,
-                    });
+                    // // prendo le reviews del dottore corrente
+                    // const doctorReviews = (await this.getDoctorReviews(doctor.id)).data;
+
+                    // // compongo un oggetto più semplice da usare con i dettagli.
+                    // // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
+                    // this.result.push({
+                    //     id: doctor.id,
+                    //     email: doctor.email,
+                    //     detail: doctorDetail,
+                    //     reviews: doctorReviews,
+                    // });
+
+                    this.result.push(doctor)
                     //cosi non si ripetono le città :)
                     if (
-                        doctorDetail.address !== null &&
-                        !this.cities.includes(doctorDetail.address)
+                        doctor.detail.address !== null &&
+                        !this.cities.includes(doctor.detail.address)
                     ) {
-                        this.cities.push(doctorDetail.address);
+                        this.cities.push(doctor.detail.address);
                     }
                 }
             }
             this.fetching = false;
             this.showBtn = true
-        },
-
-        // faccio una chiamata per avere i dettagli  di un dottore
-        getDoctorDetails(doctorId) {
-            return axios.get('http://localhost:8000/api/users/' + doctorId)
-        },
-        // faccio una chiamata per avere le reviews  di un dottore
-        getDoctorReviews(doctorId) {
-            return axios.get('http://localhost:8000/api/user/reviews/' + doctorId)
-        },
-        // faccio una chiamata per avere le reviews  di un dottore
-        getDoctorReviews(doctorId) {
-            return axios.get('http://localhost:8000/api/user/reviews/' + doctorId)
         },
     },
 
@@ -254,6 +244,7 @@ export default {
             );
         }
         if (this.hasSpecializationId) {
+            this.currentSpecialization = this.$route.params.specializationId
             this.searchDoctorBySpecialization(this.$route.params.specializationId);
         }
 
@@ -266,8 +257,8 @@ export default {
 <style lang="scss" scoped>
 
 </style>
-            
-            
-            
+
+
+
 
 

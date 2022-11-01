@@ -93,7 +93,7 @@ export default {
     },
     computed: {
 
-        
+
         averageReviews() {
             const res = {};
             for (const doctor of this.filteredDoctorsby) {
@@ -113,21 +113,21 @@ export default {
     methods: {
 
         getSpecializations() {
-            axios.get('http://localhost:8000/api/specializations/')
+            axios.get('/api/specializations/')
                 .then(res => {
                     this.specializations = res.data
                 })
         },
 
-     
+
 
         // faccio una chiamata per avere i dettagli  di un dottore
         getDoctorDetails(doctorId) {
-            return axios.get("http://localhost:8000/api/users/" + doctorId);
+            return axios.get("/api/users/" + doctorId);
         },
         // faccio una chiamata per avere le reviews  di un dottore
         getDoctorReviews(doctorId) {
-            return axios.get("http://localhost:8000/api/user/reviews/" + doctorId);
+            return axios.get("/api/user/reviews/" + doctorId);
         },
     }
 

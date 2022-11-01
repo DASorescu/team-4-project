@@ -32,7 +32,7 @@
                     <h5>F-Medical Group</h5>
                     <font-awesome-icon icon="fa-solid fa-house" /> Via dei Mille 64,<div>{{user.address}}</div>
                 </div>
-                <div class="contacts"> 
+                <div class="contacts">
                     <div id="hours">
                         <strong>Orari e contatti</strong>
                         <div><h5>Oggi:</h5> <font-awesome-icon icon="fa-solid fa-clock" /> 7:30 - 18:30</div>
@@ -77,6 +77,10 @@
                 <p>- Il centralino è operativo dalle ore 9:00 alle ore 15:00 tutti i giorni,Domenica esclusa.</p>
               </div>
            </div>
+           <div class="user-page-details">
+            <!-- invio messaggi -->
+                <NewMessage :doctor-id="''+user.id" @submitted="messageSubmitted"/>
+           </div>
             <section id="buttons" class="container d-flex align-items-center justify-content-end">
                 <router-link class="btn btn-success mr-2" :to="{ name:'reviews', params: { id: user.id }}">
                     <font-awesome-icon icon="fa-solid fa-pen-to-square" /> Scrivi una recensione
@@ -95,14 +99,16 @@
 import NavBar from '../homePageSections/NavBar.vue';
 import Footer from '../homePageSections/Footer.vue';
 import axios from 'axios';
+import NewMessage from '../NewMessage.vue';
 export default {
     name: "UserDetailPage",
     components:{
-      NavBar,
-      Footer
+        NavBar,
+        Footer,
+        NewMessage
     },
     data: () => ({
-        user: [],
+        user: {},
         specializations: [],
         isLoading: false,
     }),
@@ -126,6 +132,9 @@ export default {
                 this.specializations = res.data;
             })
         },
+        messageSubmitted(message) {
+            console.log('messagesubmitted', message)
+        }
     },
     mounted() {
         this.fetchUser(this.$route.params.id);
@@ -134,8 +143,8 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-    
+<style lang="scss">
+#user-details {
     main{
         background-color: #EEF2F7;
     }
@@ -199,7 +208,7 @@ export default {
         .address{
             width: 40%;
             padding: 20px 0;
-            
+
         }
 
         .contacts{
@@ -212,7 +221,7 @@ export default {
             #hours{
                 padding-right: 4.5rem;
             }
-            
+
         }
 
         strong{
@@ -243,5 +252,14 @@ export default {
     #buttons{
         padding: 30px;
     }
-   
+
+
+    h3,h5{
+        color: #003F5E;
+        font-weight: bold;
+        font-size: 1.5rem;
+        padding-bottom: 10px;
+    }
+
+}
 </style>
