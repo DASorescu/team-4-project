@@ -58,7 +58,7 @@ export default {
 <style lang="scss" scoped>
 #jumbotron {
 
-    height: 210px;
+    height: 450px;
     background: linear-gradient(#0451CB, #3884ff);
 
     .select-wrapper {
