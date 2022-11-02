@@ -17559,7 +17559,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       showBtn: false,
       showBar: false,
       //ha trovato i risultati?
-      finded: true,
+      finded: null,
       //campi del form
       searched: "",
       selectedPropriety: ""
@@ -17580,8 +17580,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.finded = true;
     },
     postCallHasResult: function postCallHasResult() {
-      if (this.result.includes(!this.searched)) {
-        return this.finded = false;
+      if (this.result.includes(this.searched)) {
+        return this.finded = true;
       }
     },
     hasSpecializationId: function hasSpecializationId() {
@@ -17595,14 +17595,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
       ;
       if (this.selectedPropriety === "Nome") return this.result.filter(function (doctor) {
-        return doctor.detail.first_name.toLowerCase() === _this2.searched || doctor.detail.first_name === _this2.searched;
-      }, this.finded = true);else this.finded = false;
+        return doctor.detail.first_name.toLowerCase() === _this2.searched.toLowerCase();
+      });
       if (this.selectedPropriety === "Cognome") return this.result.filter(function (doctor) {
-        return doctor.detail.last_name.toLowerCase() === _this2.searched || doctor.detail.last_name === _this2.searched;
-      }, this.finded = true);else this.finded = false;
+        return doctor.detail.last_name.toLowerCase() === _this2.searched.toLowerCase();
+      });
       if (this.selectedPropriety === "Città") return this.result.filter(function (doctor) {
-        return doctor.detail.address.toLowerCase() === _this2.searched || doctor.detail.address === _this2.searched;
-      }, this.finded = true);
+        return doctor.detail.address.toLowerCase() === _this2.searched.toLowerCase();
+      });
     },
     // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
     // In questo oggetto le proprietà sono la media del rating e il numero di review su cui è basata la media.
@@ -17715,7 +17715,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 35:
                 _this4.fetching = false;
                 _this4.showBtn = true;
-              case 37:
+                _this4.finded = true;
+              case 38:
               case "end":
                 return _context.stop();
             }
@@ -18777,8 +18778,8 @@ var render = function render() {
       }
     }, [_vm._v("\n                                                Recensioni\n                                            ")])], 1)])])])]);
   }), 0) : _c("div", {
-    staticClass: "my-3"
-  }, [_c("h1", [_vm._v(" Nessun risultato ha soddisfatto i parametri di ricerca ")])])])]) : _c("AppLoader")], 1)])], 1);
+    staticClass: "my-5 p-3 mx-auto px-5 text-center alert alert-info"
+  }, [_vm._v("\n                        Nessun risultato trovato... \n                    ")])])]) : _c("AppLoader")], 1)])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

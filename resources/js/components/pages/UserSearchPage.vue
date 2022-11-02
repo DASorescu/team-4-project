@@ -110,8 +110,8 @@
 
                         </div>
 
-                        <div v-else class="my-3">
-                           <h1> Nessun risultato ha soddisfatto i parametri di ricerca </h1> 
+                        <div v-else class="my-5 p-3 mx-auto px-5 text-center alert alert-info">
+                            Nessun risultato trovato... 
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@ export default {
             showBtn: false,
             showBar: false,
             //ha trovato i risultati?
-            finded: true,
+            finded: null,
 
             //campi del form
             searched: "",
@@ -174,8 +174,8 @@ export default {
             return this.finded = true;
         },
         postCallHasResult(){
-            if (this.result.includes(!this.searched)){
-                return this.finded = false;
+            if (this.result.includes(this.searched)){
+                return this.finded = true
             }
         },
             
@@ -192,23 +192,23 @@ export default {
             if ((this.selectedPropriety === "") || (this.searched === "")) { return this.result };
             if (this.selectedPropriety === "Nome")
                 return this.result.filter(
-                    (doctor) => doctor.detail.first_name.toLowerCase() === this.searched || doctor.detail.first_name === this.searched,
-                this.finded = true
-                );
-            else this.finded = false
+                    (doctor) => doctor.detail.first_name.toLowerCase() === this.searched.toLowerCase(),
+            );
+            
             if (this.selectedPropriety === "Cognome")
                 return this.result.filter(
-                    (doctor) => doctor.detail.last_name.toLowerCase() === this.searched || doctor.detail.last_name === this.searched,
-                this.finded = true
+                    (doctor) => doctor.detail.last_name.toLowerCase() === this.searched.toLowerCase(),
+                
                     );
-            else this.finded = false
+            
             if (this.selectedPropriety === "Città")
                 return this.result.filter(
-                    (doctor) => doctor.detail.address.toLowerCase() === this.searched || doctor.detail.address === this.searched,
-                this.finded = true
-                );
-            
+                    (doctor) => doctor.detail.address.toLowerCase() === this.searched.toLowerCase(),
+                    );
         },
+                    
+                    
+            
 
         // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
         // In questo oggetto le proprietà sono la media del rating e il numero di review su cui è basata la media.
@@ -282,6 +282,7 @@ export default {
             
             this.showBtn = true;
 
+            this.finded = true;
         },
 
         // faccio una chiamata per avere i dettagli  di un dottore
