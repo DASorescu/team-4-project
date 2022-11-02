@@ -12,8 +12,9 @@
           </figure>
           <div class="info">
             <p>{{ user.first_name }} {{ user.last_name }}</p>
-            <span>Specializzazioni:</span
-            ><span
+            <span><strong>SPECIALIZZAZIONI</strong></span>
+            <font-awesome-icon class="arrow bounce ml-2" icon="fa-solid fa-arrow-right" />
+            <span
               v-for="specialization in specializations.slice(0, 3)"
               :key="specialization.id"
             >
@@ -25,10 +26,12 @@
       <!-- INFO BANNER -->
       <div id="info-banner">
         <ul>
-          <li><a href="#">Informazioni generali</a></li>
-          <li><a href="#">Indirizzo</a></li>
-          <li><a href="#">Curriculum</a></li>
-          <li><a href="#">Tariffe</a></li>
+          <li><a href="#info">Informazioni generali</a></li>
+          <li><a href="#address">Indirizzo</a></li>
+          <li><a href="#cv">Curriculum</a></li>
+          <li><a href="#rates">Tariffe</a></li>
+          <li><a href="#message">Invia un messaggio</a></li>
+          <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
       <!-- INFO -->
@@ -37,9 +40,9 @@
           <strong>Indirizzo</strong>
           <h5>F-Medical Group</h5>
           <font-awesome-icon icon="fa-solid fa-house" /> {{ user.city_address }}
-          <div>{{ user.address }}</div>
         </div>
         <div class="contacts">
+          <a name="info"></a>
           <div id="hours">
             <strong>Orari e contatti</strong>
             <div>
@@ -47,7 +50,7 @@
               <font-awesome-icon icon="fa-solid fa-clock" /> 7:30 - 18:30
             </div>
           </div>
-          <div>
+          <div class="text-center">
             <strong>Recapito telefonico</strong>
             <div class="mt-2">
               <font-awesome-icon icon="fa-solid fa-phone" class="mr-2" /> {{ user.phone }}
@@ -60,6 +63,7 @@
       </div>
       <!-- PRESENTATION -->
       <div class="user-page-details">
+        <a name="cv"></a>
         <h4><font-awesome-icon icon="fa-solid fa-file" /> Il Curriculum</h4>
         <hr />
         <p>
@@ -72,7 +76,10 @@
       </div>
       <!-- RATES -->
       <div class="user-page-details">
-        <h4><font-awesome-icon icon="fa-solid fa-euro-sign" /> Le tariffe</h4>
+        <h4>
+          <a name="rates"></a>
+          <font-awesome-icon icon="fa-solid fa-euro-sign" /> Le tariffe
+        </h4>
         <hr />
         <div class="d-flex align-items-center justify-content-between">
           <h5 class="mb-2">Prima visita specialistica</h5>
@@ -88,6 +95,7 @@
       </div>
       <!-- FAQ -->
       <div class="user-page-details">
+        <a name="faq"></a>
         <h4 class="mb-5 question">
           <font-awesome-icon icon="fa-solid fa-info" /> Domande Frequenti
         </h4>
@@ -119,6 +127,7 @@
       </div>
       <div class="user-page-details">
         <!-- invio messaggi -->
+        <a name="message"></a>
         <NewMessage :doctor-id="'' + user.id" @submitted="messageSubmitted" />
       </div>
       <section
@@ -127,7 +136,7 @@
       >
         <router-link
           class="btn btn-success mr-2"
-          :to="{ name: 'reviews', params: { id: user.id } }"
+          :to="{ name: 'reviews', params: { userId: user.id } }"
         >
           <font-awesome-icon icon="fa-solid fa-pen-to-square" /> Scrivi una recensione
         </router-link>
@@ -227,6 +236,33 @@ export default {
         font-weight: 800;
       }
     }
+
+    .arrow {
+      width: 40px;
+      height: 20px;
+      color: #fff;
+      margin-right: 20px;
+      line-height: 40px;
+    }
+    .bounce {
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateX(0);
+      }
+      40% {
+        transform: translateX(30px);
+      }
+      60% {
+        transform: translateX(15px);
+      }
+    }
   }
 
   #info-banner {
@@ -254,6 +290,7 @@ export default {
     .address {
       width: 40%;
       padding: 20px 0;
+      text-align: center;
     }
 
     .contacts {
@@ -263,11 +300,13 @@ export default {
 
       #hours {
         padding-right: 4.5rem;
+        text-align: center;
       }
     }
 
     strong {
       color: #31a0f5;
+      font-size: 1.5rem;
     }
   }
 
