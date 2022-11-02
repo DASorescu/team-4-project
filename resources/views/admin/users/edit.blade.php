@@ -49,29 +49,32 @@
                                 <div class="form-group">
                                     <label for="username">Username *</label>
                                     <input type="text" class="form-control" id="username" name="username"
-                                    @if ($user->name) value="{{ old('username', $user->name) }}" @endif
-                                    required minlength="3">
+                                        @if ($user->name) value="{{ old('username', $user->name) }}" @endif
+                                        required minlength="3">
+                                    <div class="d-none" id="user-error">Username non valido!</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="first_name">Nome *</label>
                                     <input type="text" class="form-control" id="first_name" name="first_name"
-                                    @if ($user->userDetail->first_name) value="{{ old('first_name', $user->userDetail->first_name) }}" @endif
-                                    required minlength="3">
+                                        @if ($user->userDetail->first_name) value="{{ old('first_name', $user->userDetail->first_name) }}" @endif
+                                        required minlength="3">
+                                    <div class="d-none" id="fn-error">Nome non valido!</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="last_name">Cognome *</label>
                                     <input type="text" class="form-control" id="last_name" name="last_name"
-                                    @if ($user->userDetail->last_name) value="{{ old('last_name', $user->userDetail->last_name) }}" @endif
-                                    required minlength="3">
+                                        @if ($user->userDetail->last_name) value="{{ old('last_name', $user->userDetail->last_name) }}" @endif
+                                        required minlength="3">
+                                    <div class="d-none" id="ln-error">Cognome non valido!</div>
                                 </div>
                                 {{-- modale specializzazioni --}}
                                 <div class="btn-group my-2" id="specializations">
                                     {{-- <button class="btn btn-light dropdown-toggle w-75" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false"> --}}
-                                        <button type="button" class="btn btn-light dropdown-toggle w-75 text-left" data-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
-                                            Specializzazioni *
-                                        </button>
-                                        <div class="dropdown-menu overflow-auto spec-menu">
-                                            @foreach ($all_specialization as $specialization)
+                                    <button type="button" id="spec-button" class="btn btn-light dropdown-toggle w-75 text-left" data-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+                                         Specializzazioni *
+                                    </button>
+                                    <div class="dropdown-menu w-100 overflow-auto spec-menu">
+                                        @foreach ($all_specialization as $specialization)
                                             <div class="form-check form-check-inline d-flex align-items-center p-2 dropdown-item spec-checkbox w-100">
                                                 <input 
                                                 class="form-check-input"
@@ -88,19 +91,21 @@
                                             </div>
                                             @endforeach
                                         </div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="address">Città*</label>
-                                        <select name="address" id="address" class="form-control">
-                                            <option value="">Scegli la Città</option>
-                                            @foreach (config('cities') as $city)
+                                    <div class="d-none" id="spec-error">Scegli almeno una specializzazione!</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="address">Città *</label>
+                                    <select name="address" id="address" class="form-control">
+                                        <option value="">Scegli la Città *</option>
+                                        @foreach (config('cities') as $city)
                                             <option value="{{ $city }}"
                                             {{ old('address', $user->userDetail->address) == $city ? 'selected' : '' }}>
                                             {{ $city }}
                                         </option>
                                         @endforeach
                                     </select>
+                                    <div class="d-none" id="address-error">Scegli una città!</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Numero di telefono</label>
@@ -144,10 +149,10 @@
                     </div>
                 @endif
             </div>
-        @else()
+        @else
             <div class="h-100 d-flex justify-content-center align-items-center">
-                <h2 class="text-danger">Devi completare il profilo Dr. Strunz!</h2>
+                <h2 class="text-danger">Devi completare il profilo!</h2>
             </div>
-    @endif()
+    @endif
 </div>
 @endsection
