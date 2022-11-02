@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container bg-white">
 
     @if ( session( 'message' ) )
     <div class="alert alert-info">

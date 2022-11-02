@@ -11005,3 +11005,94 @@ body {
   background-color: #fff;
 }
 
+body {
+  background: rgb(116, 192, 236);
+}
+
+#app {
+  padding: 2rem;
+}
+
+#app #backend-navbar {
+  position: relative;
+  height: 90vh;
+  width: 5vw;
+  display: flex;
+  flex-direction: column;
+  background: rgb(4, 124, 243);
+  border-radius: 20px;
+  transform: translateX(22px);
+}
+
+#app #backend-navbar a {
+  color: #fff;
+}
+
+#app #backend-navbar #navbarSupportedContent {
+  height: 100%;
+}
+
+#app #backend-navbar #navbarSupportedContent ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#app #backend-navbar #navbarSupportedContent ul li {
+  color: #fff;
+  text-align: center;
+}
+
+#app #backend-navbar #navbarSupportedContent ul li a {
+  padding: 10px 10px;
+  font-size: 10px;
+}
+
+#app #backend-navbar #navbarSupportedContent ul li:hover {
+  background: #e9ecef;
+}
+
+#app #backend-navbar #logout {
+  position: absolute;
+  bottom: 20px;
+}
+
+#app #main {
+  width: 80vw;
+  overflow-y: auto;
+  padding-left: 20px;
+  background: #f2f2f2;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+#app #main #profileImg {
+  transform: translateX(50px);
+}
+
+#app #main .edit-card {
+  background: #f2f2f2;
+  border: none;
+}
+
+#app #main .edit-card #specializations {
+  width: 45%;
+  height: 40px;
+  transform: translateY(23px);
+}
+
+#app #main .edit-card .form-group {
+  width: 45%;
+}
+
+#app #main .buttons {
+  position: absolute;
+  bottom: -300px;
+  right: 0;
+}
+
+#app #main .cv-preview {
+  transform: translate(480px, -54px);
+  padding-left: 48px;
+}
+

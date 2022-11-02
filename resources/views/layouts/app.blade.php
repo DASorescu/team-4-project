@@ -43,84 +43,60 @@
 
 <body>
     <div id="app">
-        @if (!Route::is('admin.users.create'))
-            <nav class="navbar navbar-expand-md navbar-light bg-white shadow">
-                <div class="container">
-                    <a class="navbar-brand" href="/">
-                        {{ config('app.name', 'BDoctors') }}
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+        <div class="d-flex container">
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            @if (!Route::is('admin.users.create'))
+            <nav class="navbar navbar-expand-md" id="backend-navbar">
+                <div class="container flex-column h-100">
+                    <a class="navbar-brand text-center mx-0 my-4 " href="/">
+                        BD
+                    </a>
+                
+                    <div  id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
+                            {{-- <li class="nav-item">
+                                <a class="nav-link" @if (Route::is('admin.services.index'))  @endif
+                                href="{{ route('admin.services.index') }}">Servizi</a>
+                            </li> --}}
                             <li class="nav-item">
                                 <a class="nav-link" @if (Route::is('admin.services.index'))  @endif
-                                    href="{{ route('admin.services.index') }}">Servizi</a>
+                                href="{{ route('admin.users.reviews.index') }}"><i class="fa-solid fa-pen-to-square fa-2x"></i></a>
                             </li>
+                            
                             <li class="nav-item">
                                 <a class="nav-link" @if (Route::is('admin.services.index'))  @endif
-                                    href="{{ route('admin.users.reviews.index') }}">Reviews</a>
+                                href="{{ route('admin.users.messages.index') }}"><i class="fa-solid fa-message fa-2x"></i></a>
                             </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" @if (Route::is('admin.services.index'))  @endif
-                                    href="{{ route('admin.users.messages.index') }}">Messages</a>
-                            </li>
-                        </ul>
-
-                        <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
-                            @guest
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }}
-                                    </a>
+                            <li class="nav-item">
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item d-flex justify-content-between"
-                                            href="{{ route('admin.users.edit') }}">
-                                            Profile <i class="fa-solid fa-user"></i>
-                                        </a>
-
-                                        <a class="dropdown-item d-flex justify-content-between"
-                                            href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                            <i class="fa-solid fa-right-from-bracket"></i>
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                            @endguest
+                                <a  class="nav-link" href="{{ route('admin.users.edit') }}">
+                                    <i class="fa-solid fa-user fa-2x"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item" id="logout">
+                                <a  class="nav-link" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                        
+                                        <i class="fa-solid fa-right-from-bracket fa-2x"></i>
+                                </a>
+                                        
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    class="d-none">
+                                    @csrf
+                                </form>
+                            </li>                            
                         </ul>
                     </div>
                 </div>
             </nav>
-        @endif
-        <main class="py-4">
-            @yield('content')
-        </main>
+            @endif
+            <main class="py-4" id="main">
+                @yield('content')
+            </main>
+        </div>
     </div>
 </body>
 

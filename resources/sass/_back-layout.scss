@@ -1,0 +1,92 @@
+body {
+    background: rgb(116, 192, 236);
+}
+
+#app {
+    padding: 2rem;
+
+    #backend-navbar {
+        position: relative;
+        height: 90vh;
+        width: 5vw;
+        display: flex;
+        flex-direction: column;
+        background: rgb(4, 124, 243);
+        border-radius: 20px;
+        transform: translateX(22px);
+
+        a {
+            color: #fff;
+        }
+
+        #navbarSupportedContent {
+            height: 100%;
+
+            ul {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+
+                li {
+                    color: #fff;
+                    text-align: center;
+
+                    a {
+                        padding: 10px 10px;
+                        font-size: 10px;
+
+                    }
+
+                    &:hover {
+                        background: #e9ecef;
+                    }
+                }
+            }
+        }
+
+        #logout {
+            position: absolute;
+            bottom: 20px;
+
+        }
+    }
+
+    #main {
+        width: 80vw;
+        overflow-y: auto;
+        padding-left: 20px;
+        background: #f2f2f2;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+
+        #profileImg {
+            transform: translateX(50px);
+        }
+
+        .edit-card {
+            background: #f2f2f2;
+            border: none;
+
+            #specializations {
+                width: 45%;
+                height: 40px;
+                transform: translateY(23px);
+            }
+
+            .form-group {
+                width: 45%;
+            }
+        }
+
+        .buttons {
+            position: absolute;
+            bottom: -300px;
+            right: 0;
+        }
+
+        .cv-preview {
+            transform: translate(480px, -54px);
+            padding-left: 48px;
+        }
+    }
+}
