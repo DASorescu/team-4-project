@@ -17134,47 +17134,41 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       isActive: false,
-      searchedSpec: '',
-      specializations: ['Allergologia ed immunologia clinica', 'Malattie dell’apparato respiratorio', 'Malattie dell’apparato digerente', 'Medicina d’emergenza-urgenza', 'Dermatologia e venereologia', 'Malattie infettive e tropicali', 'Scienza dell’alimentazione', 'Oncologia medica', 'Medicina termale', 'Medicina interna', 'Reumatologia', 'Ematologia', 'Nefrologia', 'Geriatria']
+      searchedSpec: ''
     };
+  },
+  props: {
+    specializations: Array
   },
   computed: {
     filteredSpecs: function filteredSpecs() {
       var _this = this;
-      if (!this.searchedSpec) this.filteredSpecs = this.specializations;
-      return this.filteredSpecs = this.specializations.filter(function (specialization) {
-        return specialization.toLowerCase().includes(_this.searchedSpec.toLowerCase());
+      if (!this.searchedSpec) return this.specializations;
+      return this.specializations.filter(function (specialization) {
+        return specialization.label.toLowerCase().includes(_this.searchedSpec.toLowerCase());
       });
     }
   },
   methods: {
     toggleClass: function toggleClass() {
-      // al click toggolo la classe active sul div con classe Wrapper
-      // const wrapper = document.querySelector('.wrapper')
-      // wrapper.classList.toggle('active')
       this.isActive = !this.isActive;
     },
-    // addSpecialization() {
-    //     this.specializations.forEach(spec => {
-    //         // const wrapper = document.querySelector('.wrapper')
-    //         const options = document.getElementById('options-list')
-    //         // adding options inside select
-    //         let li = `<li onclick="updateName(this)">${spec}</li>`
-    //         // console.log(options)
-    //         options.insertAdjacentHTML('beforeend', li);
-    //     });
-    // },
-    updateName: function updateName(event) {
+    setFilteredSpecs: function setFilteredSpecs(event) {
       this.searchedSpec = event.target.innerText;
       var button = document.getElementById('spec');
       button.innerText = this.searchedSpec;
       this.searchedSpec = '';
       this.isActive = !this.isActive;
+      console.log(event.target);
+      // alla ricerca eseguo un push del parametro specialization name in search bar 
+      this.$router.push({
+        name: "search",
+        params: {
+          specializationName: event.target.innerText
+        }
+      });
     }
   }
-  // mounted() {
-  //     this.addSpecialization();
-  // }
 });
 
 /***/ }),
@@ -17326,19 +17320,25 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _CustomSelect_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../CustomSelect.vue */ "./resources/js/components/CustomSelect.vue");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'MainJumbo',
   data: function data() {
     return {
       specializations: [],
-      currentSpecialization: 0
+      currentSpecialization: 0,
+      isActive: false
     };
   },
   computed: {
     hasSpecializations: function hasSpecializations() {
       return this.specializations.length > 0;
     }
+  },
+  components: {
+    customSelect: _CustomSelect_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   methods: {
     getSpecializations: function getSpecializations() {
@@ -17351,9 +17351,13 @@ __webpack_require__.r(__webpack_exports__);
       this.$router.push({
         name: "search",
         params: {
-          specializationId: this.currentSpecialization
+          specializationName: this.currentSpecialization
         }
       });
+    },
+    toggleClass: function toggleClass() {
+      // al click toggolo la classe active sul div con classe Wrapper
+      this.isActive = !this.isActive;
     }
   },
   mounted: function mounted() {
@@ -17621,8 +17625,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     hasResult: function hasResult() {
       return this.result.length > 0 && !this.fetching;
     },
-    hasSpecializationId: function hasSpecializationId() {
-      return typeof this.$route.params.specializationId === 'number' && !Number.isNaN(this.$route.params.specializationId);
+    hasSpecializationName: function hasSpecializationName() {
+      return this.$route.params.specializationName;
     },
     filteredDoctors: function filteredDoctors() {
       var _this = this;
@@ -17657,7 +17661,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   methods: {
-    searchDoctorBySpecialization: function searchDoctorBySpecialization(specializationId) {
+    searchDoctorBySpecialization: function searchDoctorBySpecialization(specializationName) {
       var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var res, _iterator2, _step2, doctor, doctorDetail, doctorReviews;
@@ -17665,7 +17669,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(specializationId === 0)) {
+                if (specializationName) {
                   _context.next = 3;
                   break;
                 }
@@ -17673,7 +17677,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 return _context.abrupt("return");
               case 3:
                 _context.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/search/' + specializationId);
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/search/' + specializationName);
               case 5:
                 res = _context.sent;
                 _this2.fetching = true;
@@ -17745,11 +17749,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   mounted: function mounted() {
-    if (typeof this.$route.params.specializationId === 'string') {
-      this.$route.params.specializationId = parseInt(this.$route.params.specializationId);
-    }
-    if (this.hasSpecializationId) {
-      this.searchDoctorBySpecialization(this.$route.params.specializationId);
+    if (this.hasSpecializationName) {
+      this.searchDoctorBySpecialization(this.$route.params.specializationName);
     }
   }
 });
@@ -17941,9 +17942,9 @@ var render = function render() {
     return _c("li", {
       key: "spec-" + i,
       on: {
-        click: _vm.updateName
+        click: _vm.setFilteredSpecs
       }
-    }, [_vm._v("\n                    " + _vm._s(specialization))]);
+    }, [_vm._v("\n                    " + _vm._s(specialization.label))]);
   }), 0)])])]);
 };
 var staticRenderFns = [];
@@ -18313,39 +18314,14 @@ var render = function render() {
     staticClass: "container d-flex align-items-center h-100 p-relative"
   }, [_c("div", {
     staticClass: "select-wrapper"
-  }, [_vm._m(0), _vm._v(" "), _c("div", [_vm.hasSpecializations ? _c("select", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.currentSpecialization,
-      expression: "currentSpecialization"
-    }],
+  }, [_vm._m(0), _vm._v(" "), _c("div", [_c("customSelect", {
+    attrs: {
+      specializations: _vm.specializations
+    },
     on: {
-      change: [function ($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-          return o.selected;
-        }).map(function (o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val;
-        });
-        _vm.currentSpecialization = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
-      }, function ($event) {
-        return _vm.search();
-      }]
+      click: _vm.toggleClass
     }
-  }, [_c("option", {
-    domProps: {
-      value: 0
-    }
-  }, [_vm._v("Seleziona una specializzazione")]), _vm._v(" "), _vm._l(_vm.specializations, function (specialization) {
-    return _c("option", {
-      key: "spec-" + specialization.id,
-      domProps: {
-        value: specialization.id,
-        selected: _vm.currentSpecialization === specialization.id
-      }
-    }, [_vm._v("\n                        " + _vm._s(specialization.label) + "\n                    ")]);
-  })], 2) : _vm._e()])])])]);
+  })], 1)])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -23154,7 +23130,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&display=swap);", ""]);
 
 // module
-exports.push([module.i, "#main {\n  font-family: \"Comfortaa\", cursive;\n  height: 100vh;\n  background-color: rgb(36, 113, 255);\n}\n#main .wrapper {\n  width: 370px;\n  margin: 0px auto;\n  padding-top: 130px;\n}\n#main .select-btn,\n#main .options li {\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n}\n#main .select-btn {\n  height: 55px;\n  padding: 0 20px;\n  background: #fff;\n  border-radius: 7px;\n  justify-content: space-between;\n}\n#main .select-btn .icon {\n  transition: transform 300ms linear;\n}\n#main .wrapper.active .select-btn .icon {\n  transform: rotate(-180deg);\n}\n#main .content {\n  display: none;\n  padding: 20px;\n  margin-top: 15px;\n  border-radius: 7px;\n  background: #fff;\n}\n#main .wrapper.active .content {\n  display: block;\n}\n#main .content .search {\n  position: relative;\n}\n#main .content .search input {\n  height: 50px;\n  width: 100%;\n  border-radius: 5px;\n  font-size: 17px;\n  padding: 0 15px 0 40px;\n  outline: none;\n  border: 1px solid #b3b3b3;\n}\n#main .search .i {\n  top: 15px;\n  color: #999;\n  height: 20px;\n  vertical-align: middle;\n  left: 15px;\n  position: absolute;\n}\n#main span {\n  font-size: 20px;\n}\n#main .content .options {\n  margin-top: 10px;\n  max-height: 250px;\n  overflow-y: auto;\n}\n#main .options {\n  padding: 0;\n}\n#main .options::-webkit-scrollbar {\n  width: 7px;\n}\n#main .options::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#main .options::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#main .options li {\n  height: 50px;\n  padding: 0 13px;\n  font-size: 17px;\n  border-radius: 5px;\n}\n#main .options li:hover {\n  background: #f2f2f2;\n}", ""]);
+exports.push([module.i, "#main {\n  font-family: \"Comfortaa\", cursive;\n}\n#main .wrapper {\n  width: 580px;\n  margin: 0px auto;\n  position: relative;\n}\n#main .select-btn,\n#main .options li {\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n}\n#main .select-btn {\n  height: 55px;\n  padding: 0 20px;\n  background: #fff;\n  border-radius: 7px;\n  justify-content: space-between;\n}\n#main .select-btn .icon {\n  transition: transform 300ms linear;\n}\n#main .wrapper.active .select-btn .icon {\n  transform: rotate(-180deg);\n}\n#main .content {\n  display: none;\n  border-radius: 7px;\n  background: #fff;\n}\n#main .wrapper.active .content {\n  display: block;\n  position: absolute;\n  padding: 25px 20px;\n  top: 65px;\n  width: 580px;\n}\n#main .content .search {\n  position: relative;\n}\n#main .content .search input {\n  height: 50px;\n  width: 100%;\n  border-radius: 5px;\n  font-size: 17px;\n  padding: 0 15px 0 40px;\n  outline: none;\n  border: 1px solid #b3b3b3;\n}\n#main .search .i {\n  top: 15px;\n  color: #999;\n  height: 20px;\n  vertical-align: middle;\n  left: 15px;\n  position: absolute;\n}\n#main span {\n  font-size: 20px;\n}\n#main .content .options {\n  margin-top: 10px;\n  max-height: 250px;\n  overflow-y: auto;\n}\n#main .options {\n  padding: 0;\n}\n#main .options::-webkit-scrollbar {\n  width: 7px;\n}\n#main .options::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#main .options::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#main .options li {\n  height: 50px;\n  padding: 0 13px;\n  font-size: 17px;\n  border-radius: 5px;\n}\n#main .options li:hover {\n  background: #f2f2f2;\n}", ""]);
 
 // exports
 
@@ -23249,7 +23225,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#jumbotron[data-v-48ec172a] {\n  height: 400px;\n  background: linear-gradient(#0451CB, #3884ff);\n}\n#jumbotron .select-wrapper .select-heading img[data-v-48ec172a] {\n  position: absolute;\n  top: 20px;\n  left: 20px;\n  width: 150px;\n}\n#jumbotron .select-wrapper h2[data-v-48ec172a] {\n  transform: translate(140px, -20px);\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar {\n  width: 7px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a] {\n  outline: none;\n  padding: 10px;\n  height: 50px;\n  width: 700px;\n  border-radius: 10px;\n  border-width: 3px;\n  border-color: #fff;\n  transform: translateY(-28px);\n}\n#jumbotron select[data-v-48ec172a]:hover {\n  border-color: rgb(48, 158, 227);\n}", ""]);
+exports.push([module.i, "#jumbotron[data-v-48ec172a] {\n  height: 400px;\n  background: linear-gradient(#0451CB, #3884ff);\n}\n#jumbotron .select-wrapper .select-heading img[data-v-48ec172a] {\n  position: absolute;\n  top: 46px;\n  left: 11px;\n  width: 150px;\n}\n#jumbotron .select-wrapper h2[data-v-48ec172a] {\n  transform: translate(130px, 15px);\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar {\n  width: 7px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a] {\n  outline: none;\n  padding: 10px;\n  height: 50px;\n  width: 700px;\n  border-radius: 10px;\n  border-width: 3px;\n  border-color: #fff;\n  transform: translateY(-28px);\n}\n#jumbotron select[data-v-48ec172a]:hover {\n  border-color: rgb(48, 158, 227);\n}", ""]);
 
 // exports
 

@@ -11,8 +11,8 @@
                     <input type="text" v-model="searchedSpec" placeholder="search">
                 </div>
                 <ul class="options" id="options-list">
-                    <li v-for="(specialization, i) in filteredSpecs" :key="'spec-' + i" @click="updateName">
-                        {{ specialization }}</li>
+                    <li v-for="(specialization, i) in filteredSpecs" :key="'spec-' + i" @click="setFilteredSpecs" >
+                        {{ specialization.label }}</li>
                 </ul>
             </div>
         </div>
@@ -25,67 +25,38 @@ export default {
         return {
             isActive: false,
             searchedSpec: '',
-            specializations: [
-
-                'Allergologia ed immunologia clinica',
-                'Malattie dell’apparato respiratorio',
-                'Malattie dell’apparato digerente',
-                'Medicina d’emergenza-urgenza',
-                'Dermatologia e venereologia',
-                'Malattie infettive e tropicali',
-                'Scienza dell’alimentazione',
-                'Oncologia medica',
-                'Medicina termale',
-                'Medicina interna',
-                'Reumatologia',
-                'Ematologia',
-                'Nefrologia',
-                'Geriatria',
-            ]
 
 
 
         }
     },
+    props: {
+        specializations: Array,
+    },
     computed: {
         filteredSpecs() {
-            if (!this.searchedSpec) this.filteredSpecs = this.specializations;
-            return this.filteredSpecs = this.specializations.filter((specialization) => specialization.toLowerCase().includes(this.searchedSpec.toLowerCase()));
+            if (!this.searchedSpec) return this.specializations;
+            return this.specializations.filter((specialization) => specialization.label.toLowerCase().includes(this.searchedSpec.toLowerCase()));
         }
     },
     methods: {
         toggleClass() {
-            // al click toggolo la classe active sul div con classe Wrapper
-            // const wrapper = document.querySelector('.wrapper')
-            // wrapper.classList.toggle('active')
             this.isActive = !this.isActive
         },
-        // addSpecialization() {
-        //     this.specializations.forEach(spec => {
-
-        //         // const wrapper = document.querySelector('.wrapper')
-        //         const options = document.getElementById('options-list')
-        //         // adding options inside select
-        //         let li = `<li onclick="updateName(this)">${spec}</li>`
-        //         // console.log(options)
-        //         options.insertAdjacentHTML('beforeend', li);
-
-        //     });
-
-
-        // },
-        updateName(event) {
+        setFilteredSpecs(event) {
             this.searchedSpec = event.target.innerText
             const button = document.getElementById('spec');
             button.innerText = this.searchedSpec;
             this.searchedSpec = ''
             this.isActive = !this.isActive
+            console.log(event.target)
+            // alla ricerca eseguo un push del parametro specialization name in search bar 
+            this.$router.push({ name: "search", params: { specializationName:event.target.innerText } });
         },
+        
 
     },
-    // mounted() {
-    //     this.addSpecialization();
-    // }
+
 }
 
 
@@ -96,51 +67,52 @@ export default {
 
 #main {
     font-family: 'Comfortaa', cursive;
-    height: 100vh;
-    background-color: rgb(36, 113, 255);
-
     .wrapper {
-        width: 370px;
+    width: 580px;
         margin: 0px auto;
-        padding-top: 130px;
+        position: relative;
+    
     }
-
+    
     .select-btn,
     .options li {
         cursor: pointer;
         display: flex;
         align-items: center;
-
+    
     }
-
+    
     .select-btn {
         height: 55px;
         padding: 0 20px;
         background: #fff;
         border-radius: 7px;
         justify-content: space-between;
-
+    
         .icon {
             transition: transform 300ms linear;
         }
     }
-
+    
     .wrapper.active .select-btn .icon {
         transform: rotate(-180deg);
     }
-
+    
     .content {
         display: none;
-        padding: 20px;
-        margin-top: 15px;
+    
         border-radius: 7px;
         background: #fff;
-
-
+    
+    
     }
-
+    
     .wrapper.active .content {
         display: block;
+        position: absolute;
+        padding: 25px 20px;
+        top: 65px;
+        width: 580px;
     }
 
     .content .search {

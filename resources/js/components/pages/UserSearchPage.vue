@@ -57,9 +57,8 @@ export default {
         hasResult() {
             return this.result.length > 0 && !this.fetching
         },
-        hasSpecializationId() {
-            return typeof this.$route.params.specializationId === 'number' &&
-                !Number.isNaN(this.$route.params.specializationId)
+        hasSpecializationName() {
+            return this.$route.params.specializationName
         },
         filteredDoctors() {
             if (!this.selectedAddress) return this.result;
@@ -83,13 +82,13 @@ export default {
         }
     },
     methods: {
-        async searchDoctorBySpecialization(specializationId) {
-            if (specializationId === 0) {
+        async searchDoctorBySpecialization(specializationName) {
+            if (!specializationName) {
                 this.result = [];
                 return
             }
             // richiedo una ricerca per specializzazione, ottengo tutti i dottori che hanno quella specializzazione.
-            const res = await axios.get('/api/search/' + specializationId)
+            const res = await axios.get('/api/search/' + specializationName)
             this.fetching = true
             if (Array.isArray(res.data)) {
                 // ciclo sui dottori che ho ottenuto
@@ -128,11 +127,8 @@ export default {
         },
     },
     mounted() {
-        if (typeof this.$route.params.specializationId === 'string') {
-            this.$route.params.specializationId = parseInt(this.$route.params.specializationId)
-        }
-        if (this.hasSpecializationId) {
-            this.searchDoctorBySpecialization(this.$route.params.specializationId);
+        if (this.hasSpecializationName) {
+            this.searchDoctorBySpecialization(this.$route.params.specializationName);
         }
     }
 }

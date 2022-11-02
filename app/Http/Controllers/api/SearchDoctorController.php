@@ -35,10 +35,12 @@ class SearchDoctorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($specialization_id)
+    public function show($specialization_label)
     {
+        $specialization = Specialization::where('label', $specialization_label)->first();
         // cerco la specializzazione richiesta e restituisco i dottori con la specializzazione richiesta
-        return response()->json(Specialization::find($specialization_id)->users);
+        if(!$specialization) return response('Not Found', 404);
+        return response()->json($specialization->users);
     }
 
     /**
