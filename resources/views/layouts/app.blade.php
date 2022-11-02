@@ -13,13 +13,13 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     @if (Route::is('register'))
-    <script src="{{ asset('js/register_validation.js') }}" defer></script>
+        <script src="{{ asset('js/register_validation.js') }}" defer></script>
     @endif
     @if (Route::is('admin.users.create'))
-    <script src="{{ asset('js/create_validation.js') }}" defer></script>
+        <script src="{{ asset('js/create_validation.js') }}" defer></script>
     @endif
     @if (Route::is('admin.users.edit'))
-    <script src="{{ asset('js/edit_validation.js') }}" defer></script>
+        <script src="{{ asset('js/edit_validation.js') }}" defer></script>
     @endif
 
 
@@ -43,84 +43,61 @@
 
 <body>
     <div id="app">
-        @if (!Route::is('admin.users.create'))
-            <nav class="navbar navbar-expand-md navbar-light bg-white shadow">
-                <div class="container">
-                    <a class="navbar-brand" href="{{ route('admin.users.edit') }}">
-                        {{ config('app.name', 'BDoctors') }}
+        <div class="d-flex container">
+
+            @if (!Route::is('admin.users.create'))
+            <nav class="navbar navbar-expand-md" id="backend-navbar">
+                <div class="container flex-column h-100">
+                    <a class="navbar-brand text-center mx-0 my-4 " href="/">
+                        BD
                     </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" @if (Route::is('admin.services.index'))  @endif
+                    @auth
+                        <div  id="navbarSupportedContent">
+                            <!-- Left Side Of Navbar -->
+                            <ul class="navbar-nav mr-auto">
+                                {{-- <li class="nav-item">
+                                    <a class="nav-link" @if (Route::is('admin.services.index'))  @endif
                                     href="{{ route('admin.services.index') }}">Servizi</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" @if (Route::is('admin.services.index'))  @endif
-                                    href="{{ route('admin.users.reviews.index') }}">Reviews</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" @if (Route::is('admin.services.index'))  @endif
-                                    href="{{ route('admin.users.messages.index') }}">Messages</a>
-                            </li>
-                        </ul>
-
-                        <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
-                            <!-- Authentication Links -->
-                            @guest
+                                </li> --}}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" @if (Route::is('admin.services.index'))  @endif
+                                    href="{{ route('admin.users.reviews.index') }}"><i class="fa-solid fa-pen-to-square fa-2x"></i></a>
                                 </li>
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }}
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link" @if (Route::is('admin.services.index'))  @endif
+                                    href="{{ route('admin.users.messages.index') }}"><i class="fa-solid fa-message fa-2x"></i></a>
+                                </li>
+                                <!-- Authentication Links -->
+                                <li class="nav-item">
+
+                                    <a  class="nav-link" href="{{ route('admin.users.edit') }}">
+                                        <i class="fa-solid fa-user fa-2x"></i>
                                     </a>
-
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item d-flex justify-content-between"
-                                            href="{{ route('admin.users.edit') }}">
-                                            Profile <i class="fa-solid fa-user"></i>
-                                        </a>
-
-                                        <a class="dropdown-item d-flex justify-content-between"
-                                            href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                            <i class="fa-solid fa-right-from-bracket"></i>
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
                                 </li>
-                            @endguest
-                        </ul>
-                    </div>
+                                <li class="nav-item" id="logout">
+                                    <a  class="nav-link" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                            
+                                            <i class="fa-solid fa-right-from-bracket fa-2x"></i>
+                                    </a>
+                                            
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
+                                        @csrf
+                                    </form>
+                                </li>                            
+                            </ul>
+                        </div>
+                    @endauth
                 </div>
             </nav>
-        @endif
-        <main class="py-4">
-            @yield('content')
-        </main>
+            @endif
+            <main class="py-4" id="main">
+                @yield('content')
+            </main>
+        </div>
     </div>
 </body>
 

@@ -22,7 +22,7 @@
                     <li>Puoi usare la nostra <strong>App multipiattaforma</strong> dedicata ai Medici</li>
                     <li>Hai il nostro <strong>staff</strong> sempre <strong>disponibile</strong> ad aiutarti</li>
                 </ul>
-                <a href="http://127.0.0.1:8000/register" class="btn btn-lg">
+                <a href="/register" class="btn btn-lg">
                     Inscriviti a BDoctors
                     <font-awesome-icon icon="fa-solid fa-arrow-right " />
                 </a>

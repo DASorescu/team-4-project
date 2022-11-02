@@ -13,8 +13,8 @@
             <div class="footer-section d-flex justify-content-end align-items-center my-2">
                 <img src="../../../../public/img/contatti_dottori.png" alt="">
                 <div class="d-flex  align-items-start flex-column p-2">
-                    <a href="http://127.0.0.1:8000/register">Sei un Medico?</a>
-                    <a href="http://127.0.0.1:8000/register"><strong>Inscriviti ora!</strong></a>
+                    <a href="/register">Sei un Medico?</a>
+                    <a href="/register"><strong>Inscriviti ora!</strong></a>
                 </div>
             </div>
             <div class="footer-section ">

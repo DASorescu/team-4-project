@@ -94,10 +94,15 @@
 /***/ (function(module, exports) {
 
 var form = document.getElementById('creation-form');
-var user_name = document.getElementById('first_name');
-var user_surname = document.getElementById('last_name');
-var address_choice = document.getElementById('address');
+var firstName = document.getElementById('first_name');
+var fnError = document.getElementById('fn-error');
+var lastName = document.getElementById('last_name');
+var lnError = document.getElementById('ln-error');
+var addressChoice = document.getElementById('address');
+var addressError = document.getElementById('address-error');
 var specializations = document.querySelectorAll('.form-check-input');
+var specBtn = document.getElementById('spec-button');
+var specError = document.getElementById('spec-error');
 function checkTheBox() {
   var flag = 0;
   for (var i = 0; i < specializations.length; i++) {
@@ -114,17 +119,27 @@ function checkTheBox() {
 // todo specialization validation!!
 
 form.addEventListener('submit', function (e) {
-  var isValid = false;
-  if (!isNaN(user_name.value) || user_name.value.length < 3 || user_name.value.length > 30) {
-    alert('Inserire un nome valido.');
-  } else if (!isNaN(user_surname.value) || user_surname.value.length < 3 || user_surname.value.length > 30) {
-    alert('Inserire un cognome valido.');
-  } else if (!address_choice.value) {
-    alert('Devi scegliere una citta');
-  } else if (!checkTheBox()) {
-    alert("Devi selezionare almeno una specializzazione");
-  } else isValid = true;
-  if (!isValid) e.preventDefault();
+  var fnValid = true;
+  var lnValid = true;
+  var addressValid = true;
+  var specValid = true;
+  if (!isNaN(firstName.value) || firstName.value.length < 3 || firstName.value.length > 30) {
+    fnValid = false;
+  }
+  if (!isNaN(lastName.value) || lastName.value.length < 3 || lastName.value.length > 30) {
+    lnValid = false;
+  }
+  if (!addressChoice.value) {
+    addressValid = false;
+  }
+  if (!checkTheBox()) {
+    specValid = false;
+  }
+  fnValid ? (fnError.className = 'd-none', firstName.classList.remove('border-danger')) : (fnError.className = 'text-danger', firstName.classList.add('border-danger'));
+  lnValid ? (lnError.className = 'd-none', lastName.classList.remove('border-danger')) : (lnError.className = 'text-danger', lastName.classList.add('border-danger'));
+  addressValid ? (addressError.className = 'd-none', addressChoice.classList.remove('border-danger')) : (addressError.className = 'text-danger', addressChoice.classList.add('border-danger'));
+  specValid ? (specError.className = 'd-none', specBtn.classList.remove('border-danger')) : (specError.className = 'text-danger', specBtn.classList.add('border-danger'));
+  if (!(fnValid && lnValid && addressValid && specValid)) e.preventDefault();
 });
 
 /***/ }),
@@ -136,7 +151,7 @@ form.addEventListener('submit', function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/emanueledezotti/team-4-project/resources/js/validations/create_validation.js */"./resources/js/validations/create_validation.js");
+module.exports = __webpack_require__(/*! C:\laravel\team-4-project\resources\js\validations\create_validation.js */"./resources/js/validations/create_validation.js");
 
 
 /***/ })

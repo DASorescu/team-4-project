@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use App\User;
 use App\Models\UserDetail;
 use Illuminate\Support\Arr;
-use Faker\Generator as Faker;
+use Faker\Factory as Faker;
 
 
 class UserDetailSeeder extends Seeder
@@ -16,16 +16,19 @@ class UserDetailSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+        $faker = Faker::create('it_IT');
         $user_ids = User::pluck('id')->toArray();
         $cities = config('cities');
 
         foreach($user_ids as $id){
             $user_detail = new UserDetail();
             $user_detail->user_id = $id;
+            $user_detail->image = $faker->imageUrl(350,350);
             $user_detail->first_name = $faker->firstName();
             $user_detail->last_name = $faker->lastName();
             $user_detail->phone = $faker->phoneNumber();
             $user_detail->image = $faker->imageUrl(360, 360, 'people', true);
+            $user_detail->city_address = $faker->address();
             if(config('cities')){
                 $user_detail->address = Arr::random($cities);   
             }else{

@@ -95,21 +95,35 @@
 
 var form = document.getElementById('form');
 var username = document.getElementById('name');
+var userError = document.getElementById('user-error');
 var email = document.getElementById('email');
+var emailError = document.getElementById('email-error');
 var password = document.getElementById('password');
+var pwError = document.getElementById('pw-error');
 var passwordConfirm = document.getElementById('password-confirm');
+var pwCheckError = document.getElementById('pwcheck-error');
 form.addEventListener('submit', function (e) {
-  var isValid = false;
+  var userValid = true;
+  var emailValid = true;
+  var pwValid = true;
+  var pwCheckValid = true;
   if (!isNaN(username.value) || username.value.length < 3 || username.value.length > 30) {
-    alert('Inserire un username valido.');
-  } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
-    alert('La mail inserita non è valida.');
-  } else if (password.value.length < 8) {
-    alert('La password deve essere di almeno 8 caratteri.');
-  } else if (passwordConfirm.value !== password.value) {
-    alert('Le password non corrispondono.');
-  } else isValid = true;
-  if (!isValid) e.preventDefault();
+    userValid = false;
+  }
+  if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
+    emailValid = false;
+  }
+  if (password.value.length < 8) {
+    pwValid = false;
+  }
+  if (passwordConfirm.value !== password.value) {
+    pwCheckValid = false;
+  }
+  userValid ? (userError.className = 'd-none', username.classList.remove('border-danger')) : (userError.className = 'text-danger', username.classList.add('border-danger'));
+  emailValid ? (emailError.className = 'd-none', email.classList.remove('border-danger')) : (emailError.className = 'text-danger', email.classList.add('border-danger'));
+  pwValid ? (pwError.className = 'd-none', password.classList.remove('border-danger')) : (pwError.className = 'text-danger', password.classList.add('border-danger'));
+  pwCheckValid ? (pwCheckError.className = 'd-none', passwordConfirm.classList.remove('border-danger')) : (pwCheckError.className = 'text-danger', passwordConfirm.classList.add('border-danger'));
+  if (!(userValid && emailValid && pwValid && pwCheckValid)) e.preventDefault();
 });
 
 /***/ }),
@@ -121,7 +135,7 @@ form.addEventListener('submit', function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/emanueledezotti/team-4-project/resources/js/validations/register_validation.js */"./resources/js/validations/register_validation.js");
+module.exports = __webpack_require__(/*! C:\laravel\team-4-project\resources\js\validations\register_validation.js */"./resources/js/validations/register_validation.js");
 
 
 /***/ })
