@@ -37382,7 +37382,7 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-house"
     }
-  }), _vm._v(" Via dei Mille 64,"), _c("div", [_vm._v(_vm._s(_vm.user.address))])], 1), _vm._v(" "), _c("div", {
+  }), _vm._v(" " + _vm._s(_vm.user.city_address)), _c("div", [_vm._v(_vm._s(_vm.user.address))])], 1), _vm._v(" "), _c("div", {
     staticClass: "contacts"
   }, [_c("div", {
     attrs: {
@@ -37422,7 +37422,7 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-arrow-right"
     }
-  }), _vm._v(" Qual'é l'indirizzo?")], 1), _vm._v(" "), _c("p", [_vm._v("- L'indirizzo è " + _vm._s(_vm.user.address) + ".")])]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", [_c("div", {
+  }), _vm._v(" Qual'é l'indirizzo?")], 1), _vm._v(" "), _c("p", [_vm._v("- L'indirizzo è " + _vm._s(_vm.user.city_address) + "," + _vm._s(_vm.user.address) + ".")])]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", [_c("div", {
     staticClass: "question"
   }, [_c("font-awesome-icon", {
     attrs: {

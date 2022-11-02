@@ -30,7 +30,7 @@
                 <div class="address">
                     <strong>Indirizzo</strong>
                     <h5>F-Medical Group</h5>
-                    <font-awesome-icon icon="fa-solid fa-house" /> Via dei Mille 64,<div>{{user.address}}</div>
+                    <font-awesome-icon icon="fa-solid fa-house" /> {{user.city_address}}<div>{{user.address}}</div>
                 </div>
                 <div class="contacts">
                     <div id="hours">
@@ -64,7 +64,7 @@
               <h4 class="mb-5 question"><font-awesome-icon icon="fa-solid fa-info" /> Domande Frequenti</h4>
               <div>
                 <div class="question"><font-awesome-icon icon="fa-solid fa-arrow-right" /> Qual'é l'indirizzo?</div>
-                <p>- L'indirizzo è {{user.address}}.</p>
+                <p>- L'indirizzo è {{user.city_address}},{{user.address}}.</p>
               </div>
               <hr>
               <div>
