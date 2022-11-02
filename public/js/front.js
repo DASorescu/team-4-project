@@ -37587,7 +37587,7 @@ var render = function render() {
       to: {
         name: "reviews",
         params: {
-          id: _vm.user.id
+          userId: _vm.user.id
         }
       }
     }

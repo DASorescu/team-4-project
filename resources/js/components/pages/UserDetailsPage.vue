@@ -127,7 +127,7 @@
       >
         <router-link
           class="btn btn-success mr-2"
-          :to="{ name: 'reviews', params: { id: user.id } }"
+          :to="{ name: 'reviews', params: { userId: user.id } }"
         >
           <font-awesome-icon icon="fa-solid fa-pen-to-square" /> Scrivi una recensione
         </router-link>

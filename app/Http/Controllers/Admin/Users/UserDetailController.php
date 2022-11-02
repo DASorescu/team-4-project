@@ -28,7 +28,7 @@ class UserDetailController extends Controller
         // passo user anziché solo i dettagli in caso di form più complessi in futuro
         $user = Auth::user();
         $all_specialization = Specialization::all();
-        
+
         return view('admin.users.edit', compact('user', 'all_specialization'));
     }
 
@@ -63,11 +63,11 @@ class UserDetailController extends Controller
             ],
             [
                 'city.in_array' => 'Città non valida',
-                
+
                 'cv' => "Il formato del file dev'essere PDF",
-                
+
                 'image' => "Il formato dev'essere jpg,jpeg o png",
-                
+
                 'username' => 'Il nome utente deve contenere almeno 3 caratteri',
 
                 'specs.required' => 'Devi selezionare almeno una specializzazione ',
@@ -75,6 +75,7 @@ class UserDetailController extends Controller
         );
 
         $data = $request->all();
+        $detail->update($data);
 
 
         // qui uso $detail per le operazioni, come detto sopra
@@ -107,8 +108,7 @@ class UserDetailController extends Controller
             User::find($user->id)->specializations()->sync($data['specs']);
         }
 
-        $detail->update($data);
-
+        $detail->save();
 
         // alla fine passo comunque lo user intero per eventuali paginazioni complesse del profilo (reviews ecc)
         return redirect()->route('admin.users.edit')->with('message', 'Dati modificati con successo');
@@ -116,7 +116,7 @@ class UserDetailController extends Controller
 
     public function store(Request $request)
     {
-       
+
 
         $user = Auth::user();
         $cities = config('cities');
