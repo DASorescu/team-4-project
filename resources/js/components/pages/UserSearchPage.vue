@@ -73,14 +73,11 @@
                                         alt="" />
                                 </div>
                                 <div class="col-5">
-                                    <div>Specializzazioni: 
-                                        <ul>
-                                            <li v-for="specialization in doctor.specializations" :key="specialization.id">
-                                            {{doctor.specializations.label}}
-                                            </li>  
 
-                                        </ul>
-                                    </div>
+                                    <ul class="list-group pb-3">
+                                        <li v-for="specialization in printSp" :key="specialization.id" :class="'list-group-item list-group-item-'+specialization.color">{{specialization.label}}</li>
+                                    </ul>
+                                    
                                     <p>Città: {{ doctor.detail.address }} <span class="ml-1">  <font-awesome-icon icon="fa-solid fa-location-dot" /> </span> </p>
                                     <p> Telefono:{{ doctor.detail.phone }} <span class="ml-1">  <font-awesome-icon icon="fa-solid fa-phone"/> </span>   </p>   
                                 </div>
@@ -150,6 +147,14 @@ export default {
         };
     },
     computed: {
+
+        printSp(){
+        
+          return this.specializations.filter(specialization => specialization.id === this.currentSpecialization)
+        },
+
+        
+
 
         hasSpecializations() {
             return this.specializations.length > 0

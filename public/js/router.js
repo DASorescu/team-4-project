@@ -2390,6 +2390,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }, _defineProperty(_ref, "proprieties", ['Nome', 'Cognome', 'Città']), _defineProperty(_ref, "isLoading", false), _defineProperty(_ref, "result", []), _defineProperty(_ref, "cities", []), _defineProperty(_ref, "fetching", false), _defineProperty(_ref, "selectedAddress", ""), _ref;
   },
   computed: {
+    printSp: function printSp() {
+      var _this = this;
+      return this.specializations.filter(function (specialization) {
+        return specialization.id === _this.currentSpecialization;
+      });
+    },
     hasSpecializations: function hasSpecializations() {
       return this.specializations.length > 0;
     },
@@ -2400,27 +2406,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return typeof this.$route.params.specializationId === "number" && !Number.isNaN(this.$route.params.specializationId);
     },
     filteredDoctors: function filteredDoctors() {
-      var _this = this;
+      var _this2 = this;
       if (!this.selectedAddress) return this.result;
       return this.result.filter(function (doctor) {
-        return doctor.detail.address === _this.selectedAddress;
+        return doctor.detail.address === _this2.selectedAddress;
       });
     },
     //Filtro per Proprietà oggetto dottore, va ottimizzato
     filteredDoctorsBy: function filteredDoctorsBy() {
-      var _this2 = this;
+      var _this3 = this;
       if (this.selectedPropriety === "" && this.searched === "") {
         return this.result;
       }
       ;
       if (this.selectedPropriety === "Nome") return this.result.filter(function (doctor) {
-        return doctor.detail.first_name === _this2.searched;
+        return doctor.detail.first_name === _this3.searched;
       });
       if (this.selectedPropriety === "Cognome") return this.result.filter(function (doctor) {
-        return doctor.detail.last_name === _this2.searched;
+        return doctor.detail.last_name === _this3.searched;
       });
       if (this.selectedPropriety === "Città") return this.result.filter(function (doctor) {
-        return doctor.detail.address === _this2.searched;
+        return doctor.detail.address === _this3.searched;
       });
     },
     // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
@@ -2451,21 +2457,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: (_methods = {
     //fai una chiamata per restituire tutte le specializzazioni disponibili
     getSpecializations: function getSpecializations() {
-      var _this3 = this;
+      var _this4 = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/specializations/').then(function (res) {
-        _this3.specializations = res.data;
+        _this4.specializations = res.data;
       });
     },
     searchDoctorBySpecialization: function searchDoctorBySpecialization(specializationId) {
-      var _this4 = this;
+      var _this5 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var res, _iterator2, _step2, doctor, doctorDetail, doctorReviews, doctorSpecializations;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this4.showBar = _this4.showBtn = false;
-                _this4.result = [];
+                _this5.showBar = _this5.showBtn = false;
+                _this5.result = [];
                 if (!(specializationId === 0)) {
                   _context.next = 4;
                   break;
@@ -2476,7 +2482,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/search/' + specializationId);
               case 6:
                 res = _context.sent;
-                _this4.fetching = true;
+                _this5.fetching = true;
                 if (!Array.isArray(res.data)) {
                   _context.next = 35;
                   break;
@@ -2492,20 +2498,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 }
                 doctor = _step2.value;
                 _context.next = 16;
-                return _this4.getDoctorDetails(doctor.id);
+                return _this5.getDoctorDetails(doctor.id);
               case 16:
                 doctorDetail = _context.sent.data;
                 _context.next = 19;
-                return _this4.getDoctorReviews(doctor.id);
+                return _this5.getDoctorReviews(doctor.id);
               case 19:
                 doctorReviews = _context.sent.data;
                 _context.next = 22;
-                return _this4.getDoctorSpecializations(doctor.id);
+                return _this5.getDoctorSpecializations(doctor.id);
               case 22:
                 doctorSpecializations = _context.sent.data;
                 // compongo un oggetto più semplice da usare con i dettagli.
                 // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
-                _this4.result.push({
+                _this5.result.push({
                   id: doctor.id,
                   email: doctor.email,
                   detail: doctorDetail,
@@ -2514,8 +2520,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   specializations: doctorSpecializations
                 });
                 //cosi non si ripetono le città :)
-                if (doctorDetail.address !== null && !_this4.cities.includes(doctorDetail.address)) {
-                  _this4.cities.push(doctorDetail.address);
+                if (doctorDetail.address !== null && !_this5.cities.includes(doctorDetail.address)) {
+                  _this5.cities.push(doctorDetail.address);
                 }
               case 25:
                 _context.next = 12;
@@ -2532,8 +2538,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _iterator2.f();
                 return _context.finish(32);
               case 35:
-                _this4.fetching = false;
-                _this4.showBtn = true;
+                _this5.fetching = false;
+                _this5.showBtn = true;
               case 37:
               case "end":
                 return _context.stop();
@@ -3523,11 +3529,14 @@ var render = function render() {
       }
     })]), _vm._v(" "), _c("div", {
       staticClass: "col-5"
-    }, [_c("div", [_vm._v("Specializzazioni: \n                                    "), _c("ul", _vm._l(doctor.specializations, function (specialization) {
+    }, [_c("ul", {
+      staticClass: "list-group pb-3"
+    }, _vm._l(_vm.printSp, function (specialization) {
       return _c("li", {
-        key: specialization.id
-      }, [_vm._v("\n                                        " + _vm._s(doctor.specializations.label) + "\n                                        ")]);
-    }), 0)]), _vm._v(" "), _c("p", [_vm._v("Città: " + _vm._s(doctor.detail.address) + " "), _c("span", {
+        key: specialization.id,
+        "class": "list-group-item list-group-item-" + specialization.color
+      }, [_vm._v(_vm._s(specialization.label))]);
+    }), 0), _vm._v(" "), _c("p", [_vm._v("Città: " + _vm._s(doctor.detail.address) + " "), _c("span", {
       staticClass: "ml-1"
     }, [_c("font-awesome-icon", {
       attrs: {
