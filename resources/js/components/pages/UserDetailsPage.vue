@@ -239,10 +239,11 @@ export default {
 
     .arrow {
       width: 40px;
-      height: 20px;
+      height: 40px;
       color: #fff;
       margin-right: 20px;
       line-height: 40px;
+      vertical-align: middle;
     }
     .bounce {
       animation: bounce 2s infinite;
