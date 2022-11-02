@@ -22189,11 +22189,12 @@ var render = function render() {
     staticClass: "doctor-info"
   }, [_c("div", {
     staticClass: "address"
-  }, [_c("strong", [_vm._v("Indirizzo")]), _vm._v(" "), _c("h5", [_vm._v("F-Medical Group")]), _vm._v(" "), _c("font-awesome-icon", {
+  }, [_vm._m(2), _vm._v(" "), _c("div", [_c("font-awesome-icon", {
+    staticClass: "text-center",
     attrs: {
       icon: "fa-solid fa-house"
     }
-  }), _vm._v(" " + _vm._s(_vm.user.city_address) + "\n      ")], 1), _vm._v(" "), _c("div", {
+  })], 1), _vm._v("\n        " + _vm._s(_vm.user.city_address) + "\n      ")]), _vm._v(" "), _c("div", {
     staticClass: "contacts"
   }, [_c("a", {
     attrs: {
@@ -22241,7 +22242,7 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-euro-sign"
     }
-  }), _vm._v(" Le tariffe\n      ")], 1), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("p", [_vm._v("\n        Le tariffe sono fornite a titolo indicativo dal professionista sanitario e\n        pertanto possono variare a seconda del tipo di trattamento effettuato, il numero\n        di visite e le eventuali prestazioni accessorie. In caso di supplementi, il\n        professionista si impegna ad avvertire il paziente prima di fornire le\n        prestazioni.\n      ")])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" Le tariffe\n      ")], 1), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._m(3), _vm._v(" "), _c("p", [_vm._v("\n        Le tariffe sono fornite a titolo indicativo dal professionista sanitario e\n        pertanto possono variare a seconda del tipo di trattamento effettuato, il numero\n        di visite e le eventuali prestazioni accessorie. In caso di supplementi, il\n        professionista si impegna ad avvertire il paziente prima di fornire le\n        prestazioni.\n      ")])]), _vm._v(" "), _c("div", {
     staticClass: "user-page-details"
   }, [_c("a", {
     attrs: {
@@ -22352,6 +22353,10 @@ var staticRenderFns = [function () {
       href: "#faq"
     }
   }, [_vm._v("FAQ")])])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", [_c("strong", [_vm._v("Indirizzo")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -22701,7 +22706,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#user-details main {\n  background-color: #eef2f7;\n}\n#user-details #main-banner {\n  height: 200px;\n  background-color: #31a0f5;\n}\n#user-details #main-banner .doctor-card {\n  display: flex;\n  margin-left: 100px;\n  padding-top: 20px;\n}\n#user-details #main-banner .doctor-card figure {\n  width: 150px;\n}\n#user-details #main-banner .doctor-card figure img {\n  border-radius: 50%;\n  border: 1px solid #fff;\n}\n#user-details #main-banner .doctor-card span {\n  padding-left: 20px;\n  color: #fff;\n  font-size: 1.2rem;\n}\n#user-details #main-banner .doctor-card p {\n  font-size: 1.8rem;\n  color: #fff;\n  padding-left: 15px;\n  padding-top: 10px;\n  font-weight: 800;\n}\n#user-details #main-banner .arrow {\n  width: 40px;\n  height: 20px;\n  color: #fff;\n  margin-right: 20px;\n  line-height: 40px;\n}\n#user-details #main-banner .bounce {\n  animation: bounce 2s infinite;\n}\n@keyframes bounce {\n0%, 20%, 50%, 80%, 100% {\n    transform: translateX(0);\n}\n40% {\n    transform: translateX(30px);\n}\n60% {\n    transform: translateX(15px);\n}\n}\n#user-details #info-banner {\n  height: 60px;\n  background-color: #fff;\n  border-bottom: 1px solid #dedede;\n}\n#user-details #info-banner ul {\n  display: flex;\n  padding-left: 100px;\n}\n#user-details #info-banner ul li {\n  font-style: 1.2rem;\n  padding: 20px 10px;\n  list-style-type: none;\n}\n#user-details .doctor-info {\n  display: flex;\n  margin: 0 auto;\n  width: 800px;\n  padding: 50px 0;\n}\n#user-details .doctor-info .address {\n  width: 40%;\n  padding: 20px 0;\n  text-align: center;\n}\n#user-details .doctor-info .contacts {\n  display: flex;\n  align-items: center;\n  margin-left: 30px;\n}\n#user-details .doctor-info .contacts #hours {\n  padding-right: 4.5rem;\n  text-align: center;\n}\n#user-details .doctor-info strong {\n  color: #31a0f5;\n  font-size: 1.5rem;\n}\n#user-details .user-page-details {\n  width: 800px;\n  background-color: #fff;\n  margin: 0 auto;\n  padding: 30px;\n  margin-bottom: 50px;\n}\n#user-details .user-page-details h5 {\n  text-align: center;\n  font-size: 1.5rem;\n}\n#user-details .user-page-details .question {\n  color: #0d2339;\n  font-size: 1.2rem;\n  font-weight: bold;\n}\n#user-details #buttons {\n  padding: 30px;\n}\n#user-details h3,\n#user-details h5 {\n  color: #003f5e;\n  font-weight: bold;\n  font-size: 1.5rem;\n  padding-bottom: 10px;\n}", ""]);
+exports.push([module.i, "#user-details main {\n  background-image: url(\"https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg\");\n  animation: scroll 100s linear infinite;\n}\n@keyframes scroll {\n100% {\n    background-position: 0 -2000px;\n}\n}\n#user-details #main-banner {\n  height: 200px;\n  background-color: #31a0f5;\n}\n#user-details #main-banner .doctor-card {\n  display: flex;\n  margin-left: 100px;\n  padding-top: 20px;\n}\n#user-details #main-banner .doctor-card figure {\n  width: 150px;\n}\n#user-details #main-banner .doctor-card figure img {\n  border-radius: 50%;\n  border: 1px solid #fff;\n}\n#user-details #main-banner .doctor-card span {\n  padding-left: 20px;\n  color: #fff;\n  font-size: 1.2rem;\n}\n#user-details #main-banner .doctor-card p {\n  font-size: 1.8rem;\n  color: #fff;\n  padding-left: 15px;\n  padding-top: 10px;\n  font-weight: 800;\n}\n#user-details #main-banner .arrow {\n  width: 40px;\n  height: 20px;\n  color: #fff;\n  margin-right: 20px;\n  line-height: 40px;\n}\n#user-details #main-banner .bounce {\n  animation: bounce 2s infinite;\n}\n@keyframes bounce {\n0%, 20%, 50%, 80%, 100% {\n    transform: translateX(0);\n}\n40% {\n    transform: translateX(30px);\n}\n60% {\n    transform: translateX(15px);\n}\n}\n#user-details #info-banner {\n  height: 60px;\n  background-color: #fff;\n  border-bottom: 1px solid #dedede;\n}\n#user-details #info-banner ul {\n  display: flex;\n  padding-left: 100px;\n}\n#user-details #info-banner ul li {\n  font-style: 1.2rem;\n  padding: 20px 10px;\n  list-style-type: none;\n}\n#user-details .doctor-info {\n  display: flex;\n  margin: 0 auto;\n  width: 800px;\n  padding: 50px 0;\n  color: #fff;\n  font-size: 1.1rem;\n}\n#user-details .doctor-info .address {\n  width: 40%;\n  padding: 20px 0;\n  text-align: center;\n  background-color: rgb(155, 208, 239);\n  opacity: 0.8;\n  border-radius: 10px;\n  padding: 10px;\n}\n#user-details .doctor-info .contacts {\n  display: flex;\n  align-items: center;\n  margin-left: 30px;\n  background-color: rgb(155, 208, 239);\n  opacity: 0.8;\n  border-radius: 10px;\n  padding: 10px;\n}\n#user-details .doctor-info .contacts #hours {\n  padding-right: 4.5rem;\n  text-align: center;\n}\n#user-details .doctor-info strong {\n  color: #31a0f5;\n  font-size: 1.5rem;\n}\n#user-details .user-page-details {\n  width: 800px;\n  background-color: #fff;\n  margin: 0 auto;\n  padding: 30px;\n  margin-bottom: 50px;\n}\n#user-details .user-page-details h5 {\n  text-align: center;\n  font-size: 1.5rem;\n}\n#user-details .user-page-details .question {\n  color: #0d2339;\n  font-size: 1.2rem;\n  font-weight: bold;\n}\n#user-details #buttons {\n  padding: 30px;\n}\n#user-details h3,\n#user-details h5 {\n  color: #003f5e;\n  font-weight: bold;\n  font-size: 1.5rem;\n  padding-bottom: 10px;\n}", ""]);
 
 // exports
 
