@@ -110,6 +110,7 @@ export default {
     .wrapper.active .content {
         display: block;
         position: absolute;
+        z-index: 2;
         padding: 25px 20px;
         top: 65px;
         width: 580px;

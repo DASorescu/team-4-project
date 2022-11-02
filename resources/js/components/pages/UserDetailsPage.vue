@@ -197,7 +197,7 @@ export default {
 
   #main-banner {
     height: 200px;
-    background-color: #31a0f5;
+    background: linear-gradient(#0451CB, 60%, #fff);
 
     .doctor-card {
       display: flex;
