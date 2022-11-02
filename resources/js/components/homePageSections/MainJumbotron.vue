@@ -7,13 +7,7 @@
                     <h2 class="text-white">Prenota online la tua visita medica</h2>
                 </div>
                 <div>
-                    <select v-if="hasSpecializations" v-model="currentSpecialization" @change="search()">
-                        <option :value="0">Seleziona una specializzazione</option>
-                        <option v-for="specialization in specializations" :key="'spec-' + specialization.id"
-                            :value="specialization.id" :selected="currentSpecialization === specialization.id">
-                            {{ specialization.label }}
-                        </option>
-                    </select>
+                    <customSelect :specializations="specializations" @click="toggleClass"/>
                 </div>
 
             </div>
@@ -23,18 +17,23 @@
 
 <script>
 import axios from 'axios';
+import customSelect from '../CustomSelect.vue';
 export default {
     name: 'MainJumbo',
     data() {
         return {
             specializations: [],
             currentSpecialization: 0,
+            isActive: false,
         };
     },
     computed: {
         hasSpecializations() {
             return this.specializations.length > 0;
         },
+    },
+    components: {
+        customSelect,
     },
     methods: {
         getSpecializations() {
@@ -44,8 +43,12 @@ export default {
                 });
         },
         search() {
-            this.$router.push({ name: "search", params: { specializationId: this.currentSpecialization } });
-        }
+            this.$router.push({ name: "search", params: { specializationName: this.currentSpecialization } });
+        },
+        toggleClass() {
+            // al click toggolo la classe active sul div con classe Wrapper
+            this.isActive = !this.isActive
+        },
     },
     mounted() {
         this.getSpecializations();
@@ -55,21 +58,21 @@ export default {
 <style lang="scss" scoped>
 #jumbotron {
 
-    height: 210px;
+    height: 450px;
     background: linear-gradient(#0451CB, #3884ff);
 
     .select-wrapper {
         .select-heading {
             img {
                 position: absolute;
-                top: 20px;
-                left: 20px;
+                top: 46px;
+                left: 11px;
                 width: 150px;
             }
         }
 
         h2 {
-            transform: translate(140px, -20px);
+            transform: translate(130px, 15px);
         }
     }
 
@@ -92,13 +95,14 @@ export default {
         padding: 10px;
         height: 50px;
         width: 700px;
-        border-radius: 10px;
-        border-width: 3px;
-        border-color: #fff;
-        transform: translateY(-28px);
-
-        &:hover {
-
+            border-radius: 10px;
+                border-width: 3px;
+                border-color: #fff;
+                transform: translateY(-28px);
+                // transition: width 1000ms ease;
+            
+                &:hover {
+                    // width: 700px;
             border-color: rgb(48, 158, 227);
         }
     }
