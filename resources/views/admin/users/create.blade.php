@@ -76,7 +76,7 @@
 
 
            <footer class="d-flex align-items-center justify-content-between">
-                <div>
+                <div class="col-12">
     
                     <button class="btn btn-success" type="submit">
                         {{-- Salve -> Salva --}}
