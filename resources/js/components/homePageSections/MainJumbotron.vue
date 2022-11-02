@@ -1,6 +1,6 @@
 <template>
     <div id="jumbotron">
-        <div class="container d-flex  align-items-end h-100 p-relative">
+        <div class="container d-flex align-items-center h-100 p-relative">
             <div class="select-wrapper">
                 <div class="select-heading">
                     <img src="../../../../public/img/doctor.png" alt="doc">
@@ -58,7 +58,7 @@ export default {
 <style lang="scss" scoped>
 #jumbotron {
 
-    height: 450px;
+    height: 400px;
     background: linear-gradient(#0451CB, #3884ff);
 
     .select-wrapper {

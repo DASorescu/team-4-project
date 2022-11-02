@@ -136,7 +136,7 @@
       >
         <router-link
           class="btn btn-success mr-2"
-          :to="{ name: 'reviews', params: { id: user.id } }"
+          :to="{ name: 'reviews', params: { userId: user.id } }"
         >
           <font-awesome-icon icon="fa-solid fa-pen-to-square" /> Scrivi una recensione
         </router-link>
@@ -206,7 +206,7 @@ export default {
 
   #main-banner {
     height: 200px;
-    background-color: #31a0f5;
+    background: linear-gradient(#0451CB, 60%, #fff);
 
     .doctor-card {
       display: flex;
