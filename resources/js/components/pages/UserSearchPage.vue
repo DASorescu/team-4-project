@@ -54,57 +54,64 @@
                 <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
                     <div class="row">
 
-                        <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctorsBy"
-                            :key="'res-' + doctor.id">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <div>
-                                   <h4>Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}</h4> 
-                                   
-                                </div>
-
-                                <div>
-                                    <router-link class="btn btn-primary d-flex align-items-center"
-                                        :to="{ name: 'user-detail', params: { id: doctor.id } }">
-                                        Profilo
-                                    </router-link>
-                                </div>
-                            </div>
-                            <div class="card-body d-flex align-items-center">
-                                <div class="mr-2 col-4">
-                                    <input class="img-fluid w-75 rounded-circle" type="image" :src="doctor.detail.image"
-                                        alt="" />
-                                </div>
-                                <div class="col-4">
-
-                                    <div class="mb-3" v-if="currentSpecialization > 0" >
-                                        <span v-for="specialization in printSp" :key="specialization.id" :class="'badge badge-'+specialization.color">{{specialization.label}}</span>
-                                        <span class="ml-1">  <font-awesome-icon icon="fa-solid fa-user-doctor" /> </span> 
-                                    </div>
-                                    <p>Città: {{ doctor.detail.address }} <span class="ml-1">  <font-awesome-icon icon="fa-solid fa-location-dot" /> </span> </p>
-                                    <p> Telefono:{{ doctor.detail.phone }} <span class="ml-1">  <font-awesome-icon icon="fa-solid fa-phone"/> </span>   </p>   
-                                    
-                                </div>
-                                <div col="col-4">
-                                    <p>Email: {{ doctor.email }}</p>
+                        <div v-if="finded">
+                            <div id="my-card" class="card shadow w-100 my-2" v-for="doctor in filteredDoctorsBy"
+                                :key="'res-' + doctor.id">
+                                <div class="card-header d-flex justify-content-between align-items-center">
                                     <div>
-                                        Rating: 
-                                        <span>
-                                           <RateReview :value="averageReviews[doctor.id].avg" />
-                                           {{"(" + averageReviews[doctor.id].count + " " + "recensione )"}} 
-                                        </span>    
-                                        
-
-                                        <div class="my-3">
-                                            <router-link class="btn btn-sm btn-success"
-                                                :to="{ name: 'reviews', params: { userId: doctor.id } }">
-                                                Recensioni
-                                            </router-link>
-
-                                        </div>
+                                       <h4>Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}</h4> 
+                                       
                                     </div>
-                                    
+    
+                                    <div>
+                                        <router-link class="btn btn-primary d-flex align-items-center"
+                                            :to="{ name: 'user-detail', params: { id: doctor.id } }">
+                                            Profilo
+                                        </router-link>
+                                    </div>
+                                </div>
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="mr-2 col-3">
+                                        <input class="img-fluid w-75 border border-white rounded-circle" type="image" :src="doctor.detail.image"
+                                            alt="" />
+                                    </div>
+                                    <div class="col-5 border-left border-white">
+    
+                                        <div class="mb-3" v-if="currentSpecialization > 0" >
+                                            <span v-for="specialization in printSp" :key="specialization.id" :class="'badge badge-'+specialization.color">{{specialization.label}}</span>
+                                            <span class="ml-1">  <font-awesome-icon icon="fa-solid fa-user-doctor" /> </span> 
+                                        </div>
+                                        <p>Città: {{ doctor.detail.address }} <span class="ml-1">  <font-awesome-icon icon="fa-solid fa-location-dot" /> </span> </p>
+                                        <p> Telefono:{{ doctor.detail.phone }} <span class="ml-1">  <font-awesome-icon icon="fa-solid fa-phone"/> </span>   </p>   
+                                        
+                                    </div>
+                                    <div class="col-4 border-left border-white">
+                                        <p>Email: {{ doctor.email }}</p>
+                                        <div>
+                                            Rating: 
+                                            <span>
+                                               <RateReview :value="averageReviews[doctor.id].avg" />
+                                               {{"(" + averageReviews[doctor.id].count + " " + "recensione )"}} 
+                                            </span>    
+                                            
+    
+                                            <div class="my-3">
+                                                <router-link class="btn btn-sm btn-success"
+                                                    :to="{ name: 'reviews', params: { userId: doctor.id } }">
+                                                    Recensioni
+                                                </router-link>
+    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
                                 </div>
                             </div>
+
+                        </div>
+
+                        <div v-else class="my-3">
+                           <h1> Nessun risultato ha soddisfatto i parametri di ricerca </h1> 
                         </div>
                     </div>
                 </div>
@@ -136,8 +143,13 @@ export default {
             currentSpecialization: 0,
             specializations: [],
 
+            //visibilità varie sezioni
             showBtn: false,
             showBar: false,
+            //ha trovato i risultati?
+            finded: true,
+
+            //campi del form
             searched: "",
             selectedPropriety: "",
             proprieties: ['Nome', 'Cognome', 'Città'],
@@ -150,21 +162,23 @@ export default {
         };
     },
     computed: {
-
         printSp(){
-        
-          return this.specializations.filter(specialization => specialization.id === this.currentSpecialization)
+            return this.specializations.filter(specialization => specialization.id === this.currentSpecialization)
         },
-
         
-
-
         hasSpecializations() {
             return this.specializations.length > 0
         },
         hasResult() {
-            return this.result.length > 0 && !this.fetching;
+            this.postCallHasResult;
+            return this.finded = true;
         },
+        postCallHasResult(){
+            if (this.result.includes(!this.searched)){
+                return this.finded = false;
+            }
+        },
+            
         hasSpecializationId() {
             return (
                 typeof this.$route.params.specializationId === "number" &&
@@ -172,36 +186,35 @@ export default {
             );
         },
 
-        filteredDoctors() {
-            if (!this.selectedAddress) return this.result;
-            return this.result.filter(
-                (doctor) => doctor.detail.address === this.selectedAddress
-            );
-        },
-
         //Filtro per Proprietà oggetto dottore, va ottimizzato
         filteredDoctorsBy() {
-
-            if ((this.selectedPropriety === "") && (this.searched === "")) { return this.result };
+            
+            if ((this.selectedPropriety === "") || (this.searched === "")) { return this.result };
             if (this.selectedPropriety === "Nome")
                 return this.result.filter(
-                    (doctor) => doctor.detail.first_name === this.searched.toUpperCase()
+                    (doctor) => doctor.detail.first_name.toLowerCase() === this.searched || doctor.detail.first_name === this.searched,
+                this.finded = true
                 );
+            else this.finded = false
             if (this.selectedPropriety === "Cognome")
                 return this.result.filter(
-                    (doctor) => doctor.detail.last_name === this.searched.toUpperCase()
-                );
+                    (doctor) => doctor.detail.last_name.toLowerCase() === this.searched || doctor.detail.last_name === this.searched,
+                this.finded = true
+                    );
+            else this.finded = false
             if (this.selectedPropriety === "Città")
                 return this.result.filter(
-                    (doctor) => doctor.detail.address === this.searched.toUpperCase()
+                    (doctor) => doctor.detail.address.toLowerCase() === this.searched || doctor.detail.address === this.searched,
+                this.finded = true
                 );
+            
         },
 
         // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
         // In questo oggetto le proprietà sono la media del rating e il numero di review su cui è basata la media.
         averageReviews() {
             const res = {};
-            for (const doctor of this.filteredDoctors) {
+            for (const doctor of this.filteredDoctorsBy) {
                 res[doctor.id] = {
                     count: doctor.reviews.length,
                     // faccio una chiamata per avere i dettagli  di un dottore
@@ -233,6 +246,7 @@ export default {
             // richiedo una ricerca per specializzazione, ottengo tutti i dottori che hanno quella specializzazione.
             const res = await axios.get('http://localhost:8000/api/search/' + specializationId)
             this.fetching = true
+
             if (Array.isArray(res.data)) {
                 // ciclo sui dottori che ho ottenuto
                 for (const doctor of res.data) {
@@ -265,7 +279,9 @@ export default {
                 }
             }
             this.fetching = false;
-            this.showBtn = true
+            
+            this.showBtn = true;
+
         },
 
         // faccio una chiamata per avere i dettagli  di un dottore
@@ -307,6 +323,12 @@ export default {
 
 #a-research{
     background-color: rgb(5,81,203);
+}
+
+#my-card{
+    font-size: 16px;
+    background-color: rgb(5,81,203);
+    color: white;
 }
 
 </style>

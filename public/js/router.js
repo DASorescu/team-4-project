@@ -2383,8 +2383,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //id di partenza nel v-model select su cui ciclare
       currentSpecialization: 0,
       specializations: [],
+      //visibilità varie sezioni
       showBtn: false,
       showBar: false,
+      //ha trovato i risultati?
+      finded: true,
+      //campi del form
       searched: "",
       selectedPropriety: ""
     }, _defineProperty(_ref, "proprieties", ['Nome', 'Cognome', 'Città']), _defineProperty(_ref, "isLoading", false), _defineProperty(_ref, "result", []), _defineProperty(_ref, "cities", []), _defineProperty(_ref, "fetching", false), _defineProperty(_ref, "selectedAddress", ""), _ref;
@@ -2400,40 +2404,39 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.specializations.length > 0;
     },
     hasResult: function hasResult() {
-      return this.result.length > 0 && !this.fetching;
+      this.postCallHasResult;
+      return this.finded = true;
+    },
+    postCallHasResult: function postCallHasResult() {
+      if (this.result.includes(!this.searched)) {
+        return this.finded = false;
+      }
     },
     hasSpecializationId: function hasSpecializationId() {
       return typeof this.$route.params.specializationId === "number" && !Number.isNaN(this.$route.params.specializationId);
     },
-    filteredDoctors: function filteredDoctors() {
-      var _this2 = this;
-      if (!this.selectedAddress) return this.result;
-      return this.result.filter(function (doctor) {
-        return doctor.detail.address === _this2.selectedAddress;
-      });
-    },
     //Filtro per Proprietà oggetto dottore, va ottimizzato
     filteredDoctorsBy: function filteredDoctorsBy() {
-      var _this3 = this;
-      if (this.selectedPropriety === "" && this.searched === "") {
+      var _this2 = this;
+      if (this.selectedPropriety === "" || this.searched === "") {
         return this.result;
       }
       ;
       if (this.selectedPropriety === "Nome") return this.result.filter(function (doctor) {
-        return doctor.detail.first_name === _this3.searched.toUpperCase();
-      });
+        return doctor.detail.first_name.toLowerCase() === _this2.searched || doctor.detail.first_name === _this2.searched;
+      }, this.finded = true);else this.finded = false;
       if (this.selectedPropriety === "Cognome") return this.result.filter(function (doctor) {
-        return doctor.detail.last_name === _this3.searched.toUpperCase();
-      });
+        return doctor.detail.last_name.toLowerCase() === _this2.searched || doctor.detail.last_name === _this2.searched;
+      }, this.finded = true);else this.finded = false;
       if (this.selectedPropriety === "Città") return this.result.filter(function (doctor) {
-        return doctor.detail.address === _this3.searched.toUpperCase();
-      });
+        return doctor.detail.address.toLowerCase() === _this2.searched || doctor.detail.address === _this2.searched;
+      }, this.finded = true);
     },
     // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
     // In questo oggetto le proprietà sono la media del rating e il numero di review su cui è basata la media.
     averageReviews: function averageReviews() {
       var res = {};
-      var _iterator = _createForOfIteratorHelper(this.filteredDoctors),
+      var _iterator = _createForOfIteratorHelper(this.filteredDoctorsBy),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -2457,21 +2460,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: (_methods = {
     //fai una chiamata per restituire tutte le specializzazioni disponibili
     getSpecializations: function getSpecializations() {
-      var _this4 = this;
+      var _this3 = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/specializations/').then(function (res) {
-        _this4.specializations = res.data;
+        _this3.specializations = res.data;
       });
     },
     searchDoctorBySpecialization: function searchDoctorBySpecialization(specializationId) {
-      var _this5 = this;
+      var _this4 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var res, _iterator2, _step2, doctor, doctorDetail, doctorReviews, doctorSpecializations;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this5.showBar = _this5.showBtn = false;
-                _this5.result = [];
+                _this4.showBar = _this4.showBtn = false;
+                _this4.result = [];
                 if (!(specializationId === 0)) {
                   _context.next = 4;
                   break;
@@ -2482,7 +2485,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/search/' + specializationId);
               case 6:
                 res = _context.sent;
-                _this5.fetching = true;
+                _this4.fetching = true;
                 if (!Array.isArray(res.data)) {
                   _context.next = 35;
                   break;
@@ -2498,20 +2501,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 }
                 doctor = _step2.value;
                 _context.next = 16;
-                return _this5.getDoctorDetails(doctor.id);
+                return _this4.getDoctorDetails(doctor.id);
               case 16:
                 doctorDetail = _context.sent.data;
                 _context.next = 19;
-                return _this5.getDoctorReviews(doctor.id);
+                return _this4.getDoctorReviews(doctor.id);
               case 19:
                 doctorReviews = _context.sent.data;
                 _context.next = 22;
-                return _this5.getDoctorSpecializations(doctor.id);
+                return _this4.getDoctorSpecializations(doctor.id);
               case 22:
                 doctorSpecializations = _context.sent.data;
                 // compongo un oggetto più semplice da usare con i dettagli.
                 // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
-                _this5.result.push({
+                _this4.result.push({
                   id: doctor.id,
                   email: doctor.email,
                   detail: doctorDetail,
@@ -2520,8 +2523,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   specializations: doctorSpecializations
                 });
                 //cosi non si ripetono le città :)
-                if (doctorDetail.address !== null && !_this5.cities.includes(doctorDetail.address)) {
-                  _this5.cities.push(doctorDetail.address);
+                if (doctorDetail.address !== null && !_this4.cities.includes(doctorDetail.address)) {
+                  _this4.cities.push(doctorDetail.address);
                 }
               case 25:
                 _context.next = 12;
@@ -2538,8 +2541,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _iterator2.f();
                 return _context.finish(32);
               case 35:
-                _this5.fetching = false;
-                _this5.showBtn = true;
+                _this4.fetching = false;
+                _this4.showBtn = true;
               case 37:
               case "end":
                 return _context.stop();
@@ -3503,10 +3506,13 @@ var render = function render() {
     staticClass: "mt-3 container flex-wrap d-flex"
   }, [_c("div", {
     staticClass: "row"
-  }, _vm._l(_vm.filteredDoctorsBy, function (doctor) {
+  }, [_vm.finded ? _c("div", _vm._l(_vm.filteredDoctorsBy, function (doctor) {
     return _c("div", {
       key: "res-" + doctor.id,
-      staticClass: "card shadow w-100 my-2"
+      staticClass: "card shadow w-100 my-2",
+      attrs: {
+        id: "my-card"
+      }
     }, [_c("div", {
       staticClass: "card-header d-flex justify-content-between align-items-center"
     }, [_c("div", [_c("h4", [_vm._v("Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name))])]), _vm._v(" "), _c("div", [_c("router-link", {
@@ -3519,19 +3525,19 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("\n                                    Profilo\n                                ")])], 1)]), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                                        Profilo\n                                    ")])], 1)]), _vm._v(" "), _c("div", {
       staticClass: "card-body d-flex align-items-center"
     }, [_c("div", {
-      staticClass: "mr-2 col-4"
+      staticClass: "mr-2 col-3"
     }, [_c("input", {
-      staticClass: "img-fluid w-75 rounded-circle",
+      staticClass: "img-fluid w-75 border border-white rounded-circle",
       attrs: {
         type: "image",
         src: doctor.detail.image,
         alt: ""
       }
     })]), _vm._v(" "), _c("div", {
-      staticClass: "col-4"
+      staticClass: "col-5 border-left border-white"
     }, [_vm.currentSpecialization > 0 ? _c("div", {
       staticClass: "mb-3"
     }, [_vm._l(_vm.printSp, function (specialization) {
@@ -3558,14 +3564,12 @@ var render = function render() {
         icon: "fa-solid fa-phone"
       }
     })], 1)])]), _vm._v(" "), _c("div", {
-      attrs: {
-        col: "col-4"
-      }
-    }, [_c("p", [_vm._v("Email: " + _vm._s(doctor.email))]), _vm._v(" "), _c("div", [_vm._v("\n                                    Rating: \n                                    "), _c("span", [_c("RateReview", {
+      staticClass: "col-4 border-left border-white"
+    }, [_c("p", [_vm._v("Email: " + _vm._s(doctor.email))]), _vm._v(" "), _c("div", [_vm._v("\n                                        Rating: \n                                        "), _c("span", [_c("RateReview", {
       attrs: {
         value: _vm.averageReviews[doctor.id].avg
       }
-    }), _vm._v("\n                                       " + _vm._s("(" + _vm.averageReviews[doctor.id].count + " " + "recensione )") + " \n                                    ")], 1), _vm._v(" "), _c("div", {
+    }), _vm._v("\n                                           " + _vm._s("(" + _vm.averageReviews[doctor.id].count + " " + "recensione )") + " \n                                        ")], 1), _vm._v(" "), _c("div", {
       staticClass: "my-3"
     }, [_c("router-link", {
       staticClass: "btn btn-sm btn-success",
@@ -3577,8 +3581,10 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("\n                                            Recensioni\n                                        ")])], 1)])])])]);
-  }), 0)]) : _c("AppLoader")], 1)])], 1);
+    }, [_vm._v("\n                                                Recensioni\n                                            ")])], 1)])])])]);
+  }), 0) : _c("div", {
+    staticClass: "my-3"
+  }, [_c("h1", [_vm._v(" Nessun risultato ha soddisfatto i parametri di ricerca ")])])])]) : _c("AppLoader")], 1)])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -3769,7 +3775,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#a-research[data-v-3982aa98] {\n  background-color: rgb(5, 81, 203);\n}", ""]);
+exports.push([module.i, "#a-research[data-v-3982aa98] {\n  background-color: rgb(5, 81, 203);\n}\n#my-card[data-v-3982aa98] {\n  font-size: 16px;\n  background-color: rgb(5, 81, 203);\n  color: white;\n}", ""]);
 
 // exports
 
