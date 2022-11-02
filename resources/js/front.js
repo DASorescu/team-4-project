@@ -8,10 +8,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faHouse, faPhone, faArrowRight, faPenToSquare,faEnvelope,faRotateLeft, faClock, faFile, faEuroSign, faInfo} from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faPhone, faArrowRight, faPenToSquare,faEnvelope,faRotateLeft, faClock, faFile, faEuroSign, faInfo, faFax} from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faHouse,faPhone,faArrowRight,faPenToSquare,faEnvelope,faRotateLeft,faClock,faFile,faEuroSign,faInfo)
+library.add(faHouse,faPhone,faArrowRight,faPenToSquare,faEnvelope,faRotateLeft,faClock,faFile,faEuroSign,faInfo,faFax)
 
 
 /* add font awesome icon component */

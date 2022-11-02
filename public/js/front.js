@@ -36128,7 +36128,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchUser: function fetchUser($id) {
       var _this = this;
       this.isLoading = true;
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/users/' + $id).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/users/" + $id).then(function (res) {
         _this.user = res.data;
       })["catch"](function (err) {
         console.error(err);
@@ -36138,12 +36138,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     getDoctorSpecializations: function getDoctorSpecializations($id) {
       var _this2 = this;
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/specializations/' + $id).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/specializations/" + $id).then(function (res) {
         _this2.specializations = res.data;
       });
     },
     messageSubmitted: function messageSubmitted(message) {
-      console.log('messagesubmitted', message);
+      console.log("messagesubmitted", message);
     }
   },
   mounted: function mounted() {
@@ -37373,7 +37373,7 @@ var render = function render() {
   }, [_c("p", [_vm._v(_vm._s(_vm.user.first_name) + " " + _vm._s(_vm.user.last_name))]), _vm._v(" "), _c("span", [_vm._v("Specializzazioni:")]), _vm._l(_vm.specializations.slice(0, 3), function (specialization) {
     return _c("span", {
       key: specialization.id
-    }, [_vm._v(" " + _vm._s(specialization.label) + " ")]);
+    }, [_vm._v("\n            " + _vm._s(specialization.label) + "\n          ")]);
   })], 2)])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "doctor-info"
   }, [_c("div", {
@@ -37382,33 +37382,41 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-house"
     }
-  }), _vm._v(" " + _vm._s(_vm.user.city_address)), _c("div", [_vm._v(_vm._s(_vm.user.address))])], 1), _vm._v(" "), _c("div", {
+  }), _vm._v(" " + _vm._s(_vm.user.city_address) + "\n        "), _c("div", [_vm._v(_vm._s(_vm.user.address))])], 1), _vm._v(" "), _c("div", {
     staticClass: "contacts"
   }, [_c("div", {
     attrs: {
       id: "hours"
     }
-  }, [_c("strong", [_vm._v("Orari e contatti")]), _vm._v(" "), _c("div", [_c("h5", [_vm._v("Oggi:")]), _vm._v(" "), _c("font-awesome-icon", {
+  }, [_c("strong", [_vm._v("Orari e contatti")]), _vm._v(" "), _c("div", [_c("div", [_vm._v("Oggi:")]), _vm._v(" "), _c("font-awesome-icon", {
     attrs: {
       icon: "fa-solid fa-clock"
     }
-  }), _vm._v(" 7:30 - 18:30")], 1)]), _vm._v(" "), _c("div", [_c("strong", [_vm._v("Recapito telefonico")]), _vm._v(" "), _c("div", [_c("font-awesome-icon", {
+  }), _vm._v(" 7:30 - 18:30\n          ")], 1)]), _vm._v(" "), _c("div", [_c("strong", [_vm._v("Recapito telefonico")]), _vm._v(" "), _c("div", {
+    staticClass: "mt-2"
+  }, [_c("font-awesome-icon", {
+    staticClass: "mr-2",
     attrs: {
       icon: "fa-solid fa-phone"
     }
-  }), _vm._v(" " + _vm._s(_vm.user.phone))], 1)])])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" " + _vm._s(_vm.user.phone) + "\n          ")], 1), _vm._v(" "), _c("div", [_c("font-awesome-icon", {
+    staticClass: "mr-2",
+    attrs: {
+      icon: "fa-solid fa-fax"
+    }
+  }), _vm._v(" " + _vm._s(_vm.user.phone) + "\n          ")], 1)])])]), _vm._v(" "), _c("div", {
     staticClass: "user-page-details"
   }, [_c("h4", [_c("font-awesome-icon", {
     attrs: {
       icon: "fa-solid fa-file"
     }
-  }), _vm._v(" Il Curriculum")], 1), _vm._v(" "), _c("hr"), _vm._v(" "), _c("p", [_vm._v("Il Dottor " + _vm._s(_vm.user.first_name) + " " + _vm._s(_vm.user.last_name) + ' si è laureato in Medicina e Chirurgia nel 2012 all\'Università "La Sapienza" di Roma e successivamente, nel medesimo ateneo, ha conseguito la specializzazione in Chirurgia Vascolare. Svolge la sua attività presso il Policlinico di ' + _vm._s(_vm.user.address) + " e si occupa del trattamento delle malattie delle arterie, delle vene e dei vasi linfatici. Riceve su appuntamento a " + _vm._s(_vm.user.address) + " presso F-Medical.")])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" Il Curriculum")], 1), _vm._v(" "), _c("hr"), _vm._v(" "), _c("p", [_vm._v("\n        Il Dottor " + _vm._s(_vm.user.first_name) + " " + _vm._s(_vm.user.last_name) + " si è laureato in Medicina a\n        " + _vm._s(_vm.user.address) + "e successivamente, nel medesimo ateneo, ha conseguito la\n        specializzazione in Chirurgia Vascolare. Svolge la sua attività presso il\n        Policlinico di " + _vm._s(_vm.user.address) + " e si occupa del trattamento delle malattie\n        delle arterie, delle vene e dei vasi linfatici. Riceve su appuntamento.\n      ")])]), _vm._v(" "), _c("div", {
     staticClass: "user-page-details"
   }, [_c("h4", [_c("font-awesome-icon", {
     attrs: {
       icon: "fa-solid fa-euro-sign"
     }
-  }), _vm._v(" Le tariffe")], 1), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("p", [_vm._v("Le tariffe sono fornite a titolo indicativo dal professionista sanitario e pertanto possono variare a seconda del tipo di trattamento effettuato, il numero di visite e le eventuali prestazioni accessorie. In caso di supplementi, il professionista si impegna ad avvertire il paziente prima di fornire le prestazioni.")])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" Le tariffe")], 1), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("p", [_vm._v("\n        Le tariffe sono fornite a titolo indicativo dal professionista sanitario e\n        pertanto possono variare a seconda del tipo di trattamento effettuato, il numero\n        di visite e le eventuali prestazioni accessorie. In caso di supplementi, il\n        professionista si impegna ad avvertire il paziente prima di fornire le\n        prestazioni.\n      ")])]), _vm._v(" "), _c("div", {
     staticClass: "user-page-details"
   }, [_c("h4", {
     staticClass: "mb-5 question"
@@ -37416,25 +37424,25 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-info"
     }
-  }), _vm._v(" Domande Frequenti")], 1), _vm._v(" "), _c("div", [_c("div", {
+  }), _vm._v(" Domande Frequenti\n      ")], 1), _vm._v(" "), _c("div", [_c("div", {
     staticClass: "question"
   }, [_c("font-awesome-icon", {
     attrs: {
       icon: "fa-solid fa-arrow-right"
     }
-  }), _vm._v(" Qual'é l'indirizzo?")], 1), _vm._v(" "), _c("p", [_vm._v("- L'indirizzo è " + _vm._s(_vm.user.city_address) + "," + _vm._s(_vm.user.address) + ".")])]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", [_c("div", {
+  }), _vm._v(" Qual'é l'indirizzo?\n        ")], 1), _vm._v(" "), _c("p", [_vm._v("- L'indirizzo è " + _vm._s(_vm.user.city_address) + "," + _vm._s(_vm.user.address) + ".")])]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", [_c("div", {
     staticClass: "question"
   }, [_c("font-awesome-icon", {
     attrs: {
       icon: "fa-solid fa-arrow-right"
     }
-  }), _vm._v(" Si accetta anche pagamento con Bancomat/Carta di Credito?")], 1), _vm._v(" "), _c("p", [_vm._v("- Si,sono accettati anche questi metodi di pagamento.")])]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", [_c("div", {
+  }), _vm._v(" Si accetta anche\n          pagamento con Bancomat/Carta di Credito?\n        ")], 1), _vm._v(" "), _c("p", [_vm._v("- Si,sono accettati anche questi metodi di pagamento.")])]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", [_c("div", {
     staticClass: "question"
   }, [_c("font-awesome-icon", {
     attrs: {
       icon: "fa-solid fa-arrow-right"
     }
-  }), _vm._v(" Qual'é la fascia oraria per le prenotazioni?")], 1), _vm._v(" "), _c("p", [_vm._v("- Il centralino è operativo dalle ore 9:00 alle ore 15:00 tutti i giorni,Domenica esclusa.")])])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" Qual'é la fascia oraria\n          per le prenotazioni?\n        ")], 1), _vm._v(" "), _c("p", [_vm._v("\n          - Il centralino è operativo dalle ore 9:00 alle ore 15:00 tutti i\n          giorni,Domenica esclusa.\n        ")])])]), _vm._v(" "), _c("div", {
     staticClass: "user-page-details"
   }, [_c("NewMessage", {
     attrs: {
@@ -37462,7 +37470,7 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-pen-to-square"
     }
-  }), _vm._v(" Scrivi una recensione\n            ")], 1), _vm._v(" "), _c("button", {
+  }), _vm._v(" Scrivi una recensione\n      ")], 1), _vm._v(" "), _c("button", {
     staticClass: "btn btn-secondary",
     on: {
       click: function click($event) {
@@ -37473,7 +37481,7 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-rotate-left"
     }
-  }), _vm._v(" Torna Indietro\n            ")], 1)], 1)]), _vm._v(" "), _c("Footer")], 1);
+  }), _vm._v(" Torna Indietro\n      ")], 1)], 1)]), _vm._v(" "), _c("Footer")], 1);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -37506,7 +37514,7 @@ var staticRenderFns = [function () {
     staticClass: "d-flex align-items-center justify-content-between"
   }, [_c("h5", {
     staticClass: "mb-2"
-  }, [_vm._v("Prima visita specialistica")]), _vm._v(" "), _c("div", [_vm._v(" 100 €")])]);
+  }, [_vm._v("Prima visita specialistica")]), _vm._v(" "), _c("div", [_vm._v("100 €")])]);
 }];
 render._withStripped = true;
 
@@ -42214,7 +42222,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#user-details main {\n  background-color: #EEF2F7;\n}\n#user-details #main-banner {\n  height: 200px;\n  background-color: #31a0f5;\n}\n#user-details #main-banner .doctor-card {\n  display: flex;\n  margin-left: 100px;\n  padding-top: 20px;\n}\n#user-details #main-banner .doctor-card figure {\n  width: 150px;\n}\n#user-details #main-banner .doctor-card figure img {\n  border-radius: 50%;\n  border: 1px solid #fff;\n}\n#user-details #main-banner .doctor-card span {\n  padding-left: 20px;\n  color: #fff;\n  font-size: 1.2rem;\n}\n#user-details #main-banner .doctor-card p {\n  font-size: 1.8rem;\n  color: #fff;\n  padding-left: 15px;\n  padding-top: 10px;\n  font-weight: 800;\n}\n#user-details #info-banner {\n  height: 60px;\n  background-color: #fff;\n  border-bottom: 1px solid #dedede;\n}\n#user-details #info-banner ul {\n  display: flex;\n  padding-left: 100px;\n}\n#user-details #info-banner ul li {\n  font-style: 1.2rem;\n  padding: 20px 10px;\n  list-style-type: none;\n}\n#user-details .doctor-info {\n  display: flex;\n  width: 1000px;\n  margin: 0 auto;\n  padding: 50px 0;\n}\n#user-details .doctor-info .address {\n  width: 40%;\n  padding: 20px 0;\n}\n#user-details .doctor-info .contacts {\n  width: 30%;\n  padding: 20px 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n#user-details .doctor-info .contacts #hours {\n  padding-right: 4.5rem;\n}\n#user-details .doctor-info strong {\n  color: #31a0f5;\n}\n#user-details .user-page-details {\n  width: 800px;\n  background-color: #fff;\n  margin: 0 auto;\n  padding: 30px;\n  margin-bottom: 50px;\n}\n#user-details .user-page-details h5 {\n  text-align: center;\n  font-size: 1.5rem;\n}\n#user-details .user-page-details .question {\n  color: #0D2339;\n  font-size: 1.2rem;\n  font-weight: bold;\n}\n#user-details #buttons {\n  padding: 30px;\n}\n#user-details h3, #user-details h5 {\n  color: #003F5E;\n  font-weight: bold;\n  font-size: 1.5rem;\n  padding-bottom: 10px;\n}", ""]);
+exports.push([module.i, "#user-details main {\n  background-color: #eef2f7;\n}\n#user-details #main-banner {\n  height: 200px;\n  background-color: #31a0f5;\n}\n#user-details #main-banner .doctor-card {\n  display: flex;\n  margin-left: 100px;\n  padding-top: 20px;\n}\n#user-details #main-banner .doctor-card figure {\n  width: 150px;\n}\n#user-details #main-banner .doctor-card figure img {\n  border-radius: 50%;\n  border: 1px solid #fff;\n}\n#user-details #main-banner .doctor-card span {\n  padding-left: 20px;\n  color: #fff;\n  font-size: 1.2rem;\n}\n#user-details #main-banner .doctor-card p {\n  font-size: 1.8rem;\n  color: #fff;\n  padding-left: 15px;\n  padding-top: 10px;\n  font-weight: 800;\n}\n#user-details #info-banner {\n  height: 60px;\n  background-color: #fff;\n  border-bottom: 1px solid #dedede;\n}\n#user-details #info-banner ul {\n  display: flex;\n  padding-left: 100px;\n}\n#user-details #info-banner ul li {\n  font-style: 1.2rem;\n  padding: 20px 10px;\n  list-style-type: none;\n}\n#user-details .doctor-info {\n  display: flex;\n  margin: 0 auto;\n  width: 800px;\n  padding: 50px 0;\n}\n#user-details .doctor-info .address {\n  width: 40%;\n  padding: 20px 0;\n}\n#user-details .doctor-info .contacts {\n  display: flex;\n  align-items: center;\n  margin-left: 30px;\n}\n#user-details .doctor-info .contacts #hours {\n  padding-right: 4.5rem;\n}\n#user-details .doctor-info strong {\n  color: #31a0f5;\n}\n#user-details .user-page-details {\n  width: 800px;\n  background-color: #fff;\n  margin: 0 auto;\n  padding: 30px;\n  margin-bottom: 50px;\n}\n#user-details .user-page-details h5 {\n  text-align: center;\n  font-size: 1.5rem;\n}\n#user-details .user-page-details .question {\n  color: #0d2339;\n  font-size: 1.2rem;\n  font-weight: bold;\n}\n#user-details #buttons {\n  padding: 30px;\n}\n#user-details h3,\n#user-details h5 {\n  color: #003f5e;\n  font-weight: bold;\n  font-size: 1.5rem;\n  padding-bottom: 10px;\n}", ""]);
 
 // exports
 
@@ -91322,7 +91330,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 /* add icons to the library */
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faHouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPhone"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faArrowRight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPenToSquare"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEnvelope"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faRotateLeft"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faClock"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFile"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEuroSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faInfo"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faHouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPhone"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faArrowRight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPenToSquare"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEnvelope"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faRotateLeft"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faClock"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFile"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEuroSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faInfo"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFax"]);
 
 /* add font awesome icon component */
 Vue.component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"]);
