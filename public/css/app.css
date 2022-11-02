@@ -11005,6 +11005,14 @@ body {
   background-color: #fff;
 }
 
+.h-400px {
+  height: 400px;
+}
+
+.overflowy {
+  overflow-y: auto;
+}
+
 body {
   background: rgb(116, 192, 236);
 }
@@ -11059,6 +11067,7 @@ body {
 
 #app #main {
   width: 80vw;
+  height: 90vh;
   overflow-y: auto;
   padding-left: 20px;
   background: #f2f2f2;
