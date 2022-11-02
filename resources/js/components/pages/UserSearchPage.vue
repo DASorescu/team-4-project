@@ -17,7 +17,7 @@
                 </div>
 
 
-                <div v-if="showBar" class="text-center card p-3 mt-3">
+                <div v-if="showBar" id="a-research" class="text-center card p-3 mt-3 mx-auto">
                     <div class="text-center mx-auto">
 
                         <div class="my-2">
@@ -58,8 +58,10 @@
                             :key="'res-' + doctor.id">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <div>
-                                    Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
+                                   <h4>Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}</h4> 
+                                   
                                 </div>
+
                                 <div>
                                     <router-link class="btn btn-primary d-flex align-items-center"
                                         :to="{ name: 'user-detail', params: { id: doctor.id } }">
@@ -68,18 +70,19 @@
                                 </div>
                             </div>
                             <div class="card-body d-flex align-items-center">
-                                <div class="mr-2 col-3">
+                                <div class="mr-2 col-4">
                                     <input class="img-fluid w-75 rounded-circle" type="image" :src="doctor.detail.image"
                                         alt="" />
                                 </div>
-                                <div class="col-5">
+                                <div class="col-4">
 
-                                    <ul class="list-group pb-3">
-                                        <li v-for="specialization in printSp" :key="specialization.id" :class="'list-group-item list-group-item-'+specialization.color">{{specialization.label}}</li>
-                                    </ul>
-                                    
+                                    <div class="mb-3" v-if="currentSpecialization > 0" >
+                                        <span v-for="specialization in printSp" :key="specialization.id" :class="'badge badge-'+specialization.color">{{specialization.label}}</span>
+                                        <span class="ml-1">  <font-awesome-icon icon="fa-solid fa-user-doctor" /> </span> 
+                                    </div>
                                     <p>Città: {{ doctor.detail.address }} <span class="ml-1">  <font-awesome-icon icon="fa-solid fa-location-dot" /> </span> </p>
                                     <p> Telefono:{{ doctor.detail.phone }} <span class="ml-1">  <font-awesome-icon icon="fa-solid fa-phone"/> </span>   </p>   
+                                    
                                 </div>
                                 <div col="col-4">
                                     <p>Email: {{ doctor.email }}</p>
@@ -87,7 +90,7 @@
                                         Rating: 
                                         <span>
                                            <RateReview :value="averageReviews[doctor.id].avg" />
-                                           {{"(" + averageReviews[doctor.id].count + " " + "recensioni )"}} 
+                                           {{"(" + averageReviews[doctor.id].count + " " + "recensione )"}} 
                                         </span>    
                                         
 
@@ -182,15 +185,15 @@ export default {
             if ((this.selectedPropriety === "") && (this.searched === "")) { return this.result };
             if (this.selectedPropriety === "Nome")
                 return this.result.filter(
-                    (doctor) => doctor.detail.first_name === this.searched
+                    (doctor) => doctor.detail.first_name === this.searched.toUpperCase()
                 );
             if (this.selectedPropriety === "Cognome")
                 return this.result.filter(
-                    (doctor) => doctor.detail.last_name === this.searched
+                    (doctor) => doctor.detail.last_name === this.searched.toUpperCase()
                 );
             if (this.selectedPropriety === "Città")
                 return this.result.filter(
-                    (doctor) => doctor.detail.address === this.searched
+                    (doctor) => doctor.detail.address === this.searched.toUpperCase()
                 );
         },
 
@@ -301,6 +304,10 @@ export default {
 
 
 <style lang="scss" scoped>
+
+#a-research{
+    background-color: rgb(5,81,203);
+}
 
 </style>
 
