@@ -213,7 +213,7 @@ export default {
 
   #main-banner {
     height: 200px;
-    background: linear-gradient(#0451CB, 60%, #fff);
+    background: linear-gradient(#0451cb, 60%, #fff);
 
     .doctor-card {
       display: flex;
@@ -295,16 +295,12 @@ export default {
     margin: 0 auto;
     width: 800px;
     padding: 50px 0;
-    color: #fff;
-    font-size: 1.1rem;
     .address {
       width: 40%;
       padding: 20px 0;
       text-align: center;
-      background-color: rgb(155, 208, 239);
-      opacity: 0.8;
+      background: linear-gradient(#0451cb, 60%, #fff);
       border-radius: 10px;
-      padding: 10px;
     }
 
     .contacts {
