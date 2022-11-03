@@ -36303,7 +36303,6 @@ function valoreODefault(valore, defaultValore) {
       if (this.selectedPropriety === "Città") return this.result.filter(function (doctor) {
         return valoreODefault(doctor.detail.address, '').toLowerCase().startsWith(_this.searched.toLowerCase());
       });
-      console.log(this.result);
     },
     // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
     // In questo oggetto le proprietà sono la media del rating e il numero di review su cui è basata la media.
@@ -36334,7 +36333,7 @@ function valoreODefault(valore, defaultValore) {
     //fai una chiamata per restituire tutte le specializzazioni disponibili
     getSpecializations: function getSpecializations() {
       var _this2 = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/specializations').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/specializations/').then(function (res) {
         _this2.specializations = res.data;
       });
     },
@@ -37695,10 +37694,6 @@ var render = function render() {
   return _c("div", [_c("NavBar"), _vm._v(" "), _c("div", {
     staticClass: "row justify-content-center"
   }, [_c("div", {
-    attrs: {
-      id: "main-content"
-    }
-  }, [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_vm.showBtn ? _c("button", {
     staticClass: "btn btn-primary",
@@ -37707,7 +37702,7 @@ var render = function render() {
         _vm.showBar = !_vm.showBar;
       }
     }
-  }, [_vm._v("\n                    Ricerca Avanzata\n                ")]) : _vm._e()]), _vm._v(" "), _vm.showBar ? _c("div", {
+  }, [_vm._v("\n                Ricerca Avanzata\n            ")]) : _vm._e()]), _vm._v(" "), _vm.showBar ? _c("div", {
     staticClass: "text-center"
   }, [_c("div", {
     staticClass: "text-center mx-auto"
@@ -37744,7 +37739,7 @@ var render = function render() {
         value: specialization.id,
         selected: _vm.currentSpecialization === specialization.id
       }
-    }, [_vm._v("\n                                " + _vm._s(specialization.label) + "\n                            ")]);
+    }, [_vm._v("\n                            " + _vm._s(specialization.label) + "\n                        ")]);
   })], 2) : _vm._e(), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
@@ -37777,7 +37772,7 @@ var render = function render() {
       domProps: {
         value: propriety
       }
-    }, [_vm._v("\n                                " + _vm._s(propriety) + "\n                            ")]);
+    }, [_vm._v("\n                            " + _vm._s(propriety) + "\n                        ")]);
   })], 2)]), _vm._v(" "), _c("div", [_c("input", {
     directives: [{
       name: "model",
@@ -37805,7 +37800,7 @@ var render = function render() {
       staticClass: "card shadow w-100 my-2"
     }, [_c("div", {
       staticClass: "card-header d-flex justify-content-between align-items-center"
-    }, [_c("div", [_vm._v("\n                            Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name) + "\n                        ")]), _vm._v(" "), _c("div", [_c("router-link", {
+    }, [_c("div", [_vm._v("\n                        Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name) + "\n                    ")]), _vm._v(" "), _c("div", [_c("router-link", {
       staticClass: "btn btn-primary d-flex align-items-center",
       attrs: {
         to: {
@@ -37815,7 +37810,7 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("\n                                Visualizza profilo\n                            ")])], 1)]), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                            Visualizza profilo\n                        ")])], 1)]), _vm._v(" "), _c("div", {
       staticClass: "card-body d-flex align-items-center"
     }, [_c("div", {
       staticClass: "w-25 mr-2"
@@ -37826,11 +37821,11 @@ var render = function render() {
         src: doctor.detail.image,
         alt: ""
       }
-    })]), _vm._v(" "), _c("div", [_c("p", [_vm._v("Specializzazione: " + _vm._s(doctor.specialization))]), _vm._v(" "), _c("p", [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("p", [_vm._v("Email: " + _vm._s(doctor.email))]), _vm._v(" "), _c("p", [_vm._v("\n                                Rating:\n                                "), _c("RateReview", {
+    })]), _vm._v(" "), _c("div", [_c("p", [_vm._v("Specializzazione: " + _vm._s(doctor.specialization))]), _vm._v(" "), _c("p", [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("p", [_vm._v("Email: " + _vm._s(doctor.email))]), _vm._v(" "), _c("p", [_vm._v("\n                            Rating:\n                            "), _c("RateReview", {
       attrs: {
         value: _vm.averageReviews[doctor.id].avg
       }
-    }), _vm._v("\n                                (" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n                                "), _c("router-link", {
+    }), _vm._v("\n                            (" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n                            "), _c("router-link", {
       staticClass: "btn btn-primary",
       attrs: {
         to: {
@@ -37840,8 +37835,8 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("\n                                    mostra\n                                ")])], 1)])])]);
-  }), 0) : _c("AppLoader")], 1)])], 1);
+    }, [_vm._v("\n                                mostra\n                            ")])], 1)])])]);
+  }), 0) : _c("AppLoader")], 1)], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -42455,7 +42450,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.w-3-m-2{\r\n    margin-right: 2em;\r\n    width: calc((100% / 3) - 2em);\n}\n.flicking-arrow-prev::before,\r\n.flicking-arrow-prev::after,\r\n.flicking-arrow-next::before,\r\n.flicking-arrow-next::after {\r\n    background-color: var(--primary);\n}\r\n", ""]);
+exports.push([module.i, "\n.w-3-m-2{\n    margin-right: 2em;\n    width: calc((100% / 3) - 2em);\n}\n.flicking-arrow-prev::before,\n.flicking-arrow-prev::after,\n.flicking-arrow-next::before,\n.flicking-arrow-next::after {\n    background-color: var(--primary);\n}\n", ""]);
 
 // exports
 
@@ -42474,7 +42469,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.w-33 {\r\n    width: calc(100% / 3);\n}\r\n", ""]);
+exports.push([module.i, "\n.w-33 {\n    width: calc(100% / 3);\n}\n", ""]);
 
 // exports
 
@@ -42493,7 +42488,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#not-found {\r\n    height: 90vh;\n}\r\n", ""]);
+exports.push([module.i, "\n#not-found {\n    height: 90vh;\n}\n", ""]);
 
 // exports
 
@@ -89890,7 +89885,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/altroconsumo_reviews.svg?6fd8222c4c8a06d335d76203fe866331";
+module.exports = "/images/altroconsumo_reviews.svg?230774637878d60de6d430a5853310f7";
 
 /***/ }),
 
@@ -89901,7 +89896,7 @@ module.exports = "/images/altroconsumo_reviews.svg?6fd8222c4c8a06d335d76203fe866
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/commenti_diconodinoi.svg?905a5f91a4c807e9f87cfdcbc50ef184";
+module.exports = "/images/commenti_diconodinoi.svg?3b5c331f73d1bccf1bb9deaf4be8c58f";
 
 /***/ }),
 
@@ -89912,7 +89907,7 @@ module.exports = "/images/commenti_diconodinoi.svg?905a5f91a4c807e9f87cfdcbc50ef
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/consultazione-sito.svg?c1b0052bc3a9572ac10b1db3fedb396a";
+module.exports = "/images/consultazione-sito.svg?8adb14069a9f6068c9d6e6492372d650";
 
 /***/ }),
 
@@ -89956,7 +89951,7 @@ module.exports = "/images/facebook-reviews.png?7ed45070ee48f1f27de29fb9c3a5b57f"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/medico-e-paziente.svg?657be2094dfa7eb5596f17045385a2b1";
+module.exports = "/images/medico-e-paziente.svg?57b8381e7dbbc0c31bafcb3875fd9efd";
 
 /***/ }),
 
@@ -89967,7 +89962,7 @@ module.exports = "/images/medico-e-paziente.svg?657be2094dfa7eb5596f17045385a2b1
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/medico-vertical.svg?a078d4a5aaf060a5daa36a6f250a4bb9";
+module.exports = "/images/medico-vertical.svg?b16bc91ab4694e9425231d48d6458d7d";
 
 /***/ }),
 
@@ -89978,7 +89973,7 @@ module.exports = "/images/medico-vertical.svg?a078d4a5aaf060a5daa36a6f250a4bb9";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/prenotazione-online.svg?2f0f8d8a1fe40a8fb92f43e97d52d67e";
+module.exports = "/images/prenotazione-online.svg?47029cc2d35633fde57f12ce802b5019";
 
 /***/ }),
 
@@ -91714,7 +91709,7 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laravel\team-4-project\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/emanueledezotti/team-4-project/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })

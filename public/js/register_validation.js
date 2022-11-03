@@ -135,7 +135,7 @@ form.addEventListener('submit', function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laravel\team-4-project\resources\js\validations\register_validation.js */"./resources/js/validations/register_validation.js");
+module.exports = __webpack_require__(/*! /Users/emanueledezotti/team-4-project/resources/js/validations/register_validation.js */"./resources/js/validations/register_validation.js");
 
 
 /***/ })
