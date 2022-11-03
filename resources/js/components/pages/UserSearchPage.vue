@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="content">
         <NavBar />
         <div class="row justify-content-center">
             <div id="main-content" class="">
@@ -246,7 +246,10 @@ export default {
 
 
 <style lang="scss" scoped>
+.content {
+    background: #fff;
 
+}
 </style>
 
 
