@@ -1,90 +1,99 @@
 <template>
     <div class="content">
         <NavBar />
-        <div class="row justify-content-center">
-            <div id="main-content" class="">
-
-                <div class="d-flex justify-content-center">
-
-                    <button class="btn btn-primary" @click="showBar = !showBar" v-if="showBtn">
-                        Ricerca Avanzata
-                    </button>
+        <div class="container">
 
 
+            
+
+            <!--Ricerca Campi-->
+            <div id="selezione-campi" class="text-center my-5">
+                <div>
+
+                    <div>
+                        <select v-if="hasSpecializations" v-model="currentSpecialization"
+                            @change="searchDoctorBySpecialization(currentSpecialization)">
+                            <option :value="0">Scegli la specializzazione dei medici</option>
+                            <option v-for="specialization in specializations" :key="'spec-' + specialization.id"
+                                :value="specialization.id" :selected="currentSpecialization === specialization.id">
+                                {{ specialization.label }}
+                            </option>
+                        </select>
+
+
+                        <select class="form-select" aria-label="Default select example" v-model="selectedPropriety">
+                            <option value="">{{ 'Filtra per...' }}</option>
+                            <option v-for="(propriety, index) in proprieties" :key="index" :value="propriety">
+                                {{ propriety }}
+                            </option>
+
+                        </select>
+
+                    </div>
+                    <div>
+                        <input type="text" v-model="searched">
+                    </div>
                 </div>
 
 
-                <div v-if="showBar" class="text-center ">
-                    <div class="text-center mx-auto">
-
-                        <div class="my-2">
-                            <select v-if="hasSpecializations" v-model="currentSpecialization"
-                                @change="searchDoctorBySpecialization(currentSpecialization)">
-                                <option :value="0">Scegli la specializzazione dei medici</option>
-                                <option v-for="specialization in specializations" :key="'spec-' + specialization.id"
-                                    :value="specialization.id" :selected="currentSpecialization === specialization.id">
-                                    {{ specialization.label }}
-                                </option>
-                            </select>
+            </div>
 
 
-                            <select class="form-select" aria-label="Default select example" v-model="selectedPropriety">
-                                <option value="">{{ 'Filtra per...' }}</option>
-                                <option v-for="(propriety, index) in proprieties" :key="index" :value="propriety">
-                                    {{ propriety }}
-                                </option>
 
-                            </select>
-
+            <!--Render su pagina-->
+            <div v-if="hasResult" class="flex-wrap d-flex">
+                <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctorsBy" :key="'res-' + doctor.id">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        
+                        <div>
+                            Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
                         </div>
                         <div>
-                            <input type="text" v-model="searched">
+                            <router-link class="btn btn-primary d-flex align-items-center"
+                                :to="{ name: 'user-detail', params: { id: doctor.id } }">
+                                Visualizza profilo
+                            </router-link>
                         </div>
                     </div>
+                    <div class="card-body d-flex align-items-center">
+                        <div class="col-4 w-25 mr-2">
+                            <input class="img-fluid rounded-circle" type="image" :src="doctor.detail.image" alt=""/>
+                        </div>
+                        <div class="col-4 border-left border-white">
+                            <div>Specializzazione: 
+                                <!--tramite printSp stampo specializzazione corrente-->
+                                <span class="ml-2" v-for="specialization in printSp" :key="specialization.id" 
+                                    :class="'badge badge-'+specialization.color">{{specialization.label}}
+                                </span>
 
-
-                </div>
-
-
-
-                <!--Render su pagina-->
-                <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
-                    <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctorsBy" :key="'res-' + doctor.id">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <div>
-                                Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
                             </div>
+                            <div class="my-3">Città: {{ doctor.detail.address }}</div>
+                            <div>Email: {{ doctor.email }}</div>
+                            
+                        </div>
+                        <div class="col-4 border-left border-white">
                             <div>
-                                <router-link class="btn btn-primary d-flex align-items-center"
-                                    :to="{ name: 'user-detail', params: { id: doctor.id } }">
-                                    Visualizza profilo
+                                    Rating:
+                                    <RateReview 
+                                    :value="averageReviews[doctor.id].avg" />
+                                    <div class="my-3">
+                                        Recensioni: ({{ averageReviews[doctor.id].count }})
+
+                                    </div>
+
+                            
+                                <router-link class="btn btn-primary"
+                                    :to="{ name: 'reviews', params: { userId: doctor.id } }">
+                                    Recensioni
                                 </router-link>
                             </div>
-                        </div>
-                        <div class="card-body d-flex align-items-center">
-                            <div class="w-25 mr-2">
-                                <input class="img-fluid rounded-circle" type="image" :src="doctor.detail.image"
-                                    alt="" />
-                            </div>
-                            <div>
-                                <p>Specializzazione: {{ doctor.specialization }}</p>
-                                <p>Città: {{ doctor.detail.address }}</p>
-                                <p>Email: {{ doctor.email }}</p>
-                                <p>
-                                    Rating:
-                                    <RateReview :value="averageReviews[doctor.id].avg" />
-                                    ({{ averageReviews[doctor.id].count }})
-                                    <router-link class="btn btn-primary"
-                                        :to="{ name: 'reviews', params: { userId: doctor.id } }">
-                                        mostra
-                                    </router-link>
-                                </p>
-                            </div>
+
                         </div>
                     </div>
                 </div>
-                <AppLoader v-else />
             </div>
+            <AppLoader v-else />
+
         </div>
     </div>
 </template>
@@ -113,13 +122,13 @@ export default {
     },
     data() {
         return {
+
             //proprietà su cui ciclare
             proprieties: ['Nome', 'Cognome', 'Città'],
             //id di partenza nel v-model select su cui ciclare
             currentSpecialization: 0,
             specializations: [],
 
-            showBtn: false,
             showBar: false,
             searched: "",
             selectedPropriety: "",
@@ -133,7 +142,9 @@ export default {
         };
     },
     computed: {
-
+        printSp(){
+            return this.specializations.filter(specialization => specialization.label === this.hasSpecializationName)
+        },
         hasSpecializations() {
             return this.specializations.length > 0
         },
@@ -192,7 +203,7 @@ export default {
 
 
         async searchDoctorBySpecialization(specializationName) {
-            this.showBar = this.showBtn = false
+            this.showBar = false
             this.result = [];
             if (!specializationName) {
                 return;
@@ -230,7 +241,6 @@ export default {
                 }
             }
             this.fetching = false;
-            this.showBtn = true
         },
     },
 
@@ -250,6 +260,12 @@ export default {
     background: #fff;
 
 }
+.card{
+    background-color: rgb(5,81,203);
+    color: white;
+}
+
+
 </style>
 
 
