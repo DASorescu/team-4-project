@@ -18,6 +18,7 @@ class UserDetailSeeder extends Seeder
     {
         $faker = Faker::create('it_IT');
         $user_ids = User::pluck('id')->toArray();
+        $images = config('images');
         $cities = config('cities');
 
         foreach($user_ids as $id){
@@ -27,7 +28,7 @@ class UserDetailSeeder extends Seeder
             $user_detail->first_name = $faker->firstName();
             $user_detail->last_name = $faker->lastName();
             $user_detail->phone = $faker->phoneNumber();
-            $user_detail->image = $faker->imageUrl(360, 360, 'people', true);
+            $user_detail->image = Arr::random($images);
             $user_detail->city_address = $faker->address();
             if(config('cities')){
                 $user_detail->address = Arr::random($cities);   

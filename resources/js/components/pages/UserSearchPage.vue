@@ -123,6 +123,7 @@ export default {
     },
     data() {
         return {
+
             //proprietà su cui ciclare
             proprieties: ['Nome', 'Cognome', 'Città'],
             //id di partenza nel v-model select su cui ciclare
