@@ -22302,11 +22302,12 @@ var render = function render() {
     staticClass: "doctor-info"
   }, [_c("div", {
     staticClass: "address"
-  }, [_c("strong", [_vm._v("Indirizzo")]), _vm._v(" "), _c("h5", [_vm._v("F-Medical Group")]), _vm._v(" "), _c("font-awesome-icon", {
+  }, [_vm._m(2), _vm._v(" "), _c("div", [_c("font-awesome-icon", {
+    staticClass: "text-center",
     attrs: {
       icon: "fa-solid fa-house"
     }
-  }), _vm._v(" " + _vm._s(_vm.user.city_address) + "\n      ")], 1), _vm._v(" "), _c("div", {
+  })], 1), _vm._v("\n        " + _vm._s(_vm.user.city_address) + "\n      ")]), _vm._v(" "), _c("div", {
     staticClass: "contacts"
   }, [_c("a", {
     attrs: {
@@ -22354,7 +22355,7 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-euro-sign"
     }
-  }), _vm._v(" Le tariffe\n      ")], 1), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("p", [_vm._v("\n        Le tariffe sono fornite a titolo indicativo dal professionista sanitario e\n        pertanto possono variare a seconda del tipo di trattamento effettuato, il numero\n        di visite e le eventuali prestazioni accessorie. In caso di supplementi, il\n        professionista si impegna ad avvertire il paziente prima di fornire le\n        prestazioni.\n      ")])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" Le tariffe\n      ")], 1), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._m(3), _vm._v(" "), _c("p", [_vm._v("\n        Le tariffe sono fornite a titolo indicativo dal professionista sanitario e\n        pertanto possono variare a seconda del tipo di trattamento effettuato, il numero\n        di visite e le eventuali prestazioni accessorie. In caso di supplementi, il\n        professionista si impegna ad avvertire il paziente prima di fornire le\n        prestazioni.\n      ")])]), _vm._v(" "), _c("div", {
     staticClass: "user-page-details"
   }, [_c("a", {
     attrs: {
@@ -22465,6 +22466,10 @@ var staticRenderFns = [function () {
       href: "#faq"
     }
   }, [_vm._v("FAQ")])])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", [_c("strong", [_vm._v("Indirizzo")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;

@@ -37,9 +37,9 @@
       <!-- INFO -->
       <div class="doctor-info">
         <div class="address">
-          <strong>Indirizzo</strong>
-          <h5>F-Medical Group</h5>
-          <font-awesome-icon icon="fa-solid fa-house" /> {{ user.city_address }}
+          <div><strong>Indirizzo</strong></div>
+          <div><font-awesome-icon class="text-center" icon="fa-solid fa-house" /></div>
+          {{ user.city_address }}
         </div>
         <div class="contacts">
           <a name="info"></a>
@@ -201,7 +201,14 @@ export default {
 <style lang="scss">
 #user-details {
   main {
-    background-color: #eef2f7;
+    background-image: url("https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg");
+    animation: scroll 100s linear infinite;
+  }
+
+  @keyframes scroll {
+    100% {
+      background-position: 0 -2000px;
+    }
   }
 
   #main-banner {
@@ -288,16 +295,26 @@ export default {
     margin: 0 auto;
     width: 800px;
     padding: 50px 0;
+    color: #fff;
+    font-size: 1.1rem;
     .address {
       width: 40%;
       padding: 20px 0;
       text-align: center;
+      background-color: rgb(155, 208, 239);
+      opacity: 0.8;
+      border-radius: 10px;
+      padding: 10px;
     }
 
     .contacts {
       display: flex;
       align-items: center;
       margin-left: 30px;
+      background-color: rgb(155, 208, 239);
+      opacity: 0.8;
+      border-radius: 10px;
+      padding: 10px;
 
       #hours {
         padding-right: 4.5rem;
