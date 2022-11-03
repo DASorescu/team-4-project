@@ -34,3 +34,12 @@ body {
 .overflowy {
     overflow-y: auto;
 }
+.p-relative {
+    position: relative;
+}
+
+.error {
+    position: absolute;
+    top: 35px;
+    left: 15px;
+}

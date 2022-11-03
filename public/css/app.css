@@ -11013,6 +11013,16 @@ body {
   overflow-y: auto;
 }
 
+.p-relative {
+  position: relative;
+}
+
+.error {
+  position: absolute;
+  top: 35px;
+  left: 15px;
+}
+
 body {
   background: rgb(116, 192, 236);
 }

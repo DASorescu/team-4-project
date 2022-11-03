@@ -11,12 +11,12 @@
                     <form method="POST" action="{{ route('register') }}" id="form">
                         @csrf
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-4 p-relative">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 ">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                <div class="d-none" id="user-error">Inserisci un username valido!</div>
+                                <div class="d-none error" id="user-error">Inserisci un username valido!</div>
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -25,11 +25,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-4 p-relative">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-                            <div class="col-md-6">
+                            <div class="col-md-6 ">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                                <div class="d-none" id="email-error">Inserisci un'email valida!</div>
+                                <div class="d-none error" id="email-error">Inserisci un'email valida!</div>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -39,11 +39,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-4 p-relative">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-                            <div class="col-md-6">
+                            <div class="col-md-6 ">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                                <div class="d-none col-md-6" id="pw-error">La password deve contenere almeno 8 caratteri!</div>
+                                <div class="d-none col-md-6 error" id="pw-error">La password deve contenere almeno 8 caratteri!</div>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -53,10 +53,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row p-relative mb-4">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-                            <div class="d-none" id="pwcheck-error">Le password devono coincidere!</div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 p-relative">
+                                <div class="d-none error" id="pwcheck-error">Le password devono coincidere!</div>
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>

@@ -24,10 +24,10 @@ form.addEventListener('submit',(e) => {
         pwCheckValid = false;
     }
 
-    userValid ? (userError.className = 'd-none', username.classList.remove('border-danger')) : (userError.className = 'text-danger', username.classList.add('border-danger'));
-    emailValid ? (emailError.className = 'd-none', email.classList.remove('border-danger')) : (emailError.className = 'text-danger', email.classList.add('border-danger'));
-    pwValid ? (pwError.className = 'd-none', password.classList.remove('border-danger')) : (pwError.className = 'text-danger', password.classList.add('border-danger'));
-    pwCheckValid ? (pwCheckError.className = 'd-none', passwordConfirm.classList.remove('border-danger')) : (pwCheckError.className = 'text-danger', passwordConfirm.classList.add('border-danger'));
+    userValid ? (userError.className = 'd-none', username.classList.remove('border-danger')) : (userError.className = 'text-danger error', username.classList.add('border-danger',));
+    emailValid ? (emailError.className = 'd-none', email.classList.remove('border-danger')) : (emailError.className = 'text-danger error', email.classList.add('border-danger',));
+    pwValid ? (pwError.className = 'd-none', password.classList.remove('border-danger')) : (pwError.className = 'text-danger error', password.classList.add('border-danger',));
+    pwCheckValid ? (pwCheckError.className = 'd-none', passwordConfirm.classList.remove('border-danger')) : (pwCheckError.className = 'text-danger error', passwordConfirm.classList.add('border-danger',));
 
     if(!(userValid && emailValid && pwValid && pwCheckValid)) e.preventDefault();
 })
