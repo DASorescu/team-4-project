@@ -299,7 +299,7 @@ export default {
       width: 40%;
       padding: 20px 0;
       text-align: center;
-      background: linear-gradient(#0451cb, 60%, #fff);
+      background: linear-gradient(#72a6fb, 15%, #fff);
       border-radius: 10px;
     }
 
@@ -307,7 +307,7 @@ export default {
       display: flex;
       align-items: center;
       margin-left: 30px;
-      background-color: rgb(155, 208, 239);
+      background: linear-gradient(#72a6fb, 15%, #fff);
       opacity: 0.8;
       border-radius: 10px;
       padding: 10px;
