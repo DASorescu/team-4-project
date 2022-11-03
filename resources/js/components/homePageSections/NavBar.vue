@@ -15,12 +15,12 @@
                 <ul class="navbar-nav ml-auto align-items-center">
                     <!-- Authentication Links -->
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/login">Login</a>
+                        <a class="nav-link text-white" href="/login">Area Privata</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/register">Register</a>
-                    </li>
+                    <!-- <li class="nav-item">
+                                            <a class="nav-link text-white" href="/register">Registrati</a>
+                                        </li> -->
                 </ul>
             </div>
         </nav>

@@ -21,7 +21,8 @@ class SponsorshipController extends Controller
     {
         $user = Auth::user();
         $sponsor_plans = Sponsorship::all();
-        return view('admin.users.sponsorships.create', compact('user', 'sponsor_plans'));
+        $intent = $user->createSetupIntent();
+        return view('admin.users.sponsorships.create', compact('user', 'sponsor_plans', 'intent'));
     }
 
     public function store(Request $request)
@@ -29,9 +30,14 @@ class SponsorshipController extends Controller
 
         $user = Auth::user();
 
-        $data = $request->all();
+        $plan_id = '';
+        if($request->plan === 'price_1LzentDdebw56msOoppkEEQP') $plan_id = 1;
+        else if($request->plan === 'price_1LzentDdebw56msO6LNW6c47') $plan_id = 2;
+        else if($request->plan === 'price_1LzentDdebw56msO04NaOxbz') $plan_id = 3;
 
-        $sponsorship = Sponsorship::findOrFail($data['plan_id']);
+        $user->newSubscription($plan_id,$request->plan)->create($request->stripeToken);
+
+        $sponsorship = Sponsorship::findOrFail($plan_id);
 
         $user->sponsorship_id = $sponsorship->id;
 
@@ -41,3 +47,4 @@ class SponsorshipController extends Controller
         return redirect()->route('admin.users.sponsorships.show');
     }
 }
+

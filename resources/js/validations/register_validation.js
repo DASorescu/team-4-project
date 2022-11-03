@@ -1,21 +1,33 @@
 const form = document.getElementById('form');
 const username = document.getElementById('name');
+const userError = document.getElementById('user-error');
 const email = document.getElementById('email');
+const emailError = document.getElementById('email-error');
 const password = document.getElementById('password');
+const pwError = document.getElementById('pw-error');
 const passwordConfirm = document.getElementById('password-confirm');
+const pwCheckError = document.getElementById('pwcheck-error');
 
 form.addEventListener('submit',(e) => {
-    let isValid = false;
+    let userValid = true;
+    let emailValid = true;
+    let pwValid = true;
+    let pwCheckValid = true;
 
     if(!isNaN(username.value) || username.value.length < 3 || username.value.length > 30) {
-        alert('Inserire un username valido.');
-    } else if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))) {
-       alert('La mail inserita non è valida.');
-    } else if(password.value.length < 8) {
-        alert('La password deve essere di almeno 8 caratteri.');
-    } else if(passwordConfirm.value !== password.value) {
-        alert('Le password non corrispondono.');
-    } else isValid = true;
+        userValid = false;
+    } if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))) {
+       emailValid = false;
+    } if(password.value.length < 8) {
+        pwValid = false;
+    } if(passwordConfirm.value !== password.value) {
+        pwCheckValid = false;
+    }
 
-    if(!isValid) e.preventDefault();
+    userValid ? (userError.className = 'd-none', username.classList.remove('border-danger')) : (userError.className = 'text-danger', username.classList.add('border-danger'));
+    emailValid ? (emailError.className = 'd-none', email.classList.remove('border-danger')) : (emailError.className = 'text-danger', email.classList.add('border-danger'));
+    pwValid ? (pwError.className = 'd-none', password.classList.remove('border-danger')) : (pwError.className = 'text-danger', password.classList.add('border-danger'));
+    pwCheckValid ? (pwCheckError.className = 'd-none', passwordConfirm.classList.remove('border-danger')) : (pwCheckError.className = 'text-danger', passwordConfirm.classList.add('border-danger'));
+
+    if(!(userValid && emailValid && pwValid && pwCheckValid)) e.preventDefault();
 })

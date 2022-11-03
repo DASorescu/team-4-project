@@ -49,7 +49,6 @@ export default {
             button.innerText = this.searchedSpec;
             this.searchedSpec = ''
             this.isActive = !this.isActive
-            console.log(event.target)
             // alla ricerca eseguo un push del parametro specialization name in search bar 
             this.$router.push({ name: "search", params: { specializationName:event.target.innerText } });
         },

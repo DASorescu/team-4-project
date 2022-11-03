@@ -52,16 +52,22 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-8 offset-md-4 d-flex align-items-center">
+                                <button type="submit" class="btn btn-primary h-50 d-flex justify-content-center align-items-center py-1">
                                     {{ __('Login') }}
                                 </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                <div class="d-flex flex-column">
+                                    @if (Route::has('password.request'))
+                                        <a class="btn btn-link py-0" href="{{ route('password.request') }}">
+                                            {{ __('Password dimenticata?') }}
+                                        </a>
+                                    @endif
+                                    <a class="btn btn-link py-0" href="{{ route('register') }}">
+                                        {{ __('Non sei registrato?') }}
                                     </a>
-                                @endif
+
+                                </div>
+
                             </div>
                         </div>
                     </form>

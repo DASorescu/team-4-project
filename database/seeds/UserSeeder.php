@@ -26,6 +26,8 @@ class UserSeeder extends Seeder
         $user->email = 'pippo@pluto.com';
         $user->password = bcrypt('pippo');
 
+        $user->createAsStripeCustomer();
+
         $user->save();
 
         // popolo gli user attraverso un ciclo
@@ -35,6 +37,8 @@ class UserSeeder extends Seeder
             $user->name = $faker->firstName();
             $user->email = $faker->email();
             $user->password = bcrypt('password');
+
+            $user->createAsStripeCustomer();
 
             $user->save();
             // creo un array vuoto per raggruppare un numero random di specializzazioni

@@ -35594,7 +35594,6 @@ __webpack_require__.r(__webpack_exports__);
       button.innerText = this.searchedSpec;
       this.searchedSpec = '';
       this.isActive = !this.isActive;
-      console.log(event.target);
       // alla ricerca eseguo un push del parametro specialization name in search bar 
       this.$router.push({
         name: "search",
@@ -36304,6 +36303,7 @@ function valoreODefault(valore, defaultValore) {
       if (this.selectedPropriety === "Città") return this.result.filter(function (doctor) {
         return valoreODefault(doctor.detail.address, '').toLowerCase().startsWith(_this.searched.toLowerCase());
       });
+      console.log(this.result);
     },
     // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
     // In questo oggetto le proprietà sono la media del rating e il numero di review su cui è basata la media.
@@ -36334,7 +36334,7 @@ function valoreODefault(valore, defaultValore) {
     //fai una chiamata per restituire tutte le specializzazioni disponibili
     getSpecializations: function getSpecializations() {
       var _this2 = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/specializations/').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/specializations').then(function (res) {
         _this2.specializations = res.data;
       });
     },
@@ -37192,14 +37192,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "/login"
     }
-  }, [_vm._v("Login")])]), _vm._v(" "), _c("li", {
-    staticClass: "nav-item"
-  }, [_c("a", {
-    staticClass: "nav-link text-white",
-    attrs: {
-      href: "/register"
-    }
-  }, [_vm._v("Register")])])])])])]);
+  }, [_vm._v("Area Privata")])])])])])]);
 }];
 render._withStripped = true;
 
@@ -91630,7 +91623,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 /* add icons to the library */
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faHouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPhone"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faArrowRight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPenToSquare"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEnvelope"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faRotateLeft"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faClock"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFile"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEuroSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faInfo"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFax"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faChevronDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faChevronUp"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMagnifyingGlass"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faHouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPhone"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faArrowRight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPenToSquare"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEnvelope"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faRotateLeft"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faClock"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFile"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEuroSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faInfo"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFax"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faChevronDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faChevronUp"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMagnifyingGlass"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMessage"]);
 
 /* add font awesome icon component */
 Vue.component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"]);
@@ -91689,7 +91682,7 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_pages_HomePage__WEBPACK_IMPORTED_MODULE_2__["default"],
     name: 'home'
   }, {
-    path: '/search/:specializationId',
+    path: '/search/:specializationName',
     component: _components_pages_UserSearchPage__WEBPACK_IMPORTED_MODULE_5__["default"],
     name: 'search'
   }, {
