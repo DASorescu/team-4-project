@@ -201,12 +201,19 @@ export default {
 <style lang="scss">
 #user-details {
   main {
-    background-color: #eef2f7;
+    background-image: url("https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg");
+    animation: scroll 100s linear infinite;
+  }
+
+  @keyframes scroll {
+    100% {
+      background-position: 0 -2000px;
+    }
   }
 
   #main-banner {
     height: 200px;
-    background: linear-gradient(#0451CB, 60%, #fff);
+    background: linear-gradient(#0451cb, 60%, #fff);
 
     .doctor-card {
       display: flex;
@@ -288,16 +295,22 @@ export default {
     margin: 0 auto;
     width: 800px;
     padding: 50px 0;
+
     .address {
       width: 40%;
       padding: 20px 0;
       text-align: center;
+      background: linear-gradient(#0451cb, 60%, #fff);
+      border-radius: 10px;
     }
 
     .contacts {
       display: flex;
       align-items: center;
       margin-left: 30px;
+      background: linear-gradient(#0451cb, 60%, #fff);
+      padding: 0 6px;
+      border-radius: 10px;
 
       #hours {
         padding-right: 4.5rem;
