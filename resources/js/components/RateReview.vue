@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span @click.self="handlerClick(0)">
     <span
       v-for="n in 5"
       :key="'s-' + n"
@@ -37,9 +37,9 @@ export default {
 </script>
 
 <style lang="scss">
-.e-primary{
-    color: transparent;
-    text-shadow: 0 0 0 rgb(252, 238, 37);
+.e-primary {
+  color: transparent;
+  text-shadow: 0 0 0 rgb(252, 238, 37);
 }
 .e-white {
   color: transparent;

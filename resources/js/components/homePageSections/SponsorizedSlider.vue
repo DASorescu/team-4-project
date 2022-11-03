@@ -10,7 +10,7 @@
       class="shadow"
     >
       <div
-        class="card shadow w-3-m-2"
+        class="card shadow w-3-m-2 m-query"
         v-for="(doctor, i) in sponsorizedDoctors"
         :key="'sponsorized-' + i"
       >
@@ -84,7 +84,7 @@ export default {
       sponsorizedDoctors: [],
       showDoctors: false,
       plugins: [
-        new Arrow({ moveCount: 3 }),
+        new Arrow({ moveCount: 1 }),
         new AutoPlay({ duration: 2000, direction: "NEXT", stopOnHover: true }),
       ],
     };
@@ -129,14 +129,25 @@ export default {
 .slider {
   background: #fff;
 }
-.w-3-m-2 {
-  margin-right: 2em;
-  width: calc((100% / 3) - 2em);
-}
 .flicking-arrow-prev::before,
 .flicking-arrow-prev::after,
 .flicking-arrow-next::before,
 .flicking-arrow-next::after {
   background-color: var(--primary);
+}
+.w-3-m-2 {
+  margin-right: 2em;
+  width: calc((100% / 3) - 2em);
+}
+
+@media (max-width: 820px) {
+  .m-query {
+    width: calc((100% / 2) - 2em);
+  }
+}
+@media (max-width: 560px) {
+  .m-query {
+    width: calc((100% / 1) - 2em);
+  }
 }
 </style>

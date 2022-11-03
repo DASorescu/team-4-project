@@ -147,6 +147,16 @@
       </section>
     </main>
     <Footer />
+    <div class="overlay" v-if="showMessage" @click="showMessage = false">
+      <div class="card shadow" @click.stop>
+        <div class="card-header d-flex justify-content-end">
+          <button class="btn btn-danger" @click="showMessage = false">x</button>
+        </div>
+        <div class="card-body">
+          <h3>Messaggio Inviato Con Successo!!!</h3>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -166,6 +176,7 @@ export default {
     user: {},
     specializations: [],
     isLoading: false,
+    showMessage: false,
   }),
   methods: {
     fetchUser($id) {
@@ -187,8 +198,8 @@ export default {
         this.specializations = res.data;
       });
     },
-    messageSubmitted(message) {
-      console.log("messagesubmitted", message);
+    messageSubmitted(_message) {
+      this.showMessage = true;
     },
   },
   mounted() {
@@ -353,6 +364,21 @@ export default {
     font-weight: bold;
     font-size: 1.5rem;
     padding-bottom: 10px;
+  }
+}
+.overlay {
+  display: grid;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-content: center;
+  z-index: 1000;
+  .card {
+    z-index: 1020;
   }
 }
 </style>
