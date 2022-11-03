@@ -1,5 +1,5 @@
 <template>
-    <div class="py-4">
+    <div class="py-4 slider">
         <h1 class="text-center py-4">The Best</h1>
         <Flicking
             :options="{
@@ -105,6 +105,10 @@ export default {
 </script>
 
 <style>
+.slider {
+    background: #fff;
+
+}
 .w-3-m-2{
     margin-right: 2em;
     width: calc((100% / 3) - 2em);

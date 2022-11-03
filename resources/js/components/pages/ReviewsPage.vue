@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="content">
         <NavBar/>
         <div class="d-flex flex-column mt-5 container">
                 <div v-for="(review,i) in reviews" :key="'rev-'+i" class="card shadow mt-2">
@@ -68,3 +68,9 @@ export default {
 // devo fare la chiamata per prendere tutte le review di quel dottore.
 // come abbiamo fatto in usersearchpage
 </script>
+<style scoped>
+.content {
+    background: #fff;
+
+}
+</style>
