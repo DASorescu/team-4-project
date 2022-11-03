@@ -63,7 +63,7 @@
                                 </a>
                             </div>
                             <div class="ml-2">
-                                <button id="card-button" class="btn btn-success mt-2"
+                                <button id="card-button" class="btn btn-success"
                                     data-secret="{{ $intent->client_secret }}">
                                     Aggiungi Sponsorizzazione
                                 </button>

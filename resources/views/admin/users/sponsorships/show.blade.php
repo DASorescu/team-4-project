@@ -50,9 +50,11 @@
                         <a class="btn btn-secondary mr-2 shadow-sm" href="{{ route('admin.users.edit') }}">
                             <i class="fa-solid fa-rotate-left mr-2"></i>Torna indietro
                         </a>
+                        @if(!($user->subscribed('1')) && !($user->subscribed('2') && !($user->subscribed('3'))))
                         <a class="btn btn-warning mr-2 shadow-sm" href="{{ route('admin.users.sponsorships.create') }}">
                             <i class="fa-solid fa-plus mr-2"></i>Aggiungi Sponsorizzazioni
                         </a>
+                        @endif
                     </div>
                 </div>
             </div>
