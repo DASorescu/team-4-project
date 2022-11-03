@@ -36243,18 +36243,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 
-function valoreODefault(valore, defaultValore) {
-  if (valore !== null && valore) {
-    return valore;
-  }
-  return defaultValore;
-}
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserSearchPage",
   components: {
@@ -36264,23 +36257,26 @@ function valoreODefault(valore, defaultValore) {
     NavBar: _homePageSections_NavBar_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
-    var _ref;
-    return _ref = {
-      //proprietà su cui ciclare
-      proprieties: ['Nome', 'Cognome', 'Città'],
+    return {
       //id di partenza nel v-model select su cui ciclare
-      currentSpecialization: 0,
+      currentSpecialization: "",
       specializations: [],
       showBar: false,
       searched: "",
-      selectedPropriety: ""
-    }, _defineProperty(_ref, "proprieties", ['Nome', 'Cognome', 'Città']), _defineProperty(_ref, "isLoading", false), _defineProperty(_ref, "result", []), _defineProperty(_ref, "cities", []), _defineProperty(_ref, "fetching", false), _defineProperty(_ref, "selectedAddress", ""), _ref;
+      selectedPropriety: "",
+      proprieties: ['Nome', 'Cognome', 'Città'],
+      isLoading: false,
+      result: [],
+      cities: [],
+      fetching: false,
+      selectedAddress: ""
+    };
   },
   computed: {
     printSp: function printSp() {
       var _this = this;
       return this.specializations.filter(function (specialization) {
-        return specialization.label === _this.hasSpecializationName;
+        return specialization.label === _this.currentSpecialization;
       });
     },
     hasSpecializations: function hasSpecializations() {
@@ -36294,20 +36290,10 @@ function valoreODefault(valore, defaultValore) {
     },
     //Filtro per Proprietà oggetto dottore, va ottimizzato
     filteredDoctorsBy: function filteredDoctorsBy() {
-      var _this2 = this;
-      if (this.searched === "") {
+      if (this.$route.params.specializationName) {
         return this.result;
       }
       ;
-      if (this.selectedPropriety === "Nome") return this.result.filter(function (doctor) {
-        return valoreODefault(doctor.detail.first_name, '').toLowerCase().startsWith(_this2.searched.toLowerCase());
-      });
-      if (this.selectedPropriety === "Cognome") return this.result.filter(function (doctor) {
-        return valoreODefault(doctor.detail.last_name, '').toLowerCase().startsWith(_this2.searched.toLowerCase());
-      });
-      if (this.selectedPropriety === "Città") return this.result.filter(function (doctor) {
-        return valoreODefault(doctor.detail.address, '').toLowerCase().startsWith(_this2.searched.toLowerCase());
-      });
     },
     // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
     // In questo oggetto le proprietà sono la media del rating e il numero di review su cui è basata la media.
@@ -36337,21 +36323,21 @@ function valoreODefault(valore, defaultValore) {
   methods: {
     //fai una chiamata per restituire tutte le specializzazioni disponibili
     getSpecializations: function getSpecializations() {
-      var _this3 = this;
+      var _this2 = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/specializations/').then(function (res) {
-        _this3.specializations = res.data;
+        _this2.specializations = res.data;
       });
     },
     searchDoctorBySpecialization: function searchDoctorBySpecialization(specializationName) {
-      var _this4 = this;
+      var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var res, _iterator2, _step2, doctor;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this4.showBar = false;
-                _this4.result = [];
+                _this3.showBar = false;
+                _this3.result = [];
                 if (specializationName) {
                   _context.next = 4;
                   break;
@@ -36362,7 +36348,7 @@ function valoreODefault(valore, defaultValore) {
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/search/' + specializationName);
               case 6:
                 res = _context.sent;
-                _this4.fetching = true;
+                _this3.fetching = true;
                 if (Array.isArray(res.data)) {
                   // ciclo sui dottori che ho ottenuto
                   _iterator2 = _createForOfIteratorHelper(res.data);
@@ -36384,10 +36370,10 @@ function valoreODefault(valore, defaultValore) {
                       //     reviews: doctorReviews,
                       // });
 
-                      _this4.result.push(doctor);
+                      _this3.result.push(doctor);
                       //cosi non si ripetono le città :)
-                      if (doctor.detail.address !== null && !_this4.cities.includes(doctor.detail.address)) {
-                        _this4.cities.push(doctor.detail.address);
+                      if (doctor.detail.address !== null && !_this3.cities.includes(doctor.detail.address)) {
+                        _this3.cities.push(doctor.detail.address);
                       }
                     }
                   } catch (err) {
@@ -36396,7 +36382,7 @@ function valoreODefault(valore, defaultValore) {
                     _iterator2.f();
                   }
                 }
-                _this4.fetching = false;
+                _this3.fetching = false;
               case 10:
               case "end":
                 return _context.stop();
@@ -37698,11 +37684,11 @@ var render = function render() {
   return _c("div", [_c("NavBar"), _vm._v(" "), _c("div", {
     staticClass: "container"
   }, [_c("div", {
-    staticClass: "text-center my-5",
+    staticClass: "my-5",
     attrs: {
       id: "selezione-campi"
     }
-  }, [_c("div", [_c("div", [_vm.hasSpecializations ? _c("select", {
+  }, [_vm._m(0), _vm._v(" "), _vm.hasSpecializations ? _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -37723,70 +37709,19 @@ var render = function render() {
       }]
     }
   }, [_c("option", {
-    domProps: {
-      value: 0
+    attrs: {
+      value: "",
+      disabled: ""
     }
-  }, [_vm._v("Scegli la specializzazione dei medici")]), _vm._v(" "), _vm._l(_vm.specializations, function (specialization) {
+  }, [_vm._v(" " + _vm._s(_vm.currentSpecialization))]), _vm._v(" "), _vm._l(_vm.specializations, function (specialization) {
     return _c("option", {
-      key: "spec-" + specialization.id,
+      key: "spec-" + specialization.label,
       domProps: {
-        value: specialization.id,
-        selected: _vm.currentSpecialization === specialization.id
+        value: specialization.label,
+        selected: _vm.currentSpecialization === specialization.label
       }
-    }, [_vm._v("\n                            " + _vm._s(specialization.label) + "\n                        ")]);
-  })], 2) : _vm._e(), _vm._v(" "), _c("select", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.selectedPropriety,
-      expression: "selectedPropriety"
-    }],
-    staticClass: "form-select",
-    attrs: {
-      "aria-label": "Default select example"
-    },
-    on: {
-      change: function change($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-          return o.selected;
-        }).map(function (o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val;
-        });
-        _vm.selectedPropriety = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
-      }
-    }
-  }, [_c("option", {
-    attrs: {
-      value: ""
-    }
-  }, [_vm._v(_vm._s("Filtra per..."))]), _vm._v(" "), _vm._l(_vm.proprieties, function (propriety, index) {
-    return _c("option", {
-      key: index,
-      domProps: {
-        value: propriety
-      }
-    }, [_vm._v("\n                            " + _vm._s(propriety) + "\n                        ")]);
-  })], 2)]), _vm._v(" "), _c("div", [_c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.searched,
-      expression: "searched"
-    }],
-    attrs: {
-      type: "text"
-    },
-    domProps: {
-      value: _vm.searched
-    },
-    on: {
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.searched = $event.target.value;
-      }
-    }
-  })])])]), _vm._v(" "), _vm.hasResult ? _c("div", {
+    }, [_vm._v("\n                    " + _vm._s(specialization.label) + "\n                ")]);
+  })], 2) : _vm._e()]), _vm._v(" "), _vm.hasResult ? _c("div", {
     staticClass: "flex-wrap d-flex"
   }, _vm._l(_vm.filteredDoctorsBy, function (doctor) {
     return _c("div", {
@@ -37794,7 +37729,7 @@ var render = function render() {
       staticClass: "card shadow w-100 my-2"
     }, [_c("div", {
       staticClass: "card-header d-flex justify-content-between align-items-center"
-    }, [_c("div", [_vm._v("\n                        Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name) + "\n                    ")]), _vm._v(" "), _c("div", [_c("router-link", {
+    }, [_c("div", [_c("h4", [_vm._v("Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name))])]), _vm._v(" "), _c("div", [_c("router-link", {
       staticClass: "btn btn-primary d-flex align-items-center",
       attrs: {
         to: {
@@ -37807,7 +37742,7 @@ var render = function render() {
     }, [_vm._v("\n                            Visualizza profilo\n                        ")])], 1)]), _vm._v(" "), _c("div", {
       staticClass: "card-body d-flex align-items-center"
     }, [_c("div", {
-      staticClass: "col-4 w-25 mr-2"
+      staticClass: "col-3 w-25 mr-2"
     }, [_c("input", {
       staticClass: "img-fluid rounded-circle",
       attrs: {
@@ -37816,24 +37751,24 @@ var render = function render() {
         alt: ""
       }
     })]), _vm._v(" "), _c("div", {
-      staticClass: "col-4 border-left border-white"
-    }, [_c("div", [_vm._v("Specializzazione: \n                            "), _vm._v(" "), _vm._l(_vm.printSp, function (specialization) {
+      staticClass: "col-5 border-left border-white"
+    }, [_vm.currentSpecialization !== "" ? _c("div", [_vm._v("Specializzazione:\n                            "), _vm._v(" "), _vm._l(_vm.printSp, function (specialization) {
       return _c("span", {
         key: specialization.id,
         staticClass: "ml-2",
         "class": "badge badge-" + specialization.color
       }, [_vm._v(_vm._s(specialization.label) + "\n                            ")]);
-    })], 2), _vm._v(" "), _c("div", {
+    })], 2) : _vm._e(), _vm._v(" "), _c("div", {
       staticClass: "my-3"
     }, [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("div", [_vm._v("Email: " + _vm._s(doctor.email))])]), _vm._v(" "), _c("div", {
       staticClass: "col-4 border-left border-white"
-    }, [_c("div", [_vm._v("\n                            \n                                Rating:\n                                "), _c("RateReview", {
+    }, [_c("div", [_vm._v("\n\n                            Rating:\n                            "), _c("RateReview", {
       attrs: {
         value: _vm.averageReviews[doctor.id].avg
       }
     }), _vm._v(" "), _c("div", {
       staticClass: "my-3"
-    }, [_vm._v("\n                                    Recensioni: (" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n\n                                ")]), _vm._v(" "), _c("router-link", {
+    }, [_vm._v("\n                                Recensioni: (" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n\n                            ")]), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-primary",
       attrs: {
         to: {
@@ -37846,7 +37781,11 @@ var render = function render() {
     }, [_vm._v("\n                                Recensioni\n                            ")])], 1)])])]);
   }), 0) : _c("AppLoader")], 1)], 1);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", [_c("span", [_vm._v("Scegli una specializzazione")])]);
+}];
 render._withStripped = true;
 
 
@@ -42420,7 +42359,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".card[data-v-3982aa98] {\n  background-color: rgb(5, 81, 203);\n  color: white;\n}", ""]);
+exports.push([module.i, "#selezione-campi span[data-v-3982aa98] {\n  font-size: 20px;\n}\n.card[data-v-3982aa98] {\n  background-color: rgb(5, 81, 203);\n  color: white;\n}\n.card-header[data-v-3982aa98] {\n  font-size: 40px;\n}", ""]);
 
 // exports
 
@@ -91752,7 +91691,7 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_pages_HomePage__WEBPACK_IMPORTED_MODULE_2__["default"],
     name: 'home'
   }, {
-    path: '/search/:specializationName',
+    path: '/search/',
     component: _components_pages_UserSearchPage__WEBPACK_IMPORTED_MODULE_5__["default"],
     name: 'search'
   }, {
