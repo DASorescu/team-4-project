@@ -35594,7 +35594,6 @@ __webpack_require__.r(__webpack_exports__);
       button.innerText = this.searchedSpec;
       this.searchedSpec = '';
       this.isActive = !this.isActive;
-      console.log(event.target);
       // alla ricerca eseguo un push del parametro specialization name in search bar 
       this.$router.push({
         name: "search",
@@ -36304,6 +36303,7 @@ function valoreODefault(valore, defaultValore) {
       if (this.selectedPropriety === "Città") return this.result.filter(function (doctor) {
         return valoreODefault(doctor.detail.address, '').toLowerCase().startsWith(_this.searched.toLowerCase());
       });
+      console.log(this.result);
     },
     // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
     // In questo oggetto le proprietà sono la media del rating e il numero di review su cui è basata la media.
@@ -36334,7 +36334,7 @@ function valoreODefault(valore, defaultValore) {
     //fai una chiamata per restituire tutte le specializzazioni disponibili
     getSpecializations: function getSpecializations() {
       var _this2 = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/specializations/').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/specializations').then(function (res) {
         _this2.specializations = res.data;
       });
     },
@@ -91682,7 +91682,7 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_pages_HomePage__WEBPACK_IMPORTED_MODULE_2__["default"],
     name: 'home'
   }, {
-    path: '/search/:specializationId',
+    path: '/search/:specializationName',
     component: _components_pages_UserSearchPage__WEBPACK_IMPORTED_MODULE_5__["default"],
     name: 'search'
   }, {

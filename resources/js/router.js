@@ -23,7 +23,7 @@ const routes = new VueRouter({
     mode: 'history',
     routes: [
         {path: '/', component: HomePage, name: 'home'},
-        {path: '/search/:specializationId', component: UserSearchPage, name: 'search'},
+        { path: '/search/:specializationName', component: UserSearchPage, name: 'search' },
         {path: '/users/:id', component: UserDetailsPage, name: 'user-detail' },
         {path: '/users/:userId/reviews', component: ReviewsPage, name: 'reviews' },
 
