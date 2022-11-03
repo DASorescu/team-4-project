@@ -21101,6 +21101,12 @@ function valoreODefault(valore, defaultValore) {
     }, _defineProperty(_ref, "proprieties", ['Nome', 'Cognome', 'Città']), _defineProperty(_ref, "isLoading", false), _defineProperty(_ref, "result", []), _defineProperty(_ref, "cities", []), _defineProperty(_ref, "fetching", false), _defineProperty(_ref, "selectedAddress", ""), _ref;
   },
   computed: {
+    printSp: function printSp() {
+      var _this = this;
+      return this.specializations.filter(function (specialization) {
+        return specialization.label === _this.hasSpecializationName;
+      });
+    },
     hasSpecializations: function hasSpecializations() {
       return this.specializations.length > 0;
     },
@@ -21112,19 +21118,19 @@ function valoreODefault(valore, defaultValore) {
     },
     //Filtro per Proprietà oggetto dottore, va ottimizzato
     filteredDoctorsBy: function filteredDoctorsBy() {
-      var _this = this;
+      var _this2 = this;
       if (this.searched === "") {
         return this.result;
       }
       ;
       if (this.selectedPropriety === "Nome") return this.result.filter(function (doctor) {
-        return valoreODefault(doctor.detail.first_name, '').toLowerCase().startsWith(_this.searched.toLowerCase());
+        return valoreODefault(doctor.detail.first_name, '').toLowerCase().startsWith(_this2.searched.toLowerCase());
       });
       if (this.selectedPropriety === "Cognome") return this.result.filter(function (doctor) {
-        return valoreODefault(doctor.detail.last_name, '').toLowerCase().startsWith(_this.searched.toLowerCase());
+        return valoreODefault(doctor.detail.last_name, '').toLowerCase().startsWith(_this2.searched.toLowerCase());
       });
       if (this.selectedPropriety === "Città") return this.result.filter(function (doctor) {
-        return valoreODefault(doctor.detail.address, '').toLowerCase().startsWith(_this.searched.toLowerCase());
+        return valoreODefault(doctor.detail.address, '').toLowerCase().startsWith(_this2.searched.toLowerCase());
       });
     },
     // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
@@ -21155,21 +21161,21 @@ function valoreODefault(valore, defaultValore) {
   methods: {
     //fai una chiamata per restituire tutte le specializzazioni disponibili
     getSpecializations: function getSpecializations() {
-      var _this2 = this;
+      var _this3 = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/specializations/').then(function (res) {
-        _this2.specializations = res.data;
+        _this3.specializations = res.data;
       });
     },
     searchDoctorBySpecialization: function searchDoctorBySpecialization(specializationName) {
-      var _this3 = this;
+      var _this4 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var res, _iterator2, _step2, doctor;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this3.showBar = _this3.showBtn = false;
-                _this3.result = [];
+                _this4.showBar = _this4.showBtn = false;
+                _this4.result = [];
                 if (specializationName) {
                   _context.next = 4;
                   break;
@@ -21180,7 +21186,7 @@ function valoreODefault(valore, defaultValore) {
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/search/' + specializationName);
               case 6:
                 res = _context.sent;
-                _this3.fetching = true;
+                _this4.fetching = true;
                 if (Array.isArray(res.data)) {
                   // ciclo sui dottori che ho ottenuto
                   _iterator2 = _createForOfIteratorHelper(res.data);
@@ -21202,10 +21208,10 @@ function valoreODefault(valore, defaultValore) {
                       //     reviews: doctorReviews,
                       // });
 
-                      _this3.result.push(doctor);
+                      _this4.result.push(doctor);
                       //cosi non si ripetono le città :)
-                      if (doctor.detail.address !== null && !_this3.cities.includes(doctor.detail.address)) {
-                        _this3.cities.push(doctor.detail.address);
+                      if (doctor.detail.address !== null && !_this4.cities.includes(doctor.detail.address)) {
+                        _this4.cities.push(doctor.detail.address);
                       }
                     }
                   } catch (err) {
@@ -21214,8 +21220,8 @@ function valoreODefault(valore, defaultValore) {
                     _iterator2.f();
                   }
                 }
-                _this3.fetching = false;
-                _this3.showBtn = true;
+                _this4.fetching = false;
+                _this4.showBtn = true;
               case 11:
               case "end":
                 return _context.stop();
@@ -22622,7 +22628,13 @@ var render = function render() {
         src: doctor.detail.image,
         alt: ""
       }
-    })]), _vm._v(" "), _c("div", [_c("p", [_vm._v("Specializzazione: " + _vm._s(doctor.specialization))]), _vm._v(" "), _c("p", [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("p", [_vm._v("Email: " + _vm._s(doctor.email))]), _vm._v(" "), _c("p", [_vm._v("\n                            Rating:\n                            "), _c("RateReview", {
+    })]), _vm._v(" "), _c("div", [_c("div", [_vm._v("Specializzazione: \n                            "), _vm._l(_vm.printSp, function (specialization) {
+      return _c("span", {
+        key: specialization.id,
+        staticClass: "ml-2",
+        "class": "badge badge-" + specialization.color
+      }, [_vm._v(_vm._s(specialization.label) + "\n                            ")]);
+    })], 2), _vm._v(" "), _c("div", [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("div", [_vm._v("Email: " + _vm._s(doctor.email))]), _vm._v(" "), _c("div", [_vm._v("\n                            Rating:\n                            "), _c("RateReview", {
       attrs: {
         value: _vm.averageReviews[doctor.id].avg
       }

@@ -66,10 +66,15 @@
                             <input class="img-fluid rounded-circle" type="image" :src="doctor.detail.image" alt="" />
                         </div>
                         <div>
-                            <p>Specializzazione: {{ doctor.specialization }}</p>
-                            <p>Città: {{ doctor.detail.address }}</p>
-                            <p>Email: {{ doctor.email }}</p>
-                            <p>
+                            <div>Specializzazione: 
+                                <span class="ml-2" v-for="specialization in printSp" :key="specialization.id" 
+                                    :class="'badge badge-'+specialization.color">{{specialization.label}}
+                                </span>
+
+                            </div>
+                            <div>Città: {{ doctor.detail.address }}</div>
+                            <div>Email: {{ doctor.email }}</div>
+                            <div>
                                 Rating:
                                 <RateReview :value="averageReviews[doctor.id].avg" />
                                 ({{ averageReviews[doctor.id].count }})
@@ -77,7 +82,7 @@
                                     :to="{ name: 'reviews', params: { userId: doctor.id } }">
                                     mostra
                                 </router-link>
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -132,7 +137,9 @@ export default {
         };
     },
     computed: {
-
+        printSp(){
+            return this.specializations.filter(specialization => specialization.label === this.hasSpecializationName)
+        },
         hasSpecializations() {
             return this.specializations.length > 0
         },
