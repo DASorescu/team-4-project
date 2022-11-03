@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
 
             foreach ($spec_ids as $spec_id) {
 
-                if ($faker->boolean()) $specs[] = $spec_id;
+                if ($faker->boolean() && count($specs) < 3) $specs[]  = $spec_id;
             }
 
             // genero un numero random fra 0 e gli sponsor
