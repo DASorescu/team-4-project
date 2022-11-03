@@ -32,7 +32,7 @@ export default {
 <style lang="scss">
 .e-primary{
     color: transparent;
-    text-shadow: 0 0 0 rgb(204, 204, 3);
+    text-shadow: 0 0 0 rgb(252, 238, 37);
 }
 .e-white{
     color: transparent;

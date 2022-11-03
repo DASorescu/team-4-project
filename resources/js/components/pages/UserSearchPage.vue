@@ -1,23 +1,16 @@
 <template>
     <div>
         <NavBar />
-        <div class="row justify-content-center">
+        <div class="container">
 
 
-            <div class="d-flex justify-content-center">
+            
 
-                <button class="btn btn-primary" @click="showBar = !showBar" v-if="showBtn">
-                    Ricerca Avanzata
-                </button>
+            <!--Ricerca Campi-->
+            <div id="selezione-campi" class="text-center my-5">
+                <div>
 
-
-            </div>
-
-
-            <div v-if="showBar" class="text-center ">
-                <div class="text-center mx-auto">
-
-                    <div class="my-2">
+                    <div>
                         <select v-if="hasSpecializations" v-model="currentSpecialization"
                             @change="searchDoctorBySpecialization(currentSpecialization)">
                             <option :value="0">Scegli la specializzazione dei medici</option>
@@ -48,9 +41,10 @@
 
 
             <!--Render su pagina-->
-            <div v-if="hasResult" class="mt-3 container flex-wrap d-flex">
+            <div v-if="hasResult" class="flex-wrap d-flex">
                 <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctorsBy" :key="'res-' + doctor.id">
                     <div class="card-header d-flex justify-content-between align-items-center">
+                        
                         <div>
                             Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}
                         </div>
@@ -62,11 +56,12 @@
                         </div>
                     </div>
                     <div class="card-body d-flex align-items-center">
-                        <div class="w-25 mr-2">
-                            <input class="img-fluid rounded-circle" type="image" :src="doctor.detail.image" alt="" />
+                        <div class="col-4 w-25 mr-2">
+                            <input class="img-fluid rounded-circle" type="image" :src="doctor.detail.image" alt=""/>
                         </div>
-                        <div>
+                        <div class="col-4">
                             <div>Specializzazione: 
+                                <!--tramite printSp stampo specializzazione corrente-->
                                 <span class="ml-2" v-for="specialization in printSp" :key="specialization.id" 
                                     :class="'badge badge-'+specialization.color">{{specialization.label}}
                                 </span>
@@ -74,15 +69,19 @@
                             </div>
                             <div>Città: {{ doctor.detail.address }}</div>
                             <div>Email: {{ doctor.email }}</div>
-                            <div>
+                            
+                        </div>
+                        <div class="col-4">
+                            <div class="d-flex justify-content-between">
                                 Rating:
                                 <RateReview :value="averageReviews[doctor.id].avg" />
                                 ({{ averageReviews[doctor.id].count }})
                                 <router-link class="btn btn-primary"
                                     :to="{ name: 'reviews', params: { userId: doctor.id } }">
-                                    mostra
+                                    Recensioni
                                 </router-link>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -123,7 +122,6 @@ export default {
             currentSpecialization: 0,
             specializations: [],
 
-            showBtn: false,
             showBar: false,
             searched: "",
             selectedPropriety: "",
@@ -198,7 +196,7 @@ export default {
 
 
         async searchDoctorBySpecialization(specializationName) {
-            this.showBar = this.showBtn = false
+            this.showBar = false
             this.result = [];
             if (!specializationName) {
                 return;
@@ -236,7 +234,6 @@ export default {
                 }
             }
             this.fetching = false;
-            this.showBtn = true
         },
     },
 
@@ -252,6 +249,12 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.card{
+    background-color: rgb(5,81,203);
+    color: white;
+}
+
 
 </style>
 
