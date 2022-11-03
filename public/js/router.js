@@ -22617,22 +22617,24 @@ var render = function render() {
         alt: ""
       }
     })]), _vm._v(" "), _c("div", {
-      staticClass: "col-4"
+      staticClass: "col-4 border-left border-white"
     }, [_c("div", [_vm._v("Specializzazione: \n                            "), _vm._v(" "), _vm._l(_vm.printSp, function (specialization) {
       return _c("span", {
         key: specialization.id,
         staticClass: "ml-2",
         "class": "badge badge-" + specialization.color
       }, [_vm._v(_vm._s(specialization.label) + "\n                            ")]);
-    })], 2), _vm._v(" "), _c("div", [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("div", [_vm._v("Email: " + _vm._s(doctor.email))])]), _vm._v(" "), _c("div", {
-      staticClass: "col-4"
-    }, [_c("div", {
-      staticClass: "d-flex justify-content-between"
-    }, [_vm._v("\n                            Rating:\n                            "), _c("RateReview", {
+    })], 2), _vm._v(" "), _c("div", {
+      staticClass: "my-3"
+    }, [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("div", [_vm._v("Email: " + _vm._s(doctor.email))])]), _vm._v(" "), _c("div", {
+      staticClass: "col-4 border-left border-white"
+    }, [_c("div", [_vm._v("\n                            \n                                Rating:\n                                "), _c("RateReview", {
       attrs: {
         value: _vm.averageReviews[doctor.id].avg
       }
-    }), _vm._v("\n                            (" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n                            "), _c("router-link", {
+    }), _vm._v(" "), _c("div", {
+      staticClass: "my-3"
+    }, [_vm._v("\n                                    Recensioni: (" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n\n                                ")]), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-primary",
       attrs: {
         to: {

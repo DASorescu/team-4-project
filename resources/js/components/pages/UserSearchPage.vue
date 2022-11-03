@@ -59,7 +59,7 @@
                         <div class="col-4 w-25 mr-2">
                             <input class="img-fluid rounded-circle" type="image" :src="doctor.detail.image" alt=""/>
                         </div>
-                        <div class="col-4">
+                        <div class="col-4 border-left border-white">
                             <div>Specializzazione: 
                                 <!--tramite printSp stampo specializzazione corrente-->
                                 <span class="ml-2" v-for="specialization in printSp" :key="specialization.id" 
@@ -67,15 +67,22 @@
                                 </span>
 
                             </div>
-                            <div>Città: {{ doctor.detail.address }}</div>
+                            <div class="my-3">Città: {{ doctor.detail.address }}</div>
                             <div>Email: {{ doctor.email }}</div>
                             
                         </div>
-                        <div class="col-4">
-                            <div class="d-flex justify-content-between">
-                                Rating:
-                                <RateReview :value="averageReviews[doctor.id].avg" />
-                                ({{ averageReviews[doctor.id].count }})
+                        <div class="col-4 border-left border-white">
+                            <div>
+                                
+                                    Rating:
+                                    <RateReview 
+                                    :value="averageReviews[doctor.id].avg" />
+                                    <div class="my-3">
+                                        Recensioni: ({{ averageReviews[doctor.id].count }})
+
+                                    </div>
+
+                            
                                 <router-link class="btn btn-primary"
                                     :to="{ name: 'reviews', params: { userId: doctor.id } }">
                                     Recensioni
