@@ -112,6 +112,7 @@
                                     <input type="phone" class="form-control" id="phone" name="phone"
                                     @if ($user->userDetail->phone) value="{{ old('phone', $user->userDetail->phone) }}" @endif
                                     required minlength="3">
+                                    <div class="d-none" id="phone-error">Inserisci un numero corretto!</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="cv">Curriculum</label>
