@@ -304,10 +304,9 @@ export default {
   .doctor-info {
     display: flex;
     margin: 0 auto;
-    width: 800px;
     padding: 50px 0;
     .address {
-      width: 40%;
+      flex-basis: 40%;
       padding: 20px 0;
       text-align: center;
       background: linear-gradient(#72a6fb, 15%, #fff);
@@ -315,9 +314,9 @@ export default {
     }
 
     .contacts {
+      flex-basis: 50%;
       display: flex;
       align-items: center;
-      margin-left: 30px;
       background: linear-gradient(#72a6fb, 15%, #fff);
       opacity: 0.8;
       border-radius: 10px;
@@ -379,6 +378,48 @@ export default {
   z-index: 1000;
   .card {
     z-index: 1020;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #main-banner {
+    max-width: 480px;
+  }
+
+  #info-banner,
+  .arrow {
+    display: none;
+  }
+
+  .doctor-info {
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .address,
+    .contacts {
+      margin: 0 auto;
+      margin-bottom: 10px;
+    }
+  }
+
+  .user-page-details {
+    max-width: 480px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .doctor-info {
+    flex-wrap: nowrap;
+
+    .address {
+      flex-basis: 40%;
+      margin-left: 40px;
+    }
+    .contacts {
+      flex-basis: 30%;
+      margin: 0 10px;
+      margin-right: 20px;
+    }
   }
 }
 </style>
