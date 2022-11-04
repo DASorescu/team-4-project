@@ -12,17 +12,30 @@
 
 
 
-                <div> <span>Scegli una specializzazione</span></div> 
+                
                 <select v-if="hasSpecializations" v-model="currentSpecialization"
                     @change="searchDoctorBySpecialization(currentSpecialization)">
-                    <option value="" disabled> {{currentSpecialization}}</option>
+                    <option value="" disabled> Scegli una specializzazione </option>
                     <option v-for="specialization in specializations" :key="'spec-' + specialization.label"
                         :value="specialization.label" :selected="currentSpecialization === specialization.label">
                         {{ specialization.label }}
                     </option>
                 </select>
 
+                
+                <select v-model = "selectedRating">
+                    <option value=""> Miglior rating </option>
+                    <option value=""> Peggior rating </option>
+                </select>
 
+                 
+                <select v-model = "selectedReview">
+                    <option value=""> Più recensiti </option>
+                    <option value=""> Meno recensiti</option>
+                </select>
+
+
+                
             </div>
                 
 
@@ -110,9 +123,12 @@ export default {
     data() {
         return {
 
-            //id di partenza nel v-model select su cui ciclare
+            
             currentSpecialization: "",
             specializations: [],
+
+            selectedRating: "",
+            selectedReview: "",
 
             showBar: false,
             searched: "",
@@ -139,11 +155,13 @@ export default {
         hasSpecializationName() {
             return this.$route.params.specializationName
         },
-
+        hasSpecializationAlias() {
+            return this.currentSpecialization
+        },
         //Filtro per Proprietà oggetto dottore, va ottimizzato
         filteredDoctorsBy() {
 
-            if (this.$route.params.specializationName) { return this.result };
+            if (true) { return this.result };
 
         },
 
@@ -197,11 +215,11 @@ export default {
 
                     // // compongo un oggetto più semplice da usare con i dettagli.
                     // // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
-                    // this.result.push({
-                    //     id: doctor.id,
-                    //     email: doctor.email,
-                    //     detail: doctorDetail,
-                    //     reviews: doctorReviews,
+                    //    this.result.push({
+                    //        id: doctor.id,
+                    //        email: doctor.email,
+                    //        detail: doctorDetail,
+                    //        reviews: doctorReviews,
                     // });
 
                     this.result.push(doctor)
@@ -222,7 +240,8 @@ export default {
         if (this.hasSpecializationName) {
             this.searchDoctorBySpecialization(this.$route.params.specializationName);
         }
-
+        if (this.hasSpecializationAlias)
+            this.searchDoctorBySpecialization(this.$route.params.alias);
         this.getSpecializations();
     },
 };

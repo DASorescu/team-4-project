@@ -21081,9 +21081,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   data: function data() {
     return {
-      //id di partenza nel v-model select su cui ciclare
       currentSpecialization: "",
       specializations: [],
+      selectedRating: "",
+      selectedReview: "",
       showBar: false,
       searched: "",
       selectedPropriety: "",
@@ -21111,9 +21112,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     hasSpecializationName: function hasSpecializationName() {
       return this.$route.params.specializationName;
     },
+    hasSpecializationAlias: function hasSpecializationAlias() {
+      return this.currentSpecialization;
+    },
     //Filtro per Proprietà oggetto dottore, va ottimizzato
     filteredDoctorsBy: function filteredDoctorsBy() {
-      if (this.$route.params.specializationName) {
+      if (true) {
         return this.result;
       }
       ;
@@ -21186,11 +21190,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
                       // // compongo un oggetto più semplice da usare con i dettagli.
                       // // se voglio posso ottenere anche altre proprietù del dottore con la stessa logica. per esempio posso prendere le sponsorship.
-                      // this.result.push({
-                      //     id: doctor.id,
-                      //     email: doctor.email,
-                      //     detail: doctorDetail,
-                      //     reviews: doctorReviews,
+                      //    this.result.push({
+                      //        id: doctor.id,
+                      //        email: doctor.email,
+                      //        detail: doctorDetail,
+                      //        reviews: doctorReviews,
                       // });
 
                       _this3.result.push(doctor);
@@ -21219,6 +21223,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     if (this.hasSpecializationName) {
       this.searchDoctorBySpecialization(this.$route.params.specializationName);
     }
+    if (this.hasSpecializationAlias) this.searchDoctorBySpecialization(this.$route.params.alias);
     this.getSpecializations();
   }
 });
@@ -22489,7 +22494,7 @@ var render = function render() {
     attrs: {
       id: "selezione-campi"
     }
-  }, [_vm._m(0), _vm._v(" "), _vm.hasSpecializations ? _c("select", {
+  }, [_vm.hasSpecializations ? _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -22514,7 +22519,7 @@ var render = function render() {
       value: "",
       disabled: ""
     }
-  }, [_vm._v(" " + _vm._s(_vm.currentSpecialization))]), _vm._v(" "), _vm._l(_vm.specializations, function (specialization) {
+  }, [_vm._v(" Scegli una specializzazione ")]), _vm._v(" "), _vm._l(_vm.specializations, function (specialization) {
     return _c("option", {
       key: "spec-" + specialization.label,
       domProps: {
@@ -22522,7 +22527,59 @@ var render = function render() {
         selected: _vm.currentSpecialization === specialization.label
       }
     }, [_vm._v("\n                    " + _vm._s(specialization.label) + "\n                ")]);
-  })], 2) : _vm._e()]), _vm._v(" "), _vm.hasResult ? _c("div", {
+  })], 2) : _vm._e(), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.selectedRating,
+      expression: "selectedRating"
+    }],
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.selectedRating = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, [_c("option", {
+    attrs: {
+      value: ""
+    }
+  }, [_vm._v(" Miglior rating ")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: ""
+    }
+  }, [_vm._v(" Peggior rating ")])]), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.selectedReview,
+      expression: "selectedReview"
+    }],
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.selectedReview = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, [_c("option", {
+    attrs: {
+      value: ""
+    }
+  }, [_vm._v(" Più recensiti ")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: ""
+    }
+  }, [_vm._v(" Meno recensiti")])])]), _vm._v(" "), _vm.hasResult ? _c("div", {
     staticClass: "flex-wrap d-flex"
   }, _vm._l(_vm.filteredDoctorsBy, function (doctor) {
     return _c("div", {
@@ -22582,11 +22639,7 @@ var render = function render() {
     }, [_vm._v("\n                                Recensioni\n                            ")])], 1)])])]);
   }), 0) : _c("AppLoader")], 1)], 1);
 };
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", [_c("span", [_vm._v("Scegli una specializzazione")])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -41169,7 +41222,7 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_pages_HomePage__WEBPACK_IMPORTED_MODULE_2__["default"],
     name: 'home'
   }, {
-    path: '/search/',
+    path: '/search/:specializationName',
     component: _components_pages_UserSearchPage__WEBPACK_IMPORTED_MODULE_5__["default"],
     name: 'search'
   }, {
