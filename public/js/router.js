@@ -21160,9 +21160,9 @@ function valoreODefault(valore, defaultValore) {
   methods: {
     //fai una chiamata per restituire tutte le specializzazioni disponibili
     getSpecializations: function getSpecializations() {
-      var _this2 = this;
+      var _this3 = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/specializations/').then(function (res) {
-        _this2.specializations = res.data;
+        _this3.specializations = res.data;
       });
     },
     searchDoctorBySpecialization: function searchDoctorBySpecialization(specializationName) {
@@ -22508,7 +22508,7 @@ var render = function render() {
   return _c("div", {
     staticClass: "content"
   }, [_c("NavBar"), _vm._v(" "), _c("div", {
-    staticClass: "row justify-content-center"
+    staticClass: "container"
   }, [_c("div", {
     staticClass: "text-center my-5",
     attrs: {
@@ -22639,7 +22639,7 @@ var render = function render() {
       staticClass: "my-3"
     }, [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("div", [_vm._v("Email: " + _vm._s(doctor.email))])]), _vm._v(" "), _c("div", {
       staticClass: "col-4 border-left border-white"
-    }, [_c("div", [_vm._v("\n                            \n                                Rating:\n                                "), _c("RateReview", {
+    }, [_c("div", [_vm._v("\n                                Rating:\n                                "), _c("RateReview", {
       attrs: {
         value: _vm.averageReviews[doctor.id].avg
       }
@@ -22866,26 +22866,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".content[data-v-3982aa98] {\n  background: #fff;\n}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/UserSearchPage.vue?vue&type=style&index=0&id=3982aa98&lang=scss&scoped=true&":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/UserSearchPage.vue?vue&type=style&index=0&id=3982aa98&lang=scss&scoped=true& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".card[data-v-3982aa98] {\n  background-color: rgb(5, 81, 203);\n  color: white;\n}", ""]);
+exports.push([module.i, ".content[data-v-3982aa98] {\n  background: #fff;\n}\n.card[data-v-3982aa98] {\n  background-color: rgb(5, 81, 203);\n  color: white;\n}", ""]);
 
 // exports
 
@@ -22961,7 +22942,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.w-33 {\n    width: calc(100% / 3);\n}\n", ""]);
+exports.push([module.i, "\n.w-33 {\r\n    width: calc(100% / 3);\n}\r\n", ""]);
 
 // exports
 
@@ -22980,7 +22961,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#not-found {\n    height: 90vh;\n}\n", ""]);
+exports.push([module.i, "\n#not-found {\r\n    height: 90vh;\n}\r\n", ""]);
 
 // exports
 
@@ -39659,7 +39640,7 @@ module.exports = g;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/altroconsumo_reviews.svg?230774637878d60de6d430a5853310f7";
+module.exports = "/images/altroconsumo_reviews.svg?6fd8222c4c8a06d335d76203fe866331";
 
 /***/ }),
 
@@ -39670,7 +39651,7 @@ module.exports = "/images/altroconsumo_reviews.svg?230774637878d60de6d430a585331
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/commenti_diconodinoi.svg?3b5c331f73d1bccf1bb9deaf4be8c58f";
+module.exports = "/images/commenti_diconodinoi.svg?905a5f91a4c807e9f87cfdcbc50ef184";
 
 /***/ }),
 
@@ -39681,7 +39662,7 @@ module.exports = "/images/commenti_diconodinoi.svg?3b5c331f73d1bccf1bb9deaf4be8c
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/consultazione-sito.svg?8adb14069a9f6068c9d6e6492372d650";
+module.exports = "/images/consultazione-sito.svg?c1b0052bc3a9572ac10b1db3fedb396a";
 
 /***/ }),
 
@@ -39725,7 +39706,7 @@ module.exports = "/images/facebook-reviews.png?7ed45070ee48f1f27de29fb9c3a5b57f"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/medico-e-paziente.svg?57b8381e7dbbc0c31bafcb3875fd9efd";
+module.exports = "/images/medico-e-paziente.svg?657be2094dfa7eb5596f17045385a2b1";
 
 /***/ }),
 
@@ -39736,7 +39717,7 @@ module.exports = "/images/medico-e-paziente.svg?57b8381e7dbbc0c31bafcb3875fd9efd
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/medico-vertical.svg?b16bc91ab4694e9425231d48d6458d7d";
+module.exports = "/images/medico-vertical.svg?a078d4a5aaf060a5daa36a6f250a4bb9";
 
 /***/ }),
 
@@ -39747,7 +39728,7 @@ module.exports = "/images/medico-vertical.svg?b16bc91ab4694e9425231d48d6458d7d";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/prenotazione-online.svg?47029cc2d35633fde57f12ce802b5019";
+module.exports = "/images/prenotazione-online.svg?2f0f8d8a1fe40a8fb92f43e97d52d67e";
 
 /***/ }),
 
@@ -41359,7 +41340,7 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/emanueledezotti/team-4-project/resources/js/router.js */"./resources/js/router.js");
+module.exports = __webpack_require__(/*! C:\laravel\team-4-project\resources\js\router.js */"./resources/js/router.js");
 
 
 /***/ })
