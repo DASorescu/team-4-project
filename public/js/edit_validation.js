@@ -105,6 +105,8 @@ var addressError = document.getElementById('address-error');
 var specializations = document.querySelectorAll('.form-check-input');
 var specBtn = document.getElementById('spec-button');
 var specError = document.getElementById('spec-error');
+var phone = document.getElementById('phone');
+var phoneError = document.getElementById('phone-error');
 function checkTheBox() {
   var flag = 0;
   for (var i = 0; i < specializations.length; i++) {
@@ -124,6 +126,7 @@ form.addEventListener('submit', function (e) {
   var lnValid = true;
   var addressValid = true;
   var specValid = true;
+  var phoneValid = true;
   if (!isNaN(username.value) || username.value.length < 3 || username.value.length > 30) {
     userValid = false;
   }
@@ -139,12 +142,16 @@ form.addEventListener('submit', function (e) {
   if (!checkTheBox()) {
     specValid = false;
   }
+  if (!(/^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$/.test(phone.value) || !phone.value)) {
+    phoneValid = false;
+  }
   userValid ? (userError.className = 'd-none', username.classList.remove('border-danger')) : (userError.className = 'text-danger', username.classList.add('border-danger'));
   fnValid ? (fnError.className = 'd-none', firstName.classList.remove('border-danger')) : (fnError.className = 'text-danger', firstName.classList.add('border-danger'));
   lnValid ? (lnError.className = 'd-none', lastName.classList.remove('border-danger')) : (lnError.className = 'text-danger', lastName.classList.add('border-danger'));
   addressValid ? (addressError.className = 'd-none', addressChoice.classList.remove('border-danger')) : (addressError.className = 'text-danger', addressChoice.classList.add('border-danger'));
   specValid ? (specError.className = 'd-none', specBtn.classList.remove('border-danger')) : (specError.className = 'text-danger', specBtn.classList.add('border-danger'));
-  if (!(userValid && fnValid && lnValid && addressValid && specValid)) e.preventDefault();
+  phoneValid ? (phoneError.className = 'd-none', phone.classList.remove('border-danger')) : (phoneError.className = 'text-danger', phone.classList.add('border-danger'));
+  if (!(userValid && fnValid && lnValid && addressValid && specValid && phoneValid)) e.preventDefault();
 });
 
 /***/ }),

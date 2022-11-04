@@ -35503,7 +35503,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CustomSelect_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CustomSelect.vue */ "./resources/js/components/CustomSelect.vue");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'App',
+  name: "App",
   components: {
     customSelect: _CustomSelect_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -35565,11 +35565,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'customSelect',
+  name: "customSelect",
   data: function data() {
     return {
       isActive: false,
-      searchedSpec: ''
+      searchedSpec: ""
     };
   },
   props: {
@@ -35590,11 +35590,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     setFilteredSpecs: function setFilteredSpecs(event) {
       this.searchedSpec = event.target.innerText;
-      var button = document.getElementById('spec');
+      var button = document.getElementById("spec");
       button.innerText = this.searchedSpec;
-      this.searchedSpec = '';
+      this.searchedSpec = "";
       this.isActive = !this.isActive;
-      // alla ricerca eseguo un push del parametro specialization name in search bar 
+      // alla ricerca eseguo un push del parametro specialization name in search bar
       this.$router.push({
         name: "search",
         params: {
@@ -35825,7 +35825,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'HowItWorks'
+  name: "HowItWorks"
 });
 
 /***/ }),
@@ -36605,7 +36605,7 @@ var render = function render() {
       on: {
         click: _vm.setFilteredSpecs
       }
-    }, [_vm._v("\n                    " + _vm._s(specialization.label))]);
+    }, [_vm._v("\n          " + _vm._s(specialization.label) + "\n        ")]);
   }), 0)])])]);
 };
 var staticRenderFns = [];
@@ -37095,7 +37095,7 @@ var staticRenderFns = [function () {
   }, [_c("h2", {
     staticClass: "mb-5"
   }, [_vm._v("Come Funziona ?")]), _vm._v(" "), _c("div", {
-    staticClass: "container d-flex align-items-end"
+    staticClass: "container d-flex align-items-end sm-flex-wrap"
   }, [_c("div", {
     staticClass: "feature text-center p-1"
   }, [_c("img", {
@@ -37103,21 +37103,21 @@ var staticRenderFns = [function () {
       src: __webpack_require__(/*! ../../../../public/img/consultazione-sito.svg */ "./public/img/consultazione-sito.svg"),
       alt: "img"
     }
-  }), _vm._v(" "), _c("h3", [_vm._v("Scegli il Medico")]), _vm._v(" "), _c("p", [_vm._v("\n                Fai la scelta migliore secondo le tue esigenze: valuta curriculum, prezzo delle prestazioni,\n                patologie trattate e recensioni degli altri pazienti.\n            ")])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("h3", [_vm._v("Scegli il Medico")]), _vm._v(" "), _c("p", [_vm._v("\n        Fai la scelta migliore secondo le tue esigenze: valuta curriculum, prezzo delle\n        prestazioni, patologie trattate e recensioni degli altri pazienti.\n      ")])]), _vm._v(" "), _c("div", {
     staticClass: "feature text-center"
   }, [_c("img", {
     attrs: {
       src: __webpack_require__(/*! ../../../../public/img/prenotazione-online.svg */ "./public/img/prenotazione-online.svg"),
       alt: "img"
     }
-  }), _vm._v(" "), _c("h3", [_vm._v("Prenota la visita")]), _vm._v(" "), _c("p", [_vm._v("\n                Ti bastano pochi secondi: è facile e veloce, non serve telefonare e non è richiesta la carta di\n                credito: pagherai direttamente al medico.\n            ")])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("h3", [_vm._v("Prenota la visita")]), _vm._v(" "), _c("p", [_vm._v("\n        Ti bastano pochi secondi: è facile e veloce, non serve telefonare e non è\n        richiesta la carta di credito: pagherai direttamente al medico.\n      ")])]), _vm._v(" "), _c("div", {
     staticClass: "feature text-center"
   }, [_c("img", {
     attrs: {
       src: __webpack_require__(/*! ../../../../public/img/medico-e-paziente.svg */ "./public/img/medico-e-paziente.svg"),
       alt: "img"
     }
-  }), _vm._v(" "), _c("h3", [_vm._v("Vai all'appuntamento")]), _vm._v(" "), _c("p", [_vm._v("\n                Vai dal Medico scelto, nel giorno e nell'ora selezionati. Dopo la visita potrai lasciare una tua\n                recensione che sarà utile per gli altri pazienti.\n            ")])])])]);
+  }), _vm._v(" "), _c("h3", [_vm._v("Vai all'appuntamento")]), _vm._v(" "), _c("p", [_vm._v("\n        Vai dal Medico scelto, nel giorno e nell'ora selezionati. Dopo la visita potrai\n        lasciare una tua recensione che sarà utile per gli altri pazienti.\n      ")])])])]);
 }];
 render._withStripped = true;
 
@@ -42336,7 +42336,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&display=swap);", ""]);
 
 // module
-exports.push([module.i, "#main {\n  font-family: \"Comfortaa\", cursive;\n}\n#main .wrapper {\n  width: 580px;\n  margin: 0px auto;\n  position: relative;\n}\n#main .select-btn,\n#main .options li {\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n}\n#main .select-btn {\n  height: 55px;\n  padding: 0 20px;\n  background: #fff;\n  border-radius: 7px;\n  justify-content: space-between;\n}\n#main .select-btn .icon {\n  transition: transform 300ms linear;\n}\n#main .wrapper.active .select-btn .icon {\n  transform: rotate(-180deg);\n}\n#main .content {\n  display: none;\n  border-radius: 7px;\n  background: #fff;\n}\n#main .wrapper.active .content {\n  display: block;\n  position: absolute;\n  z-index: 2;\n  padding: 25px 20px;\n  top: 65px;\n  width: 580px;\n}\n#main .content .search {\n  position: relative;\n}\n#main .content .search input {\n  height: 50px;\n  width: 100%;\n  border-radius: 5px;\n  font-size: 17px;\n  padding: 0 15px 0 40px;\n  outline: none;\n  border: 1px solid #b3b3b3;\n}\n#main .search .i {\n  top: 15px;\n  color: #999;\n  height: 20px;\n  vertical-align: middle;\n  left: 15px;\n  position: absolute;\n}\n#main span {\n  font-size: 20px;\n}\n#main .content .options {\n  margin-top: 10px;\n  max-height: 250px;\n  overflow-y: auto;\n}\n#main .options {\n  padding: 0;\n}\n#main .options::-webkit-scrollbar {\n  width: 7px;\n}\n#main .options::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#main .options::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#main .options li {\n  height: 50px;\n  padding: 0 13px;\n  font-size: 17px;\n  border-radius: 5px;\n}\n#main .options li:hover {\n  background: #f2f2f2;\n}", ""]);
+exports.push([module.i, "#main {\n  font-family: \"Comfortaa\", cursive;\n}\n#main .wrapper {\n  width: 580px;\n  margin: 0px auto;\n  position: relative;\n}\n@media (max-width: 560px) {\n#main .wrapper {\n    width: 400px;\n}\n}\n#main .select-btn,\n#main .options li {\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n}\n#main .select-btn {\n  height: 55px;\n  padding: 0 20px;\n  background: #fff;\n  border-radius: 7px;\n  justify-content: space-between;\n}\n#main .select-btn .icon {\n  transition: transform 300ms linear;\n}\n#main .wrapper.active .select-btn .icon {\n  transform: rotate(-180deg);\n}\n#main .content {\n  display: none;\n  border-radius: 7px;\n  background: #fff;\n}\n#main .wrapper.active .content {\n  display: block;\n  position: absolute;\n  z-index: 2;\n  padding: 25px 20px;\n  top: 65px;\n  width: 580px;\n}\n#main .content .search {\n  position: relative;\n}\n#main .content .search input {\n  height: 50px;\n  width: 100%;\n  border-radius: 5px;\n  font-size: 17px;\n  padding: 0 15px 0 40px;\n  outline: none;\n  border: 1px solid #b3b3b3;\n}\n#main .search .i {\n  top: 15px;\n  color: #999;\n  height: 20px;\n  vertical-align: middle;\n  left: 15px;\n  position: absolute;\n}\n#main span {\n  font-size: 20px;\n}\n#main .content .options {\n  margin-top: 10px;\n  max-height: 250px;\n  overflow-y: auto;\n}\n#main .options {\n  padding: 0;\n}\n#main .options::-webkit-scrollbar {\n  width: 7px;\n}\n#main .options::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#main .options::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#main .options li {\n  height: 50px;\n  padding: 0 13px;\n  font-size: 17px;\n  border-radius: 5px;\n}\n#main .options li:hover {\n  background: #f2f2f2;\n}", ""]);
 
 // exports
 
@@ -42412,7 +42412,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "section[data-v-7c358b42] {\n  background: linear-gradient(#fff, 90%, #7dafff);\n}\nsection h2[data-v-7c358b42] {\n  font-size: 40px;\n  margin: 0%;\n}\nsection div[data-v-7c358b42] {\n  height: 80%;\n}\n.feature[data-v-7c358b42] {\n  flex-basis: 100%/3;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n}\n.feature img[data-v-7c358b42],\n.feature h3[data-v-7c358b42],\n.feature p[data-v-7c358b42] {\n  margin-bottom: 10px;\n}\n.feature p[data-v-7c358b42] {\n  margin: 10px auto;\n  max-width: 80%;\n  font-size: 17px;\n}\n.feature img[data-v-7c358b42] {\n  margin: 10px auto;\n  width: 150px;\n}", ""]);
+exports.push([module.i, "@media (max-width: 560px) {\n.sm-flex-wrap[data-v-7c358b42] {\n    flex-wrap: wrap;\n}\n}\nsection[data-v-7c358b42] {\n  background: linear-gradient(#fff, 90%, #7dafff);\n}\nsection h2[data-v-7c358b42] {\n  font-size: 40px;\n  margin: 0%;\n}\nsection div[data-v-7c358b42] {\n  height: 80%;\n}\n.feature[data-v-7c358b42] {\n  flex-basis: 100%/3;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n}\n.feature img[data-v-7c358b42],\n.feature h3[data-v-7c358b42],\n.feature p[data-v-7c358b42] {\n  margin-bottom: 10px;\n}\n.feature p[data-v-7c358b42] {\n  margin: 10px auto;\n  max-width: 80%;\n  font-size: 17px;\n}\n.feature img[data-v-7c358b42] {\n  margin: 10px auto;\n  width: 150px;\n}", ""]);
 
 // exports
 
@@ -42431,7 +42431,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#jumbotron[data-v-48ec172a] {\n  height: 400px;\n  background: linear-gradient(#0451cb, #6398ee);\n}\n#jumbotron .select-wrapper .select-heading img[data-v-48ec172a] {\n  position: absolute;\n  top: 50px;\n  left: 11px;\n  width: 150px;\n}\n#jumbotron .select-wrapper h2[data-v-48ec172a] {\n  transform: translate(130px, 15px);\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar {\n  width: 7px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a] {\n  outline: none;\n  padding: 10px;\n  height: 50px;\n  width: 700px;\n  border-radius: 10px;\n  border-width: 3px;\n  border-color: #fff;\n  transform: translateY(-28px);\n}\n#jumbotron select[data-v-48ec172a]:hover {\n  border-color: rgb(48, 158, 227);\n}", ""]);
+exports.push([module.i, "#jumbotron[data-v-48ec172a] {\n  height: 400px;\n  background: linear-gradient(#0451cb, #6398ee);\n}\n#jumbotron .select-wrapper .select-heading img[data-v-48ec172a] {\n  position: absolute;\n  top: 50px;\n  left: 11px;\n  width: 150px;\n}\n#jumbotron .select-wrapper h2[data-v-48ec172a] {\n  transform: translate(130px, 15px);\n}\n@media (max-width: 560px) {\n#jumbotron .select-wrapper h2[data-v-48ec172a] {\n    transform: translate(130px, 0);\n    width: 320px;\n}\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar {\n  width: 7px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a] {\n  outline: none;\n  padding: 10px;\n  height: 50px;\n  width: 700px;\n  border-radius: 10px;\n  border-width: 3px;\n  border-color: #fff;\n  transform: translateY(-28px);\n}\n#jumbotron select[data-v-48ec172a]:hover {\n  border-color: rgb(48, 158, 227);\n}", ""]);
 
 // exports
 
@@ -42545,7 +42545,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.slider {\r\n  background: #fff;\n}\n.flicking-arrow-prev::before,\r\n.flicking-arrow-prev::after,\r\n.flicking-arrow-next::before,\r\n.flicking-arrow-next::after {\r\n  background-color: var(--primary);\n}\n.w-3-m-2 {\r\n  margin-right: 2em;\r\n  width: calc((100% / 3) - 2em);\n}\n@media (max-width: 820px) {\n.m-query {\r\n    width: calc((100% / 2) - 2em);\n}\n}\n@media (max-width: 560px) {\n.m-query {\r\n    width: calc((100% / 1) - 2em);\n}\n}\r\n", ""]);
+exports.push([module.i, "\n.slider {\n  background: #fff;\n}\n.flicking-arrow-prev::before,\n.flicking-arrow-prev::after,\n.flicking-arrow-next::before,\n.flicking-arrow-next::after {\n  background-color: var(--primary);\n}\n.w-3-m-2 {\n  margin-right: 2em;\n  width: calc((100% / 3) - 2em);\n}\n@media (max-width: 820px) {\n.m-query {\n    width: calc((100% / 2) - 2em);\n}\n}\n@media (max-width: 560px) {\n.m-query {\n    width: calc((100% / 1) - 2em);\n}\n}\n", ""]);
 
 // exports
 

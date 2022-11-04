@@ -74,6 +74,12 @@ export default {
     h2 {
       transform: translate(130px, 15px);
     }
+    @media (max-width: 560px) {
+      h2 {
+        transform: translate(130px, 0);
+        width: 320px;
+      }
+    }
   }
 
   select::-webkit-scrollbar {
