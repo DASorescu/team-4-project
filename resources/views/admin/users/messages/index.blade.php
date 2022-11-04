@@ -13,7 +13,7 @@
     <h3 class="p-3">I miei messaggi</h3>
 
     <table class="table">
-        <thead class="thead-dark">
+        <thead class="thead-light">
             <tr>
             <th scope="col text-center">Inviato da</th>
             <th scope="col text-center">Email</th>
@@ -32,7 +32,7 @@
             <td class="col-4">{{ substr($message->content, 0, 50) }}...</td>
             <td class="col-2">{{$user->created_at->format('d M h:m:s')}}</td>
             <td class="d-flex col-1">
-                <a class="btn btn-info btn-small d-flex align-items-center" href="{{ route('admin.users.messages.show', $message) }}">
+                <a class="btn btn-warning btn-small border-dark d-flex align-items-center" href="{{ route('admin.users.messages.show', $message) }}">
                     <i class="fa-solid fa-magnifying-glass mr-2"></i> Dettagli
                 </a>
             </td>
@@ -48,16 +48,14 @@
             
         </tbody>
     </table>
-
-
-
 </div>
 
-
-
-
-
-
-
+<footer>
+    <div class="d-flex justify-content-end">
+        <a href="{{ route('admin.home') }}" class="btn btn-info border-dark mt-2 mr-3">
+            Torna Indietro
+        </a>
+    </div>
+</footer>
 
 @endsection

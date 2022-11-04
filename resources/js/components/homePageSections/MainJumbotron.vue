@@ -4,7 +4,7 @@
       <div class="select-wrapper">
         <div class="select-heading">
           <img src="../../../../public/img/doctor.png" alt="doc" />
-          <h2 class="text-white">Prenota online la tua visita medica</h2>
+          <h2 class="text-white pb-2 pl-2">Prenota online la tua visita medica</h2>
         </div>
         <div>
           <customSelect :specializations="specializations" @click="toggleClass" />
@@ -59,13 +59,13 @@ export default {
 <style lang="scss" scoped>
 #jumbotron {
   height: 400px;
-  background: linear-gradient(#0451cb, #3884ff);
+  background: linear-gradient(#0451cb, #6398ee);
 
   .select-wrapper {
     .select-heading {
       img {
         position: absolute;
-        top: 46px;
+        top: 50px;
         left: 11px;
         width: 150px;
       }

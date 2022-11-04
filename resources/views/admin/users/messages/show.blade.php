@@ -17,19 +17,10 @@
             </p>
         </div>
 
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-end">
             <a href="{{ route('admin.users.messages.index') }}" class="btn btn-info mt-2">
                 Torna Indietro
             </a>
-
-            <form action="{{ route('admin.users.messages.destroy', $message->id) }}"
-                method="POST">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger mt-2" type="submit">
-                    Elimina
-                </button>
-            </form>
         </div>
         
     </div>

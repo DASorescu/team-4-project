@@ -132,7 +132,7 @@
                                         </a>
                                     </div>
                                     <div>
-                                        <button class="btn btn-success shadow-sm" type="submit">
+                                        <button class="btn btn-success shadow-sm mb-3" type="submit">
                                             <i class="fa-solid fa-floppy-disk mr-2"></i>Salva Modifiche
                                         </button>
                                     </div>
