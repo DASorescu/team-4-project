@@ -12,8 +12,10 @@
             <input type="email" id="email" :class="['form-control', errorsMessages.email.length > 0 ? 'is-invalid': '']" v-model="guestEmail"></input>
             <div v-for="(emailError,i) in errorsMessages.email" :key="'e-msg-'+i" class="invalid-feedback">{{emailError}}</div>
         </div>
-        <div>
-            <RateReview v-model="review" clickable />
+        <div class="form-group">
+            <label for="rating">Inserisci un Voto da 1 a 5 Stelle</label>
+            <RateReview id="rating" v-model="review" clickable :class="['form-control', errorsMessages.rating.length > 0 ? 'is-invalid': '']" />
+            <div v-for="(ratingError,i) in errorsMessages.rating" :key="'rw-msg-'+i" class="invalid-feedback">{{ ratingError }}</div>
         </div>
         <div class="form-group">
             <label for="review">Scrivi la tua recensione</label>
@@ -50,6 +52,7 @@ export default {
             return {
                 name: this.errors && this.errors.guest_name && this.errors.guest_name !== '' ? this.errors.guest_name : [],
                 email: this.errors && this.errors.guest_email && this.errors.guest_email !== '' ? this.errors.guest_email : [],
+                rating: this.errors && this.errors.rating && this.errors.rating !== '' ? this.errors.rating : [],
                 content: this.errors && this.errors.content && this.errors.content !== '' ? this.errors.content : [],
             }
         }

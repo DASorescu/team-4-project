@@ -41,6 +41,7 @@ class UserController extends Controller
                 "email" => $user->email,
                 "detail" => $user->userDetail,
                 "reviews" => $user->reviews,
+                "specializations" => $user->specializations
             ];
         }
         // cerco la specializzazione richiesta e restituisco i dottori con la specializzazione richiesta
