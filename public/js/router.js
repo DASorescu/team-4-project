@@ -20537,6 +20537,7 @@ __webpack_require__.r(__webpack_exports__);
       return {
         name: this.errors && this.errors.guest_name && this.errors.guest_name !== '' ? this.errors.guest_name : [],
         email: this.errors && this.errors.guest_email && this.errors.guest_email !== '' ? this.errors.guest_email : [],
+        rating: this.errors && this.errors.rating && this.errors.rating !== '' ? this.errors.rating : [],
         content: this.errors && this.errors.content && this.errors.content !== '' ? this.errors.content : []
       };
     }
@@ -20667,7 +20668,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'MainJumbo',
+  name: "MainJumbo",
   data: function data() {
     return {
       specializations: [],
@@ -20720,7 +20721,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'NavBar'
+  name: "NavBar"
 });
 
 /***/ }),
@@ -20751,7 +20752,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'SponsorizedSlider',
+  name: "SponsorizedSlider",
   components: {
     RateReview: _RateReview_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     Flicking: _egjs_vue_flicking__WEBPACK_IMPORTED_MODULE_1__["Flicking"]
@@ -20761,7 +20762,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       sponsorizedDoctors: [],
       showDoctors: false,
       plugins: [new _egjs_flicking_plugins__WEBPACK_IMPORTED_MODULE_2__["Arrow"]({
-        moveCount: 3
+        moveCount: 1
       }), new _egjs_flicking_plugins__WEBPACK_IMPORTED_MODULE_2__["AutoPlay"]({
         duration: 2000,
         direction: "NEXT",
@@ -20801,7 +20802,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   methods: {
     getSponsorizedDoctors: function getSponsorizedDoctors() {
       var _this = this;
-      axios.get('/api/sponsorizedDoctors').then(function (res) {
+      axios.get("/api/sponsorizedDoctors").then(function (res) {
         var _iterator2 = _createForOfIteratorHelper(res.data),
           _step2;
         try {
@@ -21011,7 +21012,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       user: {},
       specializations: [],
-      isLoading: false
+      isLoading: false,
+      showMessage: false
     };
   },
   methods: {
@@ -21032,8 +21034,8 @@ __webpack_require__.r(__webpack_exports__);
         _this2.specializations = res.data;
       });
     },
-    messageSubmitted: function messageSubmitted(message) {
-      console.log("messagesubmitted", message);
+    messageSubmitted: function messageSubmitted(_message) {
+      this.showMessage = true;
     }
   },
   mounted: function mounted() {
@@ -21625,8 +21627,16 @@ var render = function render() {
       key: "e-msg-" + i,
       staticClass: "invalid-feedback"
     }, [_vm._v(_vm._s(emailError))]);
-  })], 2), _vm._v(" "), _c("div", [_c("RateReview", {
+  })], 2), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
     attrs: {
+      "for": "rating"
+    }
+  }, [_vm._v("Inserisci un Voto da 1 a 5 Stelle")]), _vm._v(" "), _c("RateReview", {
+    "class": ["form-control", _vm.errorsMessages.rating.length > 0 ? "is-invalid" : ""],
+    attrs: {
+      id: "rating",
       clickable: ""
     },
     model: {
@@ -21636,7 +21646,12 @@ var render = function render() {
       },
       expression: "review"
     }
-  })], 1), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _vm._l(_vm.errorsMessages.rating, function (ratingError, i) {
+    return _c("div", {
+      key: "rw-msg-" + i,
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(ratingError))]);
+  })], 2), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
@@ -21702,7 +21717,14 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("span", _vm._l(5, function (n) {
+  return _c("span", {
+    on: {
+      click: function click($event) {
+        if ($event.target !== $event.currentTarget) return null;
+        return _vm.handlerClick(0);
+      }
+    }
+  }, _vm._l(5, function (n) {
     return _c("span", {
       key: "s-" + n,
       "class": n <= _vm.value ? "e-primary" : "e-white",
@@ -21945,7 +21967,7 @@ var staticRenderFns = [function () {
       alt: "doc"
     }
   }), _vm._v(" "), _c("h2", {
-    staticClass: "text-white"
+    staticClass: "text-white pb-2 pl-2"
   }, [_vm._v("Prenota online la tua visita medica")])]);
 }];
 render._withStripped = true;
@@ -21977,7 +21999,7 @@ var staticRenderFns = [function () {
   }, [_c("div", {
     staticClass: "px-5 d-flex justify-content-between w-100"
   }, [_c("div", [_c("a", {
-    staticClass: "d-flex align-items-center justify-content-between no-underline",
+    staticClass: "d-flex align-items-center justify-content-between no-underline mt-2",
     attrs: {
       href: "/"
     }
@@ -22035,10 +22057,10 @@ var render = function render() {
   }, [_vm._l(_vm.sponsorizedDoctors, function (doctor, i) {
     return _c("div", {
       key: "sponsorized-" + i,
-      staticClass: "card shadow w-3-m-2"
+      staticClass: "card shadow w-3-m-2 m-query"
     }, [_c("div", {
       staticClass: "card-header d-flex justify-content-between align-items-center"
-    }, [_c("div", [_vm._v("\n                    Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name) + "\n                ")]), _vm._v(" "), _c("div", [_c("router-link", {
+    }, [_c("div", [_vm._v("Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name))]), _vm._v(" "), _c("div", [_c("router-link", {
       staticClass: "btn btn-primary d-flex align-items-center",
       attrs: {
         to: {
@@ -22048,7 +22070,7 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("\n                        Visualizza profilo\n                    ")])], 1)]), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n            Visualizza profilo\n          ")])], 1)]), _vm._v(" "), _c("div", {
       staticClass: "card-body d-flex align-items-center"
     }, [_c("div", {
       staticClass: "w-25 mr-2"
@@ -22059,11 +22081,17 @@ var render = function render() {
         src: doctor.detail.image,
         alt: ""
       }
-    })]), _vm._v(" "), _c("div", [_c("p", [_vm._v("Specializzazione: " + _vm._s(doctor.specialization))]), _vm._v(" "), _c("p", [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("p", [_vm._v("Email: " + _vm._s(doctor.email))]), _vm._v(" "), _c("p", [_vm._v("\n                        Rating:\n                        "), _c("RateReview", {
+    })]), _vm._v(" "), _c("div", [_c("div", [_vm._v("\n            Specializzazioni:"), _c("br"), _vm._v(" "), _vm._l(doctor.specializations, function (specialization) {
+      return _c("span", {
+        key: specialization.id,
+        staticClass: "ml-2",
+        "class": "badge badge-" + specialization.color
+      }, [_vm._v(_vm._s(specialization.label) + "\n            ")]);
+    })], 2), _vm._v(" "), _c("p", [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("p", [_vm._v("Email: " + _vm._s(doctor.email))]), _vm._v(" "), _c("p", [_vm._v("\n            Rating:\n            "), _c("RateReview", {
       attrs: {
         value: _vm.averageReviews[doctor.id].avg
       }
-    }), _vm._v("(" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n                        "), _c("router-link", {
+    }), _vm._v("(" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n            "), _c("router-link", {
       staticClass: "btn btn-primary",
       attrs: {
         to: {
@@ -22073,7 +22101,7 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("\n                            mostra\n                        ")])], 1)])])]);
+    }, [_vm._v("\n              mostra\n            ")])], 1)])])]);
   }), _vm._v(" "), _c("span", {
     staticClass: "flicking-arrow-prev",
     attrs: {
@@ -22435,7 +22463,30 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-rotate-left"
     }
-  }), _vm._v(" Torna Indietro\n      ")], 1)], 1)]), _vm._v(" "), _c("Footer")], 1);
+  }), _vm._v(" Torna Indietro\n      ")], 1)], 1)]), _vm._v(" "), _c("Footer"), _vm._v(" "), _vm.showMessage ? _c("div", {
+    staticClass: "overlay",
+    on: {
+      click: function click($event) {
+        _vm.showMessage = false;
+      }
+    }
+  }, [_c("div", {
+    staticClass: "card shadow",
+    on: {
+      click: function click($event) {
+        $event.stopPropagation();
+      }
+    }
+  }, [_c("div", {
+    staticClass: "card-header d-flex justify-content-end"
+  }, [_c("button", {
+    staticClass: "btn btn-danger",
+    on: {
+      click: function click($event) {
+        _vm.showMessage = false;
+      }
+    }
+  }, [_vm._v("x")])]), _vm._v(" "), _vm._m(4)])]) : _vm._e()], 1);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -22485,6 +22536,12 @@ var staticRenderFns = [function () {
   }, [_c("h5", {
     staticClass: "mb-2"
   }, [_vm._v("Prima visita specialistica")]), _vm._v(" "), _c("div", [_vm._v("100 €")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "card-body"
+  }, [_c("h3", [_vm._v("Messaggio Inviato Con Successo!!!")])]);
 }];
 render._withStripped = true;
 
@@ -22809,7 +22866,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#jumbotron[data-v-48ec172a] {\n  height: 400px;\n  background: linear-gradient(#0451CB, #3884ff);\n}\n#jumbotron .select-wrapper .select-heading img[data-v-48ec172a] {\n  position: absolute;\n  top: 46px;\n  left: 11px;\n  width: 150px;\n}\n#jumbotron .select-wrapper h2[data-v-48ec172a] {\n  transform: translate(130px, 15px);\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar {\n  width: 7px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a] {\n  outline: none;\n  padding: 10px;\n  height: 50px;\n  width: 700px;\n  border-radius: 10px;\n  border-width: 3px;\n  border-color: #fff;\n  transform: translateY(-28px);\n}\n#jumbotron select[data-v-48ec172a]:hover {\n  border-color: rgb(48, 158, 227);\n}", ""]);
+exports.push([module.i, "#jumbotron[data-v-48ec172a] {\n  height: 400px;\n  background: linear-gradient(#0451cb, #6398ee);\n}\n#jumbotron .select-wrapper .select-heading img[data-v-48ec172a] {\n  position: absolute;\n  top: 50px;\n  left: 11px;\n  width: 150px;\n}\n#jumbotron .select-wrapper h2[data-v-48ec172a] {\n  transform: translate(130px, 15px);\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar {\n  width: 7px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a] {\n  outline: none;\n  padding: 10px;\n  height: 50px;\n  width: 700px;\n  border-radius: 10px;\n  border-width: 3px;\n  border-color: #fff;\n  transform: translateY(-28px);\n}\n#jumbotron select[data-v-48ec172a]:hover {\n  border-color: rgb(48, 158, 227);\n}", ""]);
 
 // exports
 
@@ -22847,7 +22904,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#user-details main {\n  background-image: url(\"https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg\");\n  animation: scroll 100s linear infinite;\n}\n@keyframes scroll {\n100% {\n    background-position: 0 -2000px;\n}\n}\n#user-details #main-banner {\n  height: 200px;\n  background: linear-gradient(#0451cb, 60%, #fff);\n}\n#user-details #main-banner .doctor-card {\n  display: flex;\n  margin-left: 100px;\n  padding-top: 20px;\n}\n#user-details #main-banner .doctor-card figure {\n  width: 150px;\n}\n#user-details #main-banner .doctor-card figure img {\n  border-radius: 50%;\n  border: 1px solid #fff;\n}\n#user-details #main-banner .doctor-card span {\n  padding-left: 20px;\n  color: #fff;\n  font-size: 1.2rem;\n}\n#user-details #main-banner .doctor-card p {\n  font-size: 1.8rem;\n  color: #fff;\n  padding-left: 15px;\n  padding-top: 10px;\n  font-weight: 800;\n}\n#user-details #main-banner .arrow {\n  width: 40px;\n  height: 40px;\n  color: #fff;\n  margin-right: 20px;\n  line-height: 40px;\n  vertical-align: middle;\n}\n#user-details #main-banner .bounce {\n  animation: bounce 2s infinite;\n}\n@keyframes bounce {\n0%, 20%, 50%, 80%, 100% {\n    transform: translateX(0);\n}\n40% {\n    transform: translateX(30px);\n}\n60% {\n    transform: translateX(15px);\n}\n}\n#user-details #info-banner {\n  height: 60px;\n  background-color: #fff;\n  border-bottom: 1px solid #dedede;\n}\n#user-details #info-banner ul {\n  display: flex;\n  padding-left: 100px;\n}\n#user-details #info-banner ul li {\n  font-style: 1.2rem;\n  padding: 20px 10px;\n  list-style-type: none;\n}\n#user-details .doctor-info {\n  display: flex;\n  margin: 0 auto;\n  width: 800px;\n  padding: 50px 0;\n}\n#user-details .doctor-info .address {\n  width: 40%;\n  padding: 20px 0;\n  text-align: center;\n  background: linear-gradient(#72a6fb, 15%, #fff);\n  border-radius: 10px;\n}\n#user-details .doctor-info .contacts {\n  display: flex;\n  align-items: center;\n  margin-left: 30px;\n  background: linear-gradient(#72a6fb, 15%, #fff);\n  opacity: 0.8;\n  border-radius: 10px;\n  padding: 10px;\n}\n#user-details .doctor-info .contacts #hours {\n  padding-right: 4.5rem;\n  text-align: center;\n}\n#user-details .doctor-info strong {\n  color: #31a0f5;\n  font-size: 1.5rem;\n}\n#user-details .user-page-details {\n  width: 800px;\n  background-color: #fff;\n  margin: 0 auto;\n  padding: 30px;\n  margin-bottom: 50px;\n}\n#user-details .user-page-details h5 {\n  text-align: center;\n  font-size: 1.5rem;\n}\n#user-details .user-page-details .question {\n  color: #0d2339;\n  font-size: 1.2rem;\n  font-weight: bold;\n}\n#user-details #buttons {\n  padding: 30px;\n}\n#user-details h3,\n#user-details h5 {\n  color: #003f5e;\n  font-weight: bold;\n  font-size: 1.5rem;\n  padding-bottom: 10px;\n}", ""]);
+exports.push([module.i, "#user-details main {\n  background-image: url(\"https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg\");\n  animation: scroll 100s linear infinite;\n}\n@keyframes scroll {\n100% {\n    background-position: 0 -2000px;\n}\n}\n#user-details #main-banner {\n  height: 200px;\n  background: linear-gradient(#0451cb, 60%, #fff);\n}\n#user-details #main-banner .doctor-card {\n  display: flex;\n  margin-left: 100px;\n  padding-top: 20px;\n}\n#user-details #main-banner .doctor-card figure {\n  width: 150px;\n}\n#user-details #main-banner .doctor-card figure img {\n  border-radius: 50%;\n  border: 1px solid #fff;\n}\n#user-details #main-banner .doctor-card span {\n  padding-left: 20px;\n  color: #fff;\n  font-size: 1.2rem;\n}\n#user-details #main-banner .doctor-card p {\n  font-size: 1.8rem;\n  color: #fff;\n  padding-left: 15px;\n  padding-top: 10px;\n  font-weight: 800;\n}\n#user-details #main-banner .arrow {\n  width: 40px;\n  height: 40px;\n  color: #fff;\n  margin-right: 20px;\n  line-height: 40px;\n  vertical-align: middle;\n}\n#user-details #main-banner .bounce {\n  animation: bounce 2s infinite;\n}\n@keyframes bounce {\n0%, 20%, 50%, 80%, 100% {\n    transform: translateX(0);\n}\n40% {\n    transform: translateX(30px);\n}\n60% {\n    transform: translateX(15px);\n}\n}\n#user-details #info-banner {\n  height: 60px;\n  background-color: #fff;\n  border-bottom: 1px solid #dedede;\n}\n#user-details #info-banner ul {\n  display: flex;\n  padding-left: 100px;\n}\n#user-details #info-banner ul li {\n  font-style: 1.2rem;\n  padding: 20px 10px;\n  list-style-type: none;\n}\n#user-details .doctor-info {\n  display: flex;\n  margin: 0 auto;\n  width: 800px;\n  padding: 50px 0;\n}\n#user-details .doctor-info .address {\n  width: 40%;\n  padding: 20px 0;\n  text-align: center;\n  background: linear-gradient(#72a6fb, 15%, #fff);\n  border-radius: 10px;\n}\n#user-details .doctor-info .contacts {\n  display: flex;\n  align-items: center;\n  margin-left: 30px;\n  background: linear-gradient(#72a6fb, 15%, #fff);\n  opacity: 0.8;\n  border-radius: 10px;\n  padding: 10px;\n}\n#user-details .doctor-info .contacts #hours {\n  padding-right: 4.5rem;\n  text-align: center;\n}\n#user-details .doctor-info strong {\n  color: #31a0f5;\n  font-size: 1.5rem;\n}\n#user-details .user-page-details {\n  width: 800px;\n  background-color: #fff;\n  margin: 0 auto;\n  padding: 30px;\n  margin-bottom: 50px;\n}\n#user-details .user-page-details h5 {\n  text-align: center;\n  font-size: 1.5rem;\n}\n#user-details .user-page-details .question {\n  color: #0d2339;\n  font-size: 1.2rem;\n  font-weight: bold;\n}\n#user-details #buttons {\n  padding: 30px;\n}\n#user-details h3,\n#user-details h5 {\n  color: #003f5e;\n  font-weight: bold;\n  font-size: 1.5rem;\n  padding-bottom: 10px;\n}\n.overlay {\n  display: grid;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.6);\n  justify-content: center;\n  align-content: center;\n  z-index: 1000;\n}\n.overlay .card {\n  z-index: 1020;\n}", ""]);
 
 // exports
 
@@ -22923,7 +22980,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.slider {\r\n    background: #fff;\n}\n.w-3-m-2{\r\n    margin-right: 2em;\r\n    width: calc((100% / 3) - 2em);\n}\n.flicking-arrow-prev::before,\r\n.flicking-arrow-prev::after,\r\n.flicking-arrow-next::before,\r\n.flicking-arrow-next::after {\r\n    background-color: var(--primary);\n}\r\n", ""]);
+exports.push([module.i, "\n.slider {\r\n  background: #fff;\n}\n.flicking-arrow-prev::before,\r\n.flicking-arrow-prev::after,\r\n.flicking-arrow-next::before,\r\n.flicking-arrow-next::after {\r\n  background-color: var(--primary);\n}\n.w-3-m-2 {\r\n  margin-right: 2em;\r\n  width: calc((100% / 3) - 2em);\n}\n@media (max-width: 820px) {\n.m-query {\r\n    width: calc((100% / 2) - 2em);\n}\n}\n@media (max-width: 560px) {\n.m-query {\r\n    width: calc((100% / 1) - 2em);\n}\n}\r\n", ""]);
 
 // exports
 
