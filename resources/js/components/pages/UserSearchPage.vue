@@ -11,8 +11,6 @@
             <div id="selezione-campi" class="my-5">
 
 
-
-                
                 <select v-if="hasSpecializations" v-model="currentSpecialization"
                     @change="searchDoctorBySpecialization(currentSpecialization)">
                     <option value="" disabled> Scegli una specializzazione </option>
@@ -22,21 +20,25 @@
                     </option>
                 </select>
 
-                
                 <select v-model = "selectedRating">
+                    <option value="" disabled> Filtra per rating </option>
                     <option value=""> Miglior rating </option>
                     <option value=""> Peggior rating </option>
                 </select>
-
-                 
+                
                 <select v-model = "selectedReview">
+                    <option value="" disabled> Filtra per reviews </option>
                     <option value=""> Più recensiti </option>
                     <option value=""> Meno recensiti</option>
                 </select>
 
+            </div>
+                
+                
+                 
+
 
                 
-            </div>
                 
 
 
@@ -52,33 +54,36 @@
                 <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctorsBy" :key="'res-' + doctor.id">
                     <div class="card-header d-flex justify-content-between align-items-center">
 
-                        <div>
-                            <h4>Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}</h4>
+                        <div class="name">
+                            <span>Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}</span>
                         </div>
+                        
                         <div>
-                            <router-link class="btn btn-primary d-flex align-items-center"
+                            <router-link class="btn btn-sm btn-primary d-flex align-items-center"
                                 :to="{ name: 'user-detail', params: { id: doctor.id } }">
                                 Visualizza profilo
                             </router-link>
                         </div>
                     </div>
                     <div class="card-body d-flex align-items-center">
-                        <div class="col-3 w-25 mr-2">
-                            <input class="img-fluid rounded-circle" type="image" :src="doctor.detail.image" alt="" />
+                        <div class="col-0 col-sm-0 col-md-2 col-lg-4 col-xl-3 w-25 mr-2">
+                            <input class="d-none d-md-block img-fluid rounded-circle" type="image" :src="doctor.detail.image" alt="" />
                         </div>
-                        <div class="col-5 border-left border-white">
-                            <div v-if="currentSpecialization !== '' " >Specializzazione:
+                        <div class="col-6 col-sm-6 col-md-5 col-lg-4 col-xl-5 border-left border-white">
+
+                            <div id="specialization" v-if="currentSpecialization !== '' " >
                                 <!--tramite printSp stampo specializzazione corrente-->
-                                <span class="ml-2" v-for="specialization in printSp" :key="specialization.id"
+                                <span v-for="specialization in printSp" :key="specialization.id"
                                     :class="'badge badge-' + specialization.color">{{ specialization.label }}
                                 </span>
 
                             </div>
+                            
                             <div class="my-3">Città: {{ doctor.detail.address }}</div>
                             <div>Email: {{ doctor.email }}</div>
 
                         </div>
-                        <div class="col-4 border-left border-white">
+                        <div class="col-6 col-sm-6 col-md-5 col-lg-4 col-xl-4 border-left border-white">
                             <div>
 
                                 Rating:
@@ -89,7 +94,7 @@
                                 </div>
 
 
-                                <router-link class="btn btn-primary"
+                                <router-link class="btn btn-sm btn-primary"
                                     :to="{ name: 'reviews', params: { userId: doctor.id } }">
                                     Recensioni
                                 </router-link>
@@ -250,17 +255,40 @@ export default {
 
 <style lang="scss" scoped>
 
+
 #selezione-campi span{
-    font-size: 20px;
+    font-size: 1rem;
 }
 .card {
     background-color: rgb(5, 81, 203);
     color: white;
-
+    
+}
+@media (min-width: 476px) {
+  .card {
+    font-size: 0.7rem;
+    .name {
+    font-size: 0.9rem;
+    }
+  }
+}
+@media (min-width: 576px) {
+  .card {
+    font-size: 0.9rem;
+    .name {
+    font-size: 1rem;
+    }
+  }
+}
+@media (min-width: 1200px) {
+  .card {
+    font-size: 1.2rem;
+  }
 }
 
+
 .card-header {
-    font-size: 40px;
+    font-size: 1.3rem;
 }
 </style>
 

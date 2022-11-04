@@ -22547,6 +22547,11 @@ var render = function render() {
     }
   }, [_c("option", {
     attrs: {
+      value: "",
+      disabled: ""
+    }
+  }, [_vm._v(" Filtra per rating ")]), _vm._v(" "), _c("option", {
+    attrs: {
       value: ""
     }
   }, [_vm._v(" Miglior rating ")]), _vm._v(" "), _c("option", {
@@ -22573,6 +22578,11 @@ var render = function render() {
     }
   }, [_c("option", {
     attrs: {
+      value: "",
+      disabled: ""
+    }
+  }, [_vm._v(" Filtra per reviews ")]), _vm._v(" "), _c("option", {
+    attrs: {
       value: ""
     }
   }, [_vm._v(" Più recensiti ")]), _vm._v(" "), _c("option", {
@@ -22587,8 +22597,10 @@ var render = function render() {
       staticClass: "card shadow w-100 my-2"
     }, [_c("div", {
       staticClass: "card-header d-flex justify-content-between align-items-center"
-    }, [_c("div", [_c("h4", [_vm._v("Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name))])]), _vm._v(" "), _c("div", [_c("router-link", {
-      staticClass: "btn btn-primary d-flex align-items-center",
+    }, [_c("div", {
+      staticClass: "name"
+    }, [_c("span", [_vm._v("Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name))])]), _vm._v(" "), _c("div", [_c("router-link", {
+      staticClass: "btn btn-sm btn-primary d-flex align-items-center",
       attrs: {
         to: {
           name: "user-detail",
@@ -22600,26 +22612,29 @@ var render = function render() {
     }, [_vm._v("\n                            Visualizza profilo\n                        ")])], 1)]), _vm._v(" "), _c("div", {
       staticClass: "card-body d-flex align-items-center"
     }, [_c("div", {
-      staticClass: "col-3 w-25 mr-2"
+      staticClass: "col-0 col-sm-0 col-md-2 col-lg-4 col-xl-3 w-25 mr-2"
     }, [_c("input", {
-      staticClass: "img-fluid rounded-circle",
+      staticClass: "d-none d-md-block img-fluid rounded-circle",
       attrs: {
         type: "image",
         src: doctor.detail.image,
         alt: ""
       }
     })]), _vm._v(" "), _c("div", {
-      staticClass: "col-5 border-left border-white"
-    }, [_vm.currentSpecialization !== "" ? _c("div", [_vm._v("Specializzazione:\n                            "), _vm._v(" "), _vm._l(_vm.printSp, function (specialization) {
+      staticClass: "col-6 col-sm-6 col-md-5 col-lg-4 col-xl-5 border-left border-white"
+    }, [_vm.currentSpecialization !== "" ? _c("div", {
+      attrs: {
+        id: "specialization"
+      }
+    }, _vm._l(_vm.printSp, function (specialization) {
       return _c("span", {
         key: specialization.id,
-        staticClass: "ml-2",
         "class": "badge badge-" + specialization.color
       }, [_vm._v(_vm._s(specialization.label) + "\n                            ")]);
-    })], 2) : _vm._e(), _vm._v(" "), _c("div", {
+    }), 0) : _vm._e(), _vm._v(" "), _c("div", {
       staticClass: "my-3"
     }, [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("div", [_vm._v("Email: " + _vm._s(doctor.email))])]), _vm._v(" "), _c("div", {
-      staticClass: "col-4 border-left border-white"
+      staticClass: "col-6 col-sm-6 col-md-5 col-lg-4 col-xl-4 border-left border-white"
     }, [_c("div", [_vm._v("\n\n                            Rating:\n                            "), _c("RateReview", {
       attrs: {
         value: _vm.averageReviews[doctor.id].avg
@@ -22627,7 +22642,7 @@ var render = function render() {
     }), _vm._v(" "), _c("div", {
       staticClass: "my-3"
     }, [_vm._v("\n                                Recensioni: (" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n\n                            ")]), _vm._v(" "), _c("router-link", {
-      staticClass: "btn btn-primary",
+      staticClass: "btn btn-sm btn-primary",
       attrs: {
         to: {
           name: "reviews",
@@ -22847,7 +22862,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#selezione-campi span[data-v-3982aa98] {\n  font-size: 20px;\n}\n.card[data-v-3982aa98] {\n  background-color: rgb(5, 81, 203);\n  color: white;\n}\n.card-header[data-v-3982aa98] {\n  font-size: 40px;\n}", ""]);
+exports.push([module.i, "#selezione-campi span[data-v-3982aa98] {\n  font-size: 1rem;\n}\n.card[data-v-3982aa98] {\n  background-color: rgb(5, 81, 203);\n  color: white;\n}\n@media (min-width: 476px) {\n.card[data-v-3982aa98] {\n    font-size: 0.7rem;\n}\n.card .name[data-v-3982aa98] {\n    font-size: 0.9rem;\n}\n}\n@media (min-width: 576px) {\n.card[data-v-3982aa98] {\n    font-size: 0.9rem;\n}\n.card .name[data-v-3982aa98] {\n    font-size: 1rem;\n}\n}\n@media (min-width: 1200px) {\n.card[data-v-3982aa98] {\n    font-size: 1.2rem;\n}\n}\n.card-header[data-v-3982aa98] {\n  font-size: 1.3rem;\n}", ""]);
 
 // exports
 
