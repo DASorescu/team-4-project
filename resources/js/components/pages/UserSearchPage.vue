@@ -32,89 +32,93 @@
 
                 <select v-model="selectedReview">
                     <option value="" disabled> Filtra per reviews </option>
-                    <option value="Più recensiti"> Più recensiti </option>
-                    <option value="meno recensiti"> Meno recensiti</option>
+                    <option value="Tutti"> Tutti </option>
+                    <option value="0-5"> da 0 a 5 </option>
+                    <option value="6-10"> da 6 a 10 </option>
+                    <option value="+ di 10"> + di 10 </option>
                 </select>
+
 
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <!--Render su pagina-->
             <div v-if="hasResult" class="flex-wrap d-flex">
-                <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctorsBy"
-                    :key="'res-' + doctor.id">
-                    <div class="card-header d-flex justify-content-between align-items-center">
+                
 
-                        <div class="name">
-                            <span>Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}</span>
-                        </div>
+                    <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctorsBy" :key="'res-' + doctor.id">
+                        <div class="card-header d-flex justify-content-between align-items-center">
 
-                        <div>
-                            <router-link class="btn btn-sm btn-primary d-flex align-items-center"
-                                :to="{ name: 'user-detail', params: { id: doctor.id } }">
-                                Visualizza profilo
-                            </router-link>
-                        </div>
-                    </div>
-                    <div class="card-body d-flex align-items-center">
-                        <div class="col-0 col-sm-0 col-md-2 col-lg-4 col-xl- w-25 mr-2">
-                            <input class="d-none d-md-block img-fluid rounded-circle" type="image"
-                                :src="doctor.detail.image" alt="" />
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-5 col-lg-4 col-xl-5 border-left border-white">
-
-                            <div id="specialization" v-if="currentSpecialization !== ''">
-                                <!--tramite printSp stampo specializzazione corrente-->
-                                <span v-for="specialization in printSp" :key="specialization.id"
-                                    :class="'badge badge-' + specialization.color">{{ specialization.label }}
-                                </span>
-
+                            <div class="name">
+                                <span>Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}</span>
                             </div>
 
-                            <div class="my-3">Città: {{ doctor.detail.address }}</div>
-                            <div>Email: {{ doctor.email }}</div>
-
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-5 col-lg-4 col-xl-4 border-left border-white">
                             <div>
+                                <router-link class="btn btn-sm btn-primary d-flex align-items-center"
+                                    :to="{ name: 'user-detail', params: { id: doctor.id } }">
+                                    Visualizza profilo
+                                </router-link>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex align-items-center">
+                            <div class="col-0 col-sm-0 col-md-2 col-lg-4 col-xl- w-25 mr-2">
+                                <input class="d-none d-md-block img-fluid rounded-circle" type="image"
+                                    :src="doctor.detail.image" alt="" />
+                            </div>
+                            <div class="col-6 col-sm-6 col-md-5 col-lg-4 col-xl-5 border-left border-white">
 
-                                Rating:
-                                <RateReview :value="averageReviews[doctor.id].avg" />
-                                <div class="my-3">
-                                    Recensioni: ({{ averageReviews[doctor.id].count }})
+                                <div id="specialization" v-if="currentSpecialization !== ''">
+                                    <!--tramite printSp stampo specializzazione corrente-->
+                                    <span v-for="specialization in printSp" :key="specialization.id"
+                                        :class="'badge badge-' + specialization.color">{{ specialization.label }}
+                                    </span>
 
                                 </div>
 
+                                <div class="my-3">Città: {{ doctor.detail.address }}</div>
+                                <div>Email: {{ doctor.email }}</div>
 
-                                <router-link class="btn btn-sm btn-primary"
-                                    :to="{ name: 'reviews', params: { userId: doctor.id } }">
-                                    Recensioni
-                                </router-link>
                             </div>
+                            <div class="col-6 col-sm-6 col-md-5 col-lg-4 col-xl-4 border-left border-white">
+                                <div>
 
+                                    Rating:
+                                    <RateReview :value="averageReviews[doctor.id].avg" />
+                                    <div class="my-3">
+                                        Recensioni: ({{ averageReviews[doctor.id].count }})
+
+                                    </div>
+
+
+                                    <router-link class="btn btn-sm btn-primary"
+                                        :to="{ name: 'reviews', params: { userId: doctor.id } }">
+                                        Recensioni
+                                    </router-link>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
             <AppLoader v-else />
 
         </div>
     </div>
 </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
 import axios from 'axios';
@@ -162,28 +166,26 @@ export default {
             return this.specializations.length > 0
         },
         hasResult() {
-            return this.result.length > 0 && !this.fetching;
+            return this.filteredDoctorsBy.length > 0 && !this.fetching;
         },
         hasSpecializationName() {
             return this.$route.params.specializationName
         },
-        //Filtro per Proprietà oggetto dottore, va ottimizzato
-
-        /* quando value della tendina è 1 fai if(averageReviews[doctor.id].avg = 1) 
-                                     quando value della tendina è 2 fai if(averageReviews[doctor.id].avg = 2)
-                                     quando value della tendina è 2 fai if(averageReviews[doctor.id].avg = 3)
-                                     quando value della tendina è 2 fai if(averageReviews[doctor.id].avg = 4)
-                                     quando value della tend */
         filteredDoctorsBy() {
-            
-            if (this.selectedRating === "Tutti" || this.selectedRating === "") { return this.result}
-            if (this.selectedRating === "1") {return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 1)}
-            if (this.selectedRating === "2") {return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 2)}
-            if (this.selectedRating === "3") {return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 3)}
-            if (this.selectedRating === "4") {return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 4)}
-            if (this.selectedRating === "5") {return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 5)}
+            if (this.selectedRating === "Tutti" || this.selectedRating === "") { return this.result }
+            if (this.selectedRating === "1") { return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 1) }
+            if (this.selectedRating === "2") { return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 2) }
+            if (this.selectedRating === "3") { return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 3) }
+            if (this.selectedRating === "4") { return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 4) }
+            if (this.selectedRating === "5") { return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 5) }
+
+            if (this.selectedReview === "Tutti" || this.selectedReview === "") { return this.result }
+            if (this.selectedReview === "0-5") { return this.result.filter(doctor => this.averageReviews[doctor.id].count < 6) }
+            if (this.selectedReview === "6-10") { return this.result.filter(doctor => this.averageReviews[doctor.id].count > 6 && this.averageReviews[doctor.id].count < 11) }
+            if (this.selectedReview === "+ di 10") { return this.result.filter(doctor => this.averageReviews[doctor.id].count > 10)}
         },
-       
+
+
         // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
         // In questo oggetto le proprietà sono la media del rating e il numero di review su cui è basata la media.
         averageReviews() {
