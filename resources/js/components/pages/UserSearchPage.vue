@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar />
-    <main>
+    <main class="pb-5">
       <div class="container">
         <!--Ricerca Campi-->
         <div id="selezione-campi" class="py-5">
@@ -117,6 +117,7 @@
         <AppLoader v-if="isLoading" />
       </div>
     </main>
+    <Footer />
   </div>
 </template>
 
@@ -126,6 +127,7 @@ import AppLoader from "../AppLoader.vue";
 import CitySelect from "../CitySelect.vue";
 import RateReview from "../RateReview.vue";
 import NavBar from "../homePageSections/NavBar.vue";
+import Footer from "../homePageSections/Footer.vue";
 
 export default {
   name: "UserSearchPage",
@@ -134,6 +136,7 @@ export default {
     CitySelect,
     RateReview,
     NavBar,
+    Footer
   },
   data() {
     return {
@@ -325,7 +328,7 @@ export default {
 main {
   background-image: url("https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg");
   animation: scroll 100s linear infinite;
-  min-height: 1000px
+  min-height: 1000px;
 }
 
 @keyframes scroll {
