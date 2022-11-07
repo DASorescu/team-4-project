@@ -153,6 +153,6 @@ class UserDetailController extends Controller
 
         // ! MAIN FIX - non avevamo salvato il nuovo oggetto UserDetail
         $new_userDetail->save();
-        return redirect()->route('admin.users.edit')->with('message', 'Dati inseriti con successo');
+        return redirect()->route('admin.home')->with('message', 'Dati inseriti con successo');
     }
 }
