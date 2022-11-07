@@ -4,9 +4,6 @@
         <div class="container">
 
 
-
-
-
             <!--Ricerca Campi-->
             <div id="selezione-campi" class="my-5">
 
@@ -99,7 +96,10 @@
                         </div>
                     </div>
             </div>
-            <AppLoader v-else />
+            <AppLoader v-if="isLoading" />
+
+
+
 
         </div>
     </div>
@@ -219,10 +219,12 @@ export default {
 
         async searchDoctorBySpecialization(specializationName) {
             this.showBar = false
+            this.isLoading = true
             this.result = [];
             if (!specializationName) {
-                return;
-            }
+                return 
+            }   
+            else {   
             // richiedo una ricerca per specializzazione, ottengo tutti i dottori che hanno quella specializzazione.
             const res = await axios.get('/api/search/' + specializationName)
             this.fetching = true
@@ -255,10 +257,13 @@ export default {
                     }
                 }
             }
-            console.log(this.result);
+            }
+    
+            this.isLoading = false;
             this.fetching = false;
-        },
+        }
     },
+
 
     mounted() {
         if (this.hasSpecializationName) {
