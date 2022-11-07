@@ -36996,12 +36996,16 @@ var staticRenderFns = [function () {
     staticClass: "container d-flex"
   }, [_c("div", {
     staticClass: "about-us d-flex my-5"
-  }, [_c("div", [_c("img", {
+  }, [_c("div", {
+    staticClass: "image-container"
+  }, [_c("img", {
     attrs: {
       src: __webpack_require__(/*! ../../../../public/img/commenti_diconodinoi.svg */ "./public/img/commenti_diconodinoi.svg"),
       alt: "dinoi"
     }
-  })]), _vm._v(" "), _c("div", [_c("h2", [_vm._v("Cosa dicono di noi")]), _vm._v(" "), _c("p", [_vm._v("\n                    Oltre il 99% di pazienti soddisfatti\n    \n                    BDoctors è il primo sito in Italia di "), _c("strong", [_vm._v("prenotazioni")]), _vm._v(" di visite mediche ed esami\n                    diagnostici, online\n                    "), _c("strong", [_vm._v("\n                        dal 2022\n                    ")]), _vm._v(".\n    \n                    Crediamo nell'importanza dell'\n                    "), _c("strong", [_vm._v("\n                        informazione\n                    ")]), _vm._v("\n                    e della\n                    "), _c("strong", [_vm._v("\n                        trasparenza\n                    ")]), _vm._v(" per aiutare i pazienti a\n                    "), _c("strong", [_vm._v("\n                        scegliere il medico giusto\n                    ")]), _vm._v(" tra gli oltre 9.000 presenti su iDoctors.\n    \n                    Per questo su iDoctors, solo i pazienti che hanno prenotato attraverso il sito e svolto la\n                    prestazione\n                    possono rilasciare un feedback sul medico: una "), _c("strong", [_vm._v("garanzia dell'affidabilità")]), _vm._v(" delle\n                    "), _c("strong", [_vm._v("113.553")]), _vm._v(" recensioni che\n                    leggi.\n                ")])])]), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "desc"
+  }, [_c("h2", [_vm._v("Cosa dicono di noi")]), _vm._v(" "), _c("p", [_vm._v("\n                    Oltre il 99% di pazienti soddisfatti\n\n                    BDoctors è il primo sito in Italia di "), _c("strong", [_vm._v("prenotazioni")]), _vm._v(" di visite mediche ed esami\n                    diagnostici, online\n                    "), _c("strong", [_vm._v("\n                        dal 2022\n                    ")]), _vm._v(".\n\n                    Crediamo nell'importanza dell'\n                    "), _c("strong", [_vm._v("\n                        informazione\n                    ")]), _vm._v("\n                    e della\n                    "), _c("strong", [_vm._v("\n                        trasparenza\n                    ")]), _vm._v(" per aiutare i pazienti a\n                    "), _c("strong", [_vm._v("\n                        scegliere il medico giusto\n                    ")]), _vm._v(" tra gli oltre 9.000 presenti su iDoctors.\n\n                    Per questo su iDoctors, solo i pazienti che hanno prenotato attraverso il sito e svolto la\n                    prestazione\n                    possono rilasciare un feedback sul medico: una "), _c("strong", [_vm._v("garanzia dell'affidabilità")]), _vm._v(" delle\n                    "), _c("strong", [_vm._v("113.553")]), _vm._v(" recensioni che\n                    leggi.\n                ")])])]), _vm._v(" "), _c("div", {
     staticClass: "feed-images d-flex my-5"
   }, [_c("div", {
     staticClass: "feed-image"
@@ -37027,7 +37031,7 @@ var staticRenderFns = [function () {
     }
   }), _vm._v(" "), _c("p", {
     staticClass: "txt-gray"
-  }, [_c("strong", [_vm._v('"BDoctors')]), _vm._v(' permette al paziente di avere sempre sotto controllo il\n                    proprio appuntamento"')])])])])]);
+  }, [_c("strong", [_vm._v('"BDoctors')]), _vm._v(' permette al paziente di avere sempre sotto controllo\n                    il\n                    proprio appuntamento"')])])])])]);
 }];
 render._withStripped = true;
 
@@ -37371,7 +37375,7 @@ var render = function render() {
   return _c("section", [_c("div", {
     staticClass: "separator"
   }), _vm._v(" "), _c("div", {
-    staticClass: "container d-flex"
+    staticClass: "container d-flex work"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "description"
   }, [_c("h2", [_vm._v("Sei un Medico?")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("h3", [_vm._v("Con BDoctors:")]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("a", {
@@ -37555,6 +37559,7 @@ var render = function render() {
     }
   }, [_c("img", {
     staticClass: "img-cover border rounded-circle bg-white shadow",
+  }, [_c("figure", [_c("img", {
     attrs: {
       src: _vm.userDetail.image.startsWith("http") ? _vm.userDetail.image : "/storage/".concat(_vm.userDetail.image),
       alt: "".concat(_vm.userDetail.name)
@@ -42419,6 +42424,7 @@ exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Co
 
 // module
 exports.push([module.i, "#main {\n  font-family: \"Comfortaa\", cursive;\n}\n#main .wrapper {\n  width: 580px;\n  margin: 0px auto;\n  position: relative;\n}\n@media (max-width: 560px) {\n#main .wrapper {\n    width: 400px;\n}\n#main .wrapper .content {\n    max-width: 400px;\n}\n}\n#main .select-btn,\n#main .options li {\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n}\n#main .select-btn {\n  height: 55px;\n  padding: 0 20px;\n  background: #fff;\n  border-radius: 7px;\n  justify-content: space-between;\n}\n#main .select-btn .icon {\n  transition: transform 300ms linear;\n}\n#main .wrapper.active .select-btn .icon {\n  transform: rotate(-180deg);\n}\n#main .content {\n  display: none;\n  border-radius: 7px;\n  background: #fff;\n}\n#main .wrapper.active .content {\n  display: block;\n  position: absolute;\n  z-index: 2;\n  padding: 25px 20px;\n  top: 65px;\n  width: 580px;\n}\n#main .content .search {\n  position: relative;\n}\n#main .content .search input {\n  height: 50px;\n  width: 100%;\n  border-radius: 5px;\n  font-size: 17px;\n  padding: 0 15px 0 40px;\n  outline: none;\n  border: 1px solid #b3b3b3;\n}\n#main .search .i {\n  top: 15px;\n  color: #999;\n  height: 20px;\n  vertical-align: middle;\n  left: 15px;\n  position: absolute;\n}\n#main span {\n  font-size: 20px;\n}\n#main .content .options {\n  margin-top: 10px;\n  max-height: 250px;\n  overflow-y: auto;\n}\n#main .options {\n  padding: 0;\n}\n#main .options::-webkit-scrollbar {\n  width: 7px;\n}\n#main .options::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#main .options::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#main .options li {\n  height: 50px;\n  padding: 0 13px;\n  font-size: 17px;\n  border-radius: 5px;\n}\n#main .options li:hover {\n  background: #f2f2f2;\n}", ""]);
+exports.push([module.i, "#main {\n  font-family: \"Comfortaa\", cursive;\n}\n#main .wrapper {\n  width: 580px;\n  margin: 0px auto;\n  position: relative;\n}\n@media (max-width: 583px) {\n#main .wrapper {\n    width: 400px;\n}\n#main .wrapper .content {\n    max-width: 400px;\n}\n}\n#main .select-btn,\n#main .options li {\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n}\n#main .select-btn {\n  height: 55px;\n  padding: 0 20px;\n  background: #fff;\n  border-radius: 7px;\n  justify-content: space-between;\n}\n#main .select-btn .icon {\n  transition: transform 300ms linear;\n}\n#main .wrapper.active .select-btn .icon {\n  transform: rotate(-180deg);\n}\n#main .content {\n  display: none;\n  border-radius: 7px;\n  background: #fff;\n}\n#main .wrapper.active .content {\n  display: block;\n  position: absolute;\n  z-index: 2;\n  padding: 25px 20px;\n  top: 65px;\n  width: 580px;\n}\n#main .content .search {\n  position: relative;\n}\n#main .content .search input {\n  height: 50px;\n  width: 100%;\n  border-radius: 5px;\n  font-size: 17px;\n  padding: 0 15px 0 40px;\n  outline: none;\n  border: 1px solid #b3b3b3;\n}\n#main .search .i {\n  top: 15px;\n  color: #999;\n  height: 20px;\n  vertical-align: middle;\n  left: 15px;\n  position: absolute;\n}\n#main span {\n  font-size: 20px;\n}\n#main .content .options {\n  margin-top: 10px;\n  max-height: 250px;\n  overflow-y: auto;\n}\n#main .options {\n  padding: 0;\n}\n#main .options::-webkit-scrollbar {\n  width: 7px;\n}\n#main .options::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#main .options::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#main .options li {\n  height: 50px;\n  padding: 0 13px;\n  font-size: 17px;\n  border-radius: 5px;\n}\n#main .options li:hover {\n  background: #f2f2f2;\n}", ""]);
 
 // exports
 
@@ -42456,7 +42462,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".bg[data-v-3d52685d] {\n  background: #fff;\n}\nsection[data-v-3d52685d] {\n  padding: 50px 0px;\n  flex-direction: column;\n}\nsection .about-us[data-v-3d52685d] {\n  height: 80%;\n}\nsection .about-us div[data-v-3d52685d] {\n  flex-basis: 50%;\n}\nsection .about-us div img[data-v-3d52685d] {\n  width: 60%;\n}\nsection .about-us div p[data-v-3d52685d] {\n  font-size: 18px;\n}\nsection .feed-image[data-v-3d52685d] {\n  flex-basis: 33.3333333333%;\n}\nsection .feed-image img[data-v-3d52685d] {\n  max-width: 80%;\n}\nsection .feed-image img.tp[data-v-3d52685d] {\n  max-width: 50%;\n}\nsection .feed-image .txt-gray[data-v-3d52685d] {\n  max-width: 80%;\n  color: #999999;\n  font-size: 17px;\n}", ""]);
+exports.push([module.i, ".bg[data-v-3d52685d] {\n  background: #fff;\n}\nsection[data-v-3d52685d] {\n  padding: 50px 0px;\n  flex-direction: column;\n}\nsection .about-us[data-v-3d52685d] {\n  height: 80%;\n}\nsection .about-us div[data-v-3d52685d] {\n  flex-basis: 50%;\n}\nsection .about-us div img[data-v-3d52685d] {\n  width: 60%;\n}\nsection .about-us div p[data-v-3d52685d] {\n  font-size: 18px;\n}\nsection .feed-image[data-v-3d52685d] {\n  flex-basis: 33.3333333333%;\n}\nsection .feed-image img[data-v-3d52685d] {\n  max-width: 80%;\n}\nsection .feed-image img.tp[data-v-3d52685d] {\n  max-width: 50%;\n}\nsection .feed-image .txt-gray[data-v-3d52685d] {\n  max-width: 80%;\n  color: #999999;\n  font-size: 17px;\n}\n@media screen and (max-width: 576px) {\nsection .about-us[data-v-3d52685d] {\n    height: 80%;\n    flex-direction: column;\n    padding: 1rem;\n}\nsection .about-us .image-container[data-v-3d52685d] {\n    flex-basis: 100%;\n    display: flex;\n    justify-content: center;\n}\nsection .about-us .image-container img[data-v-3d52685d] {\n    width: 50%;\n}\nsection .about-us .desc[data-v-3d52685d] {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n}\nsection .about-us .desc h2[data-v-3d52685d] {\n    margin-top: 10px;\n}\nsection .about-us .desc p[data-v-3d52685d] {\n    font-size: 13px;\n}\nsection .feed-images[data-v-3d52685d] {\n    justify-content: center;\n}\nsection .feed-image[data-v-3d52685d] {\n    flex-basis: 25%;\n}\nsection .feed-image img[data-v-3d52685d] {\n    max-width: 80%;\n}\nsection .feed-image img.tp[data-v-3d52685d] {\n    max-width: 50%;\n}\nsection .feed-image .txt-gray[data-v-3d52685d] {\n    display: none;\n    max-width: 80%;\n    color: #999999;\n    font-size: 17px;\n}\n}", ""]);
 
 // exports
 
@@ -42513,7 +42519,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#jumbotron[data-v-48ec172a] {\n  height: 400px;\n  background: linear-gradient(#0451cb, #6398ee);\n}\n#jumbotron .select-wrapper .select-heading img[data-v-48ec172a] {\n  position: absolute;\n  top: 50px;\n  left: 11px;\n  width: 150px;\n}\n#jumbotron .select-wrapper h2[data-v-48ec172a] {\n  transform: translate(130px, 15px);\n}\n@media (max-width: 560px) {\n#jumbotron .select-wrapper h2[data-v-48ec172a] {\n    transform: translate(130px, 0);\n    width: 320px;\n}\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar {\n  width: 7px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a] {\n  outline: none;\n  padding: 10px;\n  height: 50px;\n  width: 700px;\n  border-radius: 10px;\n  border-width: 3px;\n  border-color: #fff;\n  transform: translateY(-28px);\n}\n#jumbotron select[data-v-48ec172a]:hover {\n  border-color: rgb(48, 158, 227);\n}", ""]);
+exports.push([module.i, "#jumbotron[data-v-48ec172a] {\n  height: 400px;\n  background: linear-gradient(#0451cb, #6398ee);\n}\n#jumbotron .select-wrapper .select-heading img[data-v-48ec172a] {\n  position: absolute;\n  top: 50px;\n  left: 11px;\n  width: 150px;\n}\n#jumbotron .select-wrapper h2[data-v-48ec172a] {\n  transform: translate(130px, 15px);\n}\n@media (max-width: 583px) {\n#jumbotron .select-wrapper h2[data-v-48ec172a] {\n    transform: translate(130px, 0);\n    width: 250px;\n}\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar {\n  width: 7px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a]::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#jumbotron select[data-v-48ec172a] {\n  outline: none;\n  padding: 10px;\n  height: 50px;\n  width: 700px;\n  border-radius: 10px;\n  border-width: 3px;\n  border-color: #fff;\n  transform: translateY(-28px);\n}\n#jumbotron select[data-v-48ec172a]:hover {\n  border-color: rgb(48, 158, 227);\n}", ""]);
 
 // exports
 
@@ -42532,7 +42538,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "section[data-v-2f267d2d] {\n  background: linear-gradient(#7dafff, 5%, #fff);\n  padding: 50px 0px;\n}\nsection .separator[data-v-2f267d2d] {\n  height: 100px;\n}\nsection .doc-image[data-v-2f267d2d] {\n  flex-basis: 50%;\n}\nsection .doc-image img[data-v-2f267d2d] {\n  max-width: 80%;\n}\nsection .description[data-v-2f267d2d] {\n  position: relative;\n}\nsection .description p[data-v-2f267d2d] {\n  font-size: 17px;\n}\nsection .description h2[data-v-2f267d2d] {\n  font-size: 40px;\n}\nsection .description h3[data-v-2f267d2d] {\n  font-size: 20px;\n}\nsection .description li[data-v-2f267d2d] {\n  font-size: 17px;\n}\nsection .description .btn[data-v-2f267d2d] {\n  opacity: 0.9;\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  color: #fff;\n  background-color: #FE9A01;\n}\nsection .description .btn[data-v-2f267d2d]:hover {\n  opacity: 1;\n  transform: scale(1.03);\n}", ""]);
+exports.push([module.i, "section[data-v-2f267d2d] {\n  background: linear-gradient(#7dafff, 5%, #fff);\n  padding: 50px 0px;\n}\nsection .separator[data-v-2f267d2d] {\n  height: 100px;\n}\nsection .doc-image[data-v-2f267d2d] {\n  flex-basis: 50%;\n}\nsection .doc-image img[data-v-2f267d2d] {\n  max-width: 80%;\n}\nsection .description[data-v-2f267d2d] {\n  position: relative;\n}\nsection .description p[data-v-2f267d2d] {\n  font-size: 17px;\n}\nsection .description h2[data-v-2f267d2d] {\n  font-size: 40px;\n}\nsection .description h3[data-v-2f267d2d] {\n  font-size: 20px;\n}\nsection .description li[data-v-2f267d2d] {\n  font-size: 17px;\n}\nsection .description .btn[data-v-2f267d2d] {\n  opacity: 0.9;\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  color: #fff;\n  background-color: #FE9A01;\n}\nsection .description .btn[data-v-2f267d2d]:hover {\n  opacity: 1;\n  transform: scale(1.03);\n}\n@media screen and (max-width: 576px) {\nsection .separator[data-v-2f267d2d] {\n    height: 50px;\n}\nsection .work[data-v-2f267d2d] {\n    flex-direction: column;\n}\nsection .doc-image[data-v-2f267d2d] {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    margin-bottom: 2rem;\n}\nsection .doc-image img[data-v-2f267d2d] {\n    max-width: 50%;\n}\nsection .description[data-v-2f267d2d] {\n    display: flex;\n    justify-content: center;\n    flex-direction: column;\n    position: relative;\n}\nsection .description p[data-v-2f267d2d] {\n    font-size: 17px;\n}\nsection .description h2[data-v-2f267d2d] {\n    font-size: 40px;\n}\nsection .description h3[data-v-2f267d2d] {\n    font-size: 20px;\n}\nsection .description li[data-v-2f267d2d] {\n    font-size: 17px;\n}\nsection .description .btn[data-v-2f267d2d] {\n    position: static;\n    opacity: 0.9;\n    bottom: 0;\n    right: 0;\n    color: #fff;\n    background-color: #FE9A01;\n    margin-top: 2rem;\n}\nsection .description .btn[data-v-2f267d2d]:hover {\n    opacity: 1;\n    transform: scale(1.03);\n}\n}", ""]);
 
 // exports
 
@@ -42646,7 +42652,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.w-33 {\r\n    width: calc(100% / 3);\n}\r\n", ""]);
+exports.push([module.i, "\n.w-33 {\n    width: calc(100% / 3);\n}\n", ""]);
 
 // exports
 
@@ -42665,7 +42671,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#not-found {\r\n    height: 90vh;\n}\r\n", ""]);
+exports.push([module.i, "\n#not-found {\n    height: 90vh;\n}\n", ""]);
 
 // exports
 
@@ -42684,7 +42690,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.content[data-v-67632db8] {\r\n    background: #fff;\n}\r\n", ""]);
+exports.push([module.i, "\n.content[data-v-67632db8] {\n    background: #fff;\n}\n", ""]);
 
 // exports
 
@@ -90141,7 +90147,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/altroconsumo_reviews.svg?6fd8222c4c8a06d335d76203fe866331";
+module.exports = "/images/altroconsumo_reviews.svg?230774637878d60de6d430a5853310f7";
 
 /***/ }),
 
@@ -90152,7 +90158,7 @@ module.exports = "/images/altroconsumo_reviews.svg?6fd8222c4c8a06d335d76203fe866
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/commenti_diconodinoi.svg?905a5f91a4c807e9f87cfdcbc50ef184";
+module.exports = "/images/commenti_diconodinoi.svg?3b5c331f73d1bccf1bb9deaf4be8c58f";
 
 /***/ }),
 
@@ -90163,7 +90169,7 @@ module.exports = "/images/commenti_diconodinoi.svg?905a5f91a4c807e9f87cfdcbc50ef
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/consultazione-sito.svg?c1b0052bc3a9572ac10b1db3fedb396a";
+module.exports = "/images/consultazione-sito.svg?8adb14069a9f6068c9d6e6492372d650";
 
 /***/ }),
 
@@ -90207,7 +90213,7 @@ module.exports = "/images/facebook-reviews.png?7ed45070ee48f1f27de29fb9c3a5b57f"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/medico-e-paziente.svg?657be2094dfa7eb5596f17045385a2b1";
+module.exports = "/images/medico-e-paziente.svg?57b8381e7dbbc0c31bafcb3875fd9efd";
 
 /***/ }),
 
@@ -90218,7 +90224,7 @@ module.exports = "/images/medico-e-paziente.svg?657be2094dfa7eb5596f17045385a2b1
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/medico-vertical.svg?a078d4a5aaf060a5daa36a6f250a4bb9";
+module.exports = "/images/medico-vertical.svg?b16bc91ab4694e9425231d48d6458d7d";
 
 /***/ }),
 
@@ -90229,7 +90235,7 @@ module.exports = "/images/medico-vertical.svg?a078d4a5aaf060a5daa36a6f250a4bb9";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/prenotazione-online.svg?2f0f8d8a1fe40a8fb92f43e97d52d67e";
+module.exports = "/images/prenotazione-online.svg?47029cc2d35633fde57f12ce802b5019";
 
 /***/ }),
 
@@ -92001,7 +92007,7 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laravel\team-4-project\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/daniel-andrei.sorescu/Desktop/project/team-4-project/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })

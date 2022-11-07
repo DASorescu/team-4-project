@@ -1,9 +1,11 @@
 .spec-checkbox {
     width: 10%;
 }
+
 .spec-menu {
     height: 300px;
 }
+
 .bg-main {
     background-color: #0451CB;
 }
@@ -16,6 +18,7 @@
 .logo {
     background-color: #004ecb;
 }
+
 .no-underline:hover {
     text-decoration: none;
 }
@@ -27,6 +30,7 @@
 body {
     background-color: #fff;
 }
+
 .h-400px {
     height: 400px;
 }
@@ -34,6 +38,7 @@ body {
 .overflowy {
     overflow-y: auto;
 }
+
 .p-relative {
     position: relative;
 }
@@ -42,4 +47,8 @@ body {
     position: absolute;
     top: 35px;
     left: 15px;
+}
+
+.graphics {
+    width: 40%;
 }

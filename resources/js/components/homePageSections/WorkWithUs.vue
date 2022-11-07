@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="separator"></div>
-        <div class="container d-flex">
+        <div class="container d-flex work">
             <div class="doc-image">
                 <img src="../../../../public/img/medico-vertical.svg" alt="">
             </div>
@@ -89,6 +89,68 @@ section {
         }
     }
 
+    @media screen and (max-width: 576px) {
+
+
+
+        .separator {
+            height: 50px;
+        }
+
+        .work {
+            flex-direction: column;
+        }
+
+        .doc-image {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+
+            img {
+                max-width: 50%;
+
+            }
+        }
+
+        .description {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+
+            p {
+                font-size: 17px;
+            }
+
+            h2 {
+                font-size: 40px;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+
+            li {
+                font-size: 17px;
+            }
+
+            .btn {
+                position: static;
+                opacity: .9;
+                bottom: 0;
+                right: 0;
+                color: #fff;
+                background-color: #FE9A01;
+                margin-top: 2rem;
+
+                &:hover {
+                    opacity: 1;
+                    transform: scale(1.03);
+                }
+            }
+        }
+    }
 
 
 }

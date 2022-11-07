@@ -15,7 +15,8 @@
         "laravel/cashier": "*",
         "laravel/framework": "^7.29",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^2.4"
+        "laravel/ui": "^2.4",
+        "laraveldaily/laravel-charts": "^0.1.29"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

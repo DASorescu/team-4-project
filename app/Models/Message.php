@@ -10,4 +10,6 @@ class Message extends Model
         
         return $this->belongsTo('App\User');
     }
+    protected $dateFormat = 'Y-m-d H:i:s.uO';
+
 }

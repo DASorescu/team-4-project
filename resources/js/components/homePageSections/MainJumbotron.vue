@@ -74,10 +74,11 @@ export default {
     h2 {
       transform: translate(130px, 15px);
     }
-    @media (max-width: 560px) {
+
+    @media (max-width: 583px) {
       h2 {
         transform: translate(130px, 0);
-        width: 320px;
+        width: 250px;
       }
     }
   }
