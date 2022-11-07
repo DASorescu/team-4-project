@@ -62,89 +62,91 @@
         </div>
       </div>
       <!-- PRESENTATION -->
-      <div class="user-page-details">
-        <a name="cv"></a>
-        <h4><font-awesome-icon icon="fa-solid fa-file" /> Il Curriculum</h4>
-        <hr />
-        <p>
-          Il Dottor {{ user.first_name }} {{ user.last_name }} si è laureato in Medicina a
-          {{ user.address }}e successivamente, nel medesimo ateneo, ha conseguito la
-          specializzazione in Chirurgia Vascolare. Svolge la sua attività presso il
-          Policlinico di {{ user.address }} e si occupa del trattamento delle malattie
-          delle arterie, delle vene e dei vasi linfatici. Riceve su appuntamento.
-        </p>
-      </div>
-      <!-- RATES -->
-      <div class="user-page-details">
-        <h4>
-          <a name="rates"></a>
-          <font-awesome-icon icon="fa-solid fa-euro-sign" /> Le tariffe
-        </h4>
-        <hr />
-        <div class="d-flex align-items-center justify-content-between">
-          <h5 class="mb-2">Prima visita specialistica</h5>
-          <div>100 €</div>
-        </div>
-        <p>
-          Le tariffe sono fornite a titolo indicativo dal professionista sanitario e
-          pertanto possono variare a seconda del tipo di trattamento effettuato, il numero
-          di visite e le eventuali prestazioni accessorie. In caso di supplementi, il
-          professionista si impegna ad avvertire il paziente prima di fornire le
-          prestazioni.
-        </p>
-      </div>
-      <!-- FAQ -->
-      <div class="user-page-details">
-        <a name="faq"></a>
-        <h4 class="mb-5 question">
-          <font-awesome-icon icon="fa-solid fa-info" /> Domande Frequenti
-        </h4>
-        <div>
-          <div class="question">
-            <font-awesome-icon icon="fa-solid fa-arrow-right" /> Qual'é l'indirizzo?
-          </div>
-          <p>- L'indirizzo è {{ user.city_address }},{{ user.address }}.</p>
-        </div>
-        <hr />
-        <div>
-          <div class="question">
-            <font-awesome-icon icon="fa-solid fa-arrow-right" /> Si accetta anche
-            pagamento con Bancomat/Carta di Credito?
-          </div>
-          <p>- Si,sono accettati anche questi metodi di pagamento.</p>
-        </div>
-        <hr />
-        <div>
-          <div class="question">
-            <font-awesome-icon icon="fa-solid fa-arrow-right" /> Qual'é la fascia oraria
-            per le prenotazioni?
-          </div>
+      <div class="container">
+        <div class="user-page-details">
+          <a name="cv"></a>
+          <h4><font-awesome-icon icon="fa-solid fa-file" /> Il Curriculum</h4>
+          <hr />
           <p>
-            - Il centralino è operativo dalle ore 9:00 alle ore 15:00 tutti i
-            giorni,Domenica esclusa.
+            Il Dottor {{ user.first_name }} {{ user.last_name }} si è laureato in Medicina
+            a {{ user.address }}e successivamente, nel medesimo ateneo, ha conseguito la
+            specializzazione in Chirurgia Vascolare. Svolge la sua attività presso il
+            Policlinico di {{ user.address }} e si occupa del trattamento delle malattie
+            delle arterie, delle vene e dei vasi linfatici. Riceve su appuntamento.
           </p>
         </div>
-      </div>
-      <div class="user-page-details">
-        <!-- invio messaggi -->
-        <a name="message"></a>
-        <NewMessage :doctor-id="'' + user.id" @submitted="messageSubmitted" />
-      </div>
-      <section
-        id="buttons"
-        class="container d-flex align-items-center justify-content-end"
-      >
-        <router-link
-          class="btn btn-success mr-2"
-          :to="{ name: 'reviews', params: { userId: user.id } }"
+        <!-- RATES -->
+        <div class="user-page-details">
+          <h4>
+            <a name="rates"></a>
+            <font-awesome-icon icon="fa-solid fa-euro-sign" /> Le tariffe
+          </h4>
+          <hr />
+          <div class="d-flex align-items-center justify-content-between">
+            <h5 class="mb-2">Prima visita specialistica</h5>
+            <div>100 €</div>
+          </div>
+          <p>
+            Le tariffe sono fornite a titolo indicativo dal professionista sanitario e
+            pertanto possono variare a seconda del tipo di trattamento effettuato, il
+            numero di visite e le eventuali prestazioni accessorie. In caso di
+            supplementi, il professionista si impegna ad avvertire il paziente prima di
+            fornire le prestazioni.
+          </p>
+        </div>
+        <!-- FAQ -->
+        <div class="user-page-details">
+          <a name="faq"></a>
+          <h4 class="mb-5 question">
+            <font-awesome-icon icon="fa-solid fa-info" /> Domande Frequenti
+          </h4>
+          <div>
+            <div class="question">
+              <font-awesome-icon icon="fa-solid fa-arrow-right" /> Qual'é l'indirizzo?
+            </div>
+            <p>- L'indirizzo è {{ user.city_address }},{{ user.address }}.</p>
+          </div>
+          <hr />
+          <div>
+            <div class="question">
+              <font-awesome-icon icon="fa-solid fa-arrow-right" /> Si accetta anche
+              pagamento con Bancomat/Carta di Credito?
+            </div>
+            <p>- Si,sono accettati anche questi metodi di pagamento.</p>
+          </div>
+          <hr />
+          <div>
+            <div class="question">
+              <font-awesome-icon icon="fa-solid fa-arrow-right" /> Qual'é la fascia oraria
+              per le prenotazioni?
+            </div>
+            <p>
+              - Il centralino è operativo dalle ore 9:00 alle ore 15:00 tutti i
+              giorni,Domenica esclusa.
+            </p>
+          </div>
+        </div>
+        <div class="user-page-details">
+          <!-- invio messaggi -->
+          <a name="message"></a>
+          <NewMessage :doctor-id="'' + user.id" @submitted="messageSubmitted" />
+        </div>
+        <section
+          id="buttons"
+          class="container d-flex align-items-center justify-content-end"
         >
-          <font-awesome-icon icon="fa-solid fa-pen-to-square" /> Scrivi una recensione
-        </router-link>
+          <router-link
+            class="btn btn-success mr-2"
+            :to="{ name: 'reviews', params: { userId: user.id } }"
+          >
+            <font-awesome-icon icon="fa-solid fa-pen-to-square" /> Scrivi una recensione
+          </router-link>
 
-        <button class="btn btn-secondary" @click="$router.back()">
-          <font-awesome-icon icon="fa-solid fa-rotate-left" /> Torna Indietro
-        </button>
-      </section>
+          <button class="btn btn-secondary" @click="$router.back()">
+            <font-awesome-icon icon="fa-solid fa-rotate-left" /> Torna Indietro
+          </button>
+        </section>
+      </div>
     </main>
     <Footer />
     <div class="overlay" v-if="showMessage" @click="showMessage = false">
@@ -337,7 +339,6 @@ export default {
   }
 
   .user-page-details {
-    
     background-color: #fff;
     margin: 0 auto;
     padding: 30px;
