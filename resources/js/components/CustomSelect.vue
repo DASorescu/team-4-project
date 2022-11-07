@@ -11,11 +11,7 @@
           <input type="text" v-model="searchedSpec" placeholder="search" />
         </div>
         <ul class="options" id="options-list">
-          <li
-            v-for="(specialization, i) in filteredSpecs"
-            :key="'spec-' + i"
-            @click="setFilteredSpecs"
-          >
+          <li v-for="(specialization, i) in filteredSpecs" :key="'spec-' + i" @click="setFilteredSpecs">
             {{ specialization.label }}
           </li>
         </ul>
@@ -68,19 +64,22 @@ export default {
 
 #main {
   font-family: "Comfortaa", cursive;
+
   .wrapper {
     width: 580px;
     margin: 0px auto;
     position: relative;
   }
-  @media (max-width: 560px) {
+
+  @media (max-width: 583px) {
     .wrapper {
       width: 400px;
+
       .content {
-      max-width: 400px;
+        max-width: 400px;
+      }
     }
   }
-}
 
   .select-btn,
   .options li {

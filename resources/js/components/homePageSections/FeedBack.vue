@@ -3,20 +3,20 @@
 
         <section class="container d-flex">
             <div class="about-us d-flex my-5">
-                <div>
+                <div class="image-container">
                     <img src="../../../../public/img/commenti_diconodinoi.svg" alt="dinoi">
                 </div>
-                <div>
+                <div class="desc">
                     <h2>Cosa dicono di noi</h2>
                     <p>
                         Oltre il 99% di pazienti soddisfatti
-        
+
                         BDoctors è il primo sito in Italia di <strong>prenotazioni</strong> di visite mediche ed esami
                         diagnostici, online
                         <strong>
                             dal 2022
                         </strong>.
-        
+
                         Crediamo nell'importanza dell'
                         <strong>
                             informazione
@@ -28,7 +28,7 @@
                         <strong>
                             scegliere il medico giusto
                         </strong> tra gli oltre 9.000 presenti su iDoctors.
-        
+
                         Per questo su iDoctors, solo i pazienti che hanno prenotato attraverso il sito e svolto la
                         prestazione
                         possono rilasciare un feedback sul medico: una <strong>garanzia dell'affidabilità</strong> delle
@@ -46,7 +46,8 @@
                 </div>
                 <div class="feed-image">
                     <img src="../../../../public/img/altroconsumo_reviews.svg" alt="Ac">
-                    <p class="txt-gray"><strong>"BDoctors</strong> permette al paziente di avere sempre sotto controllo il
+                    <p class="txt-gray"><strong>"BDoctors</strong> permette al paziente di avere sempre sotto controllo
+                        il
                         proprio appuntamento"</p>
                 </div>
             </div>
@@ -56,7 +57,7 @@
 <script>
 export default {
     name: 'FeedBack'
-    
+
 }
 </script>
 
@@ -65,6 +66,7 @@ export default {
     background: #fff;
 
 }
+
 section {
 
 
@@ -105,6 +107,67 @@ section {
             max-width: 80%;
             color: #999999;
             font-size: 17px;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        .about-us {
+            height: 80%;
+            flex-direction: column;
+            padding: 1rem;
+
+            .image-container {
+                flex-basis: 100%;
+                display: flex;
+                justify-content: center;
+
+
+                img {
+                    width: 50%;
+
+                }
+
+
+            }
+
+
+            .desc {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                h2 {
+                    margin-top: 10px;
+                }
+
+                p {
+                    font-size: 13px;
+                }
+            }
+
+        }
+
+        .feed-images {
+            justify-content: center;
+        }
+
+        .feed-image {
+            flex-basis: 25%;
+
+            img {
+                max-width: 80%;
+
+                &.tp {
+                    max-width: 50%;
+                }
+            }
+
+            .txt-gray {
+                display: none;
+                max-width: 80%;
+                color: #999999;
+                font-size: 17px;
+            }
         }
     }
 
