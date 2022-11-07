@@ -337,7 +337,7 @@ export default {
   }
 
   .user-page-details {
-    width: 800px;
+    
     background-color: #fff;
     margin: 0 auto;
     padding: 30px;

@@ -76,8 +76,11 @@ export default {
   @media (max-width: 560px) {
     .wrapper {
       width: 400px;
+      .content {
+      max-width: 400px;
     }
   }
+}
 
   .select-btn,
   .options li {
