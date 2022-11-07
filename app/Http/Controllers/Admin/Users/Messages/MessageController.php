@@ -18,7 +18,7 @@ class MessageController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $messages = Message::orderBy('created_at', 'DESC')->where('user_id', "$user->id")->get();
+        $messages = Message::orderBy('created_at', 'DESC')->where('user_id', $user->id)->get();
         return view('admin.users.messages.index', compact('messages', 'user'));
     }
 
@@ -54,7 +54,7 @@ class MessageController extends Controller
     {
         $message->delete();
 
-        return redirect()->route('admin.users.messages.index' )
-        ->with('message','Messaggio eliminato');
+        return redirect()->route('admin.users.messages.index')
+            ->with('message', 'Messaggio eliminato');
     }
 }

@@ -7,11 +7,19 @@
       <!-- MAIN BANNER -->
       <div id="main-banner">
         <div class="doctor-card">
-          <figure>
-            <img :src="`${user.image}`" :alt="`${user.name}`" />
+          <figure style="width: 100px; height: 100px">
+            <img
+              :src="
+                userDetail.image.startsWith('http')
+                  ? userDetail.image
+                  : `/storage/${userDetail.image}`
+              "
+              class="img-cover border rounded-circle bg-white shadow"
+              :alt="`${userDetail.name}`"
+            />
           </figure>
           <div class="info">
-            <p>{{ user.first_name }} {{ user.last_name }}</p>
+            <p>{{ userDetail.first_name }} {{ userDetail.last_name }}</p>
             <span><strong>SPECIALIZZAZIONI</strong></span>
             <font-awesome-icon class="arrow bounce ml-2" icon="fa-solid fa-arrow-right" />
             <span
@@ -39,7 +47,7 @@
         <div class="address">
           <div><strong>Indirizzo</strong></div>
           <div><font-awesome-icon class="text-center" icon="fa-solid fa-house" /></div>
-          {{ user.city_address }}
+          {{ userDetail.city_address }}
         </div>
         <div class="contacts">
           <a name="info"></a>
@@ -53,10 +61,12 @@
           <div class="text-center">
             <strong>Recapito telefonico</strong>
             <div class="mt-2">
-              <font-awesome-icon icon="fa-solid fa-phone" class="mr-2" /> {{ user.phone }}
+              <font-awesome-icon icon="fa-solid fa-phone" class="mr-2" />
+              {{ userDetail.phone }}
             </div>
             <div>
-              <font-awesome-icon icon="fa-solid fa-fax" class="mr-2" /> {{ user.phone }}
+              <font-awesome-icon icon="fa-solid fa-fax" class="mr-2" />
+              {{ userDetail.phone }}
             </div>
           </div>
         </div>
@@ -67,11 +77,12 @@
         <h4><font-awesome-icon icon="fa-solid fa-file" /> Il Curriculum</h4>
         <hr />
         <p>
-          Il Dottor {{ user.first_name }} {{ user.last_name }} si è laureato in Medicina a
-          {{ user.address }}e successivamente, nel medesimo ateneo, ha conseguito la
-          specializzazione in Chirurgia Vascolare. Svolge la sua attività presso il
-          Policlinico di {{ user.address }} e si occupa del trattamento delle malattie
-          delle arterie, delle vene e dei vasi linfatici. Riceve su appuntamento.
+          Il Dottor {{ userDetail.first_name }} {{ userDetail.last_name }} si è laureato
+          in Medicina a {{ userDetail.address }}e successivamente, nel medesimo ateneo, ha
+          conseguito la specializzazione in Chirurgia Vascolare. Svolge la sua attività
+          presso il Policlinico di {{ userDetail.address }} e si occupa del trattamento
+          delle malattie delle arterie, delle vene e dei vasi linfatici. Riceve su
+          appuntamento.
         </p>
       </div>
       <!-- RATES -->
@@ -103,7 +114,7 @@
           <div class="question">
             <font-awesome-icon icon="fa-solid fa-arrow-right" /> Qual'é l'indirizzo?
           </div>
-          <p>- L'indirizzo è {{ user.city_address }},{{ user.address }}.</p>
+          <p>- L'indirizzo è {{ userDetail.city_address }},{{ userDetail.address }}.</p>
         </div>
         <hr />
         <div>
@@ -128,7 +139,7 @@
       <div class="user-page-details">
         <!-- invio messaggi -->
         <a name="message"></a>
-        <NewMessage :doctor-id="'' + user.id" @submitted="messageSubmitted" />
+        <NewMessage :doctor-id="'' + userDetail.user_id" @submitted="messageSubmitted" />
       </div>
       <section
         id="buttons"
@@ -136,7 +147,7 @@
       >
         <router-link
           class="btn btn-success mr-2"
-          :to="{ name: 'reviews', params: { userId: user.id } }"
+          :to="{ name: 'reviews', params: { userId: userDetail.user_id } }"
         >
           <font-awesome-icon icon="fa-solid fa-pen-to-square" /> Scrivi una recensione
         </router-link>
@@ -173,7 +184,7 @@ export default {
     NewMessage,
   },
   data: () => ({
-    user: {},
+    userDetail: {},
     specializations: [],
     isLoading: false,
     showMessage: false,
@@ -184,7 +195,7 @@ export default {
       axios
         .get("/api/users/" + $id)
         .then((res) => {
-          this.user = res.data;
+          this.userDetail = res.data;
         })
         .catch((err) => {
           console.error(err);
@@ -337,7 +348,6 @@ export default {
   }
 
   .user-page-details {
-    
     background-color: #fff;
     margin: 0 auto;
     padding: 30px;

@@ -121,6 +121,7 @@ class UserController extends Controller
         );
         $data = $request->all();
 
+
         $new_message = new Message();
 
         $new_message->user_id = $user->id;
