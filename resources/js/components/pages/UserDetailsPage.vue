@@ -8,7 +8,7 @@
       <div id="main-banner">
         <div class="doctor-card">
           <figure>
-            <img class="img-fluid" :src="`${user.image}`" :alt="`${user.name}`" />
+            <img :src="`${user.image}`" :alt="`${user.name}`" />
           </figure>
           <div class="info">
             <p>{{ user.first_name }} {{ user.last_name }}</p>
@@ -228,7 +228,7 @@ export default {
 
     .doctor-card {
       display: flex;
-      margin-left: 100px;
+      margin-left: 70px;
       padding-top: 20px;
 
       figure {
@@ -303,20 +303,22 @@ export default {
 
   .doctor-info {
     display: flex;
-    margin: 0 auto;
+    justify-content: center;
     padding: 50px 0;
     .address {
-      flex-basis: 40%;
-      padding: 20px 0;
+      flex-basis: 30%;
+      padding: 20px 10px;
+      margin-right: 20px;
       text-align: center;
       background: linear-gradient(#72a6fb, 15%, #fff);
       border-radius: 10px;
     }
 
     .contacts {
-      flex-basis: 50%;
+      flex-basis: 40%;
       display: flex;
       align-items: center;
+      justify-content: center;
       background: linear-gradient(#72a6fb, 15%, #fff);
       opacity: 0.8;
       border-radius: 10px;
@@ -391,13 +393,25 @@ export default {
     display: none;
   }
 
+  .doctor-card {
+    margin-right: 40px;
+  }
+
+  figure {
+    img {
+      width: 120px;
+      height: 120px;
+    }
+  }
+
   .doctor-info {
     flex-wrap: wrap;
+    display: flex;
     justify-content: center;
 
     .address,
     .contacts {
-      margin: 0 auto;
+      justify-content: center;
       margin-bottom: 10px;
     }
   }
