@@ -25,6 +25,7 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $details = $user->userDetail;
+        $id = $user->id;
 
         $messages_chart_options = [
             'chart_title' => 'Messages by month',
@@ -32,7 +33,10 @@ class HomeController extends Controller
             'model' => 'App\Models\Message',
             'group_by_field' => 'created_at',
             'group_by_period' => 'month',
-            'chart_type' => 'bar',
+            'chart_type' => 'line',
+            'conditions'            => [
+                ['name' => 'Messages', 'condition' => "user_id = '$id'", 'color' => 'red', 'fill' => true],
+            ],
             'chart_color' => '255,79,21',
         ];
         $messages_chart = new LaravelChart($messages_chart_options);
@@ -44,6 +48,9 @@ class HomeController extends Controller
             'group_by_field' => 'rating',
             // 'group_by_period' => 'month',
             'chart_type' => 'line',
+            'conditions'            => [
+                ['name' => 'reviews', 'condition' => "user_id = '$id'", 'color' => 'blue', 'fill' => true],
+            ],
             'chart_color' => '98,100,255',
         ];
         $reviews_chart = new LaravelChart($reviews_chart_options);
