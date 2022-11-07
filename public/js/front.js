@@ -36289,21 +36289,48 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     hasSpecializationName: function hasSpecializationName() {
       return this.$route.params.specializationName;
     },
-    hasSpecializationAlias: function hasSpecializationAlias() {
-      return this.currentSpecialization;
-    },
     //Filtro per Proprietà oggetto dottore, va ottimizzato
+    /* quando value della tendina è 1 fai if(averageReviews[doctor.id].avg = 1) 
+                                 quando value della tendina è 2 fai if(averageReviews[doctor.id].avg = 2)
+                                 quando value della tendina è 2 fai if(averageReviews[doctor.id].avg = 3)
+                                 quando value della tendina è 2 fai if(averageReviews[doctor.id].avg = 4)
+                                 quando value della tend */
     filteredDoctorsBy: function filteredDoctorsBy() {
-      if (true) {
+      var _this2 = this;
+      if (this.selectedRating === "Tutti" || this.selectedRating === "") {
         return this.result;
       }
-      ;
+      if (this.selectedRating === "1") {
+        return this.result.filter(function (doctor) {
+          return _this2.averageReviews[doctor.id].avg === 1;
+        });
+      }
+      if (this.selectedRating === "2") {
+        return this.result.filter(function (doctor) {
+          return _this2.averageReviews[doctor.id].avg === 2;
+        });
+      }
+      if (this.selectedRating === "3") {
+        return this.result.filter(function (doctor) {
+          return _this2.averageReviews[doctor.id].avg === 3;
+        });
+      }
+      if (this.selectedRating === "4") {
+        return this.result.filter(function (doctor) {
+          return _this2.averageReviews[doctor.id].avg === 4;
+        });
+      }
+      if (this.selectedRating === "5") {
+        return this.result.filter(function (doctor) {
+          return _this2.averageReviews[doctor.id].avg === 5;
+        });
+      }
     },
     // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
     // In questo oggetto le proprietà sono la media del rating e il numero di review su cui è basata la media.
     averageReviews: function averageReviews() {
-      var res = {};
-      var _iterator = _createForOfIteratorHelper(this.filteredDoctorsBy),
+      var res = [];
+      var _iterator = _createForOfIteratorHelper(this.result),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -36327,21 +36354,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   methods: {
     //fai una chiamata per restituire tutte le specializzazioni disponibili
     getSpecializations: function getSpecializations() {
-      var _this2 = this;
+      var _this3 = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/specializations/').then(function (res) {
-        _this2.specializations = res.data;
+        _this3.specializations = res.data;
       });
     },
     searchDoctorBySpecialization: function searchDoctorBySpecialization(specializationName) {
-      var _this3 = this;
+      var _this4 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var res, _iterator2, _step2, doctor;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this3.showBar = false;
-                _this3.result = [];
+                _this4.showBar = false;
+                _this4.result = [];
                 if (specializationName) {
                   _context.next = 4;
                   break;
@@ -36352,7 +36379,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/search/' + specializationName);
               case 6:
                 res = _context.sent;
-                _this3.fetching = true;
+                _this4.fetching = true;
                 if (Array.isArray(res.data)) {
                   // ciclo sui dottori che ho ottenuto
                   _iterator2 = _createForOfIteratorHelper(res.data);
@@ -36374,10 +36401,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                       //        reviews: doctorReviews,
                       // });
 
-                      _this3.result.push(doctor);
+                      _this4.result.push(doctor);
                       //cosi non si ripetono le città :)
-                      if (doctor.detail.address !== null && !_this3.cities.includes(doctor.detail.address)) {
-                        _this3.cities.push(doctor.detail.address);
+                      if (doctor.detail.address !== null && !_this4.cities.includes(doctor.detail.address)) {
+                        _this4.cities.push(doctor.detail.address);
                       }
                     }
                   } catch (err) {
@@ -36386,8 +36413,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                     _iterator2.f();
                   }
                 }
-                _this3.fetching = false;
-              case 10:
+                console.log(_this4.result);
+                _this4.fetching = false;
+              case 11:
               case "end":
                 return _context.stop();
             }
@@ -36400,7 +36428,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     if (this.hasSpecializationName) {
       this.searchDoctorBySpecialization(this.$route.params.specializationName);
     }
-    if (this.hasSpecializationAlias) this.searchDoctorBySpecialization(this.$route.params.alias);
     this.getSpecializations();
   }
 });
@@ -37751,13 +37778,29 @@ var render = function render() {
     }
   }, [_vm._v(" Filtra per rating ")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: ""
+      value: "Tutti"
     }
-  }, [_vm._v(" Miglior rating ")]), _vm._v(" "), _c("option", {
+  }, [_vm._v(" Tutti ")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: ""
+      value: "1"
     }
-  }, [_vm._v(" Peggior rating ")])]), _vm._v(" "), _c("select", {
+  }, [_vm._v(" 1 ")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "2"
+    }
+  }, [_vm._v(" 2 ")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "3"
+    }
+  }, [_vm._v(" 3 ")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "4"
+    }
+  }, [_vm._v(" 4 ")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "5"
+    }
+  }, [_vm._v(" 5 ")])]), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -37782,11 +37825,11 @@ var render = function render() {
     }
   }, [_vm._v(" Filtra per reviews ")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: ""
+      value: "Più recensiti"
     }
   }, [_vm._v(" Più recensiti ")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: ""
+      value: "meno recensiti"
     }
   }, [_vm._v(" Meno recensiti")])])]), _vm._v(" "), _vm.hasResult ? _c("div", {
     staticClass: "flex-wrap d-flex"
@@ -37811,7 +37854,7 @@ var render = function render() {
     }, [_vm._v("\n                            Visualizza profilo\n                        ")])], 1)]), _vm._v(" "), _c("div", {
       staticClass: "card-body d-flex align-items-center"
     }, [_c("div", {
-      staticClass: "col-0 col-sm-0 col-md-2 col-lg-4 col-xl-3 w-25 mr-2"
+      staticClass: "col-0 col-sm-0 col-md-2 col-lg-4 col-xl- w-25 mr-2"
     }, [_c("input", {
       staticClass: "d-none d-md-block img-fluid rounded-circle",
       attrs: {

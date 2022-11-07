@@ -20,26 +20,30 @@
                     </option>
                 </select>
 
-                <select v-model = "selectedRating">
+                <select v-model="selectedRating">
                     <option value="" disabled> Filtra per rating </option>
-                    <option value=""> Miglior rating </option>
-                    <option value=""> Peggior rating </option>
+                    <option value="Tutti"> Tutti </option>
+                    <option value="1"> 1 </option>
+                    <option value="2"> 2 </option>
+                    <option value="3"> 3 </option>
+                    <option value="4"> 4 </option>
+                    <option value="5"> 5 </option>
                 </select>
-                
-                <select v-model = "selectedReview">
+
+                <select v-model="selectedReview">
                     <option value="" disabled> Filtra per reviews </option>
-                    <option value=""> Più recensiti </option>
-                    <option value=""> Meno recensiti</option>
+                    <option value="Più recensiti"> Più recensiti </option>
+                    <option value="meno recensiti"> Meno recensiti</option>
                 </select>
 
             </div>
-                
-                
-                 
 
 
-                
-                
+
+
+
+
+
 
 
 
@@ -51,13 +55,14 @@
 
             <!--Render su pagina-->
             <div v-if="hasResult" class="flex-wrap d-flex">
-                <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctorsBy" :key="'res-' + doctor.id">
+                <div class="card shadow w-100 my-2" v-for="doctor in filteredDoctorsBy"
+                    :key="'res-' + doctor.id">
                     <div class="card-header d-flex justify-content-between align-items-center">
 
                         <div class="name">
                             <span>Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}</span>
                         </div>
-                        
+
                         <div>
                             <router-link class="btn btn-sm btn-primary d-flex align-items-center"
                                 :to="{ name: 'user-detail', params: { id: doctor.id } }">
@@ -66,19 +71,20 @@
                         </div>
                     </div>
                     <div class="card-body d-flex align-items-center">
-                        <div class="col-0 col-sm-0 col-md-2 col-lg-4 col-xl-3 w-25 mr-2">
-                            <input class="d-none d-md-block img-fluid rounded-circle" type="image" :src="doctor.detail.image" alt="" />
+                        <div class="col-0 col-sm-0 col-md-2 col-lg-4 col-xl- w-25 mr-2">
+                            <input class="d-none d-md-block img-fluid rounded-circle" type="image"
+                                :src="doctor.detail.image" alt="" />
                         </div>
                         <div class="col-6 col-sm-6 col-md-5 col-lg-4 col-xl-5 border-left border-white">
 
-                            <div id="specialization" v-if="currentSpecialization !== '' " >
+                            <div id="specialization" v-if="currentSpecialization !== ''">
                                 <!--tramite printSp stampo specializzazione corrente-->
                                 <span v-for="specialization in printSp" :key="specialization.id"
                                     :class="'badge badge-' + specialization.color">{{ specialization.label }}
                                 </span>
 
                             </div>
-                            
+
                             <div class="my-3">Città: {{ doctor.detail.address }}</div>
                             <div>Email: {{ doctor.email }}</div>
 
@@ -128,7 +134,7 @@ export default {
     data() {
         return {
 
-            
+
             currentSpecialization: "",
             specializations: [],
 
@@ -148,6 +154,7 @@ export default {
         };
     },
     computed: {
+
         printSp() {
             return this.specializations.filter(specialization => specialization.label === this.currentSpecialization)
         },
@@ -160,21 +167,28 @@ export default {
         hasSpecializationName() {
             return this.$route.params.specializationName
         },
-        hasSpecializationAlias() {
-            return this.currentSpecialization
-        },
         //Filtro per Proprietà oggetto dottore, va ottimizzato
+
+        /* quando value della tendina è 1 fai if(averageReviews[doctor.id].avg = 1) 
+                                     quando value della tendina è 2 fai if(averageReviews[doctor.id].avg = 2)
+                                     quando value della tendina è 2 fai if(averageReviews[doctor.id].avg = 3)
+                                     quando value della tendina è 2 fai if(averageReviews[doctor.id].avg = 4)
+                                     quando value della tend */
         filteredDoctorsBy() {
-
-            if (true) { return this.result };
-
+            
+            if (this.selectedRating === "Tutti" || this.selectedRating === "") { return this.result}
+            if (this.selectedRating === "1") {return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 1)}
+            if (this.selectedRating === "2") {return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 2)}
+            if (this.selectedRating === "3") {return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 3)}
+            if (this.selectedRating === "4") {return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 4)}
+            if (this.selectedRating === "5") {return this.result.filter(doctor => this.averageReviews[doctor.id].avg === 5)}
         },
-
+       
         // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
         // In questo oggetto le proprietà sono la media del rating e il numero di review su cui è basata la media.
         averageReviews() {
-            const res = {};
-            for (const doctor of this.filteredDoctorsBy) {
+            const res = [];
+            for (const doctor of this.result) {
                 res[doctor.id] = {
                     count: doctor.reviews.length,
                     // faccio una chiamata per avere i dettagli  di un dottore
@@ -186,9 +200,11 @@ export default {
                 };
             }
             return res;
-        },
+        }
     },
+
     methods: {
+
         //fai una chiamata per restituire tutte le specializzazioni disponibili
         getSpecializations() {
             axios.get('/api/specializations/')
@@ -237,6 +253,7 @@ export default {
                     }
                 }
             }
+            console.log(this.result);
             this.fetching = false;
         },
     },
@@ -245,45 +262,47 @@ export default {
         if (this.hasSpecializationName) {
             this.searchDoctorBySpecialization(this.$route.params.specializationName);
         }
-        if (this.hasSpecializationAlias)
-            this.searchDoctorBySpecialization(this.$route.params.alias);
         this.getSpecializations();
     },
-};
+}
 </script>
 
 
 <style lang="scss" scoped>
-
-
-#selezione-campi span{
+#selezione-campi span {
     font-size: 1rem;
 }
+
 .card {
     background-color: rgb(5, 81, 203);
     color: white;
-    
+
 }
+
 @media (min-width: 476px) {
-  .card {
-    font-size: 0.7rem;
-    .name {
-    font-size: 0.9rem;
+    .card {
+        font-size: 0.7rem;
+
+        .name {
+            font-size: 0.9rem;
+        }
     }
-  }
 }
+
 @media (min-width: 576px) {
-  .card {
-    font-size: 0.9rem;
-    .name {
-    font-size: 1rem;
+    .card {
+        font-size: 0.9rem;
+
+        .name {
+            font-size: 1rem;
+        }
     }
-  }
 }
+
 @media (min-width: 1200px) {
-  .card {
-    font-size: 1.2rem;
-  }
+    .card {
+        font-size: 1.2rem;
+    }
 }
 
 
