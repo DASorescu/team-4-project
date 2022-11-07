@@ -175,19 +175,19 @@ export default {
         return this.result;
       }
       if (this.selectedRating === "1") {
-        return this.result.filter((doctor) => this.averageReviews[doctor.id].avg === 1);
+        return this.result.filter((doctor) => Math.round(this.averageReviews[doctor.id].avg) === 1);
       }
       if (this.selectedRating === "2") {
-        return this.result.filter((doctor) => this.averageReviews[doctor.id].avg === 2);
+        return this.result.filter((doctor) => Math.round(this.averageReviews[doctor.id].avg) === 2);
       }
       if (this.selectedRating === "3") {
-        return this.result.filter((doctor) => this.averageReviews[doctor.id].avg === 3);
+        return this.result.filter((doctor) => Math.round(this.averageReviews[doctor.id].avg) === 3);
       }
       if (this.selectedRating === "4") {
-        return this.result.filter((doctor) => this.averageReviews[doctor.id].avg === 4);
+        return this.result.filter((doctor) => Math.round(this.averageReviews[doctor.id].avg) === 4);
       }
       if (this.selectedRating === "5") {
-        return this.result.filter((doctor) => this.averageReviews[doctor.id].avg === 5);
+        return this.result.filter((doctor) => Math.round(this.averageReviews[doctor.id].avg) === 5);
       }
 
       if (this.selectedReview === "Tutti" || this.selectedReview === "") {
@@ -199,7 +199,7 @@ export default {
       if (this.selectedReview === "6-10") {
         return this.result.filter(
           (doctor) =>
-            this.averageReviews[doctor.id].count > 6 &&
+            this.averageReviews[doctor.id].count >= 6 &&
             this.averageReviews[doctor.id].count < 11
         );
       }
@@ -217,8 +217,9 @@ export default {
           count: doctor.reviews.length,
           // faccio una chiamata per avere i dettagli  di un dottore
           avg:
+            Math.round(
             doctor.reviews.reduce((oldValue, value) => oldValue + value.rating, 0) /
-            doctor.reviews.length,
+            doctor.reviews.length)
         };
       }
       return res;
@@ -274,7 +275,6 @@ export default {
           }
         }
       }
-
       this.isLoading = false;
       this.fetching = false;
     },
