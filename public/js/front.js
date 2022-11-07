@@ -36187,7 +36187,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      user: {},
+      userDetail: {},
       specializations: [],
       isLoading: false,
       showMessage: false
@@ -36198,7 +36198,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       this.isLoading = true;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/users/" + $id).then(function (res) {
-        _this.user = res.data;
+        _this.userDetail = res.data;
       })["catch"](function (err) {
         console.error(err);
       }).then(function () {
@@ -36269,14 +36269,14 @@ function valoreODefault(valore, defaultValore) {
     var _ref;
     return _ref = {
       //proprietà su cui ciclare
-      proprieties: ['Nome', 'Cognome', 'Città'],
+      proprieties: ["Nome", "Cognome", "Città"],
       //id di partenza nel v-model select su cui ciclare
       currentSpecialization: 0,
       specializations: [],
       showBar: false,
       searched: "",
       selectedPropriety: ""
-    }, _defineProperty(_ref, "proprieties", ['Nome', 'Cognome', 'Città']), _defineProperty(_ref, "isLoading", false), _defineProperty(_ref, "result", []), _defineProperty(_ref, "cities", []), _defineProperty(_ref, "fetching", false), _defineProperty(_ref, "selectedAddress", ""), _ref;
+    }, _defineProperty(_ref, "proprieties", ["Nome", "Cognome", "Città"]), _defineProperty(_ref, "isLoading", false), _defineProperty(_ref, "result", []), _defineProperty(_ref, "cities", []), _defineProperty(_ref, "fetching", false), _defineProperty(_ref, "selectedAddress", ""), _ref;
   },
   computed: {
     printSp: function printSp() {
@@ -36300,15 +36300,14 @@ function valoreODefault(valore, defaultValore) {
       if (this.searched === "") {
         return this.result;
       }
-      ;
       if (this.selectedPropriety === "Nome") return this.result.filter(function (doctor) {
-        return valoreODefault(doctor.detail.first_name, '').toLowerCase().startsWith(_this2.searched.toLowerCase());
+        return valoreODefault(doctor.detail.first_name, "").toLowerCase().startsWith(_this2.searched.toLowerCase());
       });
       if (this.selectedPropriety === "Cognome") return this.result.filter(function (doctor) {
-        return valoreODefault(doctor.detail.last_name, '').toLowerCase().startsWith(_this2.searched.toLowerCase());
+        return valoreODefault(doctor.detail.last_name, "").toLowerCase().startsWith(_this2.searched.toLowerCase());
       });
       if (this.selectedPropriety === "Città") return this.result.filter(function (doctor) {
-        return valoreODefault(doctor.detail.address, '').toLowerCase().startsWith(_this2.searched.toLowerCase());
+        return valoreODefault(doctor.detail.address, "").toLowerCase().startsWith(_this2.searched.toLowerCase());
       });
     },
     // devo farmi un oggetto che come chiave utilizzo l'id del dottore e come valore avrà un oggetto.
@@ -36340,7 +36339,7 @@ function valoreODefault(valore, defaultValore) {
     //fai una chiamata per restituire tutte le specializzazioni disponibili
     getSpecializations: function getSpecializations() {
       var _this3 = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/specializations/').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/specializations/").then(function (res) {
         _this3.specializations = res.data;
       });
     },
@@ -36361,7 +36360,7 @@ function valoreODefault(valore, defaultValore) {
                 return _context.abrupt("return");
               case 4:
                 _context.next = 6;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/search/' + specializationName);
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/search/" + specializationName);
               case 6:
                 res = _context.sent;
                 _this4.fetching = true;
@@ -37243,9 +37242,9 @@ var render = function render() {
   return _c("div", {
     staticClass: "py-4 slider"
   }, [_c("h1", {
-    staticClass: "text-center py-4"
-  }, [_vm._v("The Best")]), _vm._v(" "), _c("Flicking", {
-    staticClass: "shadow",
+    staticClass: "text-center py-4 text-info"
+  }, [_vm._v("I nostri medici")]), _vm._v(" "), _c("Flicking", {
+    staticClass: "ml-4",
     attrs: {
       options: {
         align: "prev",
@@ -37273,14 +37272,18 @@ var render = function render() {
       staticClass: "card-body d-flex align-items-center"
     }, [_c("div", {
       staticClass: "w-25 mr-2"
-    }, [_c("input", {
-      staticClass: "img-fluid rounded-circle",
-      attrs: {
-        type: "image",
-        src: doctor.detail.image,
-        alt: ""
+    }, [_c("figure", {
+      staticStyle: {
+        width: "100px",
+        height: "100px"
       }
-    })]), _vm._v(" "), _c("div", [_c("div", [_vm._v("\n            Specializzazioni:"), _c("br"), _vm._v(" "), _vm._l(doctor.specializations, function (specialization) {
+    }, [_c("img", {
+      staticClass: "img-cover border rounded-circle bg-white shadow",
+      attrs: {
+        src: doctor.detail.image.startsWith("http") ? doctor.detail.image : "/storage/".concat(doctor.detail.image),
+        alt: "".concat(doctor.detail.name)
+      }
+    })])]), _vm._v(" "), _c("div", [_c("div", [_vm._v("\n            Specializzazioni:"), _c("br"), _vm._v(" "), _vm._l(doctor.specializations, function (specialization) {
       return _c("span", {
         key: specialization.id,
         staticClass: "ml-2",
@@ -37515,15 +37518,20 @@ var render = function render() {
     }
   }, [_c("div", {
     staticClass: "doctor-card"
-  }, [_c("figure", [_c("img", {
-    staticClass: "img-fluid",
+  }, [_c("figure", {
+    staticStyle: {
+      width: "100px",
+      height: "100px"
+    }
+  }, [_c("img", {
+    staticClass: "img-cover border rounded-circle bg-white shadow",
     attrs: {
-      src: "".concat(_vm.user.image),
-      alt: "".concat(_vm.user.name)
+      src: _vm.userDetail.image.startsWith("http") ? _vm.userDetail.image : "/storage/".concat(_vm.userDetail.image),
+      alt: "".concat(_vm.userDetail.name)
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "info"
-  }, [_c("p", [_vm._v(_vm._s(_vm.user.first_name) + " " + _vm._s(_vm.user.last_name))]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("font-awesome-icon", {
+  }, [_c("p", [_vm._v(_vm._s(_vm.userDetail.first_name) + " " + _vm._s(_vm.userDetail.last_name))]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("font-awesome-icon", {
     staticClass: "arrow bounce ml-2",
     attrs: {
       icon: "fa-solid fa-arrow-right"
@@ -37541,7 +37549,7 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-house"
     }
-  })], 1), _vm._v("\n        " + _vm._s(_vm.user.city_address) + "\n      ")]), _vm._v(" "), _c("div", {
+  })], 1), _vm._v("\n        " + _vm._s(_vm.userDetail.city_address) + "\n      ")]), _vm._v(" "), _c("div", {
     staticClass: "contacts"
   }, [_c("a", {
     attrs: {
@@ -37564,12 +37572,14 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-phone"
     }
-  }), _vm._v(" " + _vm._s(_vm.user.phone) + "\n          ")], 1), _vm._v(" "), _c("div", [_c("font-awesome-icon", {
+  }), _vm._v("\n            " + _vm._s(_vm.userDetail.phone) + "\n          ")], 1), _vm._v(" "), _c("div", [_c("font-awesome-icon", {
     staticClass: "mr-2",
     attrs: {
       icon: "fa-solid fa-fax"
     }
-  }), _vm._v(" " + _vm._s(_vm.user.phone) + "\n          ")], 1)])])]), _vm._v(" "), _c("div", {
+  }), _vm._v("\n            " + _vm._s(_vm.userDetail.phone) + "\n          ")], 1)])])]), _vm._v(" "), _c("div", {
+    staticClass: "container"
+  }, [_c("div", {
     staticClass: "user-page-details"
   }, [_c("a", {
     attrs: {
@@ -37579,7 +37589,7 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-file"
     }
-  }), _vm._v(" Il Curriculum")], 1), _vm._v(" "), _c("hr"), _vm._v(" "), _c("p", [_vm._v("\n        Il Dottor " + _vm._s(_vm.user.first_name) + " " + _vm._s(_vm.user.last_name) + " si è laureato in Medicina a\n        " + _vm._s(_vm.user.address) + "e successivamente, nel medesimo ateneo, ha conseguito la\n        specializzazione in Chirurgia Vascolare. Svolge la sua attività presso il\n        Policlinico di " + _vm._s(_vm.user.address) + " e si occupa del trattamento delle malattie\n        delle arterie, delle vene e dei vasi linfatici. Riceve su appuntamento.\n      ")])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" Il Curriculum")], 1), _vm._v(" "), _c("hr"), _vm._v(" "), _c("p", [_vm._v("\n          Il Dottor " + _vm._s(_vm.userDetail.first_name) + " " + _vm._s(_vm.userDetail.last_name) + " si è laureato\n          in Medicina a " + _vm._s(_vm.userDetail.address) + "e successivamente, nel medesimo ateneo,\n          ha conseguito la specializzazione in Chirurgia Vascolare. Svolge la sua\n          attività presso il Policlinico di " + _vm._s(_vm.userDetail.address) + " e si occupa del\n          trattamento delle malattie delle arterie, delle vene e dei vasi linfatici.\n          Riceve su appuntamento.\n        ")])]), _vm._v(" "), _c("div", {
     staticClass: "user-page-details"
   }, [_c("h4", [_c("a", {
     attrs: {
@@ -37589,7 +37599,7 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-euro-sign"
     }
-  }), _vm._v(" Le tariffe\n      ")], 1), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._m(3), _vm._v(" "), _c("p", [_vm._v("\n        Le tariffe sono fornite a titolo indicativo dal professionista sanitario e\n        pertanto possono variare a seconda del tipo di trattamento effettuato, il numero\n        di visite e le eventuali prestazioni accessorie. In caso di supplementi, il\n        professionista si impegna ad avvertire il paziente prima di fornire le\n        prestazioni.\n      ")])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" Le tariffe\n        ")], 1), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._m(3), _vm._v(" "), _c("p", [_vm._v("\n          Le tariffe sono fornite a titolo indicativo dal professionista sanitario e\n          pertanto possono variare a seconda del tipo di trattamento effettuato, il\n          numero di visite e le eventuali prestazioni accessorie. In caso di\n          supplementi, il professionista si impegna ad avvertire il paziente prima di\n          fornire le prestazioni.\n        ")])]), _vm._v(" "), _c("div", {
     staticClass: "user-page-details"
   }, [_c("a", {
     attrs: {
@@ -37601,25 +37611,25 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-info"
     }
-  }), _vm._v(" Domande Frequenti\n      ")], 1), _vm._v(" "), _c("div", [_c("div", {
+  }), _vm._v(" Domande Frequenti\n        ")], 1), _vm._v(" "), _c("div", [_c("div", {
     staticClass: "question"
   }, [_c("font-awesome-icon", {
     attrs: {
       icon: "fa-solid fa-arrow-right"
     }
-  }), _vm._v(" Qual'é l'indirizzo?\n        ")], 1), _vm._v(" "), _c("p", [_vm._v("- L'indirizzo è " + _vm._s(_vm.user.city_address) + "," + _vm._s(_vm.user.address) + ".")])]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", [_c("div", {
+  }), _vm._v(" Qual'é l'indirizzo?\n          ")], 1), _vm._v(" "), _c("p", [_vm._v("- L'indirizzo è " + _vm._s(_vm.userDetail.city_address) + "," + _vm._s(_vm.userDetail.address) + ".")])]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", [_c("div", {
     staticClass: "question"
   }, [_c("font-awesome-icon", {
     attrs: {
       icon: "fa-solid fa-arrow-right"
     }
-  }), _vm._v(" Si accetta anche\n          pagamento con Bancomat/Carta di Credito?\n        ")], 1), _vm._v(" "), _c("p", [_vm._v("- Si,sono accettati anche questi metodi di pagamento.")])]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", [_c("div", {
+  }), _vm._v(" Si accetta anche\n            pagamento con Bancomat/Carta di Credito?\n          ")], 1), _vm._v(" "), _c("p", [_vm._v("- Si,sono accettati anche questi metodi di pagamento.")])]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", [_c("div", {
     staticClass: "question"
   }, [_c("font-awesome-icon", {
     attrs: {
       icon: "fa-solid fa-arrow-right"
     }
-  }), _vm._v(" Qual'é la fascia oraria\n          per le prenotazioni?\n        ")], 1), _vm._v(" "), _c("p", [_vm._v("\n          - Il centralino è operativo dalle ore 9:00 alle ore 15:00 tutti i\n          giorni,Domenica esclusa.\n        ")])])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" Qual'é la fascia oraria\n            per le prenotazioni?\n          ")], 1), _vm._v(" "), _c("p", [_vm._v("\n            - Il centralino è operativo dalle ore 9:00 alle ore 15:00 tutti i\n            giorni,Domenica esclusa.\n          ")])])]), _vm._v(" "), _c("div", {
     staticClass: "user-page-details"
   }, [_c("a", {
     attrs: {
@@ -37627,7 +37637,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("NewMessage", {
     attrs: {
-      "doctor-id": "" + _vm.user.id
+      "doctor-id": "" + _vm.userDetail.id
     },
     on: {
       submitted: _vm.messageSubmitted
@@ -37643,7 +37653,7 @@ var render = function render() {
       to: {
         name: "reviews",
         params: {
-          userId: _vm.user.id
+          userId: _vm.userDetail.id
         }
       }
     }
@@ -37651,7 +37661,7 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-pen-to-square"
     }
-  }), _vm._v(" Scrivi una recensione\n      ")], 1), _vm._v(" "), _c("button", {
+  }), _vm._v(" Scrivi una recensione\n        ")], 1), _vm._v(" "), _c("button", {
     staticClass: "btn btn-secondary",
     on: {
       click: function click($event) {
@@ -37662,7 +37672,7 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-rotate-left"
     }
-  }), _vm._v(" Torna Indietro\n      ")], 1)], 1)]), _vm._v(" "), _c("Footer"), _vm._v(" "), _vm.showMessage ? _c("div", {
+  }), _vm._v(" Torna Indietro\n        ")], 1)], 1)])]), _vm._v(" "), _c("Footer"), _vm._v(" "), _vm.showMessage ? _c("div", {
     staticClass: "overlay",
     on: {
       click: function click($event) {
@@ -37763,10 +37773,10 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "content"
-  }, [_c("NavBar"), _vm._v(" "), _c("div", {
+  }, [_c("NavBar"), _vm._v(" "), _c("main", [_c("div", {
     staticClass: "container"
   }, [_c("div", {
-    staticClass: "text-center my-5",
+    staticClass: "text-center py-5",
     attrs: {
       id: "selezione-campi"
     }
@@ -37801,7 +37811,7 @@ var render = function render() {
         value: specialization.id,
         selected: _vm.currentSpecialization === specialization.id
       }
-    }, [_vm._v("\n                            " + _vm._s(specialization.label) + "\n                        ")]);
+    }, [_vm._v("\n                " + _vm._s(specialization.label) + "\n              ")]);
   })], 2) : _vm._e(), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
@@ -37834,7 +37844,7 @@ var render = function render() {
       domProps: {
         value: propriety
       }
-    }, [_vm._v("\n                            " + _vm._s(propriety) + "\n                        ")]);
+    }, [_vm._v("\n                " + _vm._s(propriety) + "\n              ")]);
   })], 2)]), _vm._v(" "), _c("div", [_c("input", {
     directives: [{
       name: "model",
@@ -37862,7 +37872,7 @@ var render = function render() {
       staticClass: "card shadow w-100 my-2"
     }, [_c("div", {
       staticClass: "card-header d-flex justify-content-between align-items-center"
-    }, [_c("div", [_vm._v("\n                        Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name) + "\n                    ")]), _vm._v(" "), _c("div", [_c("router-link", {
+    }, [_c("div", [_vm._v("Dr. " + _vm._s(doctor.detail.first_name) + " " + _vm._s(doctor.detail.last_name))]), _vm._v(" "), _c("div", [_c("router-link", {
       staticClass: "btn btn-primary d-flex align-items-center",
       attrs: {
         to: {
@@ -37872,36 +37882,40 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("\n                            Visualizza profilo\n                        ")])], 1)]), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                Visualizza profilo\n              ")])], 1)]), _vm._v(" "), _c("div", {
       staticClass: "card-body d-flex align-items-center"
     }, [_c("div", {
       staticClass: "col-4 w-25 mr-2"
-    }, [_c("input", {
-      staticClass: "img-fluid rounded-circle",
-      attrs: {
-        type: "image",
-        src: doctor.detail.image,
-        alt: ""
+    }, [_c("figure", {
+      staticStyle: {
+        width: "150px",
+        height: "150px"
       }
-    })]), _vm._v(" "), _c("div", {
+    }, [_c("img", {
+      staticClass: "img-cover border rounded-circle bg-white shadow",
+      attrs: {
+        src: doctor.detail.image.startsWith("http") ? doctor.detail.image : "/storage/".concat(doctor.detail.image),
+        alt: "".concat(doctor.detail.name)
+      }
+    })])]), _vm._v(" "), _c("div", {
       staticClass: "col-4 border-left border-white"
-    }, [_c("div", [_vm._v("Specializzazione: \n                            "), _vm._v(" "), _vm._l(_vm.printSp, function (specialization) {
+    }, [_c("div", [_vm._v("\n                Specializzazione:\n                "), _vm._v(" "), _vm._l(_vm.printSp, function (specialization) {
       return _c("span", {
         key: specialization.id,
         staticClass: "ml-2",
         "class": "badge badge-" + specialization.color
-      }, [_vm._v(_vm._s(specialization.label) + "\n                            ")]);
+      }, [_vm._v(_vm._s(specialization.label) + "\n                ")]);
     })], 2), _vm._v(" "), _c("div", {
       staticClass: "my-3"
     }, [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("div", [_vm._v("Email: " + _vm._s(doctor.email))])]), _vm._v(" "), _c("div", {
       staticClass: "col-4 border-left border-white"
-    }, [_c("div", [_vm._v("\n                                Rating:\n                                "), _c("RateReview", {
+    }, [_c("div", [_vm._v("\n                Rating:\n                "), _c("RateReview", {
       attrs: {
         value: _vm.averageReviews[doctor.id].avg
       }
     }), _vm._v(" "), _c("div", {
       staticClass: "my-3"
-    }, [_vm._v("\n                                    Recensioni: (" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n\n                                ")]), _vm._v(" "), _c("router-link", {
+    }, [_vm._v("\n                  Recensioni: (" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n                ")]), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-primary",
       attrs: {
         to: {
@@ -37911,8 +37925,8 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("\n                                Recensioni\n                            ")])], 1)])])]);
-  }), 0) : _c("AppLoader")], 1)], 1);
+    }, [_vm._v("\n                  Recensioni\n                ")])], 1)])])]);
+  }), 0) : _c("AppLoader")], 1)])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -42336,7 +42350,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&display=swap);", ""]);
 
 // module
-exports.push([module.i, "#main {\n  font-family: \"Comfortaa\", cursive;\n}\n#main .wrapper {\n  width: 580px;\n  margin: 0px auto;\n  position: relative;\n}\n@media (max-width: 560px) {\n#main .wrapper {\n    width: 400px;\n}\n}\n#main .select-btn,\n#main .options li {\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n}\n#main .select-btn {\n  height: 55px;\n  padding: 0 20px;\n  background: #fff;\n  border-radius: 7px;\n  justify-content: space-between;\n}\n#main .select-btn .icon {\n  transition: transform 300ms linear;\n}\n#main .wrapper.active .select-btn .icon {\n  transform: rotate(-180deg);\n}\n#main .content {\n  display: none;\n  border-radius: 7px;\n  background: #fff;\n}\n#main .wrapper.active .content {\n  display: block;\n  position: absolute;\n  z-index: 2;\n  padding: 25px 20px;\n  top: 65px;\n  width: 580px;\n}\n#main .content .search {\n  position: relative;\n}\n#main .content .search input {\n  height: 50px;\n  width: 100%;\n  border-radius: 5px;\n  font-size: 17px;\n  padding: 0 15px 0 40px;\n  outline: none;\n  border: 1px solid #b3b3b3;\n}\n#main .search .i {\n  top: 15px;\n  color: #999;\n  height: 20px;\n  vertical-align: middle;\n  left: 15px;\n  position: absolute;\n}\n#main span {\n  font-size: 20px;\n}\n#main .content .options {\n  margin-top: 10px;\n  max-height: 250px;\n  overflow-y: auto;\n}\n#main .options {\n  padding: 0;\n}\n#main .options::-webkit-scrollbar {\n  width: 7px;\n}\n#main .options::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#main .options::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#main .options li {\n  height: 50px;\n  padding: 0 13px;\n  font-size: 17px;\n  border-radius: 5px;\n}\n#main .options li:hover {\n  background: #f2f2f2;\n}", ""]);
+exports.push([module.i, "#main {\n  font-family: \"Comfortaa\", cursive;\n}\n#main .wrapper {\n  width: 580px;\n  margin: 0px auto;\n  position: relative;\n}\n@media (max-width: 560px) {\n#main .wrapper {\n    width: 400px;\n}\n#main .wrapper .content {\n    max-width: 400px;\n}\n}\n#main .select-btn,\n#main .options li {\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n}\n#main .select-btn {\n  height: 55px;\n  padding: 0 20px;\n  background: #fff;\n  border-radius: 7px;\n  justify-content: space-between;\n}\n#main .select-btn .icon {\n  transition: transform 300ms linear;\n}\n#main .wrapper.active .select-btn .icon {\n  transform: rotate(-180deg);\n}\n#main .content {\n  display: none;\n  border-radius: 7px;\n  background: #fff;\n}\n#main .wrapper.active .content {\n  display: block;\n  position: absolute;\n  z-index: 2;\n  padding: 25px 20px;\n  top: 65px;\n  width: 580px;\n}\n#main .content .search {\n  position: relative;\n}\n#main .content .search input {\n  height: 50px;\n  width: 100%;\n  border-radius: 5px;\n  font-size: 17px;\n  padding: 0 15px 0 40px;\n  outline: none;\n  border: 1px solid #b3b3b3;\n}\n#main .search .i {\n  top: 15px;\n  color: #999;\n  height: 20px;\n  vertical-align: middle;\n  left: 15px;\n  position: absolute;\n}\n#main span {\n  font-size: 20px;\n}\n#main .content .options {\n  margin-top: 10px;\n  max-height: 250px;\n  overflow-y: auto;\n}\n#main .options {\n  padding: 0;\n}\n#main .options::-webkit-scrollbar {\n  width: 7px;\n}\n#main .options::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#main .options::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#main .options li {\n  height: 50px;\n  padding: 0 13px;\n  font-size: 17px;\n  border-radius: 5px;\n}\n#main .options li:hover {\n  background: #f2f2f2;\n}", ""]);
 
 // exports
 
@@ -42469,7 +42483,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#user-details main {\n  background-image: url(\"https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg\");\n  animation: scroll 100s linear infinite;\n}\n@keyframes scroll {\n100% {\n    background-position: 0 -2000px;\n}\n}\n#user-details #main-banner {\n  height: 200px;\n  background: linear-gradient(#0451cb, 60%, #fff);\n}\n#user-details #main-banner .doctor-card {\n  display: flex;\n  margin-left: 100px;\n  padding-top: 20px;\n}\n#user-details #main-banner .doctor-card figure {\n  width: 150px;\n}\n#user-details #main-banner .doctor-card figure img {\n  border-radius: 50%;\n  border: 1px solid #fff;\n}\n#user-details #main-banner .doctor-card span {\n  padding-left: 20px;\n  color: #fff;\n  font-size: 1.2rem;\n}\n#user-details #main-banner .doctor-card p {\n  font-size: 1.8rem;\n  color: #fff;\n  padding-left: 15px;\n  padding-top: 10px;\n  font-weight: 800;\n}\n#user-details #main-banner .arrow {\n  width: 40px;\n  height: 40px;\n  color: #fff;\n  margin-right: 20px;\n  line-height: 40px;\n  vertical-align: middle;\n}\n#user-details #main-banner .bounce {\n  animation: bounce 2s infinite;\n}\n@keyframes bounce {\n0%, 20%, 50%, 80%, 100% {\n    transform: translateX(0);\n}\n40% {\n    transform: translateX(30px);\n}\n60% {\n    transform: translateX(15px);\n}\n}\n#user-details #info-banner {\n  height: 60px;\n  background-color: #fff;\n  border-bottom: 1px solid #dedede;\n}\n#user-details #info-banner ul {\n  display: flex;\n  padding-left: 100px;\n}\n#user-details #info-banner ul li {\n  font-style: 1.2rem;\n  padding: 20px 10px;\n  list-style-type: none;\n}\n#user-details .doctor-info {\n  display: flex;\n  margin: 0 auto;\n  width: 800px;\n  padding: 50px 0;\n}\n#user-details .doctor-info .address {\n  width: 40%;\n  padding: 20px 0;\n  text-align: center;\n  background: linear-gradient(#72a6fb, 15%, #fff);\n  border-radius: 10px;\n}\n#user-details .doctor-info .contacts {\n  display: flex;\n  align-items: center;\n  margin-left: 30px;\n  background: linear-gradient(#72a6fb, 15%, #fff);\n  opacity: 0.8;\n  border-radius: 10px;\n  padding: 10px;\n}\n#user-details .doctor-info .contacts #hours {\n  padding-right: 4.5rem;\n  text-align: center;\n}\n#user-details .doctor-info strong {\n  color: #31a0f5;\n  font-size: 1.5rem;\n}\n#user-details .user-page-details {\n  width: 800px;\n  background-color: #fff;\n  margin: 0 auto;\n  padding: 30px;\n  margin-bottom: 50px;\n}\n#user-details .user-page-details h5 {\n  text-align: center;\n  font-size: 1.5rem;\n}\n#user-details .user-page-details .question {\n  color: #0d2339;\n  font-size: 1.2rem;\n  font-weight: bold;\n}\n#user-details #buttons {\n  padding: 30px;\n}\n#user-details h3,\n#user-details h5 {\n  color: #003f5e;\n  font-weight: bold;\n  font-size: 1.5rem;\n  padding-bottom: 10px;\n}\n.overlay {\n  display: grid;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.6);\n  justify-content: center;\n  align-content: center;\n  z-index: 1000;\n}\n.overlay .card {\n  z-index: 1020;\n}", ""]);
+exports.push([module.i, "#user-details main {\n  background-image: url(\"https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg\");\n  animation: scroll 100s linear infinite;\n}\n@keyframes scroll {\n100% {\n    background-position: 0 -2000px;\n}\n}\n#user-details #main-banner {\n  height: 200px;\n  background: linear-gradient(#0451cb, 60%, #fff);\n}\n#user-details #main-banner .doctor-card {\n  display: flex;\n  margin-left: 70px;\n  padding-top: 20px;\n}\n#user-details #main-banner .doctor-card figure {\n  width: 150px;\n}\n#user-details #main-banner .doctor-card figure img {\n  border-radius: 50%;\n  border: 1px solid #fff;\n}\n#user-details #main-banner .doctor-card span {\n  padding-left: 20px;\n  color: #fff;\n  font-size: 1.2rem;\n}\n#user-details #main-banner .doctor-card p {\n  font-size: 1.8rem;\n  color: #fff;\n  padding-left: 15px;\n  padding-top: 10px;\n  font-weight: 800;\n}\n#user-details #main-banner .arrow {\n  width: 40px;\n  height: 40px;\n  color: #fff;\n  margin-right: 20px;\n  line-height: 40px;\n  vertical-align: middle;\n}\n#user-details #main-banner .bounce {\n  animation: bounce 2s infinite;\n}\n@keyframes bounce {\n0%, 20%, 50%, 80%, 100% {\n    transform: translateX(0);\n}\n40% {\n    transform: translateX(30px);\n}\n60% {\n    transform: translateX(15px);\n}\n}\n#user-details #info-banner {\n  height: 60px;\n  background-color: #fff;\n  border-bottom: 1px solid #dedede;\n}\n#user-details #info-banner ul {\n  display: flex;\n  padding-left: 100px;\n}\n#user-details #info-banner ul li {\n  font-style: 1.2rem;\n  padding: 20px 10px;\n  list-style-type: none;\n}\n#user-details .doctor-info {\n  display: flex;\n  justify-content: center;\n  padding: 50px 0;\n}\n#user-details .doctor-info .address {\n  flex-basis: 30%;\n  padding: 20px 10px;\n  margin-right: 20px;\n  text-align: center;\n  background: linear-gradient(#72a6fb, 15%, #fff);\n  border-radius: 10px;\n}\n#user-details .doctor-info .contacts {\n  flex-basis: 40%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: linear-gradient(#72a6fb, 15%, #fff);\n  opacity: 0.8;\n  border-radius: 10px;\n  padding: 10px;\n}\n#user-details .doctor-info .contacts #hours {\n  padding-right: 4.5rem;\n  text-align: center;\n}\n#user-details .doctor-info strong {\n  color: #31a0f5;\n  font-size: 1.5rem;\n}\n#user-details .user-page-details {\n  background-color: #fff;\n  margin: 0 auto;\n  padding: 30px;\n  margin-bottom: 50px;\n}\n#user-details .user-page-details h5 {\n  text-align: center;\n  font-size: 1.5rem;\n}\n#user-details .user-page-details .question {\n  color: #0d2339;\n  font-size: 1.2rem;\n  font-weight: bold;\n}\n#user-details #buttons {\n  padding: 30px;\n}\n#user-details h3,\n#user-details h5 {\n  color: #003f5e;\n  font-weight: bold;\n  font-size: 1.5rem;\n  padding-bottom: 10px;\n}\n.overlay {\n  display: grid;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.6);\n  justify-content: center;\n  align-content: center;\n  z-index: 1000;\n}\n.overlay .card {\n  z-index: 1020;\n}\n@media screen and (max-width: 480px) {\n#main-banner {\n    max-width: 480px;\n}\n#info-banner,\n.arrow {\n    display: none;\n}\n.doctor-card {\n    margin-right: 40px;\n}\nfigure img {\n    width: 120px;\n    height: 120px;\n}\n.doctor-info {\n    flex-wrap: wrap;\n    display: flex;\n    justify-content: center;\n}\n.doctor-info .address,\n.doctor-info .contacts {\n    justify-content: center;\n    margin-bottom: 10px;\n}\n.user-page-details {\n    max-width: 480px;\n}\n}\n@media screen and (max-width: 992px) {\n.doctor-info {\n    flex-wrap: nowrap;\n}\n.doctor-info .address {\n    flex-basis: 40%;\n    margin-left: 40px;\n}\n.doctor-info .contacts {\n    flex-basis: 30%;\n    margin: 0 10px;\n    margin-right: 20px;\n}\n}", ""]);
 
 // exports
 
@@ -42488,7 +42502,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".content[data-v-3982aa98] {\n  background: #fff;\n}\n.card[data-v-3982aa98] {\n  background-color: rgb(5, 81, 203);\n  color: white;\n}", ""]);
+exports.push([module.i, ".content[data-v-3982aa98] {\n  background: #fff;\n}\n.card[data-v-3982aa98] {\n  background-color: rgb(5, 81, 203);\n  color: white;\n}\nmain[data-v-3982aa98] {\n  background-image: url(\"https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg\");\n  animation: scroll-3982aa98 100s linear infinite;\n}\n@keyframes scroll-3982aa98 {\n100% {\n    background-position: 0 -2000px;\n}\n}", ""]);
 
 // exports
 
@@ -42545,7 +42559,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.slider {\n  background: #fff;\n}\n.flicking-arrow-prev::before,\n.flicking-arrow-prev::after,\n.flicking-arrow-next::before,\n.flicking-arrow-next::after {\n  background-color: var(--primary);\n}\n.w-3-m-2 {\n  margin-right: 2em;\n  width: calc((100% / 3) - 2em);\n}\n@media (max-width: 820px) {\n.m-query {\n    width: calc((100% / 2) - 2em);\n}\n}\n@media (max-width: 560px) {\n.m-query {\n    width: calc((100% / 1) - 2em);\n}\n}\n", ""]);
+exports.push([module.i, "\n.slider {\n  background: #fff;\n}\n.flicking-arrow-prev::before,\n.flicking-arrow-prev::after,\n.flicking-arrow-next::before,\n.flicking-arrow-next::after {\n  background-color: var(--primary);\n}\n.w-3-m-2 {\n  margin-right: 1em;\n  margin-left: 1em;\n  width: calc((100% / 3) - 2em);\n}\n@media (max-width: 820px) {\n.m-query {\n    width: calc((100% / 2) - 2em);\n}\n}\n@media (max-width: 560px) {\n.m-query {\n    width: calc((100% / 1) - 2em);\n}\n}\n", ""]);
 
 // exports
 

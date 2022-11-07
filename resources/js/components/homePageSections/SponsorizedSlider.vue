@@ -7,7 +7,7 @@
         circular: true,
       }"
       :plugins="plugins"
-      class=" ml-4"
+      class="ml-4"
     >
       <div
         class="card shadow w-3-m-2 m-query"
@@ -27,12 +27,17 @@
         </div>
         <div class="card-body d-flex align-items-center">
           <div class="w-25 mr-2">
-            <input
-              class="img-fluid rounded-circle"
-              type="image"
-              :src="doctor.detail.image"
-              alt=""
-            />
+            <figure style="width: 100px; height: 100px">
+              <img
+                :src="
+                  doctor.detail.image.startsWith('http')
+                    ? doctor.detail.image
+                    : `/storage/${doctor.detail.image}`
+                "
+                class="img-cover border rounded-circle bg-white shadow"
+                :alt="`${doctor.detail.name}`"
+              />
+            </figure>
           </div>
           <div>
             <div>
