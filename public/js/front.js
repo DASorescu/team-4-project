@@ -36099,7 +36099,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'ReviewsPage',
+  name: "ReviewsPage",
   components: {
     RateReview: _RateReview__WEBPACK_IMPORTED_MODULE_0__["default"],
     NewReview: _NewReview__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -36124,7 +36124,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/user/reviews/' + doctorId);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/user/reviews/" + doctorId);
               case 2:
                 res = _context.sent;
                 if (Array.isArray(res.data)) {
@@ -37485,8 +37485,8 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "content"
-  }, [_c("NavBar"), _vm._v(" "), _c("div", {
-    staticClass: "d-flex flex-column mt-5 container"
+  }, [_c("NavBar"), _vm._v(" "), _c("main", [_c("div", {
+    staticClass: "d-flex flex-column pt-5 container"
   }, [_vm._l(_vm.reviews, function (review, i) {
     return _c("div", {
       key: "rev-" + i,
@@ -37497,9 +37497,9 @@ var render = function render() {
       attrs: {
         value: review.rating
       }
-    }), _vm._v("\n                    " + _vm._s(review.guest_email) + "\n                    " + _vm._s(review.guest_name) + "\n                ")], 1), _vm._v(" "), _c("div", {
+    }), _vm._v("\n          " + _vm._s(review.guest_email) + "\n          " + _vm._s(review.guest_name) + "\n        ")], 1), _vm._v(" "), _c("div", {
       staticClass: "card-body"
-    }, [_vm._v("\n                    " + _vm._s(review.content) + "\n                ")])]);
+    }, [_vm._v("\n          " + _vm._s(review.content) + "\n        ")])]);
   }), _vm._v(" "), _c("div", {
     staticClass: "card shadow mt-5 py-3 px-3"
   }, [_c("NewReview", {
@@ -37518,9 +37518,9 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "fa-solid fa-arrow-rotate-left"
-  }), _vm._v("\n                    Torna Indietro\n                ")])])], 1)], 2), _vm._v(" "), _c("Footer", {
+  }), _vm._v("\n            Torna Indietro\n          ")])])], 1)], 2), _vm._v(" "), _c("Footer", {
     staticClass: "mt-3"
-  })], 1);
+  })], 1)], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -37552,14 +37552,8 @@ var render = function render() {
     }
   }, [_c("div", {
     staticClass: "doctor-card"
-  }, [_c("figure", {
-    staticStyle: {
-      width: "100px",
-      height: "100px"
-    }
-  }, [_c("img", {
-    staticClass: "img-cover border rounded-circle bg-white shadow",
   }, [_c("figure", [_c("img", {
+    staticClass: "img-cover border rounded-circle bg-white shadow",
     attrs: {
       src: _vm.userDetail.image.startsWith("http") ? _vm.userDetail.image : "/storage/".concat(_vm.userDetail.image),
       alt: "".concat(_vm.userDetail.name)
@@ -37672,7 +37666,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("NewMessage", {
     attrs: {
-      "doctor-id": "" + _vm.userDetail.id
+      "doctor-id": "" + _vm.userDetail.user_id
     },
     on: {
       submitted: _vm.messageSubmitted
@@ -37688,7 +37682,7 @@ var render = function render() {
       to: {
         name: "reviews",
         params: {
-          userId: _vm.userDetail.id
+          userId: _vm.userDetail.user_id
         }
       }
     }
@@ -37806,10 +37800,10 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("NavBar"), _vm._v(" "), _c("div", {
+  return _c("div", [_c("NavBar"), _vm._v(" "), _c("main", [_c("div", {
     staticClass: "container"
   }, [_c("div", {
-    staticClass: "my-5",
+    staticClass: "py-5",
     attrs: {
       id: "selezione-campi"
     }
@@ -37845,7 +37839,7 @@ var render = function render() {
         value: specialization.label,
         selected: _vm.currentSpecialization === specialization.label
       }
-    }, [_vm._v("\n          " + _vm._s(specialization.label) + "\n        ")]);
+    }, [_vm._v("\n            " + _vm._s(specialization.label) + "\n          ")]);
   })], 2) : _vm._e(), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
@@ -37952,7 +37946,7 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("\n              Visualizza profilo\n            ")])], 1)]), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                Visualizza profilo\n              ")])], 1)]), _vm._v(" "), _c("div", {
       staticClass: "card-body d-flex align-items-center"
     }, [_c("div", {
       staticClass: "col-0 col-sm-0 col-md-2 col-lg-4 col-xl- w-25 mr-2"
@@ -37977,18 +37971,18 @@ var render = function render() {
       return _c("span", {
         key: specialization.id,
         "class": "badge badge-" + specialization.color
-      }, [_vm._v(_vm._s(specialization.label) + "\n              ")]);
+      }, [_vm._v(_vm._s(specialization.label) + "\n                ")]);
     }), 0) : _vm._e(), _vm._v(" "), _c("div", {
       staticClass: "my-3"
     }, [_vm._v("Città: " + _vm._s(doctor.detail.address))]), _vm._v(" "), _c("div", [_vm._v("Email: " + _vm._s(doctor.email))])]), _vm._v(" "), _c("div", {
       staticClass: "col-6 col-sm-6 col-md-5 col-lg-4 col-xl-4 border-left border-white"
-    }, [_c("div", [_vm._v("\n              Rating:\n              "), _c("RateReview", {
+    }, [_c("div", [_vm._v("\n                Rating:\n                "), _c("RateReview", {
       attrs: {
         value: _vm.averageReviews[doctor.id].avg
       }
     }), _vm._v(" "), _c("div", {
       staticClass: "my-3"
-    }, [_vm._v("\n                Recensioni: (" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n              ")]), _vm._v(" "), _c("router-link", {
+    }, [_vm._v("\n                  Recensioni: (" + _vm._s(_vm.averageReviews[doctor.id].count) + ")\n                ")]), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-sm btn-primary",
       attrs: {
         to: {
@@ -37998,8 +37992,8 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("\n                Recensioni\n              ")])], 1)])])]);
-  }), 0) : _vm._e(), _vm._v(" "), _vm.isLoading ? _c("AppLoader") : _vm._e()], 1)], 1);
+    }, [_vm._v("\n                  Recensioni\n                ")])], 1)])])]);
+  }), 0) : _vm._e(), _vm._v(" "), _vm.isLoading ? _c("AppLoader") : _vm._e()], 1)])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -42423,7 +42417,6 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&display=swap);", ""]);
 
 // module
-exports.push([module.i, "#main {\n  font-family: \"Comfortaa\", cursive;\n}\n#main .wrapper {\n  width: 580px;\n  margin: 0px auto;\n  position: relative;\n}\n@media (max-width: 560px) {\n#main .wrapper {\n    width: 400px;\n}\n#main .wrapper .content {\n    max-width: 400px;\n}\n}\n#main .select-btn,\n#main .options li {\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n}\n#main .select-btn {\n  height: 55px;\n  padding: 0 20px;\n  background: #fff;\n  border-radius: 7px;\n  justify-content: space-between;\n}\n#main .select-btn .icon {\n  transition: transform 300ms linear;\n}\n#main .wrapper.active .select-btn .icon {\n  transform: rotate(-180deg);\n}\n#main .content {\n  display: none;\n  border-radius: 7px;\n  background: #fff;\n}\n#main .wrapper.active .content {\n  display: block;\n  position: absolute;\n  z-index: 2;\n  padding: 25px 20px;\n  top: 65px;\n  width: 580px;\n}\n#main .content .search {\n  position: relative;\n}\n#main .content .search input {\n  height: 50px;\n  width: 100%;\n  border-radius: 5px;\n  font-size: 17px;\n  padding: 0 15px 0 40px;\n  outline: none;\n  border: 1px solid #b3b3b3;\n}\n#main .search .i {\n  top: 15px;\n  color: #999;\n  height: 20px;\n  vertical-align: middle;\n  left: 15px;\n  position: absolute;\n}\n#main span {\n  font-size: 20px;\n}\n#main .content .options {\n  margin-top: 10px;\n  max-height: 250px;\n  overflow-y: auto;\n}\n#main .options {\n  padding: 0;\n}\n#main .options::-webkit-scrollbar {\n  width: 7px;\n}\n#main .options::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#main .options::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#main .options li {\n  height: 50px;\n  padding: 0 13px;\n  font-size: 17px;\n  border-radius: 5px;\n}\n#main .options li:hover {\n  background: #f2f2f2;\n}", ""]);
 exports.push([module.i, "#main {\n  font-family: \"Comfortaa\", cursive;\n}\n#main .wrapper {\n  width: 580px;\n  margin: 0px auto;\n  position: relative;\n}\n@media (max-width: 583px) {\n#main .wrapper {\n    width: 400px;\n}\n#main .wrapper .content {\n    max-width: 400px;\n}\n}\n#main .select-btn,\n#main .options li {\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n}\n#main .select-btn {\n  height: 55px;\n  padding: 0 20px;\n  background: #fff;\n  border-radius: 7px;\n  justify-content: space-between;\n}\n#main .select-btn .icon {\n  transition: transform 300ms linear;\n}\n#main .wrapper.active .select-btn .icon {\n  transform: rotate(-180deg);\n}\n#main .content {\n  display: none;\n  border-radius: 7px;\n  background: #fff;\n}\n#main .wrapper.active .content {\n  display: block;\n  position: absolute;\n  z-index: 2;\n  padding: 25px 20px;\n  top: 65px;\n  width: 580px;\n}\n#main .content .search {\n  position: relative;\n}\n#main .content .search input {\n  height: 50px;\n  width: 100%;\n  border-radius: 5px;\n  font-size: 17px;\n  padding: 0 15px 0 40px;\n  outline: none;\n  border: 1px solid #b3b3b3;\n}\n#main .search .i {\n  top: 15px;\n  color: #999;\n  height: 20px;\n  vertical-align: middle;\n  left: 15px;\n  position: absolute;\n}\n#main span {\n  font-size: 20px;\n}\n#main .content .options {\n  margin-top: 10px;\n  max-height: 250px;\n  overflow-y: auto;\n}\n#main .options {\n  padding: 0;\n}\n#main .options::-webkit-scrollbar {\n  width: 7px;\n}\n#main .options::-webkit-scrollbar-track {\n  background: #f1f1f1;\n  border-radius: 25px;\n}\n#main .options::-webkit-scrollbar-thumb {\n  background: #ccc;\n  border-radius: 25px;\n}\n#main .options li {\n  height: 50px;\n  padding: 0 13px;\n  font-size: 17px;\n  border-radius: 5px;\n}\n#main .options li:hover {\n  background: #f2f2f2;\n}", ""]);
 
 // exports
@@ -42576,7 +42569,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#selezione-campi span[data-v-3982aa98] {\n  font-size: 1rem;\n}\n.card[data-v-3982aa98] {\n  background-color: rgb(5, 81, 203);\n  color: white;\n}\n@media (min-width: 476px) {\n.card[data-v-3982aa98] {\n    font-size: 0.7rem;\n}\n.card .name[data-v-3982aa98] {\n    font-size: 0.9rem;\n}\n}\n@media (min-width: 576px) {\n.card[data-v-3982aa98] {\n    font-size: 0.9rem;\n}\n.card .name[data-v-3982aa98] {\n    font-size: 1rem;\n}\n}\n@media (min-width: 1200px) {\n.card[data-v-3982aa98] {\n    font-size: 1.2rem;\n}\n}\nmain[data-v-3982aa98] {\n  background-image: url(\"https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg\");\n  animation: scroll 100s linear infinite;\n}\n.card-header[data-v-3982aa98] {\n  font-size: 1.3rem;\n}", ""]);
+exports.push([module.i, "#selezione-campi span[data-v-3982aa98] {\n  font-size: 1rem;\n}\n.card[data-v-3982aa98] {\n  background-color: rgb(5, 81, 203);\n  color: white;\n}\n@media (min-width: 476px) {\n.card[data-v-3982aa98] {\n    font-size: 0.7rem;\n}\n.card .name[data-v-3982aa98] {\n    font-size: 0.9rem;\n}\n}\n@media (min-width: 576px) {\n.card[data-v-3982aa98] {\n    font-size: 0.9rem;\n}\n.card .name[data-v-3982aa98] {\n    font-size: 1rem;\n}\n}\n@media (min-width: 1200px) {\n.card[data-v-3982aa98] {\n    font-size: 1.2rem;\n}\n}\nmain[data-v-3982aa98] {\n  background-image: url(\"https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg\");\n  animation: scroll-3982aa98 100s linear infinite;\n}\n@keyframes scroll-3982aa98 {\n100% {\n    background-position: 0 -2000px;\n}\n}\n.card-header[data-v-3982aa98] {\n  font-size: 1.3rem;\n}", ""]);
 
 // exports
 
@@ -42690,7 +42683,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.content[data-v-67632db8] {\n    background: #fff;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-67632db8] {\n  background: #fff;\n}\nmain[data-v-67632db8] {\n  background-image: url(\"https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg\");\n  animation: scroll-67632db8 100s linear infinite;\n}\n@keyframes scroll-67632db8 {\n100% {\n    background-position: 0 -2000px;\n}\n}\n", ""]);
 
 // exports
 
