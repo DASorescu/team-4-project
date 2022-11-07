@@ -55,7 +55,7 @@ class UserDetailController extends Controller
 
                 'image' => 'nullable|mimes:jpg,jpeg,png|file',
 
-                'phone' => ['nullable', 'regex:^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$^'],
+                'phone' => ['nullable', 'regex:^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$^'],
 
                 'city' => ['string', "in_array:cities"],
 
