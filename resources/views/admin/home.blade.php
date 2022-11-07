@@ -10,8 +10,8 @@
             </div>
         @endif
         <div class="container">
-        <div class="row h-100">
-            <div class="col-6 m-5">
+        <div class="row h-100 ">
+            <div class="col-8 mx-2 my-4">
                 <div class="card graphics rounded border-primary ">
                     <div class="card-header bg-primary"><h5>{{ $reviews_chart->options['chart_title'] }}</h5></div>
                     <div class="card-body p-0">
@@ -22,7 +22,7 @@
                 </div>
                     
             </div>
-            <div class="col-6 offset-5">
+            <div class="col-8  offset-4">
                 <div class="card graphics  rounded border-danger">
                     <div class="card-header bg-danger "><h5>{{ $messages_chart->options['chart_title'] }}</h5></div>
 

@@ -42626,7 +42626,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.slider {\n  background: #fff;\n}\n.flicking-arrow-prev::before,\n.flicking-arrow-prev::after,\n.flicking-arrow-next::before,\n.flicking-arrow-next::after {\n  background-color: var(--primary);\n}\n.w-3-m-2 {\n  margin-right: 1em;\n  margin-left: 1em;\n  width: calc((100% / 3) - 2em);\n}\n@media (max-width: 820px) {\n.m-query {\n    width: calc((100% / 2) - 2em);\n}\n}\n@media (max-width: 560px) {\n.m-query {\n    width: calc((100% / 1) - 2em);\n}\n}\n", ""]);
+exports.push([module.i, "\n.slider {\r\n  background: #fff;\n}\n.flicking-arrow-prev::before,\r\n.flicking-arrow-prev::after,\r\n.flicking-arrow-next::before,\r\n.flicking-arrow-next::after {\r\n  background-color: var(--primary);\n}\n.w-3-m-2 {\r\n  margin-right: 1em;\r\n  margin-left: 1em;\r\n  width: calc((100% / 3) - 2em);\n}\n@media (max-width: 820px) {\n.m-query {\r\n    width: calc((100% / 2) - 2em);\n}\n}\n@media (max-width: 560px) {\n.m-query {\r\n    width: calc((100% / 1) - 2em);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -42645,7 +42645,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.w-33 {\n    width: calc(100% / 3);\n}\n", ""]);
+exports.push([module.i, "\n.w-33 {\r\n    width: calc(100% / 3);\n}\r\n", ""]);
 
 // exports
 
@@ -42664,7 +42664,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#not-found {\n    height: 90vh;\n}\n", ""]);
+exports.push([module.i, "\n#not-found {\r\n    height: 90vh;\n}\r\n", ""]);
 
 // exports
 
@@ -42683,7 +42683,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.content[data-v-67632db8] {\n  background: #fff;\n}\nmain[data-v-67632db8] {\n  background-image: url(\"https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg\");\n  animation: scroll-67632db8 100s linear infinite;\n}\n@keyframes scroll-67632db8 {\n100% {\n    background-position: 0 -2000px;\n}\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-67632db8] {\r\n  background: #fff;\n}\nmain[data-v-67632db8] {\r\n  background-image: url(\"https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg\");\r\n  animation: scroll-67632db8 100s linear infinite;\n}\n@keyframes scroll-67632db8 {\n100% {\r\n    background-position: 0 -2000px;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -90140,7 +90140,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/altroconsumo_reviews.svg?230774637878d60de6d430a5853310f7";
+module.exports = "/images/altroconsumo_reviews.svg?6fd8222c4c8a06d335d76203fe866331";
 
 /***/ }),
 
@@ -90151,7 +90151,7 @@ module.exports = "/images/altroconsumo_reviews.svg?230774637878d60de6d430a585331
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/commenti_diconodinoi.svg?3b5c331f73d1bccf1bb9deaf4be8c58f";
+module.exports = "/images/commenti_diconodinoi.svg?905a5f91a4c807e9f87cfdcbc50ef184";
 
 /***/ }),
 
@@ -90162,7 +90162,7 @@ module.exports = "/images/commenti_diconodinoi.svg?3b5c331f73d1bccf1bb9deaf4be8c
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/consultazione-sito.svg?8adb14069a9f6068c9d6e6492372d650";
+module.exports = "/images/consultazione-sito.svg?c1b0052bc3a9572ac10b1db3fedb396a";
 
 /***/ }),
 
@@ -90206,7 +90206,7 @@ module.exports = "/images/facebook-reviews.png?7ed45070ee48f1f27de29fb9c3a5b57f"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/medico-e-paziente.svg?57b8381e7dbbc0c31bafcb3875fd9efd";
+module.exports = "/images/medico-e-paziente.svg?657be2094dfa7eb5596f17045385a2b1";
 
 /***/ }),
 
@@ -90217,7 +90217,7 @@ module.exports = "/images/medico-e-paziente.svg?57b8381e7dbbc0c31bafcb3875fd9efd
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/medico-vertical.svg?b16bc91ab4694e9425231d48d6458d7d";
+module.exports = "/images/medico-vertical.svg?a078d4a5aaf060a5daa36a6f250a4bb9";
 
 /***/ }),
 
@@ -90228,7 +90228,7 @@ module.exports = "/images/medico-vertical.svg?b16bc91ab4694e9425231d48d6458d7d";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/prenotazione-online.svg?47029cc2d35633fde57f12ce802b5019";
+module.exports = "/images/prenotazione-online.svg?2f0f8d8a1fe40a8fb92f43e97d52d67e";
 
 /***/ }),
 
@@ -92000,7 +92000,7 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/daniel-andrei.sorescu/Desktop/project/team-4-project/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\laravel\team-4-project\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
