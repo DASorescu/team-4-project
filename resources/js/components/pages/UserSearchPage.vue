@@ -1,120 +1,122 @@
 <template>
   <div>
     <NavBar />
-    <div class="container">
-      <!--Ricerca Campi-->
-      <div id="selezione-campi" class="my-5">
-        <select
-          v-if="hasSpecializations"
-          v-model="currentSpecialization"
-          @change="searchDoctorBySpecialization(currentSpecialization)"
-        >
-          <option value="" disabled>Scegli una specializzazione</option>
-          <option
-            v-for="specialization in specializations"
-            :key="'spec-' + specialization.label"
-            :value="specialization.label"
-            :selected="currentSpecialization === specialization.label"
+    <main>
+      <div class="container">
+        <!--Ricerca Campi-->
+        <div id="selezione-campi" class="py-5">
+          <select
+            v-if="hasSpecializations"
+            v-model="currentSpecialization"
+            @change="searchDoctorBySpecialization(currentSpecialization)"
           >
-            {{ specialization.label }}
-          </option>
-        </select>
-
-        <select v-model="selectedRating">
-          <option value="" disabled>Filtra per rating</option>
-          <option value="Tutti">Tutti</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-
-        <select v-model="selectedReview">
-          <option value="" disabled>Filtra per reviews</option>
-          <option value="Tutti">Tutti</option>
-          <option value="0-5">da 0 a 5</option>
-          <option value="6-10">da 6 a 10</option>
-          <option value="+ di 10">+ di 10</option>
-        </select>
-      </div>
-
-      <!--Render su pagina-->
-      <div v-if="hasResult" class="flex-wrap d-flex">
-        <div
-          class="card shadow w-100 my-2"
-          v-for="doctor in filteredDoctorsBy"
-          :key="'res-' + doctor.id"
-        >
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <div class="name">
-              <span
-                >Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}</span
-              >
-            </div>
-
-            <div>
-              <router-link
-                class="btn btn-sm btn-primary d-flex align-items-center"
-                :to="{ name: 'user-detail', params: { id: doctor.id } }"
-              >
-                Visualizza profilo
-              </router-link>
-            </div>
-          </div>
-          <div class="card-body d-flex align-items-center">
-            <div class="col-0 col-sm-0 col-md-2 col-lg-4 col-xl- w-25 mr-2">
-              <figure style="width: 150px; height: 150px">
-                <img
-                  :src="
-                    doctor.detail.image.startsWith('http')
-                      ? doctor.detail.image
-                      : `/storage/${doctor.detail.image}`
-                  "
-                  class="img-cover border rounded-circle bg-white shadow"
-                  :alt="`${doctor.detail.name}`"
-                />
-              </figure>
-            </div>
-            <div
-              class="col-6 col-sm-6 col-md-5 col-lg-4 col-xl-5 border-left border-white"
+            <option value="" disabled>Scegli una specializzazione</option>
+            <option
+              v-for="specialization in specializations"
+              :key="'spec-' + specialization.label"
+              :value="specialization.label"
+              :selected="currentSpecialization === specialization.label"
             >
-              <div id="specialization" v-if="currentSpecialization !== ''">
-                <!--tramite printSp stampo specializzazione corrente-->
+              {{ specialization.label }}
+            </option>
+          </select>
+
+          <select v-model="selectedRating">
+            <option value="" disabled>Filtra per rating</option>
+            <option value="Tutti">Tutti</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+
+          <select v-model="selectedReview">
+            <option value="" disabled>Filtra per reviews</option>
+            <option value="Tutti">Tutti</option>
+            <option value="0-5">da 0 a 5</option>
+            <option value="6-10">da 6 a 10</option>
+            <option value="+ di 10">+ di 10</option>
+          </select>
+        </div>
+
+        <!--Render su pagina-->
+        <div v-if="hasResult" class="flex-wrap d-flex">
+          <div
+            class="card shadow w-100 my-2"
+            v-for="doctor in filteredDoctorsBy"
+            :key="'res-' + doctor.id"
+          >
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <div class="name">
                 <span
-                  v-for="specialization in printSp"
-                  :key="specialization.id"
-                  :class="'badge badge-' + specialization.color"
-                  >{{ specialization.label }}
-                </span>
+                  >Dr. {{ doctor.detail.first_name }} {{ doctor.detail.last_name }}</span
+                >
               </div>
 
-              <div class="my-3">Città: {{ doctor.detail.address }}</div>
-              <div>Email: {{ doctor.email }}</div>
-            </div>
-            <div
-              class="col-6 col-sm-6 col-md-5 col-lg-4 col-xl-4 border-left border-white"
-            >
               <div>
-                Rating:
-                <RateReview :value="averageReviews[doctor.id].avg" />
-                <div class="my-3">
-                  Recensioni: ({{ averageReviews[doctor.id].count }})
+                <router-link
+                  class="btn btn-sm btn-primary d-flex align-items-center"
+                  :to="{ name: 'user-detail', params: { id: doctor.id } }"
+                >
+                  Visualizza profilo
+                </router-link>
+              </div>
+            </div>
+            <div class="card-body d-flex align-items-center">
+              <div class="col-0 col-sm-0 col-md-2 col-lg-4 col-xl- w-25 mr-2">
+                <figure style="width: 150px; height: 150px">
+                  <img
+                    :src="
+                      doctor.detail.image.startsWith('http')
+                        ? doctor.detail.image
+                        : `/storage/${doctor.detail.image}`
+                    "
+                    class="img-cover border rounded-circle bg-white shadow"
+                    :alt="`${doctor.detail.name}`"
+                  />
+                </figure>
+              </div>
+              <div
+                class="col-6 col-sm-6 col-md-5 col-lg-4 col-xl-5 border-left border-white"
+              >
+                <div id="specialization" v-if="currentSpecialization !== ''">
+                  <!--tramite printSp stampo specializzazione corrente-->
+                  <span
+                    v-for="specialization in printSp"
+                    :key="specialization.id"
+                    :class="'badge badge-' + specialization.color"
+                    >{{ specialization.label }}
+                  </span>
                 </div>
 
-                <router-link
-                  class="btn btn-sm btn-primary"
-                  :to="{ name: 'reviews', params: { userId: doctor.id } }"
-                >
-                  Recensioni
-                </router-link>
+                <div class="my-3">Città: {{ doctor.detail.address }}</div>
+                <div>Email: {{ doctor.email }}</div>
+              </div>
+              <div
+                class="col-6 col-sm-6 col-md-5 col-lg-4 col-xl-4 border-left border-white"
+              >
+                <div>
+                  Rating:
+                  <RateReview :value="averageReviews[doctor.id].avg" />
+                  <div class="my-3">
+                    Recensioni: ({{ averageReviews[doctor.id].count }})
+                  </div>
+
+                  <router-link
+                    class="btn btn-sm btn-primary"
+                    :to="{ name: 'reviews', params: { userId: doctor.id } }"
+                  >
+                    Recensioni
+                  </router-link>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <AppLoader v-if="isLoading" />
       </div>
-      <AppLoader v-if="isLoading" />
-    </div>
+    </main>
   </div>
 </template>
 
@@ -323,6 +325,12 @@ export default {
 main {
   background-image: url("https://www.freevector.com/uploads/vector/preview/30831/medicine_backgorund_Mesa_de_trabajo_1.jpg");
   animation: scroll 100s linear infinite;
+}
+
+@keyframes scroll {
+  100% {
+    background-position: 0 -2000px;
+  }
 }
 
 .card-header {
