@@ -140,7 +140,10 @@
         <div class="user-page-details">
           <!-- invio messaggi -->
           <a name="message"></a>
-          <NewMessage :doctor-id="'' + userDetail.id" @submitted="messageSubmitted" />
+          <NewMessage
+            :doctor-id="'' + userDetail.user_id"
+            @submitted="messageSubmitted"
+          />
         </div>
         <section
           id="buttons"
@@ -148,7 +151,7 @@
         >
           <router-link
             class="btn btn-success mr-2"
-            :to="{ name: 'reviews', params: { userId: userDetail.id } }"
+            :to="{ name: 'reviews', params: { userId: userDetail.user_id } }"
           >
             <font-awesome-icon icon="fa-solid fa-pen-to-square" /> Scrivi una recensione
           </router-link>
