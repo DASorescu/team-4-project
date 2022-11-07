@@ -1,13 +1,13 @@
 <template>
   <div class="py-4 slider">
-    <h1 class="text-center py-4">The Best</h1>
+    <h1 class="text-center py-4 text-info">I nostri medici</h1>
     <Flicking
       :options="{
         align: 'prev',
         circular: true,
       }"
       :plugins="plugins"
-      class="shadow"
+      class=" ml-4"
     >
       <div
         class="card shadow w-3-m-2 m-query"
@@ -136,7 +136,8 @@ export default {
   background-color: var(--primary);
 }
 .w-3-m-2 {
-  margin-right: 2em;
+  margin-right: 1em;
+  margin-left: 1em;
   width: calc((100% / 3) - 2em);
 }
 
