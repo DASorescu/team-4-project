@@ -7,7 +7,7 @@
       <!-- MAIN BANNER -->
       <div id="main-banner">
         <div class="doctor-card">
-          <figure style="width: 100px; height: 100px">
+          <figure>
             <img
               :src="
                 userDetail.image.startsWith('http')
