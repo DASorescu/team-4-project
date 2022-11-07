@@ -27,6 +27,7 @@ class MessageSeeder extends Seeder
                 $new_message->email = $faker->email();
                 $new_message->content = $faker->text(100);
                 $new_message->date = $faker->dateTimeThisYear();
+                $new_message->created_at = $new_message->date;
                 
     
                 $new_message->save();

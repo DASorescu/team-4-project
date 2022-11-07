@@ -5,7 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Models\UserDetails;
-use App\MOdels\Message;
+use App\Models\Message;
+use App\Models\Review;
 
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
@@ -25,20 +26,33 @@ class HomeController extends Controller
         $user = Auth::user();
         $details = $user->userDetail;
 
-        $chart_options = [
-            'chart_title' => 'messages by months',
+        $messages_chart_options = [
+            'chart_title' => 'Messages by months',
             'report_type' => 'group_by_date',
             'model' => 'App\Models\Message',
-            'group_by_field' => 'date',
+            'group_by_field' => 'created_at',
+            'group_by_period' => 'month',
+            'chart_type' => 'line',
+            'chart_color' => '255,79,21,1',
+        ];
+        $messages_chart = new LaravelChart($messages_chart_options);
+        
+        $reviews_chart_options = [
+            'chart_color'=>'(rgb(255, 99, 132))',
+            'chart_title' => 'Reviews by months',
+            'report_type' => 'group_by_date',
+            'model' => 'App\Models\Review',
+            'group_by_field' => 'created_at',
             'group_by_period' => 'month',
             'chart_type' => 'bar',
+            'chart_color' => '79,79,21,1',
         ];
-        $chart1 = new LaravelChart($chart_options);
+        $reviews_chart = new LaravelChart($reviews_chart_options);
         
         if(!$details){
             return redirect()->route('admin.users.create');
         }else{
-            return view('admin.home', compact('user','chart1'));  
+            return view('admin.home', compact('user','messages_chart','reviews_chart'));  
         }
     }
 }

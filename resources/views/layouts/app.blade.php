@@ -55,10 +55,10 @@
                         <div  id="navbarSupportedContent">
                             <!-- Left Side Of Navbar -->
                             <ul class="navbar-nav mr-auto">
-                                {{-- <li class="nav-item">
+                            <li class="nav-item">
                                     <a class="nav-link" @if (Route::is('admin.services.index'))  @endif
-                                    href="{{ route('admin.services.index') }}">Servizi</a>
-                                </li> --}}
+                                    href="{{ route('admin.home') }}"><i class="fa-solid fa-house fa-2x"></i></a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" @if (Route::is('admin.services.index'))  @endif
                                     href="{{ route('admin.users.reviews.index') }}"><i class="fa-solid fa-pen-to-square fa-2x"></i></a>
